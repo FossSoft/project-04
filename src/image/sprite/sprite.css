@@ -3,49 +3,84 @@
   background-repeat: no-repeat;
   background-image: url(sprite.svg);
 }
-.icon-edit-2 {
+.icon-chevron-left {
   width: 32px;
   height: 32px;
   background-position: 0 0;
 }
-.icon-eye {
+.icon-chevron-right {
   width: 32px;
   height: 32px;
   background-position: -48px 0;
 }
-.icon-eye-off {
+.icon-chevron-down {
   width: 32px;
   height: 32px;
   background-position: -96px 0;
 }
-.icon-log-out {
+.icon-chevron-up {
   width: 32px;
   height: 32px;
   background-position: -144px 0;
 }
-.icon-pie-chart-02 {
+.icon-minus {
   width: 32px;
   height: 32px;
   background-position: -192px 0;
 }
-.icon-settings {
+.icon-plus {
   width: 32px;
   height: 32px;
   background-position: -240px 0;
 }
-.icon-trash-04 {
+.icon-untitled {
   width: 32px;
   height: 32px;
   background-position: -288px 0;
 }
-.icon-upload {
+.icon-edit-2 {
   width: 32px;
   height: 32px;
   background-position: -336px 0;
 }
-.icon-x {
+.icon-eye {
   width: 32px;
   height: 32px;
   background-position: -384px 0;
+}
+.icon-eye-off {
+  width: 32px;
+  height: 32px;
+  background-position: -432px 0;
+}
+.icon-log-out {
+  width: 32px;
+  height: 32px;
+  background-position: -480px 0;
+}
+.icon-pie-chart-02 {
+  width: 32px;
+  height: 32px;
+  background-position: -528px 0;
+}
+.icon-settings {
+  width: 32px;
+  height: 32px;
+  background-position: -576px 0;
+}
+.icon-trash-04 {
+  width: 32px;
+  height: 32px;
+  background-position: -624px 0;
+}
+.icon-upload {
+  width: 32px;
+  height: 32px;
+  background-position: -672px 0;
+}
+.icon-x {
+  width: 32px;
+  height: 32px;
+  background-position: -720px 0;
 }
 
