@@ -1,5 +1,10 @@
 import css from './Setting.module.css';
-import uloadFotot from '../../image/x1/Ellipse_14.png';
+import mobile from '../../image/x1/Ellipse_14.png';
+import mobileX2 from '../../image/x1/Ellipse_14_640_640.png';
+import tablet from '../../image/x2/Ellipse_14.png';
+import tabletx2 from '../../image/x2/Ellipse_14_640_640.png';
+import desktop from '../../image/x3/Ellipse_14.png';
+import desktop2 from '../../image/x3/Ellipse_14_640_640.png';
 import sprite from '../../image/sprite/sprite.svg';
 // import normaFotot from '../images/normaFoto.png';
 import { useEffect, useId, useRef, useState } from 'react';
@@ -73,7 +78,23 @@ export const Setting = () => {
         <h2 className={css.titleForm}>Setting</h2>
         <div className={css.titleContainer}>
           <div className={css.uploadContaienr}>
-            <img src={uloadFotot} width={75} height={75} alt="Avatar" />
+            <img
+              src={mobile}
+              alt="Avatar"
+              srcSet={`
+    ${mobile} 75w,
+    ${mobileX2} 150w,
+    ${tablet} 100w,
+    ${tabletx2} 200w,
+    ${desktop} 100w,
+    ${desktop2} 200w
+  `}
+              sizes="
+    (min-width: 1440px) 100px,
+    (min-width: 768px) 100px,
+    (max-width: 767px) 75px
+  "
+            />
             <label htmlFor={upload} className={css.upload}>
               <svg className={css.uploadImg}>
                 <use href={`${sprite}#icon-upload`}></use>
