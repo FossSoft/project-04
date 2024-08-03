@@ -62,7 +62,7 @@ export const Setting = () => {
   }, [weightValue, timeValue, genderValue]);
   const onSubmit = data => {
     console.log(data, result);
-    reset();
+    // reset();
   };
   return (
     <div className={css.container}>
@@ -73,7 +73,7 @@ export const Setting = () => {
         <h2 className={css.titleForm}>Setting</h2>
         <div className={css.titleContainer}>
           <div className={css.uploadContaienr}>
-            <img src={uloadFotot} width={75} height={75} alt="" />
+            <img src={uloadFotot} width={75} height={75} alt="Avatar" />
             <label htmlFor={upload} className={css.upload}>
               <svg className={css.uploadImg}>
                 <use href={`${sprite}#icon-upload`}></use>
