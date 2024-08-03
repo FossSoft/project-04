@@ -42,7 +42,8 @@
 <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.88" stroke="#000" d="M22.666 10.667l-6.667-6.667-6.667 6.667"></path>
 <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.88" stroke="#000" d="M16 4v16"></path>
 </svg>
-<svg id="icon-x" width="32" height="32" viewBox="0 0 32 32" x="432" y="0">
+<!-- <svg id="icon-x" width="32" height="32" viewBox="0 0 32 32" x="432" y="0"> -->
+<svg id="icon-x" width="24" height="24" viewBox="0 0 32 32" >
 <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="3.4286" stroke="#000" d="M24 8l-16 16"></path>
 <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="3.4286" stroke="#000" d="M8 8l16 16"></path>
 </svg>
