@@ -37,7 +37,7 @@ export const Setting = () => {
     reset,
   } = useForm({
     resolver: yupResolver(validationSchema),
-    mode: 'onBlur',
+    mode: 'onChange',
   });
   const form = useRef();
   //
