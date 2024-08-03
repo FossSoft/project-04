@@ -57,12 +57,14 @@
 <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="3" stroke="#000" d="M12 4h8"></path>
 <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="3.6" stroke="#000" d="M4 8h24M25.333 8l-0.935 14.026c-0.14 2.104-0.21 3.156-0.665 3.954-0.4 0.702-1.004 1.267-1.731 1.62-0.826 0.4-1.881 0.4-3.99 0.4h-4.025c-2.109 0-3.163 0-3.99-0.4-0.727-0.353-1.331-0.917-1.731-1.62-0.455-0.798-0.525-1.85-0.665-3.954l-0.935-14.026"></path>
 </svg>
-<svg id="icon-upload" width="32" height="32" viewBox="0 0 32 32" x="672" y="0">
+<!-- <svg id="icon-upload" width="32" height="32" viewBox="0 0 32 32" x="672" y="0"> -->
+<svg id="icon-upload" width="18" height="18" viewBox="0 0 32 32" >
 <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.88" stroke="#000" d="M28 20v5.333c0 0.707-0.281 1.386-0.781 1.886s-1.178 0.781-1.886 0.781h-18.667c-0.707 0-1.386-0.281-1.886-0.781s-0.781-1.178-0.781-1.886v-5.333"></path>
 <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.88" stroke="#000" d="M22.666 10.667l-6.667-6.667-6.667 6.667"></path>
 <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.88" stroke="#000" d="M16 4v16"></path>
 </svg>
-<svg id="icon-x" width="32" height="32" viewBox="0 0 32 32" x="720" y="0">
+<!-- <svg id="icon-x" width="32" height="32" viewBox="0 0 32 32" x="720" y="0"> -->
+<svg id="icon-x" width="24" height="24" viewBox="0 0 32 32" >
 <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="3.4286" stroke="#000" d="M24 8l-16 16"></path>
 <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="3.4286" stroke="#000" d="M8 8l16 16"></path>
 </svg>
