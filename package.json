@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://FossSoft.github.io/project-04/",
   "dependencies": {
+    "@hookform/resolvers": "^3.9.0",
     "@reactour/tour": "^3.7.0",
     "@reduxjs/toolkit": "^2.2.7",
     "@testing-library/jest-dom": "^5.16.3",
