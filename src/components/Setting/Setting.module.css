@@ -1,13 +1,24 @@
-/* .container {
-  min-width: 320px;
+.container {
+  /* min-width: 320px;
   max-width: 375px;
-  padding: 0 16px;
-} */
+  padding: 0 16px; */
+  display: flex;
+  justify-content: center;
+}
 .form {
   width: 343px;
+  position: relative;
+  padding: 40px 20px;
 }
 .input-error {
   border: 2px solid red;
+}
+.closeIcon {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 16px;
+  right: 20px;
 }
 .titleContainer {
   display: flex;
@@ -368,11 +379,19 @@
 }
 @media screen and (min-width: 768px) {
   .container {
-    width: 768px;
+    min-width: 768px;
     padding: 0 32px;
   }
   .form {
     width: 648px;
+    padding: 40px;
+  }
+  .closeIcon {
+    width: 28px;
+    height: 28px;
+
+    top: 40px;
+    right: 40px;
   }
   .titleForm {
     font-size: 28px;

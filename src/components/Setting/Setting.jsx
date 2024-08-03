@@ -2,7 +2,7 @@ import css from './Setting.module.css';
 import uloadFotot from '../../image/x1/Ellipse_14.png';
 import sprite from '../../image/sprite/sprite.svg';
 // import normaFotot from '../images/normaFoto.png';
-import { useEffect, useId, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -39,14 +39,16 @@ export const Setting = () => {
     resolver: yupResolver(validationSchema),
     mode: 'onBlur',
   });
-
+  const form = useRef();
   //
 
   const weightValue = watch('weight');
   const timeValue = watch('activeTime');
   const [result, setResult] = useState(0);
   const genderValue = watch('gender');
-
+  const closeForm = () => {
+    form.current.style.display = 'none';
+  };
   useEffect(() => {
     if (weightValue > 0 && weightValue < 300 && timeValue > 0) {
       if (genderValue === 'woman') {
@@ -64,7 +66,10 @@ export const Setting = () => {
   };
   return (
     <div className={css.container}>
-      <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
+      <form ref={form} className={css.form} onSubmit={handleSubmit(onSubmit)}>
+        <svg className={css.closeIcon} onClick={closeForm}>
+          <use href={`${sprite}#icon-x`}></use>
+        </svg>
         <h2 className={css.titleForm}>Setting</h2>
         <div className={css.titleContainer}>
           <div className={css.uploadContaienr}>
