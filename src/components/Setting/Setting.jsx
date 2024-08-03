@@ -196,7 +196,7 @@ export const Setting = () => {
               </p>
               <p className={css.activeTime}>
                 <svg className={css.activeIcon}>
-                  <use></use>
+                  <use href={`${sprite}#icon-untitled`}></use>
                 </svg>
                 Active time in hours
               </p>
