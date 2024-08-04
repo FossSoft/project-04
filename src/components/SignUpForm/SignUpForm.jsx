@@ -9,7 +9,7 @@ import { register } from '../../redux/auth/operations';
 import css from './SignUpForm.module.css';
 import { FiEye } from 'react-icons/fi';
 import { FiEyeOff } from 'react-icons/fi';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -61,14 +61,12 @@ export default function SignUpForm() {
     }
     const { repeatPassword, ...payload } = data;
 
-    console.log('Payload для запиту:', payload);
-
     try {
       const result = await dispatch(register(payload)).unwrap();
       if (result?.data?.accessToken) {
         localStorage.setItem('token', result.data.accessToken);
         toast.success('Successfully registered!');
-        navigate('/trackerPage');
+        navigate('/tracker');
       } else {
         toast.error('Unexpected response format');
       }
@@ -163,9 +161,9 @@ export default function SignUpForm() {
         </button>
         <div className={css.box}>
           <p className={css.text}>Already have an account?</p>
-          <a href="/signin" className={css.link}>
+          <Link href="/signin" className={css.link}>
             Sign In
-          </a>
+          </Link>
         </div>
       </form>
     </div>
