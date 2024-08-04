@@ -10,26 +10,30 @@
   background-color: #f0f2f5;
   border-radius:30px;
   }
-
+.text{
+  display: flex;
+  flex-direction: column;
+  gap:16px;
+  padding-top: 74px;
+}
 .subtitle{
-  width: 277px;
-  height: 18px;
   color: rgb(47, 47, 47);
   font-family: Poppins;
   font-size: 14px;
   font-weight: 400;
-  line-height: 18px;
-  letter-spacing: 6%;
+  line-height: 1.28;
+  letter-spacing: 0.06em;
   text-align: left;
-  margin-bottom: 16px;
+  width: 277px;
+  height: 18px;
 }
 .title{
     color: rgb(50, 63, 71);
     font-family: Poppins;
     font-size: 38px;
     font-weight: 700;
-    line-height: 38px;
-    letter-spacing: -1%;
+    line-height: 1;
+    letter-spacing: -0.01em;
     text-align: left;
     width:311px;
     height: 114px;
@@ -45,8 +49,8 @@
   font-family: Poppins;
   font-size: 14px;
   font-weight: 700;
-  line-height: 18px;
-  letter-spacing: -1%;
+  line-height: 1.28;
+  letter-spacing:-0.01em;
   text-align: center;
   align-items: center;
   border-radius: 30px;
@@ -73,14 +77,17 @@
   height: 498px;
   padding-left: 64px;
 }
+.text{
+  padding-top: 50px;
+}
 .subtitle{
   font-size: 16px;
-  line-height: 24px;
+  line-height: 1.5;
 }
 .title{
   font-size: 64px;
-  line-height: 70px;
-  letter-spacing: -1%;
+  line-height: 1.09;
+  letter-spacing: -0.01em;
   height: 210px;
 }
 .link{
@@ -89,7 +96,7 @@
 .link_signup,
 .link_signin{
   font-size: 16px;
-  line-height: 24px;
+  line-height: 1.5;
   padding: 18px 40px;
   height: 60px;
   }
@@ -107,7 +114,7 @@
     }
  .title {
   font-size: 80px;
-  line-height: 76px;
+  line-height: 0.95;
   height: 228px;
   }
 }
