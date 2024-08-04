@@ -1,0 +1,20 @@
+.text {
+  color: var(--Dark-Blue);
+  font-family: Gilroy;
+  font-size: 32px;
+  line-height: 32px; /* 105.556% */
+  letter-spacing: -0.32px;
+}
+
+.span {
+  font-weight: 700;
+}
+@media screen and (min-width: 768px) {
+  .text {
+    color: var(--Dark-Blue);
+    font-family: Gilroy;
+    font-size: 36px;
+    line-height: 38px; /* 105.556% */
+    letter-spacing: -0.36px;
+  }
+}
