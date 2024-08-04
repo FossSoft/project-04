@@ -23,14 +23,14 @@
   height: 32px;
   background-position: -144px 0;
 }
-.icon-minus {
-  width: 32px;
-  height: 32px;
+.icon-eye {
+  width: 20px;
+  height: 20px;
   background-position: -192px 0;
 }
-.icon-plus {
-  width: 32px;
-  height: 32px;
+.icon-eye-off {
+  width: 20px;
+  height: 20px;
   background-position: -240px 0;
 }
 .icon-untitled {
@@ -63,24 +63,3 @@
   height: 32px;
   background-position: -528px 0;
 }
-.icon-settings {
-  width: 32px;
-  height: 32px;
-  background-position: -576px 0;
-}
-.icon-trash-04 {
-  width: 32px;
-  height: 32px;
-  background-position: -624px 0;
-}
-.icon-upload {
-  width: 32px;
-  height: 32px;
-  background-position: -672px 0;
-}
-.icon-x {
-  width: 32px;
-  height: 32px;
-  background-position: -720px 0;
-}
-
