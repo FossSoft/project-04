@@ -1,14 +1,13 @@
-import { Routes, Route } from "react-router-dom";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useAuth } from "../../hooks/useAuth";
-import { refreshUser } from "../../redux/auth/operations";
-import RestrictedRoute from "../../components/RestricktedRoute";
+import { Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useAuth } from '../../hooks/useAuth';
+import { refreshUser } from '../../redux/auth/operations';
+import RestrictedRoute from '../../components/RestricktedRoute';
 import PrivateRoute from '../../components/PrivateRoute';
-import HomePage from "../../pages/HomePage/HomePage";
-import SignInPage from "../../pages/SignInPage/SignInPage";
-import TrackerPage from "../../pages/TrackerPage/TrackerPage";
-
+import HomePage from '../../pages/HomePage/HomePage';
+import SignInPage from '../../pages/SignInPage/SignInPage';
+import TrackerPage from '../../pages/TrackerPage/TrackerPage';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -26,13 +25,13 @@ export default function App() {
       <Route
         path="/signin"
         element={
-          <RestrictedRoute redirectTo="/tracker" component={<SignInPage />} />
+          <RestrictedRoute redirectTo="/signin" component={<SignInPage />} />
         }
       />
       <Route
         path="/tracker"
         element={
-          <PrivateRoute redirectTo="/signin" component={<TrackerPage />} />
+          <PrivateRoute redirectTo="/tracker" component={<TrackerPage />} />
         }
       />
     </Routes>

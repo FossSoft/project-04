@@ -1,9 +1,10 @@
-import { configureStore } from "@reduxjs/toolkit"
-import { authReducer } from "./auth/slice";
+import { configureStore } from '@reduxjs/toolkit';
+import { authReducer } from './auth/slice';
+import popoverReducer from '../redux/popover/slice';
 
 export const store = configureStore({
-    reducer: {
-        auth: authReducer
-    }
+  reducer: {
+    auth: authReducer,
+    popover: popoverReducer,
+  },
 });
-
