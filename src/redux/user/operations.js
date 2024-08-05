@@ -5,9 +5,9 @@ axios.defaults.baseURL = 'https://back-end-aquatrack.onrender.com';
 
 export const fetchUserInfo = createAsyncThunk(
   'user/fetchUserInfo',
-  async (userId, thunkAPI) => {
+  async (_, thunkAPI) => {
     try {
-      const response = await axios.get(`/user/${userId}`);
+      const response = await axios.get('/user/');
       return response.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data || error.message);
