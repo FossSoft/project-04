@@ -1,5 +1,5 @@
-.wrapper {
-  padding: 14px 50px 14px 20px;
+.popover {
+  padding: 14px 45px 14px 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -32,7 +32,7 @@
   padding: 0;
   background-color: transparent;
   border-color: transparent;
-  font-family: Poppins;
+  font-family: Poppins, sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 700;

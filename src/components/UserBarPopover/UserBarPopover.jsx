@@ -1,19 +1,10 @@
 import css from './UserBarPopover.module.css';
 import clsx from 'clsx';
 import sprite from '../../image/sprite/sprite.svg';
-// import { useDispatch } from 'react-redux';
-// import { openPopover } from '../../redux/popover/slice';
 
 export default function UserBarPopover() {
-  // const dispatch = useDispatch();
-  // // const showPopover = useSelector(selecteShowPopover);
-
-  // const handleOpenPopover = () => {
-  //   dispatch(openPopover());
-  // };
-  // onClick = { handleOpenPopover };
   return (
-    <div className={css.wrapper}>
+    <div className={css.popover}>
       <div className={css.container}>
         <svg className={clsx(css.icon, css.darkblue)}>
           <use href={`${sprite}#icon-settings`}></use>

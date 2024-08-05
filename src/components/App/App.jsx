@@ -25,13 +25,13 @@ export default function App() {
       <Route
         path="/signin"
         element={
-          <RestrictedRoute redirectTo="/signin" component={<SignInPage />} />
+          <RestrictedRoute redirectTo="/tracker" component={<SignInPage />} />
         }
       />
       <Route
         path="/tracker"
         element={
-          <PrivateRoute redirectTo="/tracker" component={<TrackerPage />} />
+          <PrivateRoute redirectTo="/signin" component={<TrackerPage />} />
         }
       />
     </Routes>

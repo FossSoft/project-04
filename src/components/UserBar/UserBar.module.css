@@ -20,7 +20,7 @@
 .text {
   color: var(--white);
   text-align: center;
-  font-family: Poppins;
+  font-family: Poppins, sans-serif;
   font-size: 14px;
   font-weight: 700;
   line-height: 18px; /* 128.571% */
@@ -44,9 +44,10 @@
   display: flex;
   justify-content: center;
   align-self: center;
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
 }
+
 @media screen and (min-width: 768px) {
   .btn {
     width: 157px;
