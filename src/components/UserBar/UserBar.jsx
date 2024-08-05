@@ -39,7 +39,7 @@ export default function UserBar() {
   }, [dispatch]);
 
   return (
-    <>
+    <div className={css.useBar}>
       <button
         className={css.btn}
         type="button"
@@ -61,7 +61,7 @@ export default function UserBar() {
           ></use>
         </svg>
       </button>
-      {showPopover && <UserBarPopover />}
-    </>
+      {showPopover && <UserBarPopover className={css.userBarPopover} />}
+    </div>
   );
 }

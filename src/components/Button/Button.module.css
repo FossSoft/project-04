@@ -1,0 +1,8 @@
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  border-color: transparent;
+  text-align: center;
+}

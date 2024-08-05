@@ -1,3 +1,13 @@
+.useBar {
+  position: relative;
+}
+
+/* .userBarPopover {
+  position: absolute;
+  top: -4px;
+  left: 10px;
+} */
+
 .btn {
   padding: 6px 12px;
   display: flex;

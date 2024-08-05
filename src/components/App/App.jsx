@@ -34,6 +34,7 @@ export default function App() {
           <PrivateRoute redirectTo="/signin" component={<TrackerPage />} />
         }
       />
+      {/* <Route path="/tracker" element={<TrackerPage />} /> */}
     </Routes>
   );
 }
