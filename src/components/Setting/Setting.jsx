@@ -92,10 +92,10 @@ export const Setting = () => {
   }, [weightValue, timeValue, genderValue]);
 
   useEffect(() => {
-    dispatch(fetchUserInfo());
-    //   .unwrap()
-    //   .then(res => console.log(res));
-    // console.log('Succ');
+    dispatch(fetchUserInfo())
+      .unwrap()
+      .then(res => console.log(res.accessToken));
+    console.log('Succ');
   }, [dispatch]);
 
   const onSubmit = data => {
