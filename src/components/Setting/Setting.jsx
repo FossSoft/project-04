@@ -92,21 +92,25 @@ export const Setting = () => {
   }, [weightValue, timeValue, genderValue]);
 
   useEffect(() => {
-    dispatch(fetchUserInfo())
-      .unwrap()
-      .then(res => console.log(res));
-    console.log('Succ');
+    dispatch(fetchUserInfo());
+    //   .unwrap()
+    //   .then(res => console.log(res));
+    // console.log('Succ');
   }, [dispatch]);
 
   const onSubmit = data => {
-    const formData = new FormData();
-    formData.append('username', data.username);
-    formData.append('userEmail', data.userEmail);
-    formData.append('weight', data.weight);
-    formData.append('activeTime', data.activeTime);
-    formData.append('gender', data.gender);
+    // const formData = new FormData();
+    // formData.append('username', data.username);
+    // formData.append('userEmail', data.userEmail);
+    // formData.append('weight', data.weight);
+    // formData.append('activeTime', data.activeTime);
+    // formData.append('gender', data.gender);
+    console.log(data.gender);
 
-    dispatch(updateUserInfo(formData));
+    dispatch(updateUserInfo(data.gender))
+      .unwrap()
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
 
     // reset();
   };
