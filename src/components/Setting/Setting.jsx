@@ -12,6 +12,8 @@ import { useEffect, useId, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { validationSchema } from './validationSchema.js';
+import { useSelector } from 'react-redux';
+import { selectUserName } from '../../redux/user/selectors.js';
 export const Setting = () => {
   const upload = useId();
   const womanRadio = useId();
@@ -21,19 +23,21 @@ export const Setting = () => {
   const weightInput = useId();
   const timeInput = useId();
   const resultInput = useId();
+  const nameSelector = useSelector(selectUserName);
+  console.log(nameSelector);
 
-  // const [file, setFile] = useState(null);
-  // const [preview, setPreview] = useState(null);
+  const [file, setFile] = useState(null);
+  const [preview, setPreview] = useState(null);
 
-  // const handleFileChange = (event) => {
-  //   const file = event.target.files[0];
-  //   setFile(file);
+  const handleFileChange = event => {
+    const file = event.target.files[0];
+    setFile(file);
 
-  //   const fileURL = URL.createObjectURL(file);
-  //   setPreview(fileURL);
-  //   console.log(fileURL);
-  // };
-  //
+    const fileURL = URL.createObjectURL(file);
+
+    setPreview(fileURL);
+    console.log(fileURL);
+  };
   const {
     register,
     handleSubmit,
