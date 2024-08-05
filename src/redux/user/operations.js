@@ -2,11 +2,17 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 axios.defaults.baseURL = 'https://back-end-aquatrack.onrender.com';
+const setAuthHeader = token => {
+  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+};
 
 export const fetchUserInfo = createAsyncThunk(
   'user/fetchUserInfo',
   async (_, thunkAPI) => {
     try {
+      const token = localStorage.getItem('token');
+
+      setAuthHeader(token);
       const response = await axios.get('/user/');
       return response.data.data;
     } catch (error) {
@@ -17,9 +23,32 @@ export const fetchUserInfo = createAsyncThunk(
 
 export const updateUserInfo = createAsyncThunk(
   'user/updateUserInfo',
-  async ({ userId, formData }, thunkAPI) => {
+  async (formData, thunkAPI) => {
     try {
-      const response = await axios.patch(`/user/${userId}`, formData, {
+      const token = localStorage.getItem('token');
+
+      setAuthHeader(token);
+      const response = await axios.patch('/user/update', formData, {
+        headers: {
+          'Content-Type': 'multipart/json',
+        },
+      });
+
+      return response.data.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
+
+export const updateUserAvatar = createAsyncThunk(
+  'user/updateUserAvatar',
+  async (formData, thunkAPI) => {
+    try {
+      const token = localStorage.getItem('token');
+
+      setAuthHeader(token);
+      const response = await axios.patch('/user/avatar', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
