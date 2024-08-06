@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.3",
     "clsx": "^2.1.1",
+    "date-fns": "^3.6.0",
     "i18next": "^23.12.2",
     "modern-normalize": "^2.0.0",
     "react": "^18.1.0",
