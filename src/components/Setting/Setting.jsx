@@ -12,6 +12,18 @@ import { useEffect, useId, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { validationSchema } from './validationSchema.js';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  selectUserActivityTime,
+  selectUserEmail,
+  selectUserGender,
+  selectUserId,
+  selectUserName,
+  selectUserWaterToDrink,
+  selectUserWeight,
+} from '../../redux/user/selectors.js';
+
+import { fetchUserInfo, updateUserInfo } from '../../redux/user/operations.js';
 export const Setting = () => {
   const upload = useId();
   const womanRadio = useId();
@@ -21,18 +33,31 @@ export const Setting = () => {
   const weightInput = useId();
   const timeInput = useId();
   const resultInput = useId();
+  //
+  const nameSelector = useSelector(selectUserName);
+  const idSelector = useSelector(selectUserId);
+  const emeailSelector = useSelector(selectUserEmail);
+  const genderSelector = useSelector(selectUserGender);
+  const weightSelector = useSelector(selectUserWeight);
+  const activityTimeSelector = useSelector(selectUserActivityTime);
+  const userWaterDrinkSelector = useSelector(selectUserWaterToDrink);
+  //
 
-  // const [file, setFile] = useState(null);
-  // const [preview, setPreview] = useState(null);
+  const dispatch = useDispatch();
+  // console.log(dispatch);
 
-  // const handleFileChange = (event) => {
-  //   const file = event.target.files[0];
-  //   setFile(file);
+  //
+  const [files, setFile] = useState(null);
+  const [preview, setPreview] = useState(null);
 
-  //   const fileURL = URL.createObjectURL(file);
-  //   setPreview(fileURL);
-  //   console.log(fileURL);
-  // };
+  const handleFileChange = event => {
+    const file = event.target.files[0];
+    setFile(file);
+
+    const fileURL = URL.createObjectURL(file);
+
+    setPreview(fileURL);
+  };
   //
   const {
     register,
@@ -65,8 +90,28 @@ export const Setting = () => {
       }
     }
   }, [weightValue, timeValue, genderValue]);
+
+  useEffect(() => {
+    dispatch(fetchUserInfo())
+      .unwrap()
+      .then(res => console.log(res.accessToken));
+    console.log('Succ');
+  }, [dispatch]);
+
   const onSubmit = data => {
-    console.log(data, result);
+    // const formData = new FormData();
+    // formData.append('username', data.username);
+    // formData.append('userEmail', data.userEmail);
+    // formData.append('weight', data.weight);
+    // formData.append('activeTime', data.activeTime);
+    // formData.append('gender', data.gender);
+    console.log(data.gender);
+
+    dispatch(updateUserInfo(data.gender))
+      .unwrap()
+      .then(res => console.log(res.accessToken))
+      .catch(err => console.log(err));
+
     // reset();
   };
   return (
@@ -79,21 +124,22 @@ export const Setting = () => {
         <div className={css.titleContainer}>
           <div className={css.uploadContaienr}>
             <img
-              src={mobile}
+              className={css.avatarImg}
+              src={!preview ? tablet : preview}
               alt="Avatar"
-              srcSet={`
-    ${mobile} 75w,
-    ${mobileX2} 150w,
-    ${tablet} 100w,
-    ${tabletx2} 200w,
-    ${desktop} 100w,
-    ${desktop2} 200w
-  `}
-              sizes="
-    (min-width: 1440px) 100px,
-    (min-width: 768px) 100px,
-    (max-width: 767px) 75px
-  "
+              //             srcSet={`
+              //   ${preview} 75w,
+              //   ${preview} 150w,
+              //   ${preview} 100w,
+              //   ${preview} 200w,
+              //   ${preview} 100w,
+              //   ${preview} 200w
+              // `}
+              //             sizes="
+              //   (min-width: 1440px) 100px,
+              //   (min-width: 768px) 100px,
+              //   (max-width: 767px) 75px
+              // "
             />
             <label htmlFor={upload} className={css.upload}>
               <svg className={css.uploadImg}>
@@ -104,6 +150,7 @@ export const Setting = () => {
                 {...register('upload')}
                 type="file"
                 id={upload}
+                onChange={handleFileChange}
                 style={{ display: 'none' }}
               />
             </label>

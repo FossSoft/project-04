@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { logIn } from 'redux/auth/operations.js';
+import { logIn } from '../../redux/auth/operations.js';
 import {
   addWaterAmount,
   deleteWaterEntry,
@@ -11,6 +11,7 @@ import {
 
 const initialState = {
   userId: '',
+  avatar: '',
   gender: '',
   name: '',
   email: '',
@@ -81,7 +82,7 @@ const userSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload;
       })
-      .addCase(addWaterAmount.pending, (state) => {
+      .addCase(addWaterAmount.pending, state => {
         state.isLoading = true;
         state.error = null;
       })
@@ -93,13 +94,15 @@ const userSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload;
       })
-      .addCase(updateWaterAmount.pending, (state) => {
+      .addCase(updateWaterAmount.pending, state => {
         state.isLoading = true;
         state.error = null;
       })
       .addCase(updateWaterAmount.fulfilled, (state, action) => {
         state.isLoading = false;
-        const index = state.waterData.findIndex(item => item._id === action.payload._id);
+        const index = state.waterData.findIndex(
+          item => item._id === action.payload._id
+        );
         if (index !== -1) {
           state.waterData[index] = action.payload;
         }
@@ -108,13 +111,15 @@ const userSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload;
       })
-      .addCase(deleteWaterEntry.pending, (state) => {
+      .addCase(deleteWaterEntry.pending, state => {
         state.isLoading = true;
         state.error = null;
       })
       .addCase(deleteWaterEntry.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.waterData = state.waterData.filter(item => item._id !== action.payload);
+        state.waterData = state.waterData.filter(
+          item => item._id !== action.payload
+        );
       })
       .addCase(deleteWaterEntry.rejected, (state, action) => {
         state.isLoading = false;
