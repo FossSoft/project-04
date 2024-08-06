@@ -20,7 +20,11 @@ import {
   selectUserWeight,
 } from '../../redux/user/selectors.js';
 
-import { fetchUserInfo, updateUserInfo } from '../../redux/user/operations.js';
+import {
+  fetchUserInfo,
+  updateUserAvatar,
+  updateUserInfo,
+} from '../../redux/user/operations.js';
 export const Setting = () => {
   const upload = useId();
   const womanRadio = useId();
@@ -48,6 +52,8 @@ export const Setting = () => {
 
   const handleFileChange = event => {
     const file = event.target.files[0];
+    console.log(file);
+
     setFile(file);
 
     const fileURL = URL.createObjectURL(file);
@@ -94,13 +100,13 @@ export const Setting = () => {
   }, [dispatch]);
 
   const onSubmit = data => {
-    // const formData = new FormData();
+    const formData = new FormData();
     // formData.append('username', data.name);
     // formData.append('userEmail', data.userEmail);
     // formData.append('weight', data.weight);
     // formData.append('activeTime', data.activeTime);
-    // formData.append('gender', data.gender);
-    // console.log(data);
+    formData.append('avatar', data.upload);
+
     if (emeailSelector !== data.userEmail) {
       toast.error('Write correctly amail');
       return;
@@ -115,10 +121,16 @@ export const Setting = () => {
         activityTime: data.activeTime,
         dailyNorma: data.ownerResult,
       })
-    )
+    );
+    // .unwrap()
+    // .then(res => console.log(res))
+    // .catch(err => console.log(err.message));
+
+    dispatch(updateUserAvatar({ avatar: data.upload }))
       .unwrap()
-      .then(res => console.log(res, 'From update'))
-      .catch(err => console.log(err.message));
+      .then(res => console.log(res, 'avatar'));
+    // console.log(data.upload);
+    console.log(data.upload.file);
   };
   return (
     <div className={css.container}>
@@ -139,13 +151,13 @@ export const Setting = () => {
                 <use href={`${sprite}#icon-upload`}></use>
               </svg>
               Upload a photo
-              {/* <input
-                // {...register('upload')}
+              <input
+                {...register('upload')}
                 type="file"
                 id={upload}
                 onChange={handleFileChange}
                 style={{ display: 'none' }}
-              /> */}
+              />
             </label>
           </div>
         </div>

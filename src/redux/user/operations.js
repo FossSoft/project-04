@@ -50,7 +50,7 @@ export const updateUserAvatar = createAsyncThunk(
       const token = localStorage.getItem('token');
 
       setAuthHeader(token);
-      const response = await axios.patch('/user/avatar', formData, {
+      const response = await axios.post('/user/avatar', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

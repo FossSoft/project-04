@@ -6,6 +6,8 @@ export const selectUserEmail = state => state.user.email;
 
 export const selectUserGender = state => state.user.gender;
 
+export const selectUserAvatar = state => state.user.avatar;
+
 export const selectUserWeight = state => state.user.weight;
 
 export const selectUserActivityTime = state => state.user.activityTime;

@@ -5,6 +5,7 @@ import {
   deleteWaterEntry,
   fetchUserInfo,
   fetchWaterDataByDay,
+  updateUserAvatar,
   updateUserInfo,
   updateWaterAmount,
 } from './operations.js';
@@ -64,11 +65,23 @@ const userSlice = createSlice({
         state.email = action.payload.email;
         state.weight = action.payload.weight;
         state.activeParticipationTime = action.payload.activityTime;
-        state.waterToDrink = action.payload.dailyNorma;
-        state.avatar = action.payload.avatar;
+        state.dailyNorma = action.payload.dailyNorma;
+
         state.name = action.payload.name;
       })
       .addCase(updateUserInfo.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(updateUserAvatar.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(updateUserAvatar.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.avatar = action.payload.avatar;
+      })
+      .addCase(updateUserAvatar.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       })
