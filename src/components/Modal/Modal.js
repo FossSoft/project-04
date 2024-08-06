@@ -8,9 +8,10 @@ export default function Modal({ children, style, isOpen, onRequestClose }) {
   const handleModalClick = e => {
     e.stopPropagation();
   };
+  console.log(isOpen);
   return (
     <div
-      className={clsx(css.backdrop, { [css.active]: isOpen })}
+      className={isOpen ? clsx(css.backdrop, css.active) : css.backdrop}
       onClick={onRequestClose}
     >
       <div

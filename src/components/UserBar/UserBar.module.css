@@ -2,12 +2,6 @@
   position: relative;
 }
 
-/* .userBarPopover {
-  position: absolute;
-  top: -4px;
-  left: 10px;
-} */
-
 .btn {
   padding: 6px 12px;
   display: flex;
@@ -41,16 +35,8 @@
   width: 38px;
   height: 38px;
 }
-.iconDown {
-  display: flex;
-  justify-content: center;
-  align-self: center;
 
-  width: 16px;
-  height: 16px;
-}
-
-.iconUp {
+.icon {
   display: flex;
   justify-content: center;
   align-self: center;
@@ -76,12 +62,7 @@
     height: 44px;
   }
 
-  .iconDown {
-    width: 20px;
-    height: 20px;
-  }
-
-  .iconUp {
+  .icon {
     width: 20px;
     height: 20px;
   }

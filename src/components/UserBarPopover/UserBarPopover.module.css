@@ -1,7 +1,7 @@
 .popover {
   position: absolute;
   top: 54px;
-  padding: 14px 45px 14px 20px;
+  padding: 14px 20px 14px 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -17,19 +17,20 @@
 .container {
   display: flex;
   align-items: center;
+  column-gap: 8px;
 }
 
 .icon {
   display: flex;
   justify-content: center;
   align-self: center;
-
   width: 16px;
   height: 16px;
 }
 
 .btn {
   padding: 0;
+
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
@@ -48,18 +49,9 @@
   stroke: rgba(50, 63, 71, 0.4);
 }
 
-/* .modal {
-  padding: 20px;
-
-  border-radius: 12px;
-  background-color: white;
-  width: 50vh;
-} */
-
 @media screen and (min-width: 768px) {
   .popover {
     top: 64px;
-    padding: 14px 57px 14px 20px;
     width: 157px;
     height: 82px;
   }
