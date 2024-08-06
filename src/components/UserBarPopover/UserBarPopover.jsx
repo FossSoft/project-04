@@ -14,9 +14,11 @@ import {
   openModalSettings,
 } from '../../redux/modal/slice';
 import LogOutModal from 'components/LogOutModal/LogOutModal';
+import { selecteShowPopover } from '../../redux/popover/selectors';
 
 export default function UserBarPopover() {
   const dispatch = useDispatch();
+  const showPopover = useSelector(selecteShowPopover);
   const isOpenModalSettings = useSelector(selecteIsOpenModalSettings);
   const isOpenModalLogout = useSelector(selecteIsOpenModalLogout);
 
@@ -37,7 +39,7 @@ export default function UserBarPopover() {
   };
 
   return (
-    <div className={css.popover}>
+    <div className={showPopover ? clsx(css.popover, css.active) : css.popover}>
       <div className={css.container}>
         <svg className={clsx(css.icon, css.darkblue)}>
           <use href={`${sprite}#icon-settings`}></use>
@@ -49,7 +51,6 @@ export default function UserBarPopover() {
         >
           Settigs
         </button>
-
         <Modal
           isOpen={isOpenModalSettings}
           onRequestClose={handleCloseModalSettings}
@@ -57,6 +58,7 @@ export default function UserBarPopover() {
           Modal window put your component with css
         </Modal>
       </div>
+
       <div className={css.container}>
         <svg className={clsx(css.icon, css.gray)}>
           <use href={`${sprite}#icon-log-out`}></use>

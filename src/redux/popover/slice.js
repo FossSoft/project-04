@@ -12,7 +12,8 @@ const popoverSlice = createSlice({
       state.icon = !state.icon;
     },
     hidePopover: (state, action) => {
-      state.showPopover = !state.showPopover;
+      state.showPopover = false;
+      state.icon = false;
     },
   },
 });
