@@ -1,14 +1,14 @@
-.wrapper {
-  padding: 14px 50px 14px 20px;
+.popover {
+  position: absolute;
+  top: 54px;
+  padding: 14px 45px 14px 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   row-gap: 8px;
-
   width: 137px;
   height: 72px;
-
   background-color: var(--white);
   border-radius: 15px;
   box-shadow: 0px 4px 50px 0px rgba(0, 0, 0, 0.1);
@@ -30,13 +30,12 @@
 
 .btn {
   padding: 0;
-  background-color: transparent;
-  border-color: transparent;
-  font-family: Poppins;
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
   line-height: 18px; /* 128.571% */
+  background-color: transparent;
+  border-color: transparent;
 }
 
 .darkblue {
@@ -49,8 +48,17 @@
   stroke: rgba(50, 63, 71, 0.4);
 }
 
+/* .modal {
+  padding: 20px;
+
+  border-radius: 12px;
+  background-color: white;
+  width: 50vh;
+} */
+
 @media screen and (min-width: 768px) {
-  .wrapper {
+  .popover {
+    top: 64px;
     padding: 14px 57px 14px 20px;
     width: 157px;
     height: 82px;
