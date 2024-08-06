@@ -1,12 +1,9 @@
 import css from './Setting.module.css';
-import mobile from '../../image/x1/Ellipse_14.png';
-import mobileX2 from '../../image/x1/Ellipse_14_640_640.png';
+
 import tablet from '../../image/x2/Ellipse_14.png';
-import tabletx2 from '../../image/x2/Ellipse_14_640_640.png';
-import desktop from '../../image/x3/Ellipse_14.png';
-import desktop2 from '../../image/x3/Ellipse_14_640_640.png';
+
 import sprite from '../../image/sprite/sprite.svg';
-// import normaFotot from '../images/normaFoto.png';
+
 import { useEffect, useId, useRef, useState } from 'react';
 
 import { useForm } from 'react-hook-form';
@@ -44,10 +41,9 @@ export const Setting = () => {
   //
 
   const dispatch = useDispatch();
-  // console.log(dispatch);
 
   //
-  const [files, setFile] = useState(null);
+  const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(null);
 
   const handleFileChange = event => {
@@ -92,25 +88,25 @@ export const Setting = () => {
   }, [weightValue, timeValue, genderValue]);
 
   useEffect(() => {
-    dispatch(fetchUserInfo())
-      .unwrap()
-      .then(res => console.log(res.accessToken));
-    console.log('Succ');
+    dispatch(fetchUserInfo()).unwrap();
+    // .then(res => console.log(res.accessToken));
+    // console.log('Success');
   }, [dispatch]);
 
   const onSubmit = data => {
-    // const formData = new FormData();
-    // formData.append('username', data.username);
+    const formData = new FormData();
+    formData.append('username', data.name);
     // formData.append('userEmail', data.userEmail);
     // formData.append('weight', data.weight);
     // formData.append('activeTime', data.activeTime);
     // formData.append('gender', data.gender);
-    console.log(data.gender);
+    // console.log(data);
 
-    dispatch(updateUserInfo(data.gender))
+    dispatch(updateUserInfo(data))
       .unwrap()
-      .then(res => console.log(res.accessToken))
-      .catch(err => console.log(err));
+      .then(res => console.log(res));
+    // .catch(err => console.log(err));
+    console.log(data.name);
 
     // reset();
   };
@@ -127,19 +123,6 @@ export const Setting = () => {
               className={css.avatarImg}
               src={!preview ? tablet : preview}
               alt="Avatar"
-              //             srcSet={`
-              //   ${preview} 75w,
-              //   ${preview} 150w,
-              //   ${preview} 100w,
-              //   ${preview} 200w,
-              //   ${preview} 100w,
-              //   ${preview} 200w
-              // `}
-              //             sizes="
-              //   (min-width: 1440px) 100px,
-              //   (min-width: 768px) 100px,
-              //   (max-width: 767px) 75px
-              // "
             />
             <label htmlFor={upload} className={css.upload}>
               <svg className={css.uploadImg}>
@@ -147,7 +130,7 @@ export const Setting = () => {
               </svg>
               Upload a photo
               <input
-                {...register('upload')}
+                // {...register('upload')}
                 type="file"
                 id={upload}
                 onChange={handleFileChange}
@@ -192,17 +175,17 @@ export const Setting = () => {
                 <p className={css.userName}>Your name</p>
                 <input
                   type="text"
-                  {...register('username')}
+                  {...register('name')}
                   id={nameInput}
                   placeholder="Enter your name"
                   style={{
-                    borderColor: errors.username ? 'red' : 'initial',
+                    borderColor: errors.name ? 'red' : 'initial',
                   }}
                 />
               </label>
               <div style={{ height: 40 }}>
-                {errors.username && (
-                  <p className={css.error}>{errors.username.message}</p>
+                {errors.name && (
+                  <p className={css.error}>{errors.name.message}</p>
                 )}
               </div>
               <label htmlFor={emailInput}>
