@@ -7,11 +7,11 @@ import sprite from '../../image/sprite/sprite.svg';
 import UserBarPopover from 'components/UserBarPopover/UserBarPopover';
 import { hidePopover, togglePopover } from '../../redux/popover/slice';
 import { selecteIcon, selecteShowPopover } from '../../redux/popover/selectors';
-import { selectAvatar } from '../../redux/user/selectors';
+import { selectAvatar, selectUserName } from '../../redux/user/selectors';
 
 export default function UserBar() {
   const dispatch = useDispatch();
-
+  const userName = useSelector(selectUserName);
   const avatar = useSelector(selectAvatar);
   const showPopover = useSelector(selecteShowPopover);
   const icon = useSelector(selecteIcon);
@@ -21,25 +21,22 @@ export default function UserBar() {
     dispatch(togglePopover());
   };
 
-  useEffect(() => {
-    const handleClickOutside = e => {
-      // if (
-      //   btnRef.current &&
-      //   !btnRef.current.contains(e.target) &&
-      //   !e.target.closest('.popover')
-      // )
-      //   dispatch(hidePopover());
-      console.log('btnRef: ', btnRef.current);
-      console.log('target', e.target);
-      console.log(!e.target.closest('.popover'));
-    };
+  // useEffect(() => {
+  //   const handleClickOutside = e => {
+  //     if (
+  //       btnRef.current &&
+  //       !btnRef.current.contains(e.target) &&
+  //       !e.target.closest('.popover')
+  //     )
+  //       dispatch(hidePopover());
+  //   };
 
-    document.addEventListener('click', handleClickOutside);
+  //   document.addEventListener('click', handleClickOutside);
 
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-  }, [dispatch]);
+  //   return () => {
+  //     document.removeEventListener('click', handleClickOutside);
+  //   };
+  // }, [dispatch]);
 
   return (
     <div className={css.useBar}>
@@ -49,15 +46,23 @@ export default function UserBar() {
         ref={btnRef}
         onClick={handleTogglePopover}
       >
-        <p className={css.text}>Nadia</p>
-        <img
-          className={css.img}
-          src={avatar}
-          // srcSet={`${img1x} 1x,
-          //       ${img2x} 2x`}
-          // src={`${img1x} `}
-          alt="User"
-        />
+        {userName ? (
+          <p className={css.text}>{userName}</p>
+        ) : (
+          <p className={css.text}>Visitor</p>
+        )}
+
+        {avatar ? (
+          <img className={css.img} src={avatar} alt="User" />
+        ) : (
+          <img
+            className={css.img}
+            srcSet={`${img1x} 1x,
+                  ${img2x} 2x`}
+            src={`${img1x} `}
+            alt="User"
+          />
+        )}
 
         <svg className={css.icon}>
           <use
@@ -65,7 +70,8 @@ export default function UserBar() {
           ></use>
         </svg>
       </button>
-      {showPopover && <UserBarPopover className={css.userBarPopover} />}
+
+      <UserBarPopover className={css.userBarPopover} />
     </div>
   );
 }
