@@ -50,14 +50,12 @@ export default function UserBarPopover() {
           Settigs
         </button>
 
-        {isOpenModalSettings && (
-          <Modal
-            isOpen={isOpenModalSettings}
-            onRequestClose={handleCloseModalSettings}
-          >
-            Modal window put your component with css
-          </Modal>
-        )}
+        <Modal
+          isOpen={isOpenModalSettings}
+          onRequestClose={handleCloseModalSettings}
+        >
+          Modal window put your component with css
+        </Modal>
       </div>
       <div className={css.container}>
         <svg className={clsx(css.icon, css.gray)}>
@@ -70,14 +68,13 @@ export default function UserBarPopover() {
         >
           Log out
         </button>
-        {isOpenModalLogout && (
-          <Modal
-            isOpen={isOpenModalLogout}
-            onRequestClose={handleCloseModalLogout}
-          >
-            <LogOutModal />
-          </Modal>
-        )}
+
+        <Modal
+          isOpen={isOpenModalLogout}
+          onRequestClose={handleCloseModalLogout}
+        >
+          <LogOutModal />
+        </Modal>
       </div>
     </div>
   );
