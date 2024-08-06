@@ -1,12 +1,41 @@
-import TrackerPage from 'pages/TrackerPage/TrackerPage';
-import styles from './App.module.css';
-import { EditWaterModal } from 'components/EditWaterModal/EditWaterModal.jsx';
+import { Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useAuth } from '../../hooks/useAuth';
+import { refreshUser } from '../../redux/auth/operations';
+import RestrictedRoute from '../../components/RestricktedRoute';
+import PrivateRoute from '../../components/PrivateRoute';
+import HomePage from '../../pages/HomePage/HomePage';
+import SignInPage from '../../pages/SignInPage/SignInPage';
+import TrackerPage from '../../pages/TrackerPage/TrackerPage';
+import SignUpPage from 'pages/SignUpPage/SignUpPage';
 
+export default function App() {
+  const dispatch = useDispatch();
+  const { isRefreshing } = useAuth();
 
-export const App = () => {
-  return (
-    <div>
-      <TrackerPage />
-    </div>
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
+
+  return isRefreshing ? (
+    <b>Refreshing user</b>
+  ) : (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route
+        path="/signin"
+        element={
+          <RestrictedRoute redirectTo="/tracker" component={<SignInPage />} />
+        }
+      />
+      <Route
+        path="/tracker"
+        element={
+          <PrivateRoute redirectTo="/signin" component={<TrackerPage />} />
+        }
+      />
+      <Route path="/signup" element={<SignUpPage />}></Route>
+    </Routes>
   );
-};
+}
