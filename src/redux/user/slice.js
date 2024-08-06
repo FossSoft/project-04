@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { logIn } from 'redux/auth/operations.js';
+import { logIn } from '../../redux/auth/operations.js';
 import {
   addWaterAmount,
   deleteWaterEntry,
