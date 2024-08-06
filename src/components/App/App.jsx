@@ -8,6 +8,7 @@ import PrivateRoute from '../../components/PrivateRoute';
 import HomePage from '../../pages/HomePage/HomePage';
 import SignInPage from '../../pages/SignInPage/SignInPage';
 import TrackerPage from '../../pages/TrackerPage/TrackerPage';
+import SignUpPage from 'pages/SignUpPage/SignUpPage';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ export default function App() {
           <PrivateRoute redirectTo="/tracker" component={<TrackerPage />} />
         }
       />
+      <Route path="/signup" element={<SignUpPage />}></Route>
     </Routes>
   );
 }
