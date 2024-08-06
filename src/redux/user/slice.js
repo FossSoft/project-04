@@ -16,8 +16,8 @@ const initialState = {
   name: '',
   email: '',
   weight: 0,
-  activeParticipationTime: '',
-  waterToDrink: 0,
+  activityTime: '',
+  dailyNorma: 0,
   waterData: [],
   monthlyWaterData: {
     date: '',
@@ -45,9 +45,10 @@ const userSlice = createSlice({
         state.gender = action.payload.gender;
         state.email = action.payload.email;
         state.weight = action.payload.weight;
-        state.activeParticipationTime = action.payload.activityTime;
-        state.waterToDrink = action.payload.dailyNorma;
+        state.activityTime = action.payload.activityTime;
+        state.dailyNorma = action.payload.dailyNorma;
         state.avatar = action.payload.avatar;
+        state.name = action.payload.name;
       })
       .addCase(fetchUserInfo.rejected, (state, action) => {
         state.isLoading = false;
@@ -65,6 +66,7 @@ const userSlice = createSlice({
         state.activeParticipationTime = action.payload.activityTime;
         state.waterToDrink = action.payload.dailyNorma;
         state.avatar = action.payload.avatar;
+        state.name = action.payload.name;
       })
       .addCase(updateUserInfo.rejected, (state, action) => {
         state.isLoading = false;

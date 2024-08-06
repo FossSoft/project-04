@@ -1,5 +1,5 @@
 import css from './Setting.module.css';
-
+import toast, { Toaster } from 'react-hot-toast';
 import tablet from '../../image/x2/Ellipse_14.png';
 
 import sprite from '../../image/sprite/sprite.svg';
@@ -65,6 +65,7 @@ export const Setting = () => {
     resolver: yupResolver(validationSchema),
     mode: 'onChange',
   });
+
   const form = useRef();
   //
 
@@ -89,26 +90,35 @@ export const Setting = () => {
 
   useEffect(() => {
     dispatch(fetchUserInfo()).unwrap();
-    // .then(res => console.log(res.accessToken));
-    // console.log('Success');
+    // .then(res => console.log(res));
   }, [dispatch]);
 
   const onSubmit = data => {
-    const formData = new FormData();
-    formData.append('username', data.name);
+    // const formData = new FormData();
+    // formData.append('username', data.name);
     // formData.append('userEmail', data.userEmail);
     // formData.append('weight', data.weight);
     // formData.append('activeTime', data.activeTime);
     // formData.append('gender', data.gender);
     // console.log(data);
+    if (emeailSelector !== data.userEmail) {
+      toast.error('Write correctly amail');
+      return;
+    }
 
-    dispatch(updateUserInfo(data))
+    dispatch(
+      updateUserInfo({
+        name: data.username,
+        gender: data.gender,
+        // email: data.userEmail,
+        weight: data.weight,
+        activityTime: data.activeTime,
+        dailyNorma: data.ownerResult,
+      })
+    )
       .unwrap()
-      .then(res => console.log(res));
-    // .catch(err => console.log(err));
-    console.log(data.name);
-
-    // reset();
+      .then(res => console.log(res, 'From update'))
+      .catch(err => console.log(err.message));
   };
   return (
     <div className={css.container}>
@@ -129,13 +139,13 @@ export const Setting = () => {
                 <use href={`${sprite}#icon-upload`}></use>
               </svg>
               Upload a photo
-              <input
+              {/* <input
                 // {...register('upload')}
                 type="file"
                 id={upload}
                 onChange={handleFileChange}
                 style={{ display: 'none' }}
-              />
+              /> */}
             </label>
           </div>
         </div>
@@ -175,17 +185,17 @@ export const Setting = () => {
                 <p className={css.userName}>Your name</p>
                 <input
                   type="text"
-                  {...register('name')}
+                  {...register('username')}
                   id={nameInput}
                   placeholder="Enter your name"
                   style={{
-                    borderColor: errors.name ? 'red' : 'initial',
+                    borderColor: errors.username ? 'red' : 'initial',
                   }}
                 />
               </label>
               <div style={{ height: 40 }}>
-                {errors.name && (
-                  <p className={css.error}>{errors.name.message}</p>
+                {errors.username && (
+                  <p className={css.error}>{errors.username.message}</p>
                 )}
               </div>
               <label htmlFor={emailInput}>
@@ -302,6 +312,7 @@ export const Setting = () => {
           <img src={preview} alt="" />
         </div>
       )} */}
+      <Toaster />
     </div>
   );
 };

@@ -8,10 +8,9 @@ export const selectUserGender = state => state.user.gender;
 
 export const selectUserWeight = state => state.user.weight;
 
-export const selectUserActivityTime = state =>
-  state.user.activeParticipationTime;
+export const selectUserActivityTime = state => state.user.activityTime;
 
-export const selectUserWaterToDrink = state => state.user.waterToDrink;
+export const selectUserWaterToDrink = state => state.user.dailyNorma;
 
 export const selectUserWaterData = state => state.user.waterData;
 

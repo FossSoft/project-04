@@ -28,11 +28,8 @@ export const updateUserInfo = createAsyncThunk(
       const token = localStorage.getItem('token');
 
       setAuthHeader(token);
-      const response = await axios.patch('/user/update', formData, {
-        headers: {
-          'Content-Type': 'multipart/json',
-        },
-      });
+      const response = await axios.patch('/user/update', formData);
+      // console.log(response.data.data);
 
       return response.data.data;
     } catch (error) {
@@ -41,6 +38,11 @@ export const updateUserInfo = createAsyncThunk(
   }
 );
 
+// , {
+//         headers: {
+//           'Content-Type': 'application/json',
+//         },
+//       }
 export const updateUserAvatar = createAsyncThunk(
   'user/updateUserAvatar',
   async (formData, thunkAPI) => {
