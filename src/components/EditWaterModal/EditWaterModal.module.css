@@ -85,9 +85,14 @@
   width: 40px;
   height: 40px;
   border-radius: 50px;
-  border: 1px solid #323f47;
+  border: none;
   background-color: transparent;
   padding: 0;
+}
+.quantityIcon {
+  stroke: #323f47;
+  width: 100%;
+  height: 100%;
 }
 .numberQuantity {
   border-radius: 50px;

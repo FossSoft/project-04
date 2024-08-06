@@ -20,11 +20,6 @@ export const EditWaterModal = ({ onClose }) => {
     setQuantity(Number(e.target.value));
     };
 
-     const inputStyle = {
-    WebkitAppearance: 'none',
-    MozAppearance: 'textfield'
-  };
-
   return (
     <div className={css.mainEditWaterModalCont}>
       <div className={css.editWaterModalContWindow}>
@@ -45,8 +40,8 @@ export const EditWaterModal = ({ onClose }) => {
               type="button"
               onClick={handleDecrease}
             >
-              <svg width="24" height="24" className={css.quantityIcon}>
-                <use xlinkHref={`${sprite}#icon-x`}></use>
+              <svg  className={css.quantityIcon}>
+                <use xlinkHref={`${sprite}#icon-minus`}></use>
               </svg>
             </button>
             <div className={css.numberQuantity}>
@@ -57,8 +52,8 @@ export const EditWaterModal = ({ onClose }) => {
               type="button"
               onClick={handleIncrease}
             >
-              <svg width="24" height="24" className={css.quantityIcon}>
-                <use xlinkHref={`${sprite}#icon-x`}></use>
+              <svg  className={css.quantityIcon}>
+                <use xlinkHref={`${sprite}#icon-plus`}></use>
               </svg>
             </button>
           </div>

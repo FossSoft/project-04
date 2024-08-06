@@ -1,3 +1,7 @@
+.useBar {
+  position: relative;
+}
+
 .btn {
   padding: 6px 12px;
   display: flex;
@@ -20,7 +24,7 @@
 .text {
   color: var(--white);
   text-align: center;
-  font-family: Poppins;
+  font-family: Poppins, sans-serif;
   font-size: 14px;
   font-weight: 700;
   line-height: 18px; /* 128.571% */
@@ -31,22 +35,15 @@
   width: 38px;
   height: 38px;
 }
-.iconDown {
+
+.icon {
   display: flex;
   justify-content: center;
   align-self: center;
-
   width: 16px;
   height: 16px;
 }
 
-.iconUp {
-  display: flex;
-  justify-content: center;
-  align-self: center;
-  width: 20px;
-  height: 20px;
-}
 @media screen and (min-width: 768px) {
   .btn {
     width: 157px;
@@ -65,12 +62,7 @@
     height: 44px;
   }
 
-  .iconDown {
-    width: 20px;
-    height: 20px;
-  }
-
-  .iconUp {
+  .icon {
     width: 20px;
     height: 20px;
   }

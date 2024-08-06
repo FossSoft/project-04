@@ -11,7 +11,10 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { authReducer } from "./auth/slice";
-import useReducer from "./user/slice.js";
+import  useReducer from "./user/slice.js";
+import popoverReducer from '../redux/popover/slice';
+import modalReducer from '../redux/modal/slice';
+import waterReducer from './water/slice';
 
 const authPersistConfig = {
   key: 'auth',
@@ -22,7 +25,10 @@ const authPersistConfig = {
 export const store = configureStore({
     reducer: {
         auth: persistReducer(authPersistConfig, authReducer),
-        user: useReducer
+        user: useReducer,
+        popover: popoverReducer,
+        modal: modalReducer,
+        water: waterReducer,
     },
     middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

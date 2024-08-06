@@ -9,6 +9,7 @@ import HomePage from '../../pages/HomePage/HomePage';
 import SignInPage from '../../pages/SignInPage/SignInPage';
 import TrackerPage from '../../pages/TrackerPage/TrackerPage';
 import SignUpPage from 'pages/SignUpPage/SignUpPage';
+import { Setting } from 'components/Setting/Setting.jsx';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ export default function App() {
           <RestrictedRoute redirectTo="/tracker" component={<SignInPage />} />
         }
       />
+      <Route path="setting" element={<Setting />} />
       <Route
         path="/tracker"
         element={
@@ -36,6 +38,7 @@ export default function App() {
         }
       />
       <Route path="/signup" element={<SignUpPage />}></Route>
+      <Route path="/tracker" element={<TrackerPage />}></Route>
     </Routes>
   );
 }
