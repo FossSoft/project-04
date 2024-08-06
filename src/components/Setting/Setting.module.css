@@ -65,7 +65,11 @@
   width: 18px;
   height: 18px;
 }
-
+.avatarImg {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+}
 .upload {
   display: flex;
   gap: 8px;
@@ -396,6 +400,10 @@
   .uploadImg {
     width: 20px;
     height: 20px;
+  }
+  .avatarImg {
+    width: 100px;
+    height: 100px;
   }
   .upload {
     font-size: 16px;

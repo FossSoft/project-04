@@ -1,0 +1,119 @@
+.modalContainer {
+  /* width: 100%; */
+  width: 344px;
+  padding: 40px 14px;
+  border-radius: 15px;
+  text-align: center;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+.title {
+  color: var(--Dark-Blue);
+  text-align: center;
+
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+
+  margin-bottom: 16px;
+}
+
+.textQuestion {
+  width: 296px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  color: var(--Dark-Blue);
+
+  margin-bottom: 28px;
+}
+
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 9px;
+}
+
+.deleteBtn,
+.cancelBtn {
+  width: 304px;
+  height: 46px;
+
+  border-radius: 30px;
+  border: none;
+
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.28;
+  letter-spacing: -0.01em;
+  text-align: center;
+  padding: 14px 129px;
+
+}
+
+.deleteBtn {
+  color: var(--Dark-Blue);
+  background-color: var(--green);
+  transition: background-color 150ms ease-in;
+}
+
+.cancelBtn {
+  background-color: var(--light-gray);
+  color: rgba(50, 63, 71, 0.30);
+
+  transition: background-color 150ms ease-in, color 150ms ease-in;
+}
+
+.deleteBtn:hover,
+.deleteBtn:focus {
+  background-color: var(--green-hover);
+}
+
+.cancelBtn:hover,
+.cancelBtn:focus {
+  color: var(--Dark-Blue);
+  background-color: var(--light-gray);
+}
+
+@media screen and (min-width: 768px) {
+  .modalContainer {
+    width: 516px;
+    padding: 40px;
+  }
+
+  .title {
+    font-size: 28px;
+    line-height: 1.14;
+    margin-bottom: 24px;
+  }
+
+  .textQuestion {
+    width: 436px;
+    font-size: 18px;
+    line-height: 1.33;
+    margin-bottom: 24px;
+  }
+
+  .buttons {
+    flex-direction: row;
+
+    gap: 10px;
+  }
+
+  .deleteBtn,
+  .cancelBtn {
+    width: 170px;
+    height: 60px;
+
+    font-size: 16px;
+    line-height: 1.5;
+
+    padding: 18px 67px;
+  }
+}

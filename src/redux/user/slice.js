@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { logIn } from '../auth/operations.js';
+import { logIn } from '../../redux/auth/operations.js';
 import {
   addWaterAmount,
   deleteWaterEntry,
@@ -11,6 +11,7 @@ import {
 
 const initialState = {
   userId: '',
+  avatar: '',
   gender: '',
   name: '',
   email: '',

@@ -1,0 +1,43 @@
+.textNoWater {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.29;
+  max-width: 240px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+
+.list {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  overflow-x: overlay;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+
+  /* width: 306px; */
+  /* height: 74px; */
+}
+
+@media (min-width: 768px) {
+  .textNoWater {
+    max-width: 500px;
+  }
+
+  .list {
+    gap: 32px;
+    /* width: 640px;
+        height: 86px; */
+  }
+}
+
+@media (min-width: 1440px) {
+  .list {
+    gap: 16px;
+    /* width: 608px; */
+  }
+}

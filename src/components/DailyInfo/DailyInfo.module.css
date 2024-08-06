@@ -1,0 +1,10 @@
+.container {
+  padding: 20px 20px;
+}
+
+.dataContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
