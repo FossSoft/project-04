@@ -13,13 +13,12 @@
 <svg id="icon-chevron-up"  viewBox="0 0 32 32" >
 <path stroke="#fff" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="3.2" d="M8 20l8-8 8 8"></path>
 </svg>
-<svg id="icon-minus" width="32" height="32" viewBox="0 0 32 32" x="192" y="0">
+<svg id="icon-minus" width="40" height="40" viewBox="0 0 32 32">
 <path fill="none" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="1.1163" stroke="#000" d="M16 0.558c8.528 0 15.442 6.914 15.442 15.442s-6.914 15.442-15.442 15.442c-8.528 0-15.442-6.914-15.442-15.442s6.914-15.442 15.442-15.442z"></path>
 <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="1.3395" stroke="#000" d="M10.286 16h11.429"></path>
 </svg>
-<!-- <svg id="icon-plus" width="32" height="32" viewBox="0 0 32 32" x="240" y="0"> -->
-<svg id="icon-plus"  viewBox="0 0 32 32">
-<!-- <path fill="none" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="1.1163" stroke="#000" d="M16 0.558c8.528 0 15.442 6.914 15.442 15.442s-6.914 15.442-15.442 15.442c-8.528 0-15.442-6.914-15.442-15.442s6.914-15.442 15.442-15.442z"></path> -->
+<svg id="icon-plus" width="40" height="40" viewBox="0 0 32 32">
+<path fill="none" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="1.1163" stroke="#000" d="M16 0.558c8.528 0 15.442 6.914 15.442 15.442s-6.914 15.442-15.442 15.442c-8.528 0-15.442-6.914-15.442-15.442s6.914-15.442 15.442-15.442z"></path>
 <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="1.3395"  d="M16 10.286v11.429"></path>
 <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="1.3395"  d="M10.286 16h11.429"></path>
 </svg>
