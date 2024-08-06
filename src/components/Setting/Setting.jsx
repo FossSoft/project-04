@@ -109,7 +109,7 @@ export const Setting = () => {
 
     dispatch(updateUserInfo(data.gender))
       .unwrap()
-      .then(res => console.log(res))
+      .then(res => console.log(res.accessToken))
       .catch(err => console.log(err));
 
     // reset();
