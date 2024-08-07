@@ -65,11 +65,18 @@
   width: 116px;
   padding: 14px 19px;
 }
+.link_signup:hover {
+  background-color: #87d28d;
+}
 
 .link_signin{
   border: 1px solid rgb(50, 63, 71);
   width: 104px;
   padding: 14px 28px;
+}
+.link_signin:hover {
+border: 1px solid rgb(135, 210, 141);
+color:rgb(135, 210, 141);
 }
 @media screen and (min-width: 768px){
 .section{
