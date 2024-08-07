@@ -14,7 +14,11 @@ import {
   openModalSettings,
 } from '../../redux/modal/slice';
 import LogOutModal from 'components/LogOutModal/LogOutModal';
+
+import { Setting } from 'components/Setting/Setting.jsx';
+
 import { selecteShowPopover } from '../../redux/popover/selectors';
+
 
 export default function UserBarPopover() {
   const dispatch = useDispatch();
@@ -51,12 +55,19 @@ export default function UserBarPopover() {
         >
           Settigs
         </button>
-        <Modal
-          isOpen={isOpenModalSettings}
-          onRequestClose={handleCloseModalSettings}
-        >
-          Modal window put your component with css
-        </Modal>
+
+
+        {isOpenModalSettings && (
+          <Modal
+            isOpen={isOpenModalSettings}
+            onRequestClose={handleCloseModalSettings}
+          >
+            <Setting handleCloseModalSettings={handleCloseModalSettings} />
+          </Modal>
+        )}
+
+      
+
       </div>
 
       <div className={css.container}>
