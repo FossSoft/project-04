@@ -80,7 +80,6 @@ export default function SignUpForm() {
   return (
     <div className={css.modal}>
       <Toaster position="top-center" reverseOrder={false} />
-
       <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
         <h2 className={css.h2}>Sign Up</h2>
         <div className={css.container}>

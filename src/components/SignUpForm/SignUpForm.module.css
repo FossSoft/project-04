@@ -6,6 +6,7 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 100px;
+  margin-top: 130px;
 }
 
 form {
@@ -13,8 +14,10 @@ form {
 }
 .container {
   margin-top: 20px;
+  position: relative;
 }
 .input {
+  font-family: Poppins;
   width: 100%;
   font-size: 16px;
   border: 1px solid rgba(47, 47, 47, 0.2);
@@ -24,6 +27,7 @@ form {
   padding-bottom: 16px;
   padding-left: 16px;
   margin-top: 8px;
+  background-color: rgba(240, 239, 244, 1);
 }
 
 .input:focus {
@@ -32,6 +36,7 @@ form {
 }
 
 .input::placeholder {
+  font-family: Poppins;
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
@@ -39,12 +44,19 @@ form {
   text-align: left;
   color: rgba(47, 47, 47, 0.6);
 }
+
+.errorInput::placeholder {
+  color: rgba(239, 80, 80, 1);
+}
+
 .box {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .link {
+  font-family: Poppins;
+  font-family: Poppins;
   margin-left: 4px;
   text-decoration: underline;
   font-size: 16px;
@@ -54,7 +66,12 @@ form {
   text-align: left;
   color: rgba(47, 47, 47, 1);
 }
+.link:focus,
+.link:active {
+  color: rgba(135, 210, 141, 1);
+}
 .h2 {
+  font-family: Poppins;
   color: rgba(50, 63, 71, 1);
   font-size: 36px;
   font-weight: 700;
@@ -63,6 +80,7 @@ form {
   text-align: left;
 }
 .button {
+  font-family: Poppins;
   background-color: rgba(155, 225, 160, 1);
   color: rgba(50, 63, 71, 1);
   width: 100%;
@@ -81,15 +99,9 @@ form {
 .button:focus {
   background-color: rgba(135, 210, 141, 1);
 }
-.text {
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
-  letter-spacing: -0.01em;
-  text-align: left;
-  color: rgba(47, 47, 47, 0.5);
-}
+
 .label {
+  font-family: Poppins;
   font-size: 16px;
   font-weight: 700;
   line-height: 24px;
@@ -118,22 +130,90 @@ form {
   letter-spacing: -0.01em;
   text-align: left;
   margin-left: 8px;
+  margin-top: 8px;
+  display: block;
 }
 .errorInput {
   border-color: rgba(239, 80, 80, 1);
+  color: rgba(239, 80, 80, 1);
+}
+.text {
+  font-family: Poppins;
+  font-size: 16px; /* Default size for desktop */
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  text-align: left;
+  color: rgba(47, 47, 47, 0.5);
 }
 
+/* Mobile first */
 @media screen and (min-width: 320px) {
+  .modal {
+    margin-top: 170px;
+    margin-bottom: 170px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .text {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+  }
+  .link {
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .input::placeholder {
+    font-size: 14px;
+  }
+  .h2 {
+    font-size: 32px;
+  }
+  .label {
+    font-size: 14px;
+  }
 }
 
 @media screen and (min-width: 375px) {
-  .modal {
-    width: 311px;
+  .text {
+    font-size: 14px;
+  }
+  .link {
+    font-size: 14px;
+  }
+  .input::placeholder {
+    font-size: 14px;
+  }
+  .h2 {
+    font-size: 32px;
+  }
+  .label {
+    font-size: 14px;
   }
 }
 
 /* Tablet and > */
 @media screen and (min-width: 768px) {
+  .modal {
+    width: 436px;
+    margin-top: 227px;
+    margin-bottom: 227px;
+  }
+  .text {
+    font-size: 16px;
+  }
+  .label {
+    font-size: 16px;
+  }
+  .input::placeholder {
+    font-size: 16px;
+  }
+  .text {
+    font-size: 16px;
+  }
+  .h2 {
+    font-size: 36px;
+  }
 }
 
 /* Desktop and > */
@@ -141,5 +221,19 @@ form {
   .modal {
     width: 436px;
     background-color: rgba(240, 239, 244, 1);
+    margin-bottom: 100px;
+    margin-top: 130px;
+  }
+  .text {
+    font-size: 16px;
+  }
+  .label {
+    font-size: 16px;
+  }
+  .input::placeholder {
+    font-size: 16px;
+  }
+  .h2 {
+    font-size: 36px;
   }
 }
