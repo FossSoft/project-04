@@ -5,14 +5,9 @@ import { selectWaterDate } from '../../redux/water/selectors';
 import css from './ChooseDate.module.css';
 
 function ChooseDate() {
-
   const currentDate = useSelector(selectWaterDate);
 
-  console.log('Current Date:', currentDate);
-
-  if (!currentDate) {
-    return <h3 className={css.dateTitle}>No date selected</h3>;
-  }
+  // console.log('Current Date:', currentDate);
 
   const formattedDate = new Date(currentDate);
 
@@ -26,6 +21,3 @@ function ChooseDate() {
 }
 
 export default ChooseDate;
-
-
-

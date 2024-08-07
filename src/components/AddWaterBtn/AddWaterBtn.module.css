@@ -17,6 +17,7 @@
 
   border-radius: 50%;
   background-color: var(--green);
+  transition: background-color var(--effect), stroke var(--effect);
 }
 
 .btnAddWater span {

@@ -1,0 +1,83 @@
+.controls {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.label {
+  font-family: var(--font-regular);
+  font-size: 14px;
+  color: var(--main-text-color);
+}
+
+.customSelectWrapper {
+  position: relative;
+  width: 100px;
+}
+.water {
+  font-family: var(--font-regular);
+  font-size: 14px;
+  color: var(--main-text-color);
+}
+
+.customSelect {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  font-family: var(--font-regular);
+  font-size: 14px;
+  color: var(--main-text-color);
+  border: 1px solid var(--text-color-transparent);
+  border-radius: 4px;
+  background-color: var(--background-color);
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.customSelect:focus,
+.customSelect:hover {
+  border-color: var(--accent-color);
+}
+
+.arrow {
+  width: 10px;
+  height: 10px;
+  border: solid var(--main-text-color);
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(45deg);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+.customSelect:focus,
+.customSelect:hover .arrow,
+.arrow:hover .arrow:focus {
+  border-color: var(--accent-color);
+}
+.arrowOpen {
+  transform: rotate(225deg);
+}
+
+.customOptions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  color: var(--main-text-color);
+
+  border-top: none;
+  background-color: var(--background-color);
+  z-index: 1;
+}
+
+.customOption {
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.customOption:hover {
+  color: var(--accent-color);
+}

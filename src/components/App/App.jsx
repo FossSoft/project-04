@@ -38,6 +38,9 @@ export default function App() {
         }
       />
       <Route path="/signup" element={<SignUpPage />}></Route>
+      <Route path="/tracker" element={<TrackerPage />}></Route>
     </Routes>
   );
 }
+
+

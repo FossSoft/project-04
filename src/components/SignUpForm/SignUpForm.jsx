@@ -80,8 +80,8 @@ export default function SignUpForm() {
   return (
     <div className={css.modal}>
       <Toaster position="top-center" reverseOrder={false} />
-      <h2 className={css.h2}>Sign Up</h2>
       <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
+        <h2 className={css.h2}>Sign Up</h2>
         <div className={css.container}>
           <label className={css.label}>Email</label>
           <Controller
@@ -89,7 +89,7 @@ export default function SignUpForm() {
             control={control}
             render={({ field }) => (
               <input
-                className={css.input}
+                className={`${css.input} ${errors.email ? css.errorInput : ''}`}
                 placeholder="Enter your email"
                 type="email"
                 {...field}
@@ -108,7 +108,9 @@ export default function SignUpForm() {
               control={control}
               render={({ field }) => (
                 <input
-                  className={css.input}
+                  className={`${css.input} ${
+                    errors.password ? css.errorInput : ''
+                  }`}
                   placeholder="Enter your password"
                   type={showPassword ? 'text' : 'password'}
                   {...field}
@@ -135,7 +137,9 @@ export default function SignUpForm() {
               control={control}
               render={({ field }) => (
                 <input
-                  className={css.input}
+                  className={`${css.input} ${
+                    errors.repeatPassword ? css.errorInput : ''
+                  }`}
                   placeholder="Please repeat password"
                   type={showRepeatPassword ? 'text' : 'password'}
                   {...field}
@@ -161,7 +165,7 @@ export default function SignUpForm() {
         </button>
         <div className={css.box}>
           <p className={css.text}>Already have an account?</p>
-          <Link href="/signin" className={css.link}>
+          <Link to="/signin" className={css.link}>
             Sign In
           </Link>
         </div>

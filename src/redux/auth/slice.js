@@ -16,7 +16,8 @@ const authSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(logIn.fulfilled, (state, action) => {
-        state.token = action.payload.token || null;
+        state.token = action.payload.data.accessToken || null;
+        // state.token = action.payload.token || null;
         state.isLoggedIn = true;
         state.isRefreshing = false;
       })
@@ -30,6 +31,8 @@ const authSlice = createSlice({
         state.isRefreshing = true;
       })
       .addCase(refreshUser.fulfilled, (state, action) => {
+
+        console.log('Refresh User Success:', action.payload);
         state.user = action.payload;
         state.isLoggedIn = true;
         state.isRefreshing = false;
@@ -38,6 +41,8 @@ const authSlice = createSlice({
         state.isRefreshing = false;
       })
       .addCase(register.fulfilled, (state, action) => {
+
+        console.log('Register Success:', action.payload);
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
