@@ -11,6 +11,9 @@
   opacity: 0;
   pointer-events: none;
   transition: opacity 500ms ease;
+
+  /* my */
+  overflow-y: auto;
 }
 
 .backdrop.active {

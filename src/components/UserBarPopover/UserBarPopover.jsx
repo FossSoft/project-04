@@ -14,7 +14,7 @@ import {
   openModalSettings,
 } from '../../redux/modal/slice';
 import LogOutModal from 'components/LogOutModal/LogOutModal';
-
+import { Setting } from 'components/Setting/Setting.jsx';
 export default function UserBarPopover() {
   const dispatch = useDispatch();
   const isOpenModalSettings = useSelector(selecteIsOpenModalSettings);
@@ -55,7 +55,7 @@ export default function UserBarPopover() {
             isOpen={isOpenModalSettings}
             onRequestClose={handleCloseModalSettings}
           >
-            Modal window put your component with css
+            <Setting handleCloseModalSettings={handleCloseModalSettings} />
           </Modal>
         )}
       </div>

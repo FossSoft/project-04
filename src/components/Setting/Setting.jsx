@@ -25,7 +25,8 @@ import {
   updateUserAvatar,
   updateUserInfo,
 } from '../../redux/user/operations.js';
-export const Setting = () => {
+import { closeModalSettings } from '../../redux/modal/slice.js';
+export const Setting = ({ handleCloseModalSettings }) => {
   const upload = useId();
   const womanRadio = useId();
   const manRadio = useId();
@@ -52,7 +53,7 @@ export const Setting = () => {
 
   const handleFileChange = event => {
     const file = event.target.files[0];
-    console.log(file);
+    // console.log(file);
 
     setFile(file);
 
@@ -79,9 +80,10 @@ export const Setting = () => {
   const timeValue = watch('activeTime');
   const [result, setResult] = useState(0);
   const genderValue = watch('gender');
-  const closeForm = () => {
-    form.current.style.display = 'none';
-  };
+  // const handleCloseModalSettingss = () => {
+  //   form.current.style.display = 'none';
+  //   dispatch(closeModalSettings());
+  // };
   useEffect(() => {
     if (weightValue > 0 && weightValue < 300 && timeValue > 0) {
       if (genderValue === 'woman') {
@@ -105,7 +107,8 @@ export const Setting = () => {
     // formData.append('userEmail', data.userEmail);
     // formData.append('weight', data.weight);
     // formData.append('activeTime', data.activeTime);
-    formData.append('avatar', data.upload);
+    formData.append('avatar', data.upload[0]);
+    // console.log(formData.entries());
 
     if (emeailSelector !== data.userEmail) {
       toast.error('Write correctly amail');
@@ -126,16 +129,24 @@ export const Setting = () => {
     // .then(res => console.log(res))
     // .catch(err => console.log(err.message));
 
-    dispatch(updateUserAvatar({ avatar: data.upload }))
+    dispatch(updateUserAvatar(data))
       .unwrap()
-      .then(res => console.log(res, 'avatar'));
-    // console.log(data.upload);
-    console.log(data.upload.file);
+      .then(res => {
+        console.log(res, 'avatar updated successfully');
+      })
+      .catch(err => {
+        console.error(err.message);
+      });
   };
   return (
     <div className={css.container}>
       <form ref={form} className={css.form} onSubmit={handleSubmit(onSubmit)}>
-        <svg className={css.closeIcon} onClick={closeForm}>
+        <svg
+          className={css.closeIcon}
+          onClick={() => {
+            dispatch(closeModalSettings());
+          }}
+        >
           <use href={`${sprite}#icon-x`}></use>
         </svg>
         <h2 className={css.titleForm}>Setting</h2>

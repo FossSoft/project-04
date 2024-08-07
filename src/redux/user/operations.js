@@ -55,6 +55,8 @@ export const updateUserAvatar = createAsyncThunk(
           'Content-Type': 'multipart/form-data',
         },
       });
+      console.log(formData);
+
       return response.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data || error.message);
