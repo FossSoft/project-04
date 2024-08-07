@@ -13,7 +13,7 @@ export const fetchUserInfo = createAsyncThunk(
       const token = localStorage.getItem('token');
 
       setAuthHeader(token);
-      const response = await axios.get('/user/');
+      const response = await axios.get('/user');
       return response.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data || error.message);

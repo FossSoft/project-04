@@ -6,14 +6,13 @@ import img2x from '../../image/x2/Ellipse_14.png';
 import sprite from '../../image/sprite/sprite.svg';
 import UserBarPopover from 'components/UserBarPopover/UserBarPopover';
 import { hidePopover, togglePopover } from '../../redux/popover/slice';
-import { selecteIcon, selecteShowPopover } from '../../redux/popover/selectors';
+import { selecteIcon } from '../../redux/popover/selectors';
 import { selectAvatar, selectUserName } from '../../redux/user/selectors';
 
 export default function UserBar() {
   const dispatch = useDispatch();
   const userName = useSelector(selectUserName);
   const avatar = useSelector(selectAvatar);
-  const showPopover = useSelector(selecteShowPopover);
   const icon = useSelector(selecteIcon);
   const btnRef = useRef(null);
 
@@ -21,22 +20,22 @@ export default function UserBar() {
     dispatch(togglePopover());
   };
 
-  // useEffect(() => {
-  //   const handleClickOutside = e => {
-  //     if (
-  //       btnRef.current &&
-  //       !btnRef.current.contains(e.target) &&
-  //       !e.target.closest('.popover')
-  //     )
-  //       dispatch(hidePopover());
-  //   };
+  useEffect(() => {
+    const handleClickOutside = e => {
+      if (
+        btnRef.current &&
+        !btnRef.current.contains(e.target) &&
+        !e.target.closest('.UserBarPopover_popover__Vz69-')
+      )
+        dispatch(hidePopover());
+    };
 
-  //   document.addEventListener('click', handleClickOutside);
+    document.addEventListener('click', handleClickOutside);
 
-  //   return () => {
-  //     document.removeEventListener('click', handleClickOutside);
-  //   };
-  // }, [dispatch]);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [dispatch]);
 
   return (
     <div className={css.useBar}>
