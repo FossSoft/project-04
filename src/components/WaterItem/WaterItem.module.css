@@ -61,7 +61,7 @@
   fill: var(--white);
   stroke: var(--Dark-Blue);
 
-  transition: stroke 150ms ease-in;
+  transition: stroke var(--effect);
 }
 
 

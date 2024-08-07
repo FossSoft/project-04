@@ -9,10 +9,6 @@ function ChooseDate() {
 
   // console.log('Current Date:', currentDate);
 
-  if (!currentDate) {
-    return <h3 className={css.dateTitle}>No date selected</h3>;
-  }
-
   const formattedDate = new Date(currentDate);
 
   return (
