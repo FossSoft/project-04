@@ -6,7 +6,7 @@
   height: 100%;
   display: flex;
   justify-content: center;
-  opacity: 1;
+  /* opacity: 1; */
 }
 .form {
   /* width: 100%; */
@@ -557,8 +557,7 @@
   .container {
     width: 1440px;
     padding: 0 32px;
-    /* transform: translateY(-50px) scale(0.8); */
-    /* убрать */
+    transform: translateY(-50px) scale(0.8);
   }
   .form {
     width: 920px;
