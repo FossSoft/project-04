@@ -19,7 +19,6 @@ import { Setting } from 'components/Setting/Setting.jsx';
 
 import { selecteShowPopover } from '../../redux/popover/selectors';
 
-
 export default function UserBarPopover() {
   const dispatch = useDispatch();
   const showPopover = useSelector(selecteShowPopover);
@@ -56,18 +55,12 @@ export default function UserBarPopover() {
           Settigs
         </button>
 
-
-        {isOpenModalSettings && (
-          <Modal
-            isOpen={isOpenModalSettings}
-            onRequestClose={handleCloseModalSettings}
-          >
-            <Setting handleCloseModalSettings={handleCloseModalSettings} />
-          </Modal>
-        )}
-
-      
-
+        <Modal
+          isOpen={isOpenModalSettings}
+          onRequestClose={handleCloseModalSettings}
+        >
+          <Setting />
+        </Modal>
       </div>
 
       <div className={css.container}>
