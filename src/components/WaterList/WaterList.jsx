@@ -12,24 +12,30 @@ const WaterList = () => {
 
   useEffect(() => {
     const currentDate = new Date().toISOString().split('T')[0];
-    console.log('Fetching data for date:', currentDate);
-    console.log('Using token:', token);
+    // console.log('Fetching data for date:', currentDate);
+    // console.log('Using token:', token);
 
     if (currentDate && token) {
       dispatch(fetchWaterDataByDay({ date: currentDate }));
     }
   }, [dispatch, token]);
 
+  const sortedWaterData = [...waterData].sort((a, b) => {
+    const [hoursA, minutesA] = a.time.split(':').map(Number);
+    const [hoursB, minutesB] = b.time.split(':').map(Number);
+    return hoursA - hoursB || minutesA - minutesB;
+  });
+
   return (
     <>
-      {!waterData.length ? (
+      {!sortedWaterData.length ? (
         <div className={css.textNoWater}>
           Water has not been added yet. Please add the water.
         </div>
       ) : (
         <ul className={css.list}>
-          {waterData.map((item) => (
-            <li key={item._id}>
+          {sortedWaterData.map((item) => (
+            <li key={item.id}>
               <WaterItem item={item} />
             </li>
           ))}

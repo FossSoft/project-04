@@ -36,13 +36,13 @@ const waterSlice = createSlice({
       state.waterData.push(action.payload);
     },
     updateWater(state, action) {
-      const index = state.waterData.findIndex(item => item._id === action.payload._id);
+      const index = state.waterData.findIndex(item => item.id === action.payload.id);
       if (index !== -1) {
         state.waterData[index] = action.payload;
       }
     },
     deleteWater(state, action) {
-      state.waterData = state.waterData.filter(item => item._id !== action.payload);
+      state.waterData = state.waterData.filter(item => item.id !== action.payload);
     },
   },
   extraReducers: (builder) => {
@@ -65,7 +65,7 @@ const waterSlice = createSlice({
       .addCase(updateWaterAmount.pending, startLoading)
       .addCase(updateWaterAmount.fulfilled, (state, action) => {
         state.isLoading = false;
-        const index = state.waterData.findIndex(item => item._id === action.payload._id);
+        const index = state.waterData.findIndex(item => item.id === action.payload.id);
         if (index !== -1) {
           state.waterData[index] = action.payload;
         }
@@ -74,7 +74,7 @@ const waterSlice = createSlice({
       .addCase(deleteWaterEntry.pending, startLoading)
       .addCase(deleteWaterEntry.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.waterData = state.waterData.filter(item => item._id !== action.payload);
+        state.waterData = state.waterData.filter(item => item.id !== action.payload);
       })
       .addCase(deleteWaterEntry.rejected, setError);
   },
@@ -83,3 +83,4 @@ const waterSlice = createSlice({
 export const { setWaterDay, addWater, updateWater, deleteWater } = waterSlice.actions;
 
 export default waterSlice.reducer;
+
