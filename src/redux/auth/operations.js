@@ -96,3 +96,13 @@ export const refreshToken = createAsyncThunk(
   }
 );
 
+
+export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
+  try {
+    await apiClient.post('/auth/logout');
+    clearAuthHeader();
+    localStorage.clear();
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});

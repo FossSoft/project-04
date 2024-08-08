@@ -7,7 +7,7 @@
   align-items: flex-start;
   justify-content: center;
   padding-left: 16px;
-  background-color: #f0f2f5;
+  background-color: rgb(240, 239, 244);
   border-radius:30px;
   }
 .text{
@@ -18,24 +18,23 @@
 }
 .subtitle{
   color: rgb(47, 47, 47);
-  font-family: Poppins;
+  font-family: Poppins, sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 1.28;
   letter-spacing: 0.06em;
   text-align: left;
-  width: 277px;
   height: 18px;
 }
 .title{
     color: rgb(50, 63, 71);
-    font-family: Poppins;
+    font-family: Poppins, sans-serif;
     font-size: 38px;
     font-weight: 700;
     line-height: 1;
     letter-spacing: -0.01em;
     text-align: left;
-    width:311px;
+    /* width:311px; */
     height: 114px;
     margin-bottom: 32px;
 }
@@ -46,7 +45,7 @@
 .link_signup,
 .link_signin{
   display: flex;
-  font-family: Poppins;
+  font-family: Poppins, sans-serif;
   font-size: 14px;
   font-weight: 700;
   line-height: 1.28;
@@ -65,11 +64,18 @@
   width: 116px;
   padding: 14px 19px;
 }
+.link_signup:hover {
+  background-color: #87d28d;
+}
 
 .link_signin{
   border: 1px solid rgb(50, 63, 71);
   width: 104px;
   padding: 14px 28px;
+}
+.link_signin:hover {
+border: 1px solid rgb(135, 210, 141);
+color:rgb(135, 210, 141);
 }
 @media screen and (min-width: 768px){
 .section{

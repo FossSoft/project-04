@@ -1,21 +1,49 @@
 .container {
+  position: relative;
   background-color: rgba(240, 239, 244, 1);
-  max-width: 672px;
+  width: 672px;
+  min-height: 736px;
   border-radius: 30px;
-  margin-left: 32px;
-  margin-top: 32px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 32px;
   box-sizing: border-box;
 }
 
-.box {
-  margin-top: 0; /* Видаляє відступ зверху */
-  padding-top: 0; /* Видаляє відступ всередині */
-  margin-left: 32px; /* Додає відступ зліва від контейнера */
-  align-self: flex-start;
-  margin-bottom: 64px;
+.wrapper {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+.wrapper {
+  margin-left: 32px;
+  margin-right: 32px;
+}
+.hideOnTablets {
+  display: none;
+}
+
+/* Mobile and > */
+@media screen and (min-width: 320px) {
+}
+
+@media screen and (min-width: 375px) {
+}
+
+/* Tablet and > */
+@media screen and (min-width: 768px) {
+}
+
+/* Desktop and > */
+@media screen and (min-width: 1440px) {
+  .hideOnTablets {
+    display: contents;
+  }
+
+  .wrapper {
+    gap: 32px;
+  }
 }

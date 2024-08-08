@@ -11,10 +11,7 @@
 }
 .editWaterModalContWindow {
   box-sizing: border-box;
-  position: absolute;
-  top: 105px;
   display: flex;
-  width: 343px;
   min-width: 250px;
   flex-direction: column;
   justify-content: center;
@@ -82,14 +79,21 @@
   padding-bottom: 16px;
 }
 .quantityBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 40px;
   height: 40px;
   border-radius: 50px;
   border: none;
   background-color: transparent;
   padding: 0;
+  border: 1px solid #323f47;
 }
 .quantityIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   stroke: #323f47;
   width: 100%;
   height: 100%;

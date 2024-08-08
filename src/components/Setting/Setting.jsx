@@ -1,12 +1,9 @@
 import css from './Setting.module.css';
-import mobile from '../../image/x1/Ellipse_14.png';
-import mobileX2 from '../../image/x1/Ellipse_14_640_640.png';
+import toast, { Toaster } from 'react-hot-toast';
 import tablet from '../../image/x2/Ellipse_14.png';
-import tabletx2 from '../../image/x2/Ellipse_14_640_640.png';
-import desktop from '../../image/x3/Ellipse_14.png';
-import desktop2 from '../../image/x3/Ellipse_14_640_640.png';
+
 import sprite from '../../image/sprite/sprite.svg';
-// import normaFotot from '../images/normaFoto.png';
+
 import { useEffect, useId, useRef, useState } from 'react';
 
 import { useForm } from 'react-hook-form';
@@ -15,6 +12,7 @@ import { validationSchema } from './validationSchema.js';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectUserActivityTime,
+  selectUserAvatar,
   selectUserEmail,
   selectUserGender,
   selectUserId,
@@ -23,8 +21,13 @@ import {
   selectUserWeight,
 } from '../../redux/user/selectors.js';
 
-import { fetchUserInfo, updateUserInfo } from '../../redux/user/operations.js';
-export const Setting = () => {
+import {
+  fetchUserInfo,
+  updateUserAvatar,
+  updateUserInfo,
+} from '../../redux/user/operations.js';
+import { closeModalSettings } from '../../redux/modal/slice.js';
+export const Setting = ({ handleCloseModalSettings }) => {
   const upload = useId();
   const womanRadio = useId();
   const manRadio = useId();
@@ -41,22 +44,28 @@ export const Setting = () => {
   const weightSelector = useSelector(selectUserWeight);
   const activityTimeSelector = useSelector(selectUserActivityTime);
   const userWaterDrinkSelector = useSelector(selectUserWaterToDrink);
+  const avatarSelector = useSelector(selectUserAvatar);
   //
 
   const dispatch = useDispatch();
-  // console.log(dispatch);
 
   //
-  const [files, setFile] = useState(null);
+  const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(null);
 
   const handleFileChange = event => {
     const file = event.target.files[0];
+    // console.log(file);
+
     setFile(file);
 
     const fileURL = URL.createObjectURL(file);
 
     setPreview(fileURL);
+    const formData = new FormData();
+
+    formData.append('avatar', file);
+    dispatch(updateUserAvatar(formData));
   };
   //
   const {
@@ -69,6 +78,7 @@ export const Setting = () => {
     resolver: yupResolver(validationSchema),
     mode: 'onChange',
   });
+
   const form = useRef();
   //
 
@@ -76,9 +86,10 @@ export const Setting = () => {
   const timeValue = watch('activeTime');
   const [result, setResult] = useState(0);
   const genderValue = watch('gender');
-  const closeForm = () => {
-    form.current.style.display = 'none';
-  };
+  // const handleCloseModalSettingss = () => {
+  //   form.current.style.display = 'none';
+  //   dispatch(closeModalSettings());
+  // };
   useEffect(() => {
     if (weightValue > 0 && weightValue < 300 && timeValue > 0) {
       if (genderValue === 'woman') {
@@ -92,32 +103,56 @@ export const Setting = () => {
   }, [weightValue, timeValue, genderValue]);
 
   useEffect(() => {
-    dispatch(fetchUserInfo())
-      .unwrap()
-      .then(res => console.log(res.accessToken));
-    console.log('Succ');
+    dispatch(fetchUserInfo()).unwrap();
+    // .then(res => console.log(res));
   }, [dispatch]);
 
   const onSubmit = data => {
     // const formData = new FormData();
-    // formData.append('username', data.username);
+    // formData.append('username', data.name);
     // formData.append('userEmail', data.userEmail);
     // formData.append('weight', data.weight);
     // formData.append('activeTime', data.activeTime);
-    // formData.append('gender', data.gender);
-    console.log(data.gender);
+    // formData.append('avatar', data.upload[0]);
+    // console.log(formData.entries());
 
-    dispatch(updateUserInfo(data.gender))
-      .unwrap()
-      .then(res => console.log(res.accessToken))
-      .catch(err => console.log(err));
+    if (emeailSelector !== data.userEmail) {
+      toast.error('Write correctly amail');
+      return;
+    }
 
-    // reset();
+    dispatch(
+      updateUserInfo({
+        name: data.username,
+        gender: data.gender,
+        // email: data.userEmail,
+        weight: data.weight,
+        activityTime: data.activeTime,
+        dailyNorma: data.ownerResult,
+      })
+    );
+    // .unwrap()
+    // .then(res => console.log(res))
+    // .catch(err => console.log(err.message));
+
+    // dispatch(updateUserAvatar(data))
+    //   .unwrap()
+    //   .then(res => {
+    //     console.log(res, 'avatar updated successfully');
+    //   })
+    //   .catch(err => {
+    //     console.error(err.message);
+    //   });
   };
   return (
     <div className={css.container}>
       <form ref={form} className={css.form} onSubmit={handleSubmit(onSubmit)}>
-        <svg className={css.closeIcon} onClick={closeForm}>
+        <svg
+          className={css.closeIcon}
+          onClick={() => {
+            dispatch(closeModalSettings());
+          }}
+        >
           <use href={`${sprite}#icon-x`}></use>
         </svg>
         <h2 className={css.titleForm}>Setting</h2>
@@ -125,21 +160,8 @@ export const Setting = () => {
           <div className={css.uploadContaienr}>
             <img
               className={css.avatarImg}
-              src={!preview ? tablet : preview}
+              src={!avatarSelector ? tablet : avatarSelector}
               alt="Avatar"
-              //             srcSet={`
-              //   ${preview} 75w,
-              //   ${preview} 150w,
-              //   ${preview} 100w,
-              //   ${preview} 200w,
-              //   ${preview} 100w,
-              //   ${preview} 200w
-              // `}
-              //             sizes="
-              //   (min-width: 1440px) 100px,
-              //   (min-width: 768px) 100px,
-              //   (max-width: 767px) 75px
-              // "
             />
             <label htmlFor={upload} className={css.upload}>
               <svg className={css.uploadImg}>
@@ -147,7 +169,7 @@ export const Setting = () => {
               </svg>
               Upload a photo
               <input
-                {...register('upload')}
+                name="avatar"
                 type="file"
                 id={upload}
                 onChange={handleFileChange}
@@ -319,6 +341,7 @@ export const Setting = () => {
           <img src={preview} alt="" />
         </div>
       )} */}
+      <Toaster />
     </div>
   );
 };

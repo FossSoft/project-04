@@ -27,7 +27,7 @@ export const fetchUserInfo = createAsyncThunk(
       setAuthHeader(token)
       const response = await apiClient.get('/user/');
       console.log(response.data)
-      return response.data;
+      return response.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data || error.message);
     }
@@ -46,6 +46,7 @@ export const updateUserInfo = createAsyncThunk(
     try {
       setAuthHeader(token);
       const response = await apiClient.patch('/user/update', formData);
+
 
       return response.data.data;
     } catch (error) {
@@ -70,6 +71,8 @@ export const updateUserAvatar = createAsyncThunk(
           'Content-Type': 'multipart/form-data',
         },
       });
+      console.log(formData);
+
       return response.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data || error.message);

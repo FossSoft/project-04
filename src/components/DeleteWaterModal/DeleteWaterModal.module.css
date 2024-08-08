@@ -60,14 +60,14 @@
 .deleteBtn {
   color: var(--Dark-Blue);
   background-color: var(--green);
-  transition: background-color 150ms ease-in;
+  transition: background-color var(--effect);
 }
 
 .cancelBtn {
   background-color: var(--light-gray);
   color: rgba(50, 63, 71, 0.30);
 
-  transition: background-color 150ms ease-in, color 150ms ease-in;
+  transition: background-color var(--effect), color var(--effect);
 }
 
 .deleteBtn:hover,

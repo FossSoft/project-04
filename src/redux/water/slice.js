@@ -7,11 +7,22 @@ import {
 } from './operations.js';
 
 const initialState = {
-  waterDay: [],
-  date: new Date().toISOString(),// видалити пізніше
-
+  waterData: [],
+  date: new Date().toISOString().split('T')[0],
   isLoading: false,
   error: null,
+  totalAmount: 0,
+  percentageConsumed: 0,
+};
+
+const startLoading = (state) => {
+  state.isLoading = true;
+  state.error = null;
+};
+
+const setError = (state, action) => {
+  state.isLoading = false;
+  state.error = action.payload;
 };
 
 const waterSlice = createSlice({
@@ -19,77 +30,57 @@ const waterSlice = createSlice({
   initialState,
   reducers: {
     setWaterDay(state, action) {
-      state.waterDay = action.payload;
+      state.waterData = action.payload;
     },
     addWater(state, action) {
-      state.waterDay.push(action.payload);
+      state.waterData.push(action.payload);
     },
     updateWater(state, action) {
-      const index = state.waterDay.findIndex(item => item._id === action.payload._id);
+      const index = state.waterData.findIndex(item => item.id === action.payload.id);
       if (index !== -1) {
-        state.waterDay[index] = action.payload;
+        state.waterData[index] = action.payload;
       }
     },
     deleteWater(state, action) {
-      state.waterDay = state.waterDay.filter(item => item._id !== action.payload);
+      state.waterData = state.waterData.filter(item => item.id !== action.payload);
     },
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
-      .addCase(fetchWaterDataByDay.pending, state => {
-        state.isLoading = true;
-        state.error = null;
-      })
+      .addCase(fetchWaterDataByDay.pending, startLoading)
       .addCase(fetchWaterDataByDay.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.waterDay = action.payload.waterData;
-      })
-      .addCase(fetchWaterDataByDay.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
-      })
-      .addCase(addWaterAmount.pending, (state) => {
-        state.isLoading = true;
+        state.waterData = action.payload.data.waterData;
+        state.totalAmount = action.payload.data.totalAmount;
+        state.percentageConsumed = action.payload.data.percentageConsumed;
         state.error = null;
+        state.isLoading = false;
       })
+      .addCase(fetchWaterDataByDay.rejected, setError)
+      .addCase(addWaterAmount.pending, startLoading)
       .addCase(addWaterAmount.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.waterDay.push(action.payload);
+        state.waterData.push(action.payload);
       })
-      .addCase(addWaterAmount.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
-      })
-      .addCase(updateWaterAmount.pending, (state) => {
-        state.isLoading = true;
-        state.error = null;
-      })
+      .addCase(addWaterAmount.rejected, setError)
+      .addCase(updateWaterAmount.pending, startLoading)
       .addCase(updateWaterAmount.fulfilled, (state, action) => {
         state.isLoading = false;
-        const index = state.waterDay.findIndex(item => item._id === action.payload._id);
+        const index = state.waterData.findIndex(item => item.id === action.payload.id);
         if (index !== -1) {
-          state.waterDay[index] = action.payload;
+          state.waterData[index] = action.payload;
         }
       })
-      .addCase(updateWaterAmount.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
-      })
-      .addCase(deleteWaterEntry.pending, (state) => {
-        state.isLoading = true;
-        state.error = null;
-      })
+      .addCase(updateWaterAmount.rejected, setError)
+      .addCase(deleteWaterEntry.pending, startLoading)
       .addCase(deleteWaterEntry.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.waterDay = state.waterDay.filter(item => item._id !== action.payload);
+        state.waterData = state.waterData.filter(item => item.id !== action.payload);
       })
-      .addCase(deleteWaterEntry.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
-      });
+      .addCase(deleteWaterEntry.rejected, setError);
   },
 });
 
 export const { setWaterDay, addWater, updateWater, deleteWater } = waterSlice.actions;
 
 export default waterSlice.reducer;
+

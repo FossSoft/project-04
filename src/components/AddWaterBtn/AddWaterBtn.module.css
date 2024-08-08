@@ -1,36 +1,120 @@
-.btnAddWater {
-  width: 124px;
-  height: 30px;
-  padding: 0;
-
+.btn {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   gap: 10px;
+
+
   border: none;
+  border-radius: 30px;
+
+  transition: color var(--effect);
 }
 
-.btnAddWater .svgPlus {
-  stroke: var(--Dark-Blue);
+.svgPlus {
   width: 30px;
   height: 30px;
-
-  border-radius: 50%;
-  background-color: var(--green);
+  transition: stroke var(--effect);
 }
 
-.btnAddWater span {
+
+.btnPrimary {
+  /* position: absolute;
+  right: 16px;
+  bottom: 32px; */
+
+  width: 140px;
+  height: 46px;
+  padding: 20px 14px;
+
+  color: var(--white);
+  background-color: var(--Dark-Blue);
+}
+
+
+.btnPrimary span {
   font-weight: 700;
-  font-size: 16px;
+  font-size: 14px;
+  line-height: 1.28;
+  letter-spacing: -0.01em;
+  text-align: center;
+
+
+}
+
+
+.btnPrimary:hover,
+.btnPrimary:focus {
+  color: var(--green);
+}
+
+.btnPrimary:hover .svgPlus,
+.btnPrimary:focus .svgPlus {
+  stroke: var(--green);
+}
+
+.btnSecondary {
+  width: 124px;
+  height: 30px;
+
+  padding: 0;
+  color: var(--Dark-Blue);
+  background-color: transparent;
+}
+
+.btnSecondary span {
+  font-weight: 700;
+  font-size: 16x;
   line-height: 1.5;
   letter-spacing: -0.01em;
   text-align: center;
-  color: var(--Dark-Blue);
-
 }
 
-.btnAddWater:hover .svgPlus,
-.btnAddWatert:active .svgPlus {
+.svgPlusSecondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+
+  stroke: var(--Dark-Blue);
+  background-color: var(--green);
+}
+
+.svgPlusPrimary {
+  stroke: var(--white);
+}
+
+.svgPlusSecondary {
+  stroke: var(--Dark-Blue);
+}
+
+.btnSecondary:hover .svgPlusSecondary,
+.btnSecondary:active .svgPlusSecondary {
   stroke: var(--white);
   background-color: var(--Dark-Blue);
 }
+
+
+@media (min-width: 768px) {
+  .btnPrimary {
+    /* right: 32px;
+    bottom: 64px; */
+    width: 178px;
+    height: 60px;
+    padding: 18px 30px;
+
+  }
+
+  /* .svgPlusPrimary {
+    width: 24px;
+    height: 24px;
+  } */
+
+  .btnPrimary span {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+}
+
+@media (min-width: 1440px) {}
