@@ -121,7 +121,7 @@ export const Setting = ({ handleCloseModalSettings }) => {
     dispatch(closeModalSettings());
   };
   return (
-    <div>
+    <div className={css.probe}>
       <form ref={form} className={css.form} onSubmit={handleSubmit(onSubmit)}>
         {/* <svg
           className={css.closeIcon}
@@ -191,6 +191,7 @@ export const Setting = ({ handleCloseModalSettings }) => {
                 <input
                   type="text"
                   {...register('username')}
+                  defaultValue={nameSelector}
                   id={nameInput}
                   placeholder="Enter your name"
                   style={{
@@ -209,6 +210,8 @@ export const Setting = ({ handleCloseModalSettings }) => {
                   {...register('userEmail')}
                   type="text"
                   id={emailInput}
+                  defaultValue={emeailSelector}
+                  disabled
                   placeholder="Enter your email"
                   style={{
                     borderColor: errors.userEmail ? 'red' : 'initial',
