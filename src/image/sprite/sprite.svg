@@ -23,6 +23,11 @@
 <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="1.3395"  d="M16 10.286v11.429"></path>
 <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="1.3395"  d="M10.286 16h11.429"></path>
 </svg>
+<svg id="icon-plus-water"  width="43" height="43" viewBox="0 0 43 43" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="0.75" y="0.75" width="41.5" height="41.5" rx="20.75" stroke="#323F47" stroke-width="1.5"/>
+<path d="M21.5 13.8215V29.1787" stroke="#323F47" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M13.8213 21.5H29.1784" stroke="#323F47" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
  <svg id="icon-untitled" width="22" height="22" viewBox="0 0 32 32" >
 <path fill="#1e1e1e" d="M0 0h32v32h-32v-32z"></path>
 <path fill="#404040" d="M-7298.909-1802.182c0-1.6 1.309-2.909 2.909-2.909h11863.273c1.6 0 2.909 1.309 2.909 2.909v5364.364c0 1.6-1.309 2.909-2.909 2.909h-11863.273c-1.6 0-2.909-1.309-2.909-2.909v-5364.364z"></path>
