@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { selectToken } from '../auth/selectors.js';
+import { selectAccessToken } from '../auth/selectors.js';
 
 axios.defaults.baseURL = 'https://back-end-aquatrack.onrender.com';
 
@@ -63,7 +63,7 @@ export const fetchWaterDataByDay = createAsyncThunk(
   'water/fetchWaterDataByDay',
   async ({ date }, { getState, rejectWithValue }) => {
     const state = getState();
-    const token = selectToken(state);
+    const token = selectAccessToken(state);
     setAuthHeader(token);
     try {
       const response = await axios.get(`/water/day/${date}`);
