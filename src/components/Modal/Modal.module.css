@@ -18,7 +18,6 @@
 
   transform: scale(0.5);
   transition: opacity 500ms linear, transform 500ms linear;
-
 }
 
 .backdrop.active {
