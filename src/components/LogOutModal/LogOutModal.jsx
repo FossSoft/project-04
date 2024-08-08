@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { closeModalLogout } from '../../redux/modal/slice';
 import { logout } from '../../redux/auth/operations';
 import { useNavigate } from 'react-router-dom';
+import { resetStore } from '../../redux/store';
 
 export default function LogOutModal() {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ export default function LogOutModal() {
 
   const handleClearStorage = () => {
     dispatch(logout());
+    dispatch(resetStore());
     navigate('/', { replace: true });
   };
 

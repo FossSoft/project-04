@@ -1,4 +1,8 @@
-import { configureStore } from '@reduxjs/toolkit';
+import {
+  combineReducers,
+  configureStore,
+  createAction,
+} from '@reduxjs/toolkit';
 import {
   persistStore,
   persistReducer,
@@ -22,14 +26,41 @@ const authPersistConfig = {
   whitelist: ['token'],
 };
 
+export const resetStore = createAction('RESET_STORE');
+
+const rootReducer = combineReducers({
+  auth: persistReducer(authPersistConfig, authReducer),
+  user: useReducer,
+  popover: popoverReducer,
+  modal: modalReducer,
+  water: waterReducer,
+});
+
+const rootReducersWithReset = (state, action) => {
+  if (action.type === resetStore.type) {
+    return (state = undefined);
+  }
+  return rootReducer(state, action);
+};
+
+// export const store = configureStore({
+//   reducer: {
+//     auth: persistReducer(authPersistConfig, authReducer),
+//     user: useReducer,
+//     popover: popoverReducer,
+//     modal: modalReducer,
+//     water: waterReducer,
+//   },
+//   middleware: getDefaultMiddleware =>
+//     getDefaultMiddleware({
+//       serializableCheck: {
+//         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+//       },
+//     }),
+// });
+
 export const store = configureStore({
-  reducer: {
-    auth: persistReducer(authPersistConfig, authReducer),
-    user: useReducer,
-    popover: popoverReducer,
-    modal: modalReducer,
-    water: waterReducer,
-  },
+  reducer: rootReducersWithReset,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
