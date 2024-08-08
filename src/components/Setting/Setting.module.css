@@ -8,12 +8,21 @@
   justify-content: center;
   /* opacity: 1; */
 }
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.probe {
+  height: 996px;
+}
 .form {
   /* width: 100%; */
   width: 343px;
-  height: 100%;
+  /* height: 100%; */
   position: relative;
   padding: 40px 20px;
+  height: 996px;
 }
 .input-error {
   border: 2px solid red;

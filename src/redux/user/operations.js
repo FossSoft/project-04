@@ -4,7 +4,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 export const apiClient = axios.create({
   baseURL: 'https://back-end-aquatrack.onrender.com',
   headers: {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   },
 });
 
@@ -12,7 +12,8 @@ const setAuthHeader = token => {
   apiClient.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
-const getToken = (state) => state.auth.accessToken || localStorage.getItem('token');
+const getToken = state =>
+  state.auth.accessToken || localStorage.getItem('token');
 
 export const fetchUserInfo = createAsyncThunk(
   'user/fetchUserInfo',
@@ -24,9 +25,9 @@ export const fetchUserInfo = createAsyncThunk(
       return thunkAPI.rejectWithValue('Unable to get current user');
     }
     try {
-      setAuthHeader(token)
+      setAuthHeader(token);
       const response = await apiClient.get('/user/');
-      console.log(response.data)
+      console.log(response.data);
       return response.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data || error.message);
@@ -47,7 +48,6 @@ export const updateUserInfo = createAsyncThunk(
       setAuthHeader(token);
       const response = await apiClient.patch('/user/update', formData);
 
-
       return response.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data || error.message);
@@ -66,7 +66,7 @@ export const updateUserAvatar = createAsyncThunk(
     }
     try {
       setAuthHeader(token);
-      const response = await apiClient.patch('/user/avatar', formData, {
+      const response = await apiClient.post('/user/avatar', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
