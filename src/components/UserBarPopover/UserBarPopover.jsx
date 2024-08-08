@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
 import css from './UserBarPopover.module.css';
+import './UserBarPopover.css';
 import sprite from '../../image/sprite/sprite.svg';
 import Modal from 'components/Modal/Modal';
 import {
@@ -42,7 +43,7 @@ export default function UserBarPopover() {
   };
 
   return (
-    <div className={showPopover ? clsx(css.popover, css.active) : css.popover}>
+    <div className={showPopover ? 'popover active' : 'popover'}>
       <div className={css.container}>
         <svg className={clsx(css.icon, css.darkblue)}>
           <use href={`${sprite}#icon-settings`}></use>

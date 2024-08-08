@@ -13,6 +13,7 @@
 
   /* my */
   overflow-y: auto;
+  overflow-x: auto;
 
   transform: scale(0.5);
   transition: opacity 500ms linear, transform 500ms linear;
@@ -30,6 +31,8 @@
   border-radius: 15px;
   transform: scale(0.5);
   transition: transform 500ms ease;
+  /* overflow-y: auto;
+  overflow-x: auto; */
 }
 
 .modal.active {
@@ -44,7 +47,7 @@
   height: 24px;
   position: absolute;
   top: 20px;
-  right: 20px;
+  right: 16px;
   background-color: transparent;
   border-color: transparent;
   cursor: pointer;

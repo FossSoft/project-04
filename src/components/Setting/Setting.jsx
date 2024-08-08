@@ -26,7 +26,7 @@ import {
   updateUserAvatar,
   updateUserInfo,
 } from '../../redux/user/operations.js';
-import { closeModalSettings } from '../../redux/modal/slice.js';
+// import { closeModalSettings } from '../../redux/modal/slice.js
 export const Setting = ({ handleCloseModalSettings }) => {
   const upload = useId();
   const womanRadio = useId();
@@ -147,14 +147,14 @@ export const Setting = ({ handleCloseModalSettings }) => {
   return (
     <div className={css.container}>
       <form ref={form} className={css.form} onSubmit={handleSubmit(onSubmit)}>
-        <svg
+        {/* <svg
           className={css.closeIcon}
           onClick={() => {
             dispatch(closeModalSettings());
           }}
         >
           <use href={`${sprite}#icon-x`}></use>
-        </svg>
+        </svg> */}
         <h2 className={css.titleForm}>Setting</h2>
         <div className={css.titleContainer}>
           <div className={css.uploadContaienr}>

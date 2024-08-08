@@ -1,4 +1,4 @@
-.popover {
+/* .popover {
   position: absolute;
   top: 54px;
   padding: 14px 20px 14px 20px;
@@ -20,7 +20,7 @@
 .popover.active {
   opacity: 1;
   pointer-events: all;
-}
+} */
 
 .container {
   display: flex;

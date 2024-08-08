@@ -70,7 +70,7 @@ export default function UserBar() {
         </svg>
       </button>
 
-      <UserBarPopover className={css.userBarPopover} />
+      <UserBarPopover />
     </div>
   );
 }
