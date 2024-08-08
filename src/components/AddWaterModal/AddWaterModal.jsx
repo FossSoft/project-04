@@ -43,7 +43,7 @@ export const WaterModal = ({ onClose }) => {
             onClick={handleDecrease}
           >
             <svg width="43" height="43" className={css.quantityIcon}>
-              <use href={`${sprite}#icon-minus`}></use>
+              <use href={`${sprite}#icon-minus-water`}></use>
             </svg>
           </button>
           <input
@@ -69,10 +69,9 @@ export const WaterModal = ({ onClose }) => {
         </div>
         <p className={css['value-text']}>Recording time:</p>
         <input
+          type="time"
           className={css['water-input']}
-          type="text"
           defaultValue={timeNow}
-          // value={`${time}`}
         />
       </div>
 
