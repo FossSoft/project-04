@@ -13,7 +13,7 @@ const WaterItem = ({ item, onEdit }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const dispatch = useDispatch();
 
-  const { _id: id, amountOfWater, time } = item;
+  const { id, amountOfWater, time } = item;
 
   const formatAmount = (amountOfWater) => {
     return `${amountOfWater} ml`;
@@ -56,7 +56,7 @@ const WaterItem = ({ item, onEdit }) => {
       </svg>
       <div className={css.waterInfo}>
         <p className={css.mlInfo}>{formatAmount(amountOfWater)}</p>
-        <p className={css.timeInfo}>{formatTime(time)}</p> {/* Використовуйте time */}
+        <p className={css.timeInfo}>{formatTime(time)}</p>
       </div>
       <div className={css.waterActions}>
         <button className={css.btnSvg} type="button" onClick={openEditModal}>
@@ -70,8 +70,9 @@ const WaterItem = ({ item, onEdit }) => {
           </svg>
         </button>
       </div>
+
       <Modal isOpen={isDeleteModalOpen} onRequestClose={closeDeleteModal}>
-        <DeleteWaterModal onDelete={handleDelete} onClose={closeDeleteModal} />
+        <DeleteWaterModal item={item} onDelete={handleDelete} onClose={closeDeleteModal} />
       </Modal>
       <Modal isOpen={isEditModalOpen} onRequestClose={closeEditModal}>
         <EditWaterModal onClose={closeEditModal} />

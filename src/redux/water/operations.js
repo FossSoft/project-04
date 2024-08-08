@@ -53,7 +53,7 @@ export const deleteWaterEntry = createAsyncThunk(
       await axios.delete(`/water/${id}`);
       return id;
     } catch (error) {
-      console.error('Error deleting water entry:', error);
+      // console.error('Error deleting water entry:', error);
       return thunkAPI.rejectWithValue(error.response?.data || error.message);
     }
   }
