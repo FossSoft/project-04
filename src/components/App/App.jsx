@@ -17,7 +17,7 @@ export default function App() {
 
   useEffect(() => {
     if (isLoggedIn) {
-      dispatch(fetchUserInfo()); 
+      dispatch(fetchUserInfo());
     }
   }, [dispatch, isLoggedIn]);
 

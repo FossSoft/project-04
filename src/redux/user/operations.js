@@ -1,16 +1,18 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { apiClient } from '../auth/operations.js';
 
-export const apiClient = axios.create({
-  baseURL: 'https://back-end-aquatrack.onrender.com',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-});
+// export const apiClient = axios.create({
+//   // baseURL: 'https://back-end-aquatrack.onrender.com',
+//   baseURL: "http://localhost:3001",
+//   headers: {
+//     'Content-Type': 'application/json'
+//   },
+// });
 
-const setAuthHeader = token => {
-  apiClient.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
+// const setAuthHeader = token => {
+//   apiClient.defaults.headers.common.Authorization = `Bearer ${token}`;
+// };
 
 const getToken = (state) => state.auth.accessToken || localStorage.getItem('token');
 
@@ -24,9 +26,9 @@ export const fetchUserInfo = createAsyncThunk(
       return thunkAPI.rejectWithValue('Unable to get current user');
     }
     try {
-      setAuthHeader(token)
+      // setAuthHeader(token)
       const response = await apiClient.get('/user/');
-      console.log(response.data)
+      // console.log(response.data)
       return response.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data || error.message);
@@ -44,7 +46,7 @@ export const updateUserInfo = createAsyncThunk(
       return thunkAPI.rejectWithValue('Unable to get current user');
     }
     try {
-      setAuthHeader(token);
+      // setAuthHeader(token);
       const response = await apiClient.patch('/user/update', formData);
 
 
@@ -65,7 +67,7 @@ export const updateUserAvatar = createAsyncThunk(
       return thunkAPI.rejectWithValue('Unable to update avatar');
     }
     try {
-      setAuthHeader(token);
+      // setAuthHeader(token);
       const response = await apiClient.patch('/user/avatar', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',

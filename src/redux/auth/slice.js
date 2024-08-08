@@ -17,6 +17,7 @@ const authSlice = createSlice({
       state.user = action.payload.user;
       state.accessToken = action.payload.accessToken;
       state.isLoggedIn = true;
+      state.isRefreshing = false;
       state.error = null;
     },
     clearCredentials: (state) => {
@@ -24,7 +25,7 @@ const authSlice = createSlice({
       state.accessToken = null;
       state.isLoggedIn = false;
       state.error = null;
-    },  
+    },
   },
   extraReducers: builder => {
     builder

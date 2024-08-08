@@ -3,7 +3,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { setCredentials, clearCredentials } from './slice';
 
 export const apiClient = axios.create({
-  baseURL: 'https://back-end-aquatrack.onrender.com',
+  // baseURL: 'https://back-end-aquatrack.onrender.com',
+  baseURL: "http://localhost:3001",
   headers: {
     'Content-Type': 'application/json'
   },
@@ -84,12 +85,12 @@ export const logIn = createAsyncThunk(
 
 export const refreshToken = createAsyncThunk(
   'auth/refresh',
-  async (_, thunkAPI) => {            
+  async (_, thunkAPI) => {
    try {
     const { data }  = await apiClient.get('/user/refresh');
     thunkAPI.dispatch(setCredentials(data.data));
     console.log(data.data)
-    return data;
+    return data.data;
    } catch (error) {
     return thunkAPI.rejectWithValue(error.response?.data || error.message);
    }

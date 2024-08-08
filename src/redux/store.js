@@ -44,22 +44,6 @@ const rootReducersWithReset = (state, action) => {
   return rootReducer(state, action);
 };
 
-// export const store = configureStore({
-//   reducer: {
-//     auth: persistReducer(authPersistConfig, authReducer),
-//     user: useReducer,
-//     popover: popoverReducer,
-//     modal: modalReducer,
-//     water: waterReducer,
-//   },
-//   middleware: getDefaultMiddleware =>
-//     getDefaultMiddleware({
-//       serializableCheck: {
-//         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-//       },
-//     }),
-// });
-
 export const store = configureStore({
   reducer: rootReducersWithReset,
   middleware: getDefaultMiddleware =>

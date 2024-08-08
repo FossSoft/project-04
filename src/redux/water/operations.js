@@ -1,23 +1,25 @@
-
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { selectToken } from '../auth/selectors.js';
+import { selectAccessToken } from '../auth/selectors.js';
+import { apiClient } from '../auth/operations.js';
 
-axios.defaults.baseURL = 'https://back-end-aquatrack.onrender.com';
+// axios.defaults.baseURL = 'https://back-end-aquatrack.onrender.com';
 
-const setAuthHeader = token => {
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
+// axios.defaults.baseURL = 'http://localhost:3001';
+
+// const setAuthHeader = token => {
+//   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+// };
 
 export const addWaterAmount = createAsyncThunk(
   'water/addWaterAmount',
   async (waterData, thunkAPI) => {
     try {
       const { token, ...waterItem } = waterData;
-      if (token) {
-        setAuthHeader(token);
-      }
-      const { data } = await axios.post('/water', waterItem);
+      // if (token) {
+      //   setAuthHeader(token);
+      // }
+      const { data } = await apiClient.post('/water', waterItem);
       return data;
     } catch (error) {
       console.error('Error adding water:', error);
@@ -31,10 +33,10 @@ export const updateWaterAmount = createAsyncThunk(
   async (waterData, thunkAPI) => {
     try {
       const { token, ...waterItem } = waterData;
-      if (token) {
-        setAuthHeader(token);
-      }
-      const { data } = await axios.put(`/water/${waterItem.id}`, waterItem);
+      // if (token) {
+      //   setAuthHeader(token);
+      // }
+      const { data } = await apiClient.put(`/water/${waterItem.id}`, waterItem);
       return data;
     } catch (error) {
       console.error('Error updating water:', error);
@@ -47,10 +49,10 @@ export const deleteWaterEntry = createAsyncThunk(
   'water/deleteWaterEntry',
   async ({ id, token }, thunkAPI) => {
     try {
-      if (token) {
-        setAuthHeader(token);
-      }
-      await axios.delete(`/water/${id}`);
+      // if (token) {
+      //   setAuthHeader(token);
+      // }
+      await apiClient.delete(`/water/${id}`);
       return id;
     } catch (error) {
       // console.error('Error deleting water entry:', error);
@@ -62,14 +64,17 @@ export const deleteWaterEntry = createAsyncThunk(
 export const fetchWaterDataByDay = createAsyncThunk(
   'water/fetchWaterDataByDay',
   async ({ date }, { getState, rejectWithValue }) => {
-    const state = getState();
-    const token = selectToken(state);
-    setAuthHeader(token);
+    // const state = getState();
+    // const token = selectAccessToken(state);
+    // setAuthHeader(token);
     try {
-      const response = await axios.get(`/water/day/${date}`);
+      const response = await apiClient.get(`/water/day/${date}`);
       return response.data;
     } catch (error) {
-      console.error('Error fetching water data:', error.response?.data || error.message);
+      console.error(
+        'Error fetching water data:',
+        error.response?.data || error.message
+      );
       return rejectWithValue(error.response?.data || error.message);
     }
   }
