@@ -60,6 +60,10 @@ export const Setting = ({ handleCloseModalSettings }) => {
     const fileURL = URL.createObjectURL(file);
 
     setPreview(fileURL);
+    const formData = new FormData();
+
+    formData.append('avatar', file);
+    dispatch(updateUserAvatar(formData));
   };
   //
   const {
@@ -97,21 +101,14 @@ export const Setting = ({ handleCloseModalSettings }) => {
   }, [weightValue, timeValue, genderValue]);
 
   useEffect(() => {
-    dispatch(fetchUserInfo()).unwrap();
-    // .then(res => console.log(res));
+    dispatch(fetchUserInfo())
+      .unwrap()
+      .then(res => console.log(res));
   }, [dispatch]);
 
   const onSubmit = data => {
-    const formData = new FormData();
-    // formData.append('username', data.name);
-    // formData.append('userEmail', data.userEmail);
-    // formData.append('weight', data.weight);
-    // formData.append('activeTime', data.activeTime);
-    formData.append('avatar', data.upload[0]);
-    // console.log(formData.entries());
-
     if (emeailSelector !== data.userEmail) {
-      toast.error('Write correctly amail');
+      toast.error('Enter your email correctly');
       return;
     }
 
@@ -129,49 +126,49 @@ export const Setting = ({ handleCloseModalSettings }) => {
     // .then(res => console.log(res))
     // .catch(err => console.log(err.message));
 
-    dispatch(updateUserAvatar(data))
-      .unwrap()
-      .then(res => {
-        console.log(res, 'avatar updated successfully');
-      })
-      .catch(err => {
-        console.error(err.message);
-      });
+    // dispatch(updateUserAvatar(data))
+    //   .unwrap()
+    //   .then(res => {
+    //     console.log(res, 'avatar updated successfully');
+    //   })
+    //   .catch(err => {
+    //     console.error(err.message);
+    //   });
   };
   return (
     <div className={css.container}>
+      <svg
+        className={css.closeIcon}
+        onClick={() => {
+          dispatch(closeModalSettings());
+        }}
+      >
+        <use href={`${sprite}#icon-x`}></use>
+      </svg>
+      <h2 className={css.titleForm}>Setting</h2>
+      <div className={css.uploadContaienr}>
+        <img
+          className={css.avatarImg}
+          src={!preview ? tablet : preview}
+          alt="Avatar"
+        />
+        <label htmlFor={upload} className={css.upload}>
+          <svg className={css.uploadImg}>
+            <use href={`${sprite}#icon-upload`}></use>
+          </svg>
+          Upload a photo
+          <input
+            // {...register('upload')}
+            name="avatar"
+            type="file"
+            id={upload}
+            onChange={handleFileChange}
+            style={{ display: 'none' }}
+          />
+        </label>
+      </div>
       <form ref={form} className={css.form} onSubmit={handleSubmit(onSubmit)}>
-        <svg
-          className={css.closeIcon}
-          onClick={() => {
-            dispatch(closeModalSettings());
-          }}
-        >
-          <use href={`${sprite}#icon-x`}></use>
-        </svg>
-        <h2 className={css.titleForm}>Setting</h2>
-        <div className={css.titleContainer}>
-          <div className={css.uploadContaienr}>
-            <img
-              className={css.avatarImg}
-              src={!preview ? tablet : preview}
-              alt="Avatar"
-            />
-            <label htmlFor={upload} className={css.upload}>
-              <svg className={css.uploadImg}>
-                <use href={`${sprite}#icon-upload`}></use>
-              </svg>
-              Upload a photo
-              <input
-                {...register('upload')}
-                type="file"
-                id={upload}
-                onChange={handleFileChange}
-                style={{ display: 'none' }}
-              />
-            </label>
-          </div>
-        </div>
+        <div className={css.titleContainer}></div>
         <div className={css.descktopContainer}>
           <div>
             <div className={css.genderContainer}>
