@@ -12,6 +12,7 @@ import { validationSchema } from './validationSchema.js';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectUserActivityTime,
+  selectUserAvatar,
   selectUserEmail,
   selectUserGender,
   selectUserId,
@@ -43,6 +44,7 @@ export const Setting = ({ handleCloseModalSettings }) => {
   const weightSelector = useSelector(selectUserWeight);
   const activityTimeSelector = useSelector(selectUserActivityTime);
   const userWaterDrinkSelector = useSelector(selectUserWaterToDrink);
+  const avatarSelector = useSelector(selectUserAvatar);
   //
 
   const dispatch = useDispatch();
@@ -60,6 +62,10 @@ export const Setting = ({ handleCloseModalSettings }) => {
     const fileURL = URL.createObjectURL(file);
 
     setPreview(fileURL);
+    const formData = new FormData();
+
+    formData.append('avatar', file);
+    dispatch(updateUserAvatar(formData));
   };
   //
   const {
@@ -102,12 +108,12 @@ export const Setting = ({ handleCloseModalSettings }) => {
   }, [dispatch]);
 
   const onSubmit = data => {
-    const formData = new FormData();
+    // const formData = new FormData();
     // formData.append('username', data.name);
     // formData.append('userEmail', data.userEmail);
     // formData.append('weight', data.weight);
     // formData.append('activeTime', data.activeTime);
-    formData.append('avatar', data.upload[0]);
+    // formData.append('avatar', data.upload[0]);
     // console.log(formData.entries());
 
     if (emeailSelector !== data.userEmail) {
@@ -129,14 +135,14 @@ export const Setting = ({ handleCloseModalSettings }) => {
     // .then(res => console.log(res))
     // .catch(err => console.log(err.message));
 
-    dispatch(updateUserAvatar(data))
-      .unwrap()
-      .then(res => {
-        console.log(res, 'avatar updated successfully');
-      })
-      .catch(err => {
-        console.error(err.message);
-      });
+    // dispatch(updateUserAvatar(data))
+    //   .unwrap()
+    //   .then(res => {
+    //     console.log(res, 'avatar updated successfully');
+    //   })
+    //   .catch(err => {
+    //     console.error(err.message);
+    //   });
   };
   return (
     <div className={css.container}>
@@ -154,7 +160,7 @@ export const Setting = ({ handleCloseModalSettings }) => {
           <div className={css.uploadContaienr}>
             <img
               className={css.avatarImg}
-              src={!preview ? tablet : preview}
+              src={!avatarSelector ? tablet : avatarSelector}
               alt="Avatar"
             />
             <label htmlFor={upload} className={css.upload}>
@@ -163,7 +169,7 @@ export const Setting = ({ handleCloseModalSettings }) => {
               </svg>
               Upload a photo
               <input
-                {...register('upload')}
+                name="avatar"
                 type="file"
                 id={upload}
                 onChange={handleFileChange}
