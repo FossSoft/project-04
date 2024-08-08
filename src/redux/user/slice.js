@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { logIn } from '../../redux/auth/operations.js';
 import {
   addWaterAmount,
   deleteWaterEntry,
@@ -10,6 +9,7 @@ import {
 } from './operations.js';
 
 const initialState = {
+  _id: '',
   userId: '',
   avatar: '',
   gender: '',
@@ -23,6 +23,7 @@ const initialState = {
     date: '',
     data: [],
   },
+  isLoggedIn: false,
   isLoading: false,
   error: null,
 };
@@ -33,14 +34,12 @@ const userSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(logIn.fulfilled, (state, action) => {
-        state.userId = action.payload.data.userId;
-      })
       .addCase(fetchUserInfo.pending, state => {
         state.isLoading = true;
         state.error = null;
       })
       .addCase(fetchUserInfo.fulfilled, (state, action) => {
+        state.isLoggedIn = true;
         state.isLoading = false;
         state.gender = action.payload.gender;
         state.email = action.payload.email;
@@ -58,6 +57,7 @@ const userSlice = createSlice({
         state.error = null;
       })
       .addCase(updateUserInfo.fulfilled, (state, action) => {
+        state.isLoggedIn = true;
         state.isLoading = false;
         state.gender = action.payload.gender;
         state.email = action.payload.email;
@@ -118,7 +118,7 @@ const userSlice = createSlice({
       .addCase(deleteWaterEntry.fulfilled, (state, action) => {
         state.isLoading = false;
         state.waterData = state.waterData.filter(
-          item => item._id !== action.payload
+        item => item._id !== action.payload
         );
       })
       .addCase(deleteWaterEntry.rejected, (state, action) => {

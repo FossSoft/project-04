@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useAuth } from '../../hooks/useAuth';
-import { refreshUser } from '../../redux/auth/operations';
+import { fetchUserInfo } from '../../redux/user/operations';
 import RestrictedRoute from '../../components/RestricktedRoute';
 import PrivateRoute from '../../components/PrivateRoute';
 import HomePage from '../../pages/HomePage/HomePage';
@@ -13,17 +13,25 @@ import { Setting } from 'components/Setting/Setting.jsx';
 
 export default function App() {
   const dispatch = useDispatch();
-  const { isRefreshing } = useAuth();
+  const { isRefreshing, isLoggedIn } = useAuth();
 
   useEffect(() => {
-    dispatch(refreshUser());
-  }, [dispatch]);
+    if (isLoggedIn) {
+      dispatch(fetchUserInfo()); 
+    }
+  }, [dispatch, isLoggedIn]);
 
   return isRefreshing ? (
     <b>Refreshing user</b>
   ) : (
     <Routes>
-      <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<HomePage />} />
+          <Route
+             path="/signup"
+        element={
+          <RestrictedRoute redirectTo="/tracker" component={<SignUpPage />} />
+            }
+          />
       <Route
         path="/signin"
         element={
@@ -37,7 +45,6 @@ export default function App() {
           <PrivateRoute redirectTo="/signin" component={<TrackerPage />} />
         }
       />
-      <Route path="/signup" element={<SignUpPage />}></Route>
       <Route path="/tracker" element={<TrackerPage />}></Route>
     </Routes>
   );
