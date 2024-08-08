@@ -108,12 +108,12 @@ export const Setting = ({ handleCloseModalSettings }) => {
   }, [dispatch]);
 
   const onSubmit = data => {
-    const formData = new FormData();
+    // const formData = new FormData();
     // formData.append('username', data.name);
     // formData.append('userEmail', data.userEmail);
     // formData.append('weight', data.weight);
     // formData.append('activeTime', data.activeTime);
-    formData.append('avatar', data.upload[0]);
+    // formData.append('avatar', data.upload[0]);
     // console.log(formData.entries());
 
     if (emeailSelector !== data.userEmail) {
@@ -135,14 +135,14 @@ export const Setting = ({ handleCloseModalSettings }) => {
     // .then(res => console.log(res))
     // .catch(err => console.log(err.message));
 
-    dispatch(updateUserAvatar(data))
-      .unwrap()
-      .then(res => {
-        console.log(res, 'avatar updated successfully');
-      })
-      .catch(err => {
-        console.error(err.message);
-      });
+    // dispatch(updateUserAvatar(data))
+    //   .unwrap()
+    //   .then(res => {
+    //     console.log(res, 'avatar updated successfully');
+    //   })
+    //   .catch(err => {
+    //     console.error(err.message);
+    //   });
   };
   return (
     <div className={css.container}>
