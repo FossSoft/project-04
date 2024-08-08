@@ -80,16 +80,12 @@ export const Setting = ({ handleCloseModalSettings }) => {
   });
 
   const form = useRef();
-  //
 
   const weightValue = watch('weight');
   const timeValue = watch('activeTime');
   const [result, setResult] = useState(0);
   const genderValue = watch('gender');
-  // const handleCloseModalSettingss = () => {
-  //   form.current.style.display = 'none';
-  //   dispatch(closeModalSettings());
-  // };
+
   useEffect(() => {
     if (weightValue > 0 && weightValue < 300 && timeValue > 0) {
       if (genderValue === 'woman') {
@@ -104,18 +100,9 @@ export const Setting = ({ handleCloseModalSettings }) => {
 
   useEffect(() => {
     dispatch(fetchUserInfo()).unwrap();
-    // .then(res => console.log(res));
   }, [dispatch]);
 
   const onSubmit = data => {
-    // const formData = new FormData();
-    // formData.append('username', data.name);
-    // formData.append('userEmail', data.userEmail);
-    // formData.append('weight', data.weight);
-    // formData.append('activeTime', data.activeTime);
-    // formData.append('avatar', data.upload[0]);
-    // console.log(formData.entries());
-
     if (emeailSelector !== data.userEmail) {
       toast.error('Write correctly amail');
       return;
@@ -125,27 +112,16 @@ export const Setting = ({ handleCloseModalSettings }) => {
       updateUserInfo({
         name: data.username,
         gender: data.gender,
-        // email: data.userEmail,
+
         weight: data.weight,
         activityTime: data.activeTime,
         dailyNorma: data.ownerResult,
       })
     );
-    // .unwrap()
-    // .then(res => console.log(res))
-    // .catch(err => console.log(err.message));
-
-    // dispatch(updateUserAvatar(data))
-    //   .unwrap()
-    //   .then(res => {
-    //     console.log(res, 'avatar updated successfully');
-    //   })
-    //   .catch(err => {
-    //     console.error(err.message);
-    //   });
+    dispatch(closeModalSettings());
   };
   return (
-    <div className={css.container}>
+    <div>
       <form ref={form} className={css.form} onSubmit={handleSubmit(onSubmit)}>
         {/* <svg
           className={css.closeIcon}
@@ -336,11 +312,7 @@ export const Setting = ({ handleCloseModalSettings }) => {
           Save
         </button>
       </form>
-      {/* {preview && (
-        <div>
-          <img src={preview} alt="" />
-        </div>
-      )} */}
+
       <Toaster />
     </div>
   );
