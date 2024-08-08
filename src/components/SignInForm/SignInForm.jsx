@@ -2,7 +2,6 @@ import { useId, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import toast from 'react-hot-toast';
 import { Toaster } from 'react-hot-toast';
 import { logIn } from '../../redux/auth/operations';
 import { useDispatch } from 'react-redux';
@@ -50,16 +49,18 @@ export default function LoginForm() {
     },
   });
 
-  const onSubmit = async values => {
-    try {
-      const result = await dispatch(logIn(values)).unwrap();
-      localStorage.setItem('token', result.data.accessToken);
-      toast.success('Successfully logged in!');
-    } catch (error) {
-      toast.error(error?.message || 'Incorrect login or password');
-    } finally {
+  const onSubmit = async (values) => {
+      dispatch(logIn(values));
       reset();
-    }
+    // try {
+    //   const result = await dispatch(logIn(values)).unwrap();
+    //   localStorage.setItem('accessToken', result.data.accessToken);
+    //   toast.success('Successfully logged in!');
+    // } catch (error) {
+    //   toast.error(error?.message || 'Incorrect login or password');
+    // } finally {
+    //   reset();
+    // }
   };
 
   const handleToggle = () => {

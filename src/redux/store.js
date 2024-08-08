@@ -19,11 +19,12 @@ import useReducer from './user/slice.js';
 import popoverReducer from '../redux/popover/slice';
 import modalReducer from '../redux/modal/slice';
 import waterReducer from './water/slice';
+import { setupAxiosInterceptors } from "./auth/operations";
 
 const authPersistConfig = {
   key: 'auth',
   storage,
-  whitelist: ['token'],
+  whitelist: ['accessToken'],
 };
 
 export const resetStore = createAction('RESET_STORE');
@@ -68,5 +69,7 @@ export const store = configureStore({
       },
     }),
 });
+
+setupAxiosInterceptors(store);
 
 export const persistor = persistStore(store);

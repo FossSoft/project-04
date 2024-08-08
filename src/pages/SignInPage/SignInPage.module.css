@@ -1,14 +1,16 @@
 .page {
   margin: 16px;
+  display: flex;
+  justify-content: flex-start;
 }
+
 .wrapper {
   max-width: 380px;
   width: 100%;
-  margin: 0 auto;
-
   padding: 24px 16px 216px 16px;
   border-radius: 30px;
   background: #f0eff4;
+  margin: 0 auto;
 }
 
 .logoBox {
@@ -44,6 +46,10 @@
   letter-spacing: -0.14px;
   text-decoration-line: underline;
   cursor: pointer;
+}
+
+.imageWrapper {
+  display: none;
 }
 
 @media screen and (min-width: 375px) {
@@ -91,9 +97,17 @@
   .wrapper {
     max-width: 672px;
     padding-bottom: 169px;
+    margin-right: 32px;
   }
 
   .logoBox {
     margin-bottom: 113px;
+  }
+
+  .imageWrapper {
+    display: block;
+    width: 672px;
+    height: 736px;
+    flex-shrink: 0;
   }
 }

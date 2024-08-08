@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { logIn, refreshUser, register } from './operations';
+import { logIn, register, refreshToken } from './operations';
 
 const authInitialState = {
-  user: {},
-  token: null,
+  user: null,
+  accessToken: null,
   isLoggedIn: false,
   isRefreshing: false,
   error: null,
@@ -12,39 +12,41 @@ const authInitialState = {
 const authSlice = createSlice({
   name: 'auth',
   initialState: authInitialState,
-  reducers: {},
+  reducers: {
+    setCredentials: (state, action) => {
+      state.user = action.payload.user;
+      state.accessToken = action.payload.accessToken;
+      state.isLoggedIn = true;
+      state.error = null;
+    },
+    clearCredentials: (state) => {
+      state.user = null;
+      state.accessToken = null;
+      state.isLoggedIn = false;
+      state.error = null;
+    },  
+  },
   extraReducers: builder => {
     builder
       .addCase(logIn.fulfilled, (state, action) => {
-        state.token = action.payload.data.accessToken || null;
-        // state.token = action.payload.token || null;
+        state.user = action.payload.user;
+        state.accessToken= action.payload.accessToken;
+
         state.isLoggedIn = true;
         state.isRefreshing = false;
       })
       .addCase(logIn.pending, state => {
         state.isRefreshing = true;
       })
-      .addCase(logIn.rejected, state => {
-        state.isRefreshing = false;
-      })
-      .addCase(refreshUser.pending, state => {
-        state.isRefreshing = true;
-      })
-      .addCase(refreshUser.fulfilled, (state, action) => {
-
-        console.log('Refresh User Success:', action.payload);
-        state.user = action.payload;
-        state.isLoggedIn = true;
-        state.isRefreshing = false;
-      })
-      .addCase(refreshUser.rejected, state => {
+      .addCase(logIn.rejected, (state, action )=> {
+        state.error = action.error;
         state.isRefreshing = false;
       })
       .addCase(register.fulfilled, (state, action) => {
 
         console.log('Register Success:', action.payload);
         state.user = action.payload.user;
-        state.token = action.payload.token;
+        state.accessToken= action.payload.accessToken;
         state.isLoggedIn = true;
         state.error = false;
       })
@@ -53,8 +55,19 @@ const authSlice = createSlice({
       })
       .addCase(register.rejected, state => {
         state.error = true;
+      })
+      .addCase(refreshToken.fulfilled, (state, action) => {
+        state.accessToken = action.payload.accessToken;
+        state.user = action.payload.user;
+        state.isLoggedIn = true;
+        state.isRefreshing = false;
+      })
+      .addCase(refreshToken.rejected, (state, action) => {
+        state.error = action.error;
+        state.isRefreshing = false;
       });
   },
 });
 
+export const { setCredentials, clearCredentials } = authSlice.actions;
 export const authReducer = authSlice.reducer;
