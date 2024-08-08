@@ -12,7 +12,6 @@ export default function TrackerPage() {
           <UserPanel />
         </div>
         <DailyInfo />
-
       </BackgroundColor>
       <BackgroundColor color="green">Hello, world</BackgroundColor>
     </Layout>

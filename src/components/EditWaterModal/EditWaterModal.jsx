@@ -21,14 +21,13 @@ export const EditWaterModal = ({ onClose }) => {
     };
 
   return (
-    <div className={css.mainEditWaterModalCont}>
       <div className={css.editWaterModalContWindow}>
         <div className={css.editWaterModalListAndBtn}>
-          <button onClick={onClose} className={css.btnCloseModal}>
+          {/* <button onClick={onClose} className={css.btnCloseModal}>
             <svg className={css.btnCloseSvg}>
               <use  href={`${sprite}#icon-x`}></use>
             </svg>
-          </button>
+          </button> */}
 
           <h2 className={css.editWaterTitle}>Edit the entered amount of water</h2>
           <span className={css.editWaterSpan}>Correct entered data:</span>
@@ -84,6 +83,5 @@ export const EditWaterModal = ({ onClose }) => {
           </form>
         </div>
       </div>
-    </div>
   );
 };
