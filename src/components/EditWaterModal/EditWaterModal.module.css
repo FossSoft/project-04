@@ -11,8 +11,6 @@
 }
 .editWaterModalContWindow {
   box-sizing: border-box;
-  position: absolute;
-  top: 105px;
   display: flex;
   width: 343px;
   min-width: 250px;

@@ -50,6 +50,7 @@
   background-color: transparent;
   border-color: transparent;
   cursor: pointer;
+  z-index: 1;
 }
 
 .icon {
