@@ -12,6 +12,7 @@ import { validationSchema } from './validationSchema.js';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectUserActivityTime,
+  selectUserAvatar,
   selectUserEmail,
   selectUserGender,
   selectUserId,
@@ -43,6 +44,7 @@ export const Setting = ({ handleCloseModalSettings }) => {
   const weightSelector = useSelector(selectUserWeight);
   const activityTimeSelector = useSelector(selectUserActivityTime);
   const userWaterDrinkSelector = useSelector(selectUserWaterToDrink);
+  const avatarSelector = useSelector(selectUserAvatar);
   //
 
   const dispatch = useDispatch();
@@ -158,7 +160,7 @@ export const Setting = ({ handleCloseModalSettings }) => {
           <div className={css.uploadContaienr}>
             <img
               className={css.avatarImg}
-              src={!preview ? tablet : preview}
+              src={!avatarSelector ? tablet : avatarSelector}
               alt="Avatar"
             />
             <label htmlFor={upload} className={css.upload}>
