@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { selectToken } from '../../redux/auth/selectors';
+import { selectAccessToken } from '../../redux/auth/selectors';
 import { fetchWaterDataByDay } from '../../redux/water/operations';
 import { useEffect } from 'react';
 import WaterItem from '../WaterItem/WaterItem';
@@ -7,7 +7,7 @@ import css from './WaterList.module.css';
 
 const WaterList = () => {
   const dispatch = useDispatch();
-  const token = useSelector(selectToken);
+  const token = useSelector(selectAccessToken);
   const waterData = useSelector(state => state.water.waterData);
 
   useEffect(() => {
