@@ -26,6 +26,7 @@ import {
   updateUserAvatar,
   updateUserInfo,
 } from '../../redux/user/operations.js';
+
 import { closeModalSettings } from '../../redux/modal/slice.js';
 export const Setting = ({ handleCloseModalSettings }) => {
   const upload = useId();
