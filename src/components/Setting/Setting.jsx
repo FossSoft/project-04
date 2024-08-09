@@ -95,15 +95,18 @@ export const Setting = () => {
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors },
     reset,
   } = useForm({
     resolver: yupResolver(validationSchema),
     mode: 'onChange',
   });
-
+  useEffect(() => {
+    setValue('gender', genderSelector);
+  }, [genderSelector, setValue]);
   const form = useRef();
-  // const email = useRef();
+
   const weightValue = watch('weight');
   const timeValue = watch('activeTime');
   const [result, setResult] = useState(0);
@@ -178,8 +181,10 @@ export const Setting = () => {
                   <input
                     type="radio"
                     {...register('gender')}
-                    defaultChecked
                     value="woman"
+                    onChange={() => {
+                      setValue('gender', 'woman');
+                    }}
                     id={womanRadio}
                     className={css.inputRadio}
                   />
@@ -193,6 +198,9 @@ export const Setting = () => {
                     {...register('gender')}
                     value="man"
                     // defaultChecked={genderSelector === 'man'}
+                    onChange={() => {
+                      setValue('gender', 'man');
+                    }}
                     id={manRadio}
                     className={css.inputRadio}
                   />
