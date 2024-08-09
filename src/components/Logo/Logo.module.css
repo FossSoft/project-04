@@ -1,12 +1,14 @@
-.logo {
-  color: rgb(50, 63, 71);
-  font-family: Poppins, sans-serif;
-  text-align: center;
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.0018em;
-  text-transform: uppercase;
+@media screen and (min-width: 320px) {
+  .logo {
+    color: rgb(50, 63, 71);
+    font-family: Poppins, sans-serif;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: -0.0018em;
+    text-transform: uppercase;
+  }
 }
 
 @media screen and (min-width: 768px) {
