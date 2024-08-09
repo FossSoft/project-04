@@ -27,7 +27,7 @@ export const fetchUserInfo = createAsyncThunk(
     try {
       setAuthHeader(token);
       const response = await apiClient.get('/user/');
-      console.log(response.data);
+      // console.log(response.data);
       return response.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data || error.message);

@@ -18,7 +18,7 @@ import LogOutModal from 'components/LogOutModal/LogOutModal';
 import { Setting } from 'components/Setting/Setting.jsx';
 import { selecteShowPopover } from '../../redux/popover/selectors';
 
-export default function UserBarPopover() {
+export default function UserBarPopover({ style }) {
   const dispatch = useDispatch();
   const showPopover = useSelector(selecteShowPopover);
   const isOpenModalSettings = useSelector(selecteIsOpenModalSettings);
@@ -41,7 +41,7 @@ export default function UserBarPopover() {
   };
 
   return (
-    <div className={showPopover ? 'popover active' : 'popover'}>
+    <div className={showPopover ? 'popover active' : 'popover'} style={style}>
       <div className={css.container}>
         <svg className={clsx(css.icon, css.darkblue)}>
           <use href={`${sprite}#icon-settings`}></use>

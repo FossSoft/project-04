@@ -5,8 +5,12 @@ import img1x from '../../image/x1/Ellipse_14.png';
 import img2x from '../../image/x2/Ellipse_14.png';
 import sprite from '../../image/sprite/sprite.svg';
 import UserBarPopover from 'components/UserBarPopover/UserBarPopover';
-import { hidePopover, togglePopover } from '../../redux/popover/slice';
-import { selecteIcon } from '../../redux/popover/selectors';
+import {
+  getCurrentWidthBtn,
+  hidePopover,
+  togglePopover,
+} from '../../redux/popover/slice';
+import { selecteIcon, selecteWidth } from '../../redux/popover/selectors';
 import {
   selectAvatar,
   selectUserEmail,
@@ -18,12 +22,34 @@ export default function UserBar() {
   const userName = useSelector(selectUserName);
   const avatar = useSelector(selectAvatar);
   const icon = useSelector(selecteIcon);
+  const width = useSelector(selecteWidth);
   const visitor = useSelector(selectUserEmail).split('@')[0];
   const btnRef = useRef(null);
 
   const handleTogglePopover = () => {
     dispatch(togglePopover());
   };
+
+  useEffect(() => {
+    const updateSize = () => {
+      if (btnRef.current) {
+        const { width } = btnRef.current.getBoundingClientRect();
+        dispatch(getCurrentWidthBtn(width));
+      }
+    };
+    updateSize();
+
+    const resizeObserver = new ResizeObserver(updateSize);
+    if (btnRef.current) {
+      resizeObserver.observe(btnRef.current);
+    }
+
+    return () => {
+      if (btnRef.current) {
+        resizeObserver.unobserve(btnRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = e => {
@@ -75,7 +101,7 @@ export default function UserBar() {
         </svg>
       </button>
 
-      <UserBarPopover />
+      <UserBarPopover style={{ width: `${width}px` }} />
     </div>
   );
 }
