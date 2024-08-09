@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const popoverSlice = createSlice({
   name: 'popover',
   initialState: {
+    width: 0,
     showPopover: false,
     icon: false,
   },
@@ -15,10 +16,15 @@ const popoverSlice = createSlice({
       state.showPopover = false;
       state.icon = false;
     },
+
+    getCurrentWidthBtn: (state, action) => {
+      state.width = action.payload;
+    },
   },
 });
 
-export const { togglePopover, hidePopover } = popoverSlice.actions;
+export const { togglePopover, hidePopover, getCurrentWidthBtn } =
+  popoverSlice.actions;
 export default popoverSlice.reducer;
 
 // email: Bob_fun2024@gmail.com
