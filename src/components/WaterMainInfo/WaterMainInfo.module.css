@@ -1,0 +1,26 @@
+@media screen and (min-width: 320px) {
+  .container{
+    width: 288px;
+    position: relative;
+    height: 415px;
+  }
+  .addWaterBtn{
+    position: absolute;
+    bottom: 32px;
+    right: 16px;
+  }
+  .logo{
+    position: absolute;
+    top: 24px;
+    left: 16px;
+    width: 114px;
+  }
+}
+
+
+@media screen and (min-width: 375px) {
+  .container{
+    width: 343px;
+
+  }
+}
