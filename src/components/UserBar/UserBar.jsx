@@ -7,13 +7,18 @@ import sprite from '../../image/sprite/sprite.svg';
 import UserBarPopover from 'components/UserBarPopover/UserBarPopover';
 import { hidePopover, togglePopover } from '../../redux/popover/slice';
 import { selecteIcon } from '../../redux/popover/selectors';
-import { selectAvatar, selectUserName } from '../../redux/user/selectors';
+import {
+  selectAvatar,
+  selectUserEmail,
+  selectUserName,
+} from '../../redux/user/selectors';
 
 export default function UserBar() {
   const dispatch = useDispatch();
   const userName = useSelector(selectUserName);
   const avatar = useSelector(selectAvatar);
   const icon = useSelector(selecteIcon);
+  const visitor = useSelector(selectUserEmail).split('@')[0];
   const btnRef = useRef(null);
 
   const handleTogglePopover = () => {
@@ -48,7 +53,7 @@ export default function UserBar() {
         {userName ? (
           <p className={css.text}>{userName}</p>
         ) : (
-          <p className={css.text}>Visitor</p>
+          <p className={css.text}>{visitor}</p>
         )}
 
         {avatar ? (
