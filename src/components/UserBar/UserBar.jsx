@@ -25,7 +25,7 @@ export default function UserBar() {
       if (
         btnRef.current &&
         !btnRef.current.contains(e.target) &&
-        !e.target.closest('.UserBarPopover_popover__Vz69-')
+        !e.target.closest('.popover')
       )
         dispatch(hidePopover());
     };
