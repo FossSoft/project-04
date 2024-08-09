@@ -1,24 +1,20 @@
 import css from './Setting.module.css';
 import toast, { Toaster } from 'react-hot-toast';
-import tablet from '../../image/x2/Ellipse_14.png';
-
+import avatar from '../../image/avatar.jpg';
+import * as Yup from 'yup';
 import sprite from '../../image/sprite/sprite.svg';
 
 import { useEffect, useId, useRef, useState } from 'react';
 
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { validationSchema } from './validationSchema.js';
+
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  selectUserActivityTime,
   selectUserAvatar,
   selectUserEmail,
-  selectUserGender,
-  selectUserId,
   selectUserName,
-  selectUserWaterToDrink,
-  selectUserWeight,
+  selectUserGender,
 } from '../../redux/user/selectors.js';
 
 import {
@@ -28,7 +24,7 @@ import {
 } from '../../redux/user/operations.js';
 
 import { closeModalSettings } from '../../redux/modal/slice.js';
-export const Setting = ({ handleCloseModalSettings }) => {
+export const Setting = () => {
   const upload = useId();
   const womanRadio = useId();
   const manRadio = useId();
@@ -39,24 +35,50 @@ export const Setting = ({ handleCloseModalSettings }) => {
   const resultInput = useId();
   //
   const nameSelector = useSelector(selectUserName);
-  const idSelector = useSelector(selectUserId);
-  const emeailSelector = useSelector(selectUserEmail);
   const genderSelector = useSelector(selectUserGender);
-  const weightSelector = useSelector(selectUserWeight);
-  const activityTimeSelector = useSelector(selectUserActivityTime);
-  const userWaterDrinkSelector = useSelector(selectUserWaterToDrink);
-  const avatarSelector = useSelector(selectUserAvatar);
-  //
+  const emeailSelector = useSelector(selectUserEmail);
 
+  const avatarSelector = useSelector(selectUserAvatar);
+
+  // Validation
+
+  const validationSchema = Yup.object().shape({
+    // username: Yup.string().matches(
+    //   /^[А-Яа-яA-Za-z]+$/,
+    //   'Username must contain only letters'
+    // ),
+    username: Yup.string()
+      .test('Username must contain only letters', value => {
+        const isValidInitial = !value || /^[А-Яа-яA-Za-z]+$/.test(value);
+
+        return !value || isValidInitial;
+      })
+      .max(30, 'Too long'),
+    // .min(3, 'Too short')
+
+    // .required('Username is required'),
+
+    // .required('Name is required'),
+    // userEmail: Yup.string().email('Must be a valid email!').required('Required'),
+    weight: Yup.number()
+      .required('Weight is required')
+      .positive('Weight must be a positive number')
+      .min(20, 'Weight must be at least 20kg')
+      .max(300, 'Weight must be 300kg or less'),
+    activeTime: Yup.number()
+      .required('Write your active sport time')
+      .max(10, 'Too much time')
+      .positive('Time must be a positive number'),
+    ownerResult: Yup.number().min(0.6, 'Too little').max(12, 'Too much'),
+  });
+  // Validation
   const dispatch = useDispatch();
 
-  //
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(null);
 
   const handleFileChange = event => {
     const file = event.target.files[0];
-    // console.log(file);
 
     setFile(file);
 
@@ -73,13 +95,16 @@ export const Setting = ({ handleCloseModalSettings }) => {
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors },
     reset,
   } = useForm({
     resolver: yupResolver(validationSchema),
     mode: 'onChange',
   });
-
+  useEffect(() => {
+    setValue('gender', genderSelector);
+  }, [genderSelector, setValue]);
   const form = useRef();
 
   const weightValue = watch('weight');
@@ -104,10 +129,10 @@ export const Setting = ({ handleCloseModalSettings }) => {
   }, [dispatch]);
 
   const onSubmit = data => {
-    if (emeailSelector !== data.userEmail) {
-      toast.error('Write correctly amail');
-      return;
-    }
+    // if (emeailSelector !== data.userEmail) {
+    //   toast.error('Write correctly amail');
+    //   return;
+    // }
 
     dispatch(
       updateUserInfo({
@@ -124,20 +149,12 @@ export const Setting = ({ handleCloseModalSettings }) => {
   return (
     <div className={css.probe}>
       <form ref={form} className={css.form} onSubmit={handleSubmit(onSubmit)}>
-        {/* <svg
-          className={css.closeIcon}
-          onClick={() => {
-            dispatch(closeModalSettings());
-          }}
-        >
-          <use href={`${sprite}#icon-x`}></use>
-        </svg> */}
         <h2 className={css.titleForm}>Setting</h2>
         <div className={css.titleContainer}>
           <div className={css.uploadContaienr}>
             <img
               className={css.avatarImg}
-              src={!avatarSelector ? tablet : avatarSelector}
+              src={!avatarSelector ? avatar : avatarSelector}
               alt="Avatar"
             />
             <label htmlFor={upload} className={css.upload}>
@@ -164,8 +181,10 @@ export const Setting = ({ handleCloseModalSettings }) => {
                   <input
                     type="radio"
                     {...register('gender')}
-                    defaultChecked
                     value="woman"
+                    onChange={() => {
+                      setValue('gender', 'woman');
+                    }}
                     id={womanRadio}
                     className={css.inputRadio}
                   />
@@ -178,6 +197,10 @@ export const Setting = ({ handleCloseModalSettings }) => {
                     type="radio"
                     {...register('gender')}
                     value="man"
+                    // defaultChecked={genderSelector === 'man'}
+                    onChange={() => {
+                      setValue('gender', 'man');
+                    }}
                     id={manRadio}
                     className={css.inputRadio}
                   />
@@ -208,10 +231,11 @@ export const Setting = ({ handleCloseModalSettings }) => {
               <label htmlFor={emailInput}>
                 <p className={css.userEmail}>Email</p>
                 <input
+                  // ref={email}
                   type="text"
                   id={emailInput}
                   defaultValue={emeailSelector}
-                  // disabled
+                  disabled
                   placeholder="Enter your email"
                   style={{
                     borderColor: errors.userEmail ? 'red' : 'initial',
@@ -305,8 +329,16 @@ export const Setting = ({ handleCloseModalSettings }) => {
                   id={resultInput}
                   className={css.userOwnerInput}
                   {...register('ownerResult')}
+                  style={{
+                    borderColor: errors.ownerResult ? 'red' : 'initial',
+                  }}
                 />
               </label>
+              <div>
+                {errors.ownerResult && (
+                  <p className={css.error}>{errors.ownerResult.message}</p>
+                )}
+              </div>
             </div>
           </div>
         </div>
