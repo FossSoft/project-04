@@ -2,12 +2,13 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { selectAccessToken } from '../auth/selectors.js';
+import { apiClient, getToken, setAuthHeader } from '../auth/operations.js';
 
-axios.defaults.baseURL = 'https://back-end-aquatrack.onrender.com';
+// axios.defaults.baseURL = 'https://back-end-aquatrack.onrender.com';
 
-const setAuthHeader = token => {
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
+// const setAuthHeader = token => {
+//   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+// };
 
 export const addWaterAmount = createAsyncThunk(
   'water/addWaterAmount',
@@ -16,7 +17,7 @@ export const addWaterAmount = createAsyncThunk(
       if (token) {
         setAuthHeader(token);
       }
-      const { data } = await axios.post('/water', waterItem);
+      const { data } = await apiClient.post('/water', waterItem);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data || error.message);
@@ -31,7 +32,7 @@ export const updateWaterAmount = createAsyncThunk(
       if (token) {
         setAuthHeader(token);
       }
-      const { data } = await axios.patch(`/water/${id}`, waterItem);
+      const { data } = await apiClient.patch(`/water/${id}`, waterItem);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data || error.message);
@@ -46,7 +47,7 @@ export const deleteWaterEntry = createAsyncThunk(
       if (token) {
         setAuthHeader(token);
       }
-      await axios.delete(`/water/${id}`);
+      await apiClient.delete(`/water/${id}`);
       return id;
     } catch (error) {
       // console.error('Error deleting water entry:', error);
@@ -59,10 +60,10 @@ export const fetchWaterDataByDay = createAsyncThunk(
   'water/fetchWaterDataByDay',
   async ({ date }, { getState, rejectWithValue }) => {
     const state = getState();
-    const token = selectAccessToken(state);
+    const token = getToken(state);
     setAuthHeader(token);
     try {
-      const response = await axios.get(`/water/day/${date}`);
+      const response = await apiClient.get(`/water/day/${date}`);
       return response.data;
     } catch (error) {
       // console.error('Error fetching water data:', error.response?.data || error.message);

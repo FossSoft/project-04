@@ -3,35 +3,39 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { setCredentials, clearCredentials } from './slice';
 
 export const apiClient = axios.create({
-  baseURL: 'https://back-end-aquatrack.onrender.com',
+  // baseURL: 'https://back-end-aquatrack.onrender.com',
+  baseURL: 'http://localhost:3001',
   headers: {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   },
 });
 
-const setAuthHeader = token => {
+export const setAuthHeader = token => {
   apiClient.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
-const clearAuthHeader = () => {
+export const clearAuthHeader = () => {
   apiClient.defaults.headers.common.Authorization = '';
-}
+};
 
-export const setupAxiosInterceptors = (store) => {
+export const getToken = state =>
+  state.auth.accessToken || localStorage.getItem('token');
+
+export const setupAxiosInterceptors = store => {
   apiClient.interceptors.request.use(
-    (config) => {
+    config => {
       const { auth } = store.getState();
       if (auth.accessToken) {
         config.headers.Authorization = `Bearer ${auth.accessToken}`;
       }
       return config;
     },
-    (error) => Promise.reject(error)
+    error => Promise.reject(error)
   );
 
   apiClient.interceptors.response.use(
-    (response) => response,
-    async (error) => {
+    response => response,
+    async error => {
       const { response, config } = error;
 
       if (response.status === 401 && !config.__isRetryRequest) {
@@ -40,7 +44,8 @@ export const setupAxiosInterceptors = (store) => {
         try {
           await store.dispatch(refreshToken()).unwrap();
           const { auth } = store.getState();
-          config.headers.Authorization = `Bearer ${auth.accessToken}`;
+          // config.headers.Authorization = `Bearer ${auth.accessToken}`;
+          setAuthHeader(auth.accessToken);
           return apiClient(config);
         } catch (refreshError) {
           store.dispatch(clearCredentials());
@@ -57,7 +62,7 @@ export const register = createAsyncThunk(
   async (userData, thunkAPI) => {
     try {
       const response = await apiClient.post('/auth/register', userData);
-      const {accessToken} = response.data;
+      const { accessToken } = response.data;
       setAuthHeader(accessToken);
       thunkAPI.dispatch(setCredentials(response.data));
       return response.data;
@@ -84,18 +89,18 @@ export const logIn = createAsyncThunk(
 
 export const refreshToken = createAsyncThunk(
   'auth/refresh',
-  async (_, thunkAPI) => {            
-   try {
-    const { data }  = await apiClient.get('/user/refresh');
-    thunkAPI.dispatch(setCredentials(data.data));
-    console.log(data.data)
-    return data;
-   } catch (error) {
-    return thunkAPI.rejectWithValue(error.response?.data || error.message);
-   }
+  async (_, thunkAPI) => {
+    try {
+      const { data } = await apiClient.post('/auth/refresh');
+      setAuthHeader(data.data.accessToken);
+      thunkAPI.dispatch(setCredentials(data.data));
+      console.log(data.data);
+      return data.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response?.data || error.message);
+    }
   }
 );
-
 
 export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {

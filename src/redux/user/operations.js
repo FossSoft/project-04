@@ -1,19 +1,18 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { apiClient, getToken, setAuthHeader } from '../auth/operations.js';
 
-export const apiClient = axios.create({
-  baseURL: 'https://back-end-aquatrack.onrender.com',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+// export const apiClient = axios.create({
+//   baseURL: 'https://back-end-aquatrack.onrender.com',
+//   headers: {
+//     'Content-Type': 'application/json',
+//   },
+// });
 
-const setAuthHeader = token => {
-  apiClient.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
+// const setAuthHeader = token => {
+//   apiClient.defaults.headers.common.Authorization = `Bearer ${token}`;
+// };
 
-const getToken = state =>
-  state.auth.accessToken || localStorage.getItem('token');
 
 export const fetchUserInfo = createAsyncThunk(
   'user/fetchUserInfo',
