@@ -12,6 +12,7 @@
   pointer-events: none;
   transform: scale(0.5);
   transition: opacity 250ms linear, transform 250ms linear;
+  overflow-x: auto;
   z-index: 1000;
 }
 
@@ -27,8 +28,8 @@
   border-radius: 15px;
   transform: scale(0.5);
   transition: transform 250ms ease;
-  overflow-y: auto;
-  overflow-x: auto;
+  /* overflow-y: auto;
+  overflow-x: auto; */
 }
 
 .modal.active {
