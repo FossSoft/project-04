@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 344px;
+  /* width: 344px; */
   color: var(--Dark-Blue);
 }
 
@@ -46,6 +46,19 @@
 .gray {
   background-color: var(--light-gray);
   color: rgba(50, 63, 71, 0.3);
+}
+
+@media screen and (min-width: 320px) and (max-width: 374px) {
+  .wrapper {
+    max-width: 344px;
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 375px) {
+  .wrapper {
+    width: 344px;
+  }
 }
 
 @media screen and (min-width: 768px) {
