@@ -207,8 +207,6 @@ export const Setting = ({ handleCloseModalSettings }) => {
               <label htmlFor={emailInput}>
                 <p className={css.userEmail}>Email</p>
                 <input
-                  {...register('userEmail')}
-                  ref={emailInputRef}
                   type="text"
                   id={emailInput}
                   defaultValue={emeailSelector}
