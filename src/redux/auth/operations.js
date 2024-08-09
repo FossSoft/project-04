@@ -22,16 +22,16 @@ export const getToken = state =>
   state.auth.accessToken || localStorage.getItem('token');
 
 export const setupAxiosInterceptors = store => {
-  apiClient.interceptors.request.use(
-    config => {
-      const { auth } = store.getState();
-      if (auth.accessToken) {
-        config.headers.Authorization = `Bearer ${auth.accessToken}`;
-      }
-      return config;
-    },
-    error => Promise.reject(error)
-  );
+  // apiClient.interceptors.request.use(
+  //   config => {
+  //     const { auth } = store.getState();
+  //     if (auth.accessToken) {
+  //       config.headers.Authorization = `Bearer ${auth.accessToken}`;
+  //     }
+  //     return config;
+  //   },
+  //   error => Promise.reject(error)
+  // );
 
   apiClient.interceptors.response.use(
     response => response,
