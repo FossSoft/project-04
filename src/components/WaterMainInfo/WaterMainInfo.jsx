@@ -1,6 +1,16 @@
 import AddWaterBtn from 'components/AddWaterBtn/AddWaterBtn';
 import styles from './WaterMainInfo.module.css';
 import Logo from 'components/Logo/Logo.jsx';
+import mobx1 from '../../image/x1/transparent_bottle_for_water1_mob.png';
+import mobx2 from '../../image/x2/transparent_bottle_for_water1_mob.png';
+import mobx3 from '../../image/x3/transparent_bottle_for_water1_mob.png';
+import tab1 from '../../image/x1/transparent_bottle_for_water1_tab.png'
+import tab2 from '../../image/x2/transparent_bottle_for_water1_tab.png'
+import tab3 from '../../image/x3/transparent_bottle_for_water1_tab.png'
+import desk1 from '../../image/x1/transparent_bottle_for_water1.png'
+import desk2 from '../../image/x2/transparent_bottle_for_water1.png'
+import desk3 from '../../image/x3/transparent_bottle_for_water1.png'
+
 
 const WaterMainInfo = () => {
   return (
@@ -10,18 +20,18 @@ const WaterMainInfo = () => {
       </div>
       <picture>
         <source
-          srcset="large-image-1x.jpg 1x, large-image-2x.jpg 2x, large-image-3x.jpg 3x"
+          srcSet={`${desk1} 1x, ${desk2} 2x, ${desk3} 3x`}
           media="(min-width: 1440px)"
         />
         <source
-          srcset="medium-image-1x.jpg 1x, medium-image-2x.jpg 2x, medium-image-3x.jpg 3x"
+          srcSet={`${tab1} 1x, ${tab2} 2x, ${tab3} 3x`}
           media="(min-width: 768px)"
         />
         <source
-          srcset="../../image/x1/transparent_bottle_for_water1_mob.png 1x, ../../image/x2/transparent_bottle_for_water1_mob.png 2x, ../../image/x3/transparent_bottle_for_water1_mob.png 3x"
+          srcSet={`${mobx2} 1x, ${mobx2} 2x, ${mobx3} 3x`}
           media="(min-width: 320px)"
         />
-        <img src="../../image/x1/transparent_bottle_for_water1_mob.png" alt="bottle" />
+        <img src={mobx1} alt="bottle" className={styles.bottleImg}/>
       </picture>
 
       <div className={styles.addWaterBtn}>
