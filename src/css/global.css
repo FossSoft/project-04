@@ -27,7 +27,8 @@ a {
   cursor: pointer;
 }
 
-button,input {
+button,
+input {
   cursor: pointer;
 }
 
@@ -66,7 +67,7 @@ img {
 
 body {
   background-color: var(--white);
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-weight: normal;
   font-style: normal;
 }

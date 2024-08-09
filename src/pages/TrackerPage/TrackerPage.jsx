@@ -5,21 +5,31 @@ import css from './TrackerPage.module.css';
 import DailyInfo from 'components/DailyInfo/DailyInfo';
 import WaterMainInfo from 'components/WaterMainInfo/WaterMainInfo';
 import MonthInfo from 'components/MonthInfo/MonthInfo';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { fetchUserInfo } from '../../redux/user/operations';
 
 export default function TrackerPage() {
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    dispatch(fetchUserInfo());
+  }, [dispatch]);
   return (
-    <Layout>
-      <BackgroundColor color="green">
-        <WaterMainInfo />
-      </BackgroundColor>
+    <div className="container">
+      <Layout>
+        <BackgroundColor color="green">
+          <WaterMainInfo />
+        </BackgroundColor>
 
-      <BackgroundColor color="grey">
-        <div className={css.padding}>
-          <UserPanel />
-        </div>
-        <DailyInfo />
-        <MonthInfo />
-      </BackgroundColor>
-    </Layout>
+        <BackgroundColor color="grey">
+          <div className={css.padding}>
+            <UserPanel />
+          </div>
+          <DailyInfo />
+          <MonthInfo />
+        </BackgroundColor>
+      </Layout>
+    </div>
   );
 }

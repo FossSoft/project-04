@@ -11,16 +11,14 @@ const setAuthHeader = token => {
 
 export const addWaterAmount = createAsyncThunk(
   'water/addWaterAmount',
-  async (waterData, thunkAPI) => {
+  async ([waterItem, token], thunkAPI) => {
     try {
-      const { token, ...waterItem } = waterData;
       if (token) {
         setAuthHeader(token);
       }
       const { data } = await axios.post('/water', waterItem);
       return data;
     } catch (error) {
-      console.error('Error adding water:', error);
       return thunkAPI.rejectWithValue(error.response?.data || error.message);
     }
   }
@@ -28,16 +26,14 @@ export const addWaterAmount = createAsyncThunk(
 
 export const updateWaterAmount = createAsyncThunk(
   'water/updateWaterAmount',
-  async (waterData, thunkAPI) => {
+  async ([id, waterItem, token], thunkAPI) => {
     try {
-      const { token, ...waterItem } = waterData;
       if (token) {
         setAuthHeader(token);
       }
-      const { data } = await axios.put(`/water/${waterItem.id}`, waterItem);
+      const { data } = await axios.patch(`/water/${id}`, waterItem);
       return data;
     } catch (error) {
-      console.error('Error updating water:', error);
       return thunkAPI.rejectWithValue(error.response?.data || error.message);
     }
   }
@@ -69,7 +65,7 @@ export const fetchWaterDataByDay = createAsyncThunk(
       const response = await axios.get(`/water/day/${date}`);
       return response.data;
     } catch (error) {
-      console.error('Error fetching water data:', error.response?.data || error.message);
+      // console.error('Error fetching water data:', error.response?.data || error.message);
       return rejectWithValue(error.response?.data || error.message);
     }
   }

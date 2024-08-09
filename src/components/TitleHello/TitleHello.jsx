@@ -1,22 +1,16 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import css from './TitleHello.module.css';
-import { selectUserName } from '../../redux/user/selectors';
-import { fetchUserInfo } from '../../redux/user/operations';
+import { selectUserEmail, selectUserName } from '../../redux/user/selectors';
 
 export default function TitleHello() {
-  const dispatch = useDispatch();
   const userName = useSelector(selectUserName);
-
-  useEffect(() => {
-    dispatch(fetchUserInfo());
-  }, [dispatch]);
+  const visitor = useSelector(selectUserEmail).split('@')[0];
 
   return (
     <div className={css.text}>
       Hello,
       {!userName ? (
-        <span className={css.span}>Visitor</span>
+        <span className={css.span}>{visitor}!</span>
       ) : (
         <span className={css.span}>{userName}</span>
       )}

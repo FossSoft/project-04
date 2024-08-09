@@ -7,7 +7,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 137px;
+  min-width: 137px;
   height: 50px;
   align-items: center;
   border-radius: 30px;
@@ -34,6 +34,7 @@
 .img {
   width: 38px;
   height: 38px;
+  border-radius: 50%;
 }
 
 .icon {
@@ -46,7 +47,7 @@
 
 @media screen and (min-width: 768px) {
   .btn {
-    width: 157px;
+    min-width: 157px;
     height: 56px;
   }
 

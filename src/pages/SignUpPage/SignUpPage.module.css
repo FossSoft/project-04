@@ -10,7 +10,11 @@
   flex-direction: column;
   box-sizing: border-box;
 }
-
+.box {
+  align-self: flex-start;
+  margin-top: 32px;
+  margin-left: 32px;
+}
 .wrapper {
   display: flex;
   align-items: stretch;

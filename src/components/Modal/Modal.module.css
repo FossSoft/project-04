@@ -10,13 +10,10 @@
   left: 0;
   opacity: 0;
   pointer-events: none;
-
-  /* my */
-  overflow-y: auto;
-  overflow-x: auto;
-
   transform: scale(0.5);
-  transition: opacity 500ms linear, transform 500ms linear;
+  transition: opacity 250ms linear, transform 250ms linear;
+  overflow-x: auto;
+  z-index: 1000;
 }
 
 .backdrop.active {
@@ -30,7 +27,7 @@
   background-color: var(--white);
   border-radius: 15px;
   transform: scale(0.5);
-  transition: transform 500ms ease;
+  transition: transform 250ms ease;
   /* overflow-y: auto;
   overflow-x: auto; */
 }
