@@ -14,7 +14,7 @@ input[type='number']::-webkit-outer-spin-button {
   margin: 0;
 }
 .probe {
-  height: 996px;
+  height: 600px;
 }
 .form {
   /* width: 100%; */
@@ -22,7 +22,7 @@ input[type='number']::-webkit-outer-spin-button {
   /* height: 100%; */
   position: relative;
   padding: 40px 20px;
-  height: 996px;
+  /* height: 670px; */
 }
 .input-error {
   border: 2px solid red;
@@ -560,6 +560,9 @@ input[type='number']::-webkit-outer-spin-button {
     padding: 16px 50px;
     width: 141px;
   }
+  .probe {
+    height: 650px;
+  }
 }
 
 @media screen and (min-width: 1440px) {
@@ -590,5 +593,8 @@ input[type='number']::-webkit-outer-spin-button {
   }
   .secondDescktopContainer {
     padding-top: 86px;
+  }
+  .probe {
+    height: 610px;
   }
 }

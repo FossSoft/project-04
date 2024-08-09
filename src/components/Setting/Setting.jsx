@@ -208,10 +208,11 @@ export const Setting = ({ handleCloseModalSettings }) => {
                 <p className={css.userEmail}>Email</p>
                 <input
                   {...register('userEmail')}
+                  ref={emailInputRef}
                   type="text"
                   id={emailInput}
                   defaultValue={emeailSelector}
-                  disabled
+                  // disabled
                   placeholder="Enter your email"
                   style={{
                     borderColor: errors.userEmail ? 'red' : 'initial',
