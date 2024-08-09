@@ -1,8 +1,7 @@
 .container {
-  margin-top: 16px;
-  margin-bottom: 16px;
   display: flex;
   flex-direction: column;
+  /* justify-content: center; */
   align-items: center;
   row-gap: 16px;
 }

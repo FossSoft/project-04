@@ -26,6 +26,7 @@ import {
   updateUserAvatar,
   updateUserInfo,
 } from '../../redux/user/operations.js';
+
 import { closeModalSettings } from '../../redux/modal/slice.js';
 export const Setting = ({ handleCloseModalSettings }) => {
   const upload = useId();
@@ -207,11 +208,10 @@ export const Setting = ({ handleCloseModalSettings }) => {
               <label htmlFor={emailInput}>
                 <p className={css.userEmail}>Email</p>
                 <input
-                  {...register('userEmail')}
                   type="text"
                   id={emailInput}
                   defaultValue={emeailSelector}
-                  disabled
+                  // disabled
                   placeholder="Enter your email"
                   style={{
                     borderColor: errors.userEmail ? 'red' : 'initial',
