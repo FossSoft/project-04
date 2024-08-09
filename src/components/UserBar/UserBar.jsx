@@ -39,17 +39,18 @@ export default function UserBar() {
     };
     updateSize();
 
+    const currentRef = btnRef.current;
     const resizeObserver = new ResizeObserver(updateSize);
-    if (btnRef.current) {
-      resizeObserver.observe(btnRef.current);
+    if (currentRef) {
+      resizeObserver.observe(currentRef);
     }
-
     return () => {
-      if (btnRef.current) {
-        resizeObserver.unobserve(btnRef.current);
+      if (currentRef) {
+        resizeObserver.unobserve(currentRef);
       }
+      resizeObserver.disconnect();
     };
-  }, []);
+  }, [dispatch, btnRef]);
 
   useEffect(() => {
     const handleClickOutside = e => {
