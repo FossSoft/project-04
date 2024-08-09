@@ -6,7 +6,6 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 100px;
-  margin-top: 130px;
 }
 
 form {
@@ -222,7 +221,7 @@ form {
     width: 436px;
     background-color: rgba(240, 239, 244, 1);
     margin-bottom: 100px;
-    margin-top: 130px;
+    margin-top: 74px;
   }
   .text {
     font-size: 16px;
