@@ -1,9 +1,12 @@
-.wrapper {
-  width: 100%;
-  max-width: 304px;
-  margin: 0 auto;
-  background-color: #f0eff4;
-  color: var(--dark-blue);
+.container {
+  padding: 20px 20px;
+}
+.wrapperContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
 }
 .header {
   margin: 0;
@@ -16,7 +19,14 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  gap: 16px;
+  gap: 20px;
+}
+.containerToggle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
 }
 .iconBtn {
   display: grid;

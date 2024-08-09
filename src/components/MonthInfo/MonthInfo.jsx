@@ -1,120 +1,71 @@
-import { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { format } from 'date-fns';
-import clsx from 'clsx';
+import Calendar from '../MonthInfo/Calendar/Calendar.jsx';
+import CalendarPagination from '../MonthInfo/CalendarPagination/CalendarPagination.jsx';
+import CalendarTitle from '../MonthInfo/CalendarTitle/CalendarTitle.jsx';
+import CalendarToggle from './CalendarToggle/CalendarToggle.jsx';
 
-import Calendar from './Calendar/Calendar';
-import CalendarPagination from './CalendarPagination/CalendarPagination';
-import Loader from './Loader/Loader';
-import Statistics from './Statistics/Statistics';
-import sprite from '../../image/sprite/sprite.svg';
-import { apiGetWaterMonth } from '../../redux/water/operations';
+import Loader from '../MonthInfo/Loader/Loader.jsx';
+import css from './MonthInfo.module.css';
+import { upMonth, downMonth, setDate } from '../../redux/water/calendar/slice';
 import {
-  incrementMonth,
-  decrementMonth,
-  setToggleInfo,
-  setDate,
-} from '../../redux/water/slice';
-import {
-  selectWaterMonth,
-  selectisLoadingMonth,
-  selectMonthError,
-  selectToggleInfo,
+  selectWaterData,
   selectMonth,
   selectDate,
-} from '../../redux/water/selectors';
+  selectIsLoading,
+  selectError,
+} from '../../redux/water/calendar/selectors';
 
-import css from './MonthInfo.module.css';
-
-const MonthInfo = () => {
+function MonthInfo() {
   const dispatch = useDispatch();
 
-  const monthArray = useSelector(selectWaterMonth);
-  const currentMonth = useSelector(selectMonth);
-  const isLoading = useSelector(selectisLoadingMonth);
-  const isError = useSelector(selectMonthError);
-  const ToggleInfo = useSelector(selectToggleInfo);
+  const currentMonth = useSelector(selectMonth); // Строка в формате 'YYYY-MM'
+  const monthArray = useSelector(selectWaterData);
   const selectedDate = useSelector(selectDate);
-
-  const formattedMonthArray = useMemo(() => {
-    return monthArray.map(day => {
-      return {
-        id: day.id,
-        date: day.day.split('-')[2],
-        value: Math.floor(Number(day.totalAmount) * 1000),
-      };
-    });
-  }, [monthArray]);
+  const isLoading = useSelector(selectIsLoading);
+  const isError = useSelector(selectError);
 
   const onNextMonth = () => {
-    dispatch(incrementMonth());
-  };
-  const onPrevMonth = () => {
-    dispatch(decrementMonth());
+    dispatch(upMonth());
   };
 
-  const onToggleInfo = () => {
-    dispatch(setToggleInfo());
+  const onPrevMonth = () => {
+    dispatch(downMonth());
   };
-  const onDayChange = date => {
-    dispatch(setDate(date));
+
+  const onTodayHandler = () => {
+    const today = new Date();
+    dispatch(setDate(format(today, 'yyyy-MM-dd')));
   };
-  const handleTodayClick = date => {
+
+  const onDateSelect = date => {
     dispatch(setDate(format(date, 'yyyy-MM-dd')));
   };
 
-  useEffect(() => {
-    dispatch(apiGetWaterMonth(currentMonth));
-  }, [dispatch, currentMonth]);
-
   return (
-    <div>
-      <div className={css.wrapper} data-tour="step-8">
-        <div className={css.thead}>
-          <h3 className={css.title}>{ToggleInfo ? 'Month' : 'Statistics'}</h3>
-          <div className={css.pagination}>
-            <CalendarPagination
-              onNextMonth={onNextMonth}
-              onPrevMonth={onPrevMonth}
-              onTodayClick={handleTodayClick}
-              setSelectedDate={setDate}
-              isStatisticsOpen={!ToggleInfo}
-            />
-            <button
-              className={clsx(css.iconBtn, {
-                [css.active]: !ToggleInfo,
-              })}
-              onClick={onToggleInfo}
-              data-tour="step-9"
-            >
-              <svg width="20" height="20">
-                <use href={`${sprite}#pie-chart-02`} />
-              </svg>
-            </button>
-          </div>
-        </div>
-        {isError && (
-          <div className={css.errorMessage}>
-            <p>Error loading data</p>
-          </div>
-        )}
-
-        {isLoading && !isError && <Loader />}
-
-        {ToggleInfo && !isError && !isLoading && (
-          <Calendar
-            month={monthArray}
-            date={selectedDate}
-            onClick={onDayChange}
+    <div className={css.container}>
+      <div className={css.wrapperContainer}>
+        <CalendarTitle onTodayHandler={onTodayHandler} title="Month" />
+        <div className={css.containerToggle}>
+          <CalendarPagination
+            currentDate={new Date(currentMonth)}
+            onPrevHandler={onPrevMonth}
+            onMonthHandler={onTodayHandler}
+            onNextHandler={onNextMonth}
           />
-        )}
-
-        {!ToggleInfo && !isError && !isLoading && (
-          <Statistics data={formattedMonthArray} />
-        )}
+          <CalendarToggle />
+        </div>
       </div>
+      {isError && (
+        <div className={css.errorMessage}>
+          <p> An error occurred</p>
+        </div>
+      )}
+      {isLoading && <Loader />}
+
+      <Calendar month={monthArray} date={selectedDate} onClick={onDateSelect} />
     </div>
   );
-};
+}
 
 export default MonthInfo;

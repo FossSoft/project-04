@@ -1,34 +1,30 @@
-import { isSameDay, format } from 'date-fns';
 import clsx from 'clsx';
 import css from './CalendarItem.module.css';
 
-const CalendarItem = ({ day, isActive, onClick, dayWaterMonth }) => {
-  const formattedDate = format(day, 'yyyy-MM-dd');
-
-  // Ищем данные для текущего дня
-  const dataIsWater = dayWaterMonth.find(item => item.date === formattedDate);
-
-  // Прямо используем строку с процентом без изменений, приходит с бэкенда
-  const rate = dataIsWater ? dataIsWater.percentageConsumed : '0%';
-
-  const isCurrentDay = isSameDay(new Date(), day);
-
-  const handleClick = () => {
-    onClick(day);
-  };
+const CalendarItem = ({
+  day,
+  isCurrentDay,
+  isSelectedDay,
+  percentage,
+  onClick,
+}) => {
+  const percentageNumber = parseFloat(percentage) || 0;
 
   return (
-    <li className={css.element} onClick={handleClick}>
-      <div
-        className={clsx(css.number, {
-          [css.active]: isActive,
-          [css.current]: isCurrentDay && !isActive,
-        })}
-      >
-        {format(day, 'd')}
-      </div>
-      <span className={css.rate}>{rate}</span>
-    </li>
+    <div
+      className={clsx(css.dayWrapper, {
+        [css.currentDay]: isCurrentDay,
+        [css.selectedDay]: isSelectedDay,
+        [css.highlightedBackground]: percentageNumber > 0 && !isCurrentDay,
+        [css.defaultBackground]: percentageNumber === 0 && !isCurrentDay,
+      })}
+      onClick={onClick}
+      style={{ cursor: 'pointer' }}
+    >
+      {day}
+      {/* Рендерим проценты напрямую без изменений */}
+      <div className={css.percentage}>{percentage}</div>
+    </div>
   );
 };
 

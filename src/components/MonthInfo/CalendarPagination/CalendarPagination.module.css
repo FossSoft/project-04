@@ -1,0 +1,28 @@
+button {
+  border: none;
+  background-color: transparent;
+}
+.wrapperButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: baseline;
+  gap: 5px;
+  width: 100%;
+}
+.monthButton {
+  color: #323f47;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+}
+.chevronButton {
+  color: #323f47;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+}

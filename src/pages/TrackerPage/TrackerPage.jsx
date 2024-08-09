@@ -4,6 +4,7 @@ import UserPanel from 'components/UserPanel/UserPanel';
 import css from './TrackerPage.module.css';
 import DailyInfo from 'components/DailyInfo/DailyInfo';
 import WaterMainInfo from 'components/WaterMainInfo/WaterMainInfo';
+import MonthInfo from 'components/MonthInfo/MonthInfo';
 
 export default function TrackerPage() {
   return (
@@ -17,8 +18,8 @@ export default function TrackerPage() {
           <UserPanel />
         </div>
         <DailyInfo />
+        <MonthInfo />
       </BackgroundColor>
-
     </Layout>
   );
 }

@@ -1,62 +1,30 @@
-.element {
-  margin: 0;
-  padding: 0;
-  flex-basis: calc((100% - 108px) / 7);
-  min-width: 27.5px;
+.dayWrapper {
   display: flex;
   flex-direction: column;
+  gap: 4px;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
 }
-.number {
-  width: 100%;
-  aspect-ratio: 1;
-  display: grid;
-  place-items: center;
-  color: #323f47;
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 18px;
-  text-align: center;
-  background-color: #fff;
+
+.currentDay {
   border-radius: 50%;
-  transition: all 0.3s ease-in-out;
-}
-.rate {
-  color: #2f2f2f99;
-  font-size: 10px;
-  font-weight: 400;
-  line-height: 10px;
-  text-align: left;
-}
-
-.number.current {
-  background: #9be1a0;
-  color: #fff;
-}
-
-.number.active,
-.number:hover {
   background: #323f47;
-  color: #9be1a0;
+  color: var(--Accent, #9be1a0);
 }
 
-@media (min-width: 768px) {
-  .element {
-    flex-basis: calc((100% - 336px) / 8);
-    gap: 4px;
-  }
-  .number {
-    font-size: 16px;
-    line-height: 24px;
-  }
-  .rate {
-    font-size: 12px;
-    line-height: 22.4px;
-  }
+.defaultBackground {
+  background-color: #fff;
 }
-@media (min-width: 1440px) {
-  .element {
-    flex-basis: calc((100% - 301px) / 8);
-  }
+
+.highlightedBackground {
+  background: rgba(50, 63, 71, 0.2);
+}
+
+.percentage {
+  color: rgba(47, 47, 47, 0.6);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.86;
 }
