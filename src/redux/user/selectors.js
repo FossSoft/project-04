@@ -21,3 +21,5 @@ export const selectUserMonthlyWaterData = state => state.user.monthlyWaterData;
 export const selectIsLoading = state => state.user.isLoading;
 
 export const selectUserError = state => state.user.error;
+
+export const selectTodayProgress = state => state.user.todayProgress;
