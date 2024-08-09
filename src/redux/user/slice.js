@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import {
   addWaterAmount,
   deleteWaterEntry,
+  fetchTodayProgress,
   fetchUserInfo,
   fetchWaterDataByDay,
   updateUserAvatar,
@@ -20,6 +21,7 @@ const initialState = {
   activityTime: '',
   dailyNorma: 0,
   waterData: [],
+  todayProgress: "",
   monthlyWaterData: {
     date: '',
     data: [],
@@ -139,7 +141,18 @@ const userSlice = createSlice({
       .addCase(deleteWaterEntry.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
-      });
+      })
+      .addCase(fetchTodayProgress.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchTodayProgress.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.todayProgress = action.payload.percentageConsumed;
+      })
+      .addCase(fetchTodayProgress.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error= action.payload;
+      })
   },
 });
 

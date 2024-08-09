@@ -80,6 +80,27 @@ export const updateUserAvatar = createAsyncThunk(
   }
 );
 
+export const fetchTodayProgress = createAsyncThunk("user/fetchTodayProggress",
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const token = getToken(state);
+    const today = new Date().toISOString().split('T')[0];
+
+    if (!token) {
+      return thunkAPI.rejectWithValue('Unable to get data');
+    }
+
+    try {
+      setAuthHeader(token);
+      const response = await apiClient.get(`/water/day/${today}`);
+
+      return response.data.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response?.data || error.message);
+    }
+  }
+)
+
 export const fetchWaterDataByDay = createAsyncThunk(
   'user/fetchWaterDataByDay',
   async (date, thunkAPI) => {

@@ -4,19 +4,28 @@ import Logo from 'components/Logo/Logo.jsx';
 import mobx1 from '../../image/x1/transparent_bottle_for_water1_mob.png';
 import mobx2 from '../../image/x2/transparent_bottle_for_water1_mob.png';
 import mobx3 from '../../image/x3/transparent_bottle_for_water1_mob.png';
-import tab1 from '../../image/x1/transparent_bottle_for_water1_tab.png'
-import tab2 from '../../image/x2/transparent_bottle_for_water1_tab.png'
-import tab3 from '../../image/x3/transparent_bottle_for_water1_tab.png'
-import desk1 from '../../image/x1/transparent_bottle_for_water1.png'
-import desk2 from '../../image/x2/transparent_bottle_for_water1.png'
-import desk3 from '../../image/x3/transparent_bottle_for_water1.png'
-
+import tab1 from '../../image/x1/transparent_bottle_for_water1_tab.png';
+import tab2 from '../../image/x2/transparent_bottle_for_water1_tab.png';
+import tab3 from '../../image/x3/transparent_bottle_for_water1_tab.png';
+import desk1 from '../../image/x1/transparent_bottle_for_water1.png';
+import desk2 from '../../image/x2/transparent_bottle_for_water1.png';
+import desk3 from '../../image/x3/transparent_bottle_for_water1.png';
+import DailyNorma from 'components/DailyNorma/DailyNorma.jsx';
+import WaterProgressBar from 'components/WaterProgressBar/WaterProgressBar.jsx';
 
 const WaterMainInfo = () => {
   return (
     <div className={styles.container}>
       <div className={styles.logo}>
         <Logo />
+      </div>
+
+      <div className={styles.dailyNormaContainer}>
+        <DailyNorma />
+      </div>
+
+      <div className={styles.progress}>
+        <WaterProgressBar />
       </div>
       <picture>
         <source
@@ -31,7 +40,7 @@ const WaterMainInfo = () => {
           srcSet={`${mobx2} 1x, ${mobx2} 2x, ${mobx3} 3x`}
           media="(min-width: 320px)"
         />
-        <img src={mobx1} alt="bottle" className={styles.bottleImg}/>
+        <img src={mobx1} alt="bottle" className={styles.bottleImg} />
       </picture>
 
       <div className={styles.addWaterBtn}>
