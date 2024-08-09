@@ -23,7 +23,6 @@ import {
   updateUserInfo,
 } from '../../redux/user/operations.js';
 
-import { closeModalSettings } from '../../redux/modal/slice.js';
 export const Setting = () => {
   const upload = useId();
   const womanRadio = useId();
@@ -43,17 +42,12 @@ export const Setting = () => {
   // Validation
 
   const validationSchema = Yup.object().shape({
-    // username: Yup.string().matches(
-    //   /^[А-Яа-яA-Za-z]+$/,
-    //   'Username must contain only letters'
-    // ),
-    username: Yup.string()
-      .test('Username must contain only letters', value => {
-        const isValidInitial = !value || /^[А-Яа-яA-Za-z]+$/.test(value);
+    username: Yup.string().test('Username must contain only letters', value => {
+      const isValidInitial = !value || /^[А-Яа-яA-Za-z]+$/.test(value);
 
-        return !value || isValidInitial;
-      })
-      .max(30, 'Too long'),
+      return !value || isValidInitial;
+    }),
+    // .max(30, 'Too long'),
     // .min(3, 'Too short')
 
     // .required('Username is required'),
@@ -69,22 +63,22 @@ export const Setting = () => {
       .required('Write your active sport time')
       .max(10, 'Too much time')
       .positive('Time must be a positive number'),
-    ownerResult: Yup.number().min(0.6, 'Too little').max(12, 'Too much'),
+    ownerResult: Yup.number().max(12, 'Too much'),
   });
   // Validation
   const dispatch = useDispatch();
 
-  const [file, setFile] = useState(null);
-  const [preview, setPreview] = useState(null);
+  // const [file, setFile] = useState(null);
+  // const [preview, setPreview] = useState(null);
 
   const handleFileChange = event => {
     const file = event.target.files[0];
 
-    setFile(file);
+    // setFile(file);
 
-    const fileURL = URL.createObjectURL(file);
+    // const fileURL = URL.createObjectURL(file);
 
-    setPreview(fileURL);
+    // setPreview(fileURL);
     const formData = new FormData();
 
     formData.append('avatar', file);
@@ -97,14 +91,14 @@ export const Setting = () => {
     watch,
     setValue,
     formState: { errors },
-    reset,
   } = useForm({
     resolver: yupResolver(validationSchema),
     mode: 'onChange',
   });
   useEffect(() => {
     setValue('gender', genderSelector);
-  }, [genderSelector, setValue]);
+    setValue('username', nameSelector);
+  }, [genderSelector, setValue, nameSelector]);
   const form = useRef();
 
   const weightValue = watch('weight');
@@ -144,7 +138,9 @@ export const Setting = () => {
         dailyNorma: data.ownerResult,
       })
     );
-    dispatch(closeModalSettings());
+
+    // dispatch(closeModalSettings());
+    toast.success('Successfully updated!');
   };
   return (
     <div className={css.probe}>
@@ -215,7 +211,7 @@ export const Setting = () => {
                 <input
                   type="text"
                   {...register('username')}
-                  defaultValue={nameSelector}
+                  // defaultValue={nameSelector || 'Write your name'}
                   id={nameInput}
                   placeholder="Enter your name"
                   style={{
@@ -348,7 +344,7 @@ export const Setting = () => {
         </button>
       </form>
 
-      <Toaster />
+      <Toaster position="center" />
     </div>
   );
 };
