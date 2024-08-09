@@ -23,7 +23,7 @@
 </svg>
 <!-- <svg id="icon-plus" width="40" height="40" viewBox="0 0 32 32"> -->
 <svg id="icon-plus"  viewBox="0 0 32 32">
-<!-- <path fill="none" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="1.1163" stroke="#000" d="M16 0.558c8.528 0 15.442 6.914 15.442 15.442s-6.914 15.442-15.442 15.442c-8.528 0-15.442-6.914-15.442-15.442s6.914-15.442 15.442-15.442z"></path> --> 
+<!-- <path fill="none" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="1.1163" stroke="#000" d="M16 0.558c8.528 0 15.442 6.914 15.442 15.442s-6.914 15.442-15.442 15.442c-8.528 0-15.442-6.914-15.442-15.442s6.914-15.442 15.442-15.442z"></path> -->
 <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="1.3395"  d="M16 10.286v11.429"></path>
 <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="1.3395"  d="M10.286 16h11.429"></path>
 </svg>
@@ -32,7 +32,7 @@
 <path d="M21.5 13.8215V29.1787" stroke="#323F47" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M13.8213 21.5H29.1784" stroke="#323F47" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
- <svg id="icon-untitled" width="22" height="22" viewBox="0 0 32 32" >
+ <svg id="icon-untitled" width="23" height="23" viewBox="0 0 32 32" >
 <path fill="#1e1e1e" d="M0 0h32v32h-32v-32z"></path>
 <path fill="#404040" d="M-7298.909-1802.182c0-1.6 1.309-2.909 2.909-2.909h11863.273c1.6 0 2.909 1.309 2.909 2.909v5364.364c0 1.6-1.309 2.909-2.909 2.909h-11863.273c-1.6 0-2.909-1.309-2.909-2.909v-5364.364z"></path>
 <path fill="#fff" opacity="0.1" d="M-7296-1803.636v0zM4568.727-1802.182v5364.364h2.909v-5364.364h-2.909zM4567.273 3563.636v0zM-7297.455 3562.182v-5364.364h-2.909v5364.364h2.909zM-7296 3563.636c-0.8 0-1.455-0.655-1.455-1.455h-2.909c0 2.415 1.949 4.364 4.364 4.364v-2.909zM4568.727 3562.182c0 0.8-0.655 1.455-1.455 1.455v2.909c2.415 0 4.364-1.949 4.364-4.364h-2.909zM4567.273-1803.636c0.8 0 1.455 0.655 1.455 1.455h2.909c0-2.415-1.949-4.364-4.364-4.364v2.909zM-7296-1806.545c-2.415 0-4.364 1.949-4.364 4.364h2.909c0-0.8 0.655-1.455 1.455-1.455v-2.909z"></path>
