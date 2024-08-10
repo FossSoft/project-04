@@ -1,3 +1,4 @@
+//src\components\MonthInfo\CalendarPagination\CalendarPagination.jsx
 import css from './CalendarPagination.module.css';
 import { format } from 'date-fns';
 
@@ -7,7 +8,10 @@ const CalendarPagination = ({
   onMonthHandler,
   onNextHandler,
 }) => {
-  const month = format(currentDate, 'MMMM');
+  console.log('Current Date:', currentDate); //проверка формата даты
+
+  const month = format(currentDate, 'MM');
+
   const capitalizedMonth = month.charAt(0).toUpperCase() + month.slice(1);
   const year = format(currentDate, 'yyyy');
 
