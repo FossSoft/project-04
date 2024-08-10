@@ -15,6 +15,7 @@ import {
   selectUserGender,
   selectUserActivityTime,
   selectUserWeight,
+  selectUserWaterToDrink,
 } from '../../redux/user/selectors.js';
 import { closeModalSettings } from '../../redux/modal/slice.js';
 import {
@@ -40,7 +41,7 @@ export const Setting = () => {
   const emeailSelector = useSelector(selectUserEmail);
   const isLoading = useSelector(selectIsLoading);
   const avatarSelector = useSelector(selectUserAvatar);
-
+  const userNorma = useSelector(selectUserWaterToDrink);
   // Validation
   const validationSchema = Yup.object().shape({
     username: Yup.string().test('Username must contain only letters', value => {
@@ -51,14 +52,24 @@ export const Setting = () => {
     weight: Yup.number()
       .required('Weight is required')
       .positive('Weight must be a positive number')
+
       .min(20, 'Weight must be at least 20kg')
       .max(300, 'Weight must be 300kg or less'),
     activeTime: Yup.number()
       .required('Write your active sport time')
       .max(10, 'Too much time')
-      .positive('Time must be a positive number'),
+      .positive('Time must be a positive number')
+      .transform((value, originalValue) =>
+        originalValue === '' ? null : value
+      )
+      .nullable(),
     ownerResult: Yup.number()
       .max(12, 'Too much')
+      .nullable()
+      .required('Write your result!')
+      .transform((value, originalValue) =>
+        originalValue === '' ? null : value
+      )
       .positive('Time must be a positive number'),
   });
   // Validation
@@ -84,12 +95,14 @@ export const Setting = () => {
     setValue('username', nameSelector);
     setValue('activeTime', activeTimeSelector);
     setValue('weight', weightSelector);
+    setValue('ownerResult', userNorma);
   }, [
     genderSelector,
     setValue,
     nameSelector,
     activeTimeSelector,
     weightSelector,
+    userNorma,
   ]);
   const form = useRef();
   const weightValue = watch('weight');
@@ -210,6 +223,7 @@ export const Setting = () => {
               <label htmlFor={emailInput}>
                 <p className={css.userEmail}>Email</p>
                 <input
+                  className={css.emailInput}
                   type="text"
                   id={emailInput}
                   defaultValue={emeailSelector}
