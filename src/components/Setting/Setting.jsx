@@ -13,6 +13,8 @@ import {
   selectUserEmail,
   selectUserName,
   selectUserGender,
+  selectUserActivityTime,
+  selectUserWeight,
 } from '../../redux/user/selectors.js';
 import { closeModalSettings } from '../../redux/modal/slice.js';
 import {
@@ -31,8 +33,10 @@ export const Setting = () => {
   const weightInput = useId();
   const timeInput = useId();
   const resultInput = useId();
+  const activeTimeSelector = useSelector(selectUserActivityTime);
   const nameSelector = useSelector(selectUserName);
   const genderSelector = useSelector(selectUserGender);
+  const weightSelector = useSelector(selectUserWeight);
   const emeailSelector = useSelector(selectUserEmail);
   const isLoading = useSelector(selectIsLoading);
   const avatarSelector = useSelector(selectUserAvatar);
@@ -78,7 +82,15 @@ export const Setting = () => {
   useEffect(() => {
     setValue('gender', genderSelector);
     setValue('username', nameSelector);
-  }, [genderSelector, setValue, nameSelector]);
+    setValue('activeTime', activeTimeSelector);
+    setValue('weight', weightSelector);
+  }, [
+    genderSelector,
+    setValue,
+    nameSelector,
+    activeTimeSelector,
+    weightSelector,
+  ]);
   const form = useRef();
   const weightValue = watch('weight');
   const timeValue = watch('activeTime');
@@ -247,8 +259,9 @@ export const Setting = () => {
                 <input
                   id={weightInput}
                   {...register('weight')}
+                  step="0.01"
+                  defaultValue="0"
                   type="number"
-                  defaultValue={0}
                   style={{
                     borderColor: errors.weight ? 'red' : 'initial',
                   }}
@@ -265,7 +278,8 @@ export const Setting = () => {
                 </p>
                 <input
                   type="number"
-                  defaultValue={0}
+                  defaultValue="0"
+                  step="0.01"
                   id={timeInput}
                   {...register('activeTime')}
                   style={{
@@ -293,6 +307,7 @@ export const Setting = () => {
                 <input
                   type="number"
                   id={resultInput}
+                  step="0.01"
                   className={css.userOwnerInput}
                   {...register('ownerResult')}
                   style={{
