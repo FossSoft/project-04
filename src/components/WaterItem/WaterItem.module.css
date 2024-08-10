@@ -1,33 +1,17 @@
-/* .itemWrapper {
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  min-width: 147px;
-  height: 74px;
-  padding: 18px 14px;
-  margin-bottom: 24px;
-  border-radius: 15px;
-  background: var(--white);
-  width: 100%;
-} */
-
 .itemWrapper {
   flex: 1 1 0%;
-  width: 147px;
+  min-width: 147px;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 10px;
-  /* height: 74px; */
+  height: 74px;
   padding: 18px 14px;
   margin-bottom: 24px;
   border-radius: 15px;
   background: var(--white);
   box-sizing: border-box;
 }
-
 
 
 .itemWrapper:last-child {
