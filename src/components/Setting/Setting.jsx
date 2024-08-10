@@ -51,14 +51,24 @@ export const Setting = () => {
     weight: Yup.number()
       .required('Weight is required')
       .positive('Weight must be a positive number')
+
       .min(20, 'Weight must be at least 20kg')
       .max(300, 'Weight must be 300kg or less'),
     activeTime: Yup.number()
       .required('Write your active sport time')
       .max(10, 'Too much time')
-      .positive('Time must be a positive number'),
+      .positive('Time must be a positive number')
+      .transform((value, originalValue) =>
+        originalValue === '' ? null : value
+      )
+      .nullable(),
     ownerResult: Yup.number()
       .max(12, 'Too much')
+      .nullable()
+      .required('Write your result!')
+      .transform((value, originalValue) =>
+        originalValue === '' ? null : value
+      )
       .positive('Time must be a positive number'),
   });
   // Validation
@@ -210,6 +220,7 @@ export const Setting = () => {
               <label htmlFor={emailInput}>
                 <p className={css.userEmail}>Email</p>
                 <input
+                  className={css.emailInput}
                   type="text"
                   id={emailInput}
                   defaultValue={emeailSelector}
