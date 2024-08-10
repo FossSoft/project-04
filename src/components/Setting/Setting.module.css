@@ -592,6 +592,9 @@ input[type='number']::-webkit-outer-spin-button {
   .weightTimeContainer label input {
     width: 400px;
   }
+  .weightTimeContainer {
+    margin-top: 0;
+  }
   .userOwnerInput {
     width: 400px;
     margin-bottom: 0;

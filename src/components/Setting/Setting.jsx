@@ -202,7 +202,7 @@ export const Setting = () => {
                   }}
                 />
               </label>
-              <div style={{ height: 40 }}>
+              <div>
                 {errors.username && (
                   <p className={css.error}>{errors.username.message}</p>
                 )}
