@@ -4,7 +4,6 @@ import Calendar from '../MonthInfo/Calendar/Calendar.jsx';
 import CalendarPagination from '../MonthInfo/CalendarPagination/CalendarPagination.jsx';
 import CalendarTitle from '../MonthInfo/CalendarTitle/CalendarTitle.jsx';
 import CalendarToggle from './CalendarToggle/CalendarToggle.jsx';
-
 import Loader from '../MonthInfo/Loader/Loader.jsx';
 import css from './MonthInfo.module.css';
 import { upMonth, downMonth, setDate } from '../../redux/water/calendar/slice';
@@ -22,9 +21,8 @@ function MonthInfo() {
   const dispatch = useDispatch();
   const [isActive, setIsActive] = useState(true);
   const currentMonth = useSelector(selectMonth); // Строка в формате 'YYYY-MM'
-  const monthArray = useSelector(selectWaterData);
-
-  const selectedDate = useSelector(selectDate);
+  const monthArray = useSelector(selectWaterData); // Данные о потреблении воды
+  const selectedDate = useSelector(selectDate); // Дата в формате 'YYYY-MM-DD'
   const isLoading = useSelector(selectIsLoading);
   const isError = useSelector(selectError);
 
@@ -42,8 +40,26 @@ function MonthInfo() {
   };
 
   const onDateSelect = date => {
-    dispatch(setDate(format(date, 'yyyy-MM-dd')));
+    const formattedDate = format(date, 'yyyy-MM-dd');
+    dispatch(setDate(formattedDate));
   };
+
+  // Преобразование даты в формат YYYY-MM-DD
+  const formatDate = dateString => {
+    const [month, day] = dateString.split(', ').map(part => part.trim());
+    const monthIndex = new Date(Date.parse(month + ' 1, 2012')).getMonth(); // Получаем индекс месяца
+    const year = new Date().getFullYear(); // Текущий год
+
+    // Создаем объект Date и форматируем в YYYY-MM-DD
+    const dateObject = new Date(year, monthIndex, day);
+    return format(dateObject, 'yyyy-MM-dd');
+  };
+
+  // Преобразование всех дат в monthArray
+  const formattedMonthArray = monthArray.map(day => ({
+    ...day,
+    date: formatDate(day.date),
+  }));
 
   useEffect(() => {
     dispatch(fetchWaterData(currentMonth));
@@ -64,13 +80,13 @@ function MonthInfo() {
       </div>
       {isError && (
         <div className={css.errorMessage}>
-          <p> An error occurred</p>
+          <p>An error occurred</p>
         </div>
       )}
       {isLoading && <Loader />}
 
       <Calendar
-        monthArray={monthArray}
+        monthArray={formattedMonthArray}
         date={selectedDate}
         onClick={onDateSelect}
       />

@@ -18,7 +18,6 @@ import { authReducer } from './auth/slice';
 import useReducer from './user/slice.js';
 import popoverReducer from '../redux/popover/slice';
 import modalReducer from '../redux/modal/slice';
-import waterReducer from './water/slice';
 import waterReducer from '../redux/water/slice.js';
 import waterMonthReducer from "../redux/water/calendar/slice.js"
 import { setupAxiosInterceptors } from "./auth/operations";
