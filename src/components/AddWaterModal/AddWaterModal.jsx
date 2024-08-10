@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
-import css from './AddWaterModal.module.css'; // Переконайтеся, що цей шлях правильний і CSS підключається
-import sprite from '../../image/sprite/sprite.svg'; // Актуальний шлях до спрайту
-import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import css from './AddWaterModal.module.css';
+import sprite from '../../image/sprite/sprite.svg';
 import { addWaterAmount } from '../../redux/water/operations';
+import { selectWaterDate } from '../../redux/water/selectors';
 
 export const WaterModal = ({ onClose }) => {
+  const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(50);
   const timeNow = new Date().toTimeString().slice(0, 5);
-  const dispatch = useDispatch();
+  const [time, setTime] = useState(timeNow);
+  const waterDate = useSelector(selectWaterDate);
+
   const handleDecrease = () => {
     setQuantity(prevValue => (prevValue > 50 ? prevValue - 50 : prevValue));
   };
@@ -16,12 +20,38 @@ export const WaterModal = ({ onClose }) => {
     setQuantity(prevValue => (prevValue < 1500 ? prevValue + 50 : prevValue));
   };
 
-  const handleChange = e => {
-    setQuantity(Number(e.target.value));
+  const handleChangeQuantity = e => {
+    const value = Number(e.target.value);
+    if (value >= 50 && value <= 1500) {
+      setQuantity(value);
+    }
   };
 
-  const handleSaveWater = () => {
-    dispatch(addWaterAmount({}));
+  const handleChangeTime = e => {
+    setTime(e.target.value);
+  };
+
+  const handleSaveWater = async () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return;
+    }
+
+    const waterData = {
+      amountOfWater: quantity,
+      time,
+      date: waterDate,
+    };
+
+    try {
+      const result = await dispatch(addWaterAmount([waterData, token])).unwrap();
+
+      if (typeof onClose === 'function') {
+        onClose();
+      }
+    } catch (error) {
+      //  місце для обробки помилок, якщо потрібно
+    }
   };
 
   return (
@@ -29,10 +59,7 @@ export const WaterModal = ({ onClose }) => {
       <h1 className={css.addWaterTitle}>Add Water</h1>
 
       <div>
-        <h2
-          style={{ marginBottom: '20px' }}
-          className={css['value-text-title']}
-        >
+        <h2 style={{ marginBottom: '20px' }} className={css['value-text-title']}>
           Choose a value:
         </h2>
         <p className={css['value-text']}>Amount of water:</p>
@@ -51,7 +78,6 @@ export const WaterModal = ({ onClose }) => {
             className={css.value}
             value={`${quantity}ml`}
             readOnly
-            onChange={handleChange}
             style={{
               WebkitAppearance: 'none',
               MozAppearance: 'textfield',
@@ -71,7 +97,8 @@ export const WaterModal = ({ onClose }) => {
         <input
           type="time"
           className={css['water-input']}
-          defaultValue={timeNow}
+          value={time}
+          onChange={handleChangeTime}
         />
       </div>
 
@@ -82,9 +109,9 @@ export const WaterModal = ({ onClose }) => {
         <input
           className={css['water-input']}
           placeholder="50"
-          type="text"
+          type="number"
           value={quantity}
-          onChange={handleChange}
+          onChange={handleChangeQuantity}
         />
       </div>
 

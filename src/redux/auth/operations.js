@@ -17,6 +17,11 @@ const clearAuthHeader = () => {
   apiClient.defaults.headers.common.Authorization = '';
 }
 
+const saveToken = (token) => {
+  localStorage.setItem('token', token);
+  console.log('Token saved:', localStorage.getItem('token'));
+};
+
 export const setupAxiosInterceptors = (store) => {
   apiClient.interceptors.request.use(
     (config) => {
@@ -57,8 +62,11 @@ export const register = createAsyncThunk(
   async (userData, thunkAPI) => {
     try {
       const response = await apiClient.post('/auth/register', userData);
-      const {accessToken} = response.data;
+      const { accessToken } = response.data;
       setAuthHeader(accessToken);
+      // тут дописала зберігання токену
+      saveToken(accessToken);
+
       thunkAPI.dispatch(setCredentials(response.data));
       return response.data;
     } catch (error) {
@@ -74,6 +82,8 @@ export const logIn = createAsyncThunk(
       const { data } = await apiClient.post('/auth/login', credentials);
       const { accessToken } = data.data;
       setAuthHeader(accessToken);
+      // тут дописала зберігання токену
+      saveToken(accessToken);
       thunkAPI.dispatch(setCredentials(data.data));
       return data.data;
     } catch (error) {
@@ -84,15 +94,15 @@ export const logIn = createAsyncThunk(
 
 export const refreshToken = createAsyncThunk(
   'auth/refresh',
-  async (_, thunkAPI) => {            
-   try {
-    const { data }  = await apiClient.get('/user/refresh');
-    thunkAPI.dispatch(setCredentials(data.data));
-    console.log(data.data)
-    return data;
-   } catch (error) {
-    return thunkAPI.rejectWithValue(error.response?.data || error.message);
-   }
+  async (_, thunkAPI) => {
+    try {
+      const { data } = await apiClient.get('/user/refresh');
+      thunkAPI.dispatch(setCredentials(data.data));
+      console.log(data.data)
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response?.data || error.message);
+    }
   }
 );
 

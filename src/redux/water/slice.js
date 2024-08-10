@@ -57,9 +57,16 @@ const waterSlice = createSlice({
       })
       .addCase(fetchWaterDataByDay.rejected, setError)
       .addCase(addWaterAmount.pending, startLoading)
+
       .addCase(addWaterAmount.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.waterData.push(action.payload);
+        if (!action.payload.id) {
+          return;
+        }
+        const exists = state.waterData.some(item => item.id === action.payload.id);
+        if (!exists) {
+          state.waterData.push(action.payload);
+        }
       })
       .addCase(addWaterAmount.rejected, setError)
       .addCase(updateWaterAmount.pending, startLoading)

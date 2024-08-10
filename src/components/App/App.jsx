@@ -17,7 +17,7 @@ export default function App() {
 
   useEffect(() => {
     if (isLoggedIn) {
-      dispatch(fetchUserInfo()); 
+      dispatch(fetchUserInfo());
     }
   }, [dispatch, isLoggedIn]);
 
@@ -25,13 +25,13 @@ export default function App() {
     <b>Refreshing user</b>
   ) : (
     <Routes>
-        <Route path="/" element={<HomePage />} />
-          <Route
-             path="/signup"
+      <Route path="/" element={<HomePage />} />
+      <Route
+        path="/signup"
         element={
           <RestrictedRoute redirectTo="/tracker" component={<SignUpPage />} />
-            }
-          />
+        }
+      />
       <Route
         path="/signin"
         element={
@@ -47,5 +47,6 @@ export default function App() {
       />
       <Route path="/tracker" element={<TrackerPage />}></Route>
     </Routes>
+
   );
 }

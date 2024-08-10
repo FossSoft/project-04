@@ -24,13 +24,13 @@ const authSlice = createSlice({
       state.accessToken = null;
       state.isLoggedIn = false;
       state.error = null;
-    },  
+    },
   },
   extraReducers: builder => {
     builder
       .addCase(logIn.fulfilled, (state, action) => {
         state.user = action.payload.user;
-        state.accessToken= action.payload.accessToken;
+        state.accessToken = action.payload.accessToken;
 
         state.isLoggedIn = true;
         state.isRefreshing = false;
@@ -38,7 +38,7 @@ const authSlice = createSlice({
       .addCase(logIn.pending, state => {
         state.isRefreshing = true;
       })
-      .addCase(logIn.rejected, (state, action )=> {
+      .addCase(logIn.rejected, (state, action) => {
         state.error = action.error;
         state.isRefreshing = false;
       })
@@ -46,7 +46,7 @@ const authSlice = createSlice({
 
         console.log('Register Success:', action.payload);
         state.user = action.payload.user;
-        state.accessToken= action.payload.accessToken;
+        state.accessToken = action.payload.accessToken;
         state.isLoggedIn = true;
         state.error = false;
       })
