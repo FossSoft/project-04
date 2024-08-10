@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+// import clsx from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
 import css from './UserBarPopover.module.css';
 import './UserBarPopover.css';
@@ -42,45 +42,38 @@ export default function UserBarPopover({ style }) {
 
   return (
     <div className={showPopover ? 'popover active' : 'popover'} style={style}>
-      <div className={css.container}>
-        <svg className={clsx(css.icon, css.darkblue)}>
+      <button
+        className={css.btnDarkblue}
+        onClick={handleOpenModalSettings}
+        type="button"
+      >
+        <svg className={css.iconDarkblue}>
           <use href={`${sprite}#icon-settings`}></use>
         </svg>
-        <button
-          className={clsx(css.btn, css.darkblue)}
-          onClick={handleOpenModalSettings}
-          type="button"
-        >
-          Settigs
-        </button>
+        Settigs
+      </button>
 
-        <Modal
-          isOpen={isOpenModalSettings}
-          onRequestClose={handleCloseModalSettings}
-        >
-          <Setting />
-        </Modal>
-      </div>
+      <Modal
+        isOpen={isOpenModalSettings}
+        onRequestClose={handleCloseModalSettings}
+      >
+        <Setting />
+      </Modal>
 
-      <div className={css.container}>
-        <svg className={clsx(css.icon, css.gray)}>
+      <button
+        className={css.btnGray}
+        onClick={handleOpenModalLogout}
+        type="button"
+      >
+        <svg className={css.iconGray}>
           <use href={`${sprite}#icon-log-out`}></use>
         </svg>
-        <button
-          className={clsx(css.btn, css.gray)}
-          onClick={handleOpenModalLogout}
-          type="button"
-        >
-          Log out
-        </button>
+        Log out
+      </button>
 
-        <Modal
-          isOpen={isOpenModalLogout}
-          onRequestClose={handleCloseModalLogout}
-        >
-          <LogOutModal />
-        </Modal>
-      </div>
+      <Modal isOpen={isOpenModalLogout} onRequestClose={handleCloseModalLogout}>
+        <LogOutModal />
+      </Modal>
     </div>
   );
 }
