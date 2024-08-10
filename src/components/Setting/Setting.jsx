@@ -1,27 +1,29 @@
 import css from './Setting.module.css';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import avatar from '../../image/avatar.jpg';
 import * as Yup from 'yup';
 import sprite from '../../image/sprite/sprite.svg';
-
 import { useEffect, useId, useRef, useState } from 'react';
-
+import { selectIsLoading } from '../../redux/user/selectors.js';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectUserAvatar,
   selectUserEmail,
   selectUserName,
   selectUserGender,
+  selectUserActivityTime,
+  selectUserWeight,
+  selectUserWaterToDrink,
 } from '../../redux/user/selectors.js';
-
+import { closeModalSettings } from '../../redux/modal/slice.js';
 import {
   fetchUserInfo,
   updateUserAvatar,
   updateUserInfo,
 } from '../../redux/user/operations.js';
+import { Spiner } from 'components/Spiner/Spiner.jsx';
 
 export const Setting = () => {
   const upload = useId();
@@ -32,59 +34,52 @@ export const Setting = () => {
   const weightInput = useId();
   const timeInput = useId();
   const resultInput = useId();
-  //
+  const activeTimeSelector = useSelector(selectUserActivityTime);
   const nameSelector = useSelector(selectUserName);
   const genderSelector = useSelector(selectUserGender);
+  const weightSelector = useSelector(selectUserWeight);
   const emeailSelector = useSelector(selectUserEmail);
-
+  const isLoading = useSelector(selectIsLoading);
   const avatarSelector = useSelector(selectUserAvatar);
-
+  const userNorma = useSelector(selectUserWaterToDrink);
   // Validation
-
   const validationSchema = Yup.object().shape({
     username: Yup.string().test('Username must contain only letters', value => {
       const isValidInitial = !value || /^[А-Яа-яA-Za-z]+$/.test(value);
 
       return !value || isValidInitial;
     }),
-    // .max(30, 'Too long'),
-    // .min(3, 'Too short')
-
-    // .required('Username is required'),
-
-    // .required('Name is required'),
-    // userEmail: Yup.string().email('Must be a valid email!').required('Required'),
     weight: Yup.number()
       .required('Weight is required')
       .positive('Weight must be a positive number')
+
       .min(20, 'Weight must be at least 20kg')
       .max(300, 'Weight must be 300kg or less'),
     activeTime: Yup.number()
       .required('Write your active sport time')
       .max(10, 'Too much time')
+      .positive('Time must be a positive number')
+      .transform((value, originalValue) =>
+        originalValue === '' ? null : value
+      )
+      .nullable(),
+    ownerResult: Yup.number()
+      .max(12, 'Too much')
+      .nullable()
+      .required('Write your result!')
+      .transform((value, originalValue) =>
+        originalValue === '' ? null : value
+      )
       .positive('Time must be a positive number'),
-    ownerResult: Yup.number().max(12, 'Too much'),
   });
   // Validation
   const dispatch = useDispatch();
-
-  // const [file, setFile] = useState(null);
-  // const [preview, setPreview] = useState(null);
-
   const handleFileChange = event => {
     const file = event.target.files[0];
-
-    // setFile(file);
-
-    // const fileURL = URL.createObjectURL(file);
-
-    // setPreview(fileURL);
     const formData = new FormData();
-
     formData.append('avatar', file);
     dispatch(updateUserAvatar(formData));
   };
-  //
   const {
     register,
     handleSubmit,
@@ -98,9 +93,18 @@ export const Setting = () => {
   useEffect(() => {
     setValue('gender', genderSelector);
     setValue('username', nameSelector);
-  }, [genderSelector, setValue, nameSelector]);
+    setValue('activeTime', activeTimeSelector);
+    setValue('weight', weightSelector);
+    setValue('ownerResult', userNorma);
+  }, [
+    genderSelector,
+    setValue,
+    nameSelector,
+    activeTimeSelector,
+    weightSelector,
+    userNorma,
+  ]);
   const form = useRef();
-
   const weightValue = watch('weight');
   const timeValue = watch('activeTime');
   const [result, setResult] = useState(0);
@@ -123,11 +127,6 @@ export const Setting = () => {
   }, [dispatch]);
 
   const onSubmit = data => {
-    // if (emeailSelector !== data.userEmail) {
-    //   toast.error('Write correctly amail');
-    //   return;
-    // }
-
     dispatch(
       updateUserInfo({
         name: data.username,
@@ -138,9 +137,8 @@ export const Setting = () => {
         dailyNorma: data.ownerResult,
       })
     );
-
-    // dispatch(closeModalSettings());
-    toast.success('Successfully updated!');
+    toast.success('Successfully updated!', { duration: 1000 });
+    dispatch(closeModalSettings());
   };
   return (
     <div className={css.probe}>
@@ -193,7 +191,6 @@ export const Setting = () => {
                     type="radio"
                     {...register('gender')}
                     value="man"
-                    // defaultChecked={genderSelector === 'man'}
                     onChange={() => {
                       setValue('gender', 'man');
                     }}
@@ -211,7 +208,6 @@ export const Setting = () => {
                 <input
                   type="text"
                   {...register('username')}
-                  // defaultValue={nameSelector || 'Write your name'}
                   id={nameInput}
                   placeholder="Enter your name"
                   style={{
@@ -219,7 +215,7 @@ export const Setting = () => {
                   }}
                 />
               </label>
-              <div style={{ height: 40 }}>
+              <div>
                 {errors.username && (
                   <p className={css.error}>{errors.username.message}</p>
                 )}
@@ -227,7 +223,7 @@ export const Setting = () => {
               <label htmlFor={emailInput}>
                 <p className={css.userEmail}>Email</p>
                 <input
-                  // ref={email}
+                  className={css.emailInput}
                   type="text"
                   id={emailInput}
                   defaultValue={emeailSelector}
@@ -277,8 +273,9 @@ export const Setting = () => {
                 <input
                   id={weightInput}
                   {...register('weight')}
+                  step="0.01"
+                  defaultValue="0"
                   type="number"
-                  defaultValue={0}
                   style={{
                     borderColor: errors.weight ? 'red' : 'initial',
                   }}
@@ -295,7 +292,8 @@ export const Setting = () => {
                 </p>
                 <input
                   type="number"
-                  defaultValue={0}
+                  defaultValue="0"
+                  step="0.01"
                   id={timeInput}
                   {...register('activeTime')}
                   style={{
@@ -323,6 +321,7 @@ export const Setting = () => {
                 <input
                   type="number"
                   id={resultInput}
+                  step="0.01"
                   className={css.userOwnerInput}
                   {...register('ownerResult')}
                   style={{
@@ -343,8 +342,11 @@ export const Setting = () => {
           Save
         </button>
       </form>
-
-      <Toaster position="center" />
+      {isLoading && (
+        <div className={css.loaderBg}>
+          <Spiner addClass={css.dataLoader} />
+        </div>
+      )}
     </div>
   );
 };

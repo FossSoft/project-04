@@ -52,7 +52,7 @@ const WaterItem = ({ item }) => {
         <DeleteWaterModal item={item} onDelete={handleDelete} onClose={closeDeleteModal} />
       </Modal>
       <Modal isOpen={isEditModalOpen} onRequestClose={closeEditModal}>
-        <EditWaterModal onClose={closeEditModal} />
+        <EditWaterModal item={item} onClose={closeEditModal} />
       </Modal>
     </div>
   );

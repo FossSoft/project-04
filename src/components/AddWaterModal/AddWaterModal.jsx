@@ -1,17 +1,17 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import css from './AddWaterModal.module.css'; // Переконайтеся, що цей шлях правильний і CSS підключається
+import sprite from '../../image/sprite/sprite.svg'; // Актуальний шлях до спрайту
 import { useDispatch, useSelector } from 'react-redux';
-import css from './AddWaterModal.module.css';
-import sprite from '../../image/sprite/sprite.svg';
 import { addWaterAmount } from '../../redux/water/operations';
 import { selectWaterDate } from '../../redux/water/selectors';
+import { addWater } from '../../redux/water/slice';
 
-export const WaterModal = ({ onClose }) => {
+export const AddWaterModal = ({ onCancel }) => {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(50);
   const timeNow = new Date().toTimeString().slice(0, 5);
   const [time, setTime] = useState(timeNow);
   const waterDate = useSelector(selectWaterDate);
-
   const handleDecrease = () => {
     setQuantity(prevValue => (prevValue > 50 ? prevValue - 50 : prevValue));
   };
@@ -20,17 +20,44 @@ export const WaterModal = ({ onClose }) => {
     setQuantity(prevValue => (prevValue < 1500 ? prevValue + 50 : prevValue));
   };
 
+  // const handleChangeQuantity = e => {
+  //   let value = e.target.value;
+  //   if (isNaN(value) || value.trim() === '') {
+  //     return;
+  //   }
+
+  //   value = Number(value);
+  //   if (value < 0) {
+  //     value = 0;
+  //   } else if (value > 1500) {
+  //     value = 1500;
+  //   }
+
+  //   setQuantity(value);
+  // };
   const handleChangeQuantity = e => {
-    const value = Number(e.target.value);
-    if (value >= 50 && value <= 1500) {
+    let value = e.target.value;
+
+    // Дозволяємо вводити лише цифри, обмежуємо довжину до 4 символів
+    if (/^\d{0,4}$/.test(value)) {
       setQuantity(value);
     }
+  };
+
+  const handleBlurQuantity = () => {
+    let numericValue = Number(quantity);
+
+    // Обмежуємо значення діапазоном від 0 до 1500
+    if (numericValue > 1500) {
+      numericValue = 1500;
+    }
+
+    setQuantity(numericValue);
   };
 
   const handleChangeTime = e => {
     setTime(e.target.value);
   };
-
   const handleSaveWater = async () => {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -42,16 +69,9 @@ export const WaterModal = ({ onClose }) => {
       time,
       date: waterDate,
     };
-
-    try {
-      const result = await dispatch(addWaterAmount([waterData, token])).unwrap();
-
-      if (typeof onClose === 'function') {
-        onClose();
-      }
-    } catch (error) {
-      //  місце для обробки помилок, якщо потрібно
-    }
+    await dispatch(addWaterAmount([waterData, token])).unwrap();
+    dispatch(addWater(waterData));
+    onCancel();
   };
 
   return (
@@ -78,6 +98,7 @@ export const WaterModal = ({ onClose }) => {
             className={css.value}
             value={`${quantity}ml`}
             readOnly
+            onChange={handleChangeQuantity}
             style={{
               WebkitAppearance: 'none',
               MozAppearance: 'textfield',
@@ -97,7 +118,7 @@ export const WaterModal = ({ onClose }) => {
         <input
           type="time"
           className={css['water-input']}
-          value={time}
+          defaultValue={timeNow}
           onChange={handleChangeTime}
         />
       </div>
@@ -112,11 +133,12 @@ export const WaterModal = ({ onClose }) => {
           type="number"
           value={quantity}
           onChange={handleChangeQuantity}
+          onBlur={handleBlurQuantity}
         />
       </div>
 
       <button
-        type="button"
+        type="submit"
         onClick={handleSaveWater}
         className={css['btn-save']}
       >

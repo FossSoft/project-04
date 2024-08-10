@@ -28,7 +28,6 @@ const AddWaterBtn = ({ isPrimary = false }) => {
         </svg>
         <span>Add water</span>
       </button>
-
       <Modal isOpen={isModalOpen} onRequestClose={closeModal}>
         <WaterModal onSubmit={handleAddWater} onCancel={closeModal} />
       </Modal>
