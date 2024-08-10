@@ -1,30 +1,32 @@
 //src\components\MonthInfo\CalendarPagination\CalendarPagination.jsx
+import { addMonths, subMonths, format } from 'date-fns';
+import { useState } from 'react';
 import css from './CalendarPagination.module.css';
-import { format } from 'date-fns';
 
-const CalendarPagination = ({
-  currentDate,
-  onPrevHandler,
-  onMonthHandler,
-  onNextHandler,
-}) => {
-  console.log('Current Date:', currentDate); //проверка формата даты
+const CalendarPagination = ({ currentDate, onMonthHandler }) => {
+  const [date, setDate] = useState(currentDate);
 
-  const month = format(currentDate, 'MM');
+  const handlePrev = () => {
+    setDate(prevDate => subMonths(prevDate, 1));
+  };
 
-  const capitalizedMonth = month.charAt(0).toUpperCase() + month.slice(1);
-  const year = format(currentDate, 'yyyy');
+  const handleNext = () => {
+    setDate(prevDate => addMonths(prevDate, 1));
+  };
+
+  const month = format(date, 'MMMM');
+  const year = format(date, 'yyyy');
 
   return (
     <div className={css.wrapperButtons}>
-      <button className={css.chevronButton} onClick={onPrevHandler}>
+      <button className={css.chevronButton} onClick={handlePrev}>
         &lt;
       </button>
       <button
         onClick={onMonthHandler}
         className={css.monthButton}
-      >{`${capitalizedMonth}, ${year}`}</button>
-      <button className={css.chevronButton} onClick={onNextHandler}>
+      >{`${month}, ${year}`}</button>
+      <button className={css.chevronButton} onClick={handleNext}>
         &gt;
       </button>
     </div>
