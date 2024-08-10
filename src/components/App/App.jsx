@@ -12,33 +12,39 @@ import SignUpPage from 'pages/SignUpPage/SignUpPage';
 import { Setting } from 'components/Setting/Setting.jsx';
 
 export default function App() {
-  const dispatch = useDispatch();
-  const { isRefreshing } = useAuth();
+  // const dispatch = useDispatch();
+  // const { isRefreshing } = useAuth();
 
-  useEffect(() => {
-    dispatch(refreshToken());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(refreshToken());
+  // }, [dispatch]);
 
-  return isRefreshing ? (
-    <b>Refreshing user</b>
-  ) : (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route
-        path="/signin"
-        element={
-          <RestrictedRoute redirectTo="/tracker" component={<SignInPage />} />
-        }
-      />
-      <Route path="setting" element={<Setting />} />
-      <Route
-        path="/tracker"
-        element={
-          <PrivateRoute redirectTo="/signin" component={<TrackerPage />} />
-        }
-      />
-      <Route path="/signup" element={<SignUpPage />}></Route>
-      <Route path="/tracker" element={<TrackerPage />}></Route>
-    </Routes>
+  // return isRefreshing ? (
+  //   <b>Refreshing user</b>
+  // ) : (
+
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/signin"
+          element={
+            <RestrictedRoute redirectTo="/tracker" component={<SignInPage />} />
+          }
+        />
+        <Route path="setting" element={<Setting />} />
+        <Route
+          path="/tracker"
+          element={
+            <PrivateRoute redirectTo="/signin" component={<TrackerPage />} />
+          }
+        />
+        <Route path="/signup" element={<SignUpPage />}></Route>
+        <Route path="/tracker" element={<TrackerPage />}></Route>
+      </Routes>
+    </>
   );
+
+  // );
 }
