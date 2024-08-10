@@ -26,19 +26,6 @@ export const addWaterAmount = createAsyncThunk(
   }
 );
 
-export const updateWaterAmount = createAsyncThunk(
-  'water/updateWaterAmount',
-  async ([id, waterItem, token], thunkAPI) => {
-    try {
-      setAuthHeader(token);
-      const response = await apiClient.post('/water', waterData);
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.response?.data || error.message);
-    }
-  }
-);
-
 export const deleteWaterEntry = createAsyncThunk(
   'water/deleteWaterEntry',
   async ({ id, token }, thunkAPI) => {

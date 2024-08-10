@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import Modal from 'components/Modal/Modal';
-import { WaterModal } from 'components/AddWaterModal/AddWaterModal.jsx';
+import { AddWaterModal } from 'components/AddWaterModal/AddWaterModal.jsx';
 import { useAddWater } from '../../hooks/useWater';
 import css from './AddWaterBtn.module.css';
 import sprite from '../../image/sprite/sprite.svg';
@@ -29,7 +29,7 @@ const AddWaterBtn = ({ isPrimary = false }) => {
         <span>Add water</span>
       </button>
       <Modal isOpen={isModalOpen} onRequestClose={closeModal}>
-        <WaterModal onSubmit={handleAddWater} onCancel={closeModal} />
+        <AddWaterModal onSubmit={handleAddWater} onCancel={closeModal} />
       </Modal>
     </>
   );
