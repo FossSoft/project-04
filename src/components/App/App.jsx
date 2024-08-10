@@ -14,7 +14,6 @@ import { Setting } from 'components/Setting/Setting.jsx';
 export default function App() {
   // const dispatch = useDispatch();
   // const { isRefreshing } = useAuth();
-
   // useEffect(() => {
   //   dispatch(refreshToken());
   // }, [dispatch]);

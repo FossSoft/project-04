@@ -22,6 +22,11 @@ const saveToken = token => {
   console.log('Token saved:', localStorage.getItem('token'));
 };
 
+const saveToken = (token) => {
+  localStorage.setItem('token', token);
+  console.log('Token saved:', localStorage.getItem('token'));
+};
+
 export const setupAxiosInterceptors = (store) => {
   apiClient.interceptors.response.use(
     (response) => response,

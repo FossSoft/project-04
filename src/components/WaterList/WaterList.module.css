@@ -1,24 +1,33 @@
 .textNoWater {
+
   padding-top: 20px;
   padding-bottom: 20px;
   font-weight: 700;
   font-size: 14px;
   line-height: 1.29;
+
   max-width: 240px;
   margin: 0 auto;
   text-align: center;
+
+  width: 100%;
+  box-sizing: border-box;
 }
 
 
 .list {
+  width: 100%;
   display: flex;
   justify-content: flex-start;
   flex-wrap: nowrap;
-  overflow-x: overlay;
+  overflow-x: auto;
   align-items: center;
   gap: 8px;
   margin-bottom: 24px;
+  box-sizing: border-box;
+  scroll-snap-type: x mandatory;
 }
+
 
 .list::-webkit-scrollbar {
   height: 8px;
@@ -45,6 +54,7 @@
 
 .list::-webkit-scrollbar-thumb:vertical {
   display: none;
+
 }
 
 @media (min-width: 768px) {

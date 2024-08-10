@@ -28,7 +28,7 @@ const authSlice = createSlice({
     builder
       .addCase(logIn.fulfilled, (state, action) => {
         state.user = action.payload.user;
-        state.accessToken= action.payload.accessToken;
+        state.accessToken = action.payload.accessToken;
 
         state.isLoggedIn = true;
         state.isRefreshing = false;
