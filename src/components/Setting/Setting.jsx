@@ -15,6 +15,7 @@ import {
   selectUserGender,
   selectUserActivityTime,
   selectUserWeight,
+  selectUserWaterToDrink,
 } from '../../redux/user/selectors.js';
 import { closeModalSettings } from '../../redux/modal/slice.js';
 import {
@@ -40,7 +41,7 @@ export const Setting = () => {
   const emeailSelector = useSelector(selectUserEmail);
   const isLoading = useSelector(selectIsLoading);
   const avatarSelector = useSelector(selectUserAvatar);
-
+  const userNorma = useSelector(selectUserWaterToDrink);
   // Validation
   const validationSchema = Yup.object().shape({
     username: Yup.string().test('Username must contain only letters', value => {
@@ -94,12 +95,14 @@ export const Setting = () => {
     setValue('username', nameSelector);
     setValue('activeTime', activeTimeSelector);
     setValue('weight', weightSelector);
+    setValue('ownerResult', userNorma);
   }, [
     genderSelector,
     setValue,
     nameSelector,
     activeTimeSelector,
     weightSelector,
+    userNorma,
   ]);
   const form = useRef();
   const weightValue = watch('weight');
