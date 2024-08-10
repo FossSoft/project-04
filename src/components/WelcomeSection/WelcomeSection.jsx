@@ -8,7 +8,9 @@ export default function WelcomeSection() {
 
   return (
     <section className={css.section}>
-      <Logo />
+      <div className={css.logo} >
+        <Logo />
+        </div>
       <div className={css.text}>
         <h2 className={css.subtitle}>Record daily water intake and track</h2>
         <h1 className={css.title}>Water consumption tracker</h1>
