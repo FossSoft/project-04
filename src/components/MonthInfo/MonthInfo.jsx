@@ -10,18 +10,23 @@ import Loader from '../MonthInfo/Loader/Loader.jsx';
 import css from './MonthInfo.module.css';
 import { upMonth, downMonth, setDate } from '../../redux/water/calendar/slice';
 import {
-  selectWaterData,
+  // selectWaterData,
   selectMonth,
   selectDate,
   selectIsLoading,
   selectError,
+  selectWaterData,
 } from '../../redux/water/calendar/selectors';
+import { useEffect } from 'react';
+import { fetchWaterData } from '../../redux/water/calendar/operations.js';
 
 function MonthInfo() {
   const dispatch = useDispatch();
 
   const currentMonth = useSelector(selectMonth); // Строка в формате 'YYYY-MM'
   const monthArray = useSelector(selectWaterData);
+
+  console.log(monthArray, "from month info")
 
   const selectedDate = useSelector(selectDate);
   const isLoading = useSelector(selectIsLoading);
@@ -44,6 +49,10 @@ function MonthInfo() {
     dispatch(setDate(format(date, 'yyyy-MM-dd')));
   };
 
+  useEffect(() => {
+    dispatch(fetchWaterData(currentMonth));
+  }, [dispatch, currentMonth])
+
   return (
     <div className={css.container}>
       <div className={css.wrapperContainer}>
@@ -65,7 +74,7 @@ function MonthInfo() {
       )}
       {isLoading && <Loader />}
 
-      <Calendar month={monthArray} date={selectedDate} onClick={onDateSelect} />
+      <Calendar monthArray={monthArray} date={selectedDate} onClick={onDateSelect} />
     </div>
   );
 }
