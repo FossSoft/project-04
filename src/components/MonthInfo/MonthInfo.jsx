@@ -1,4 +1,3 @@
-//\src\components\MonthInfo\MonthInfo.jsx
 import { useDispatch, useSelector } from 'react-redux';
 import { format } from 'date-fns';
 import Calendar from '../MonthInfo/Calendar/Calendar.jsx';
@@ -10,16 +9,18 @@ import Loader from '../MonthInfo/Loader/Loader.jsx';
 import css from './MonthInfo.module.css';
 import { upMonth, downMonth, setDate } from '../../redux/water/calendar/slice';
 import {
-  selectWaterData,
   selectMonth,
   selectDate,
   selectIsLoading,
   selectError,
+  selectWaterData,
 } from '../../redux/water/calendar/selectors';
+import { useState, useEffect } from 'react';
+import { fetchWaterData } from '../../redux/water/calendar/operations.js';
 
 function MonthInfo() {
   const dispatch = useDispatch();
-
+  const [isActive, setIsActive] = useState(true);
   const currentMonth = useSelector(selectMonth); // Строка в формате 'YYYY-MM'
   const monthArray = useSelector(selectWaterData);
 
@@ -27,12 +28,12 @@ function MonthInfo() {
   const isLoading = useSelector(selectIsLoading);
   const isError = useSelector(selectError);
 
-  const onNextMonth = () => {
-    dispatch(upMonth());
-  };
-
-  const onPrevMonth = () => {
-    dispatch(downMonth());
+  const changeMonth = increment => {
+    if (increment > 0) {
+      dispatch(upMonth());
+    } else if (increment < 0) {
+      dispatch(downMonth());
+    }
   };
 
   const onTodayHandler = () => {
@@ -44,6 +45,10 @@ function MonthInfo() {
     dispatch(setDate(format(date, 'yyyy-MM-dd')));
   };
 
+  useEffect(() => {
+    dispatch(fetchWaterData(currentMonth));
+  }, [dispatch, currentMonth]);
+
   return (
     <div className={css.container}>
       <div className={css.wrapperContainer}>
@@ -51,11 +56,10 @@ function MonthInfo() {
         <div className={css.containerToggle}>
           <CalendarPagination
             currentDate={new Date(currentMonth)}
-            onPrevHandler={onPrevMonth}
+            changeMonth={changeMonth}
             onMonthHandler={onTodayHandler}
-            onNextHandler={onNextMonth}
           />
-          <CalendarToggle />
+          <CalendarToggle isActive={isActive} setIsActive={setIsActive} />
         </div>
       </div>
       {isError && (
@@ -65,7 +69,11 @@ function MonthInfo() {
       )}
       {isLoading && <Loader />}
 
-      <Calendar month={monthArray} date={selectedDate} onClick={onDateSelect} />
+      <Calendar
+        monthArray={monthArray}
+        date={selectedDate}
+        onClick={onDateSelect}
+      />
     </div>
   );
 }

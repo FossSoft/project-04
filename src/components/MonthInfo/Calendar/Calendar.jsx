@@ -6,13 +6,13 @@ const isValidDate = dateString => {
   return !isNaN(date.getTime());
 };
 
-const Calendar = ({ month, date, onClick }) => {
-  if (month.length === 0) return null;
+const Calendar = ({monthArray, date, onClick }) => {
+  if (monthArray.length === 0) return null;
 
   return (
     <ul className={css.calendar}>
-      {month.map((day, index) => {
-        const percentageString = day.percentageConsumed || '0%';
+      {monthArray.map((day, index) => {
+        const percentageString = day.percentage || '0%';
 
         return (
           <CalendarItem
