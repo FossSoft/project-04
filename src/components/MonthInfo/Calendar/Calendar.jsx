@@ -12,22 +12,19 @@ const Calendar = ({ month, date, onClick }) => {
   return (
     <ul className={css.calendar}>
       {month.map((day, index) => {
-        // Получаем процент как строку, или '0%' по умолчанию
         const percentageString = day.percentageConsumed || '0%';
 
         return (
           <CalendarItem
             key={index}
-            day={day.day}
-            isCurrentDay={day.day === date}
-            isSelectedDay={day.day === date}
-            // Передаём процент как есть, строкой
-            percentage={percentageString}
+            date={{ day: day.date, percentageConsumed: percentageString }} // Передаем объект с day и percentageConsumed
+            isCurrentDay={day.date === date}
+            isSelectedDay={day.date === date}
             onClick={() => {
-              if (isValidDate(day.day)) {
-                onClick(day.day);
+              if (isValidDate(day.date)) {
+                onClick(day.date);
               } else {
-                console.error('Invalid date value:', day.day);
+                console.error('Invalid date value:', day.date);
               }
             }}
           />

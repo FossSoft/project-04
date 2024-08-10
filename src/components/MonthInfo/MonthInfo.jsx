@@ -1,3 +1,4 @@
+//\src\components\MonthInfo\MonthInfo.jsx
 import { useDispatch, useSelector } from 'react-redux';
 import { format } from 'date-fns';
 import Calendar from '../MonthInfo/Calendar/Calendar.jsx';
@@ -21,6 +22,7 @@ function MonthInfo() {
 
   const currentMonth = useSelector(selectMonth); // Строка в формате 'YYYY-MM'
   const monthArray = useSelector(selectWaterData);
+
   const selectedDate = useSelector(selectDate);
   const isLoading = useSelector(selectIsLoading);
   const isError = useSelector(selectError);
