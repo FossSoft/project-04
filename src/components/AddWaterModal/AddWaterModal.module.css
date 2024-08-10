@@ -69,7 +69,6 @@ p {
   text-align: center;
   height: 43px;
   width: 86px;
-  /* padding: 11px, 20px; */
   background-color: #323f47;
   color: white;
   border-radius: 30px;
@@ -81,13 +80,25 @@ p {
 }
 .water-input {
   width: 300px;
-  border: 1px solid #2f2f2f;
+  border: 1px solid rgba(47, 47, 47, 0.2);
   border-radius: 15px;
   padding: 14px 16px 14px 16px;
   align-items: flex-start;
   gap: 10px;
   align-self: stretch;
 }
+.water-input:focus {
+  outline: none;
+  border: 1px solid rgba(47, 47, 47, 0.2);
+}
+.water-input:active {
+  outline: none;
+  border: 1px solid rgba(47, 47, 47, 0.4);
+}
+/* .water-input.error {
+  border: 1px solid #ef5050;
+  fill: #ef5050;
+} */
 .btn-save {
   width: 116px;
   height: 46px;

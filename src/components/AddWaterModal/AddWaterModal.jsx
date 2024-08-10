@@ -20,11 +20,39 @@ export const AddWaterModal = ({ onCancel }) => {
     setQuantity(prevValue => (prevValue < 1500 ? prevValue + 50 : prevValue));
   };
 
+  // const handleChangeQuantity = e => {
+  //   let value = e.target.value;
+  //   if (isNaN(value) || value.trim() === '') {
+  //     return;
+  //   }
+
+  //   value = Number(value);
+  //   if (value < 0) {
+  //     value = 0;
+  //   } else if (value > 1500) {
+  //     value = 1500;
+  //   }
+
+  //   setQuantity(value);
+  // };
   const handleChangeQuantity = e => {
-    const value = Number(e.target.value);
-    if (value >= 50 && value <= 1500) {
+    let value = e.target.value;
+
+    // Дозволяємо вводити лише цифри, обмежуємо довжину до 4 символів
+    if (/^\d{0,4}$/.test(value)) {
       setQuantity(value);
     }
+  };
+
+  const handleBlurQuantity = () => {
+    let numericValue = Number(quantity);
+
+    // Обмежуємо значення діапазоном від 0 до 1500
+    if (numericValue > 1500) {
+      numericValue = 1500;
+    }
+
+    setQuantity(numericValue);
   };
 
   const handleChangeTime = e => {
@@ -110,6 +138,7 @@ export const AddWaterModal = ({ onCancel }) => {
           type="text"
           value={quantity}
           onChange={handleChangeQuantity}
+          onBlur={handleBlurQuantity}
         />
       </div>
 
