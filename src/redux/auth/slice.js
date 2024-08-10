@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { logIn, register, refreshToken } from './operations';
+import { logIn, register, setAuthHeader, clearAuthHeader } from './operations';
 
 const authInitialState = {
   user: null,
@@ -14,24 +14,21 @@ const authSlice = createSlice({
   initialState: authInitialState,
   reducers: {
     setCredentials: (state, action) => {
-      state.user = action.payload.user;
       state.accessToken = action.payload.accessToken;
-      state.isLoggedIn = true;
-      state.error = null;
+      state.user = action.payload.user;
+      setAuthHeader(state.accessToken);
     },
     clearCredentials: (state) => {
-      state.user = null;
       state.accessToken = null;
-      state.isLoggedIn = false;
-      state.error = null;
-    },  
+      state.user = null;
+      clearAuthHeader();
+    }
   },
   extraReducers: builder => {
     builder
       .addCase(logIn.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.accessToken= action.payload.accessToken;
-
         state.isLoggedIn = true;
         state.isRefreshing = false;
       })
@@ -55,17 +52,7 @@ const authSlice = createSlice({
       })
       .addCase(register.rejected, state => {
         state.error = true;
-      })
-      .addCase(refreshToken.fulfilled, (state, action) => {
-        state.accessToken = action.payload.accessToken;
-        state.user = action.payload.user;
-        state.isLoggedIn = true;
-        state.isRefreshing = false;
-      })
-      .addCase(refreshToken.rejected, (state, action) => {
-        state.error = action.error;
-        state.isRefreshing = false;
-      });
+      });;
   },
 });
 
