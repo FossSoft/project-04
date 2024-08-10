@@ -7,6 +7,7 @@ export const apiClient = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
+  withCredentials: true,
 });
 
 const setAuthHeader = token => {
@@ -91,14 +92,14 @@ export const logIn = createAsyncThunk(
 export const refreshToken = createAsyncThunk(
   'auth/refresh',
   async (_, thunkAPI) => {
-    try {
-      const { data } = await apiClient.get('/user/refresh');
-      thunkAPI.dispatch(setCredentials(data.data));
-      console.log(data.data);
-      return data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.response?.data || error.message);
-    }
+   try {
+    const { data }  = await apiClient.get('/user/refresh');
+    thunkAPI.dispatch(setCredentials(data.data));
+    console.log(data.data)
+    return data;
+   } catch (error) {
+    return thunkAPI.rejectWithValue(error.response?.data || error.message);
+   }
   }
 );
 
