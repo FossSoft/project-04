@@ -6,7 +6,7 @@ const isValidDate = dateString => {
   return !isNaN(date.getTime());
 };
 
-const Calendar = ({monthArray, date, onClick }) => {
+const Calendar = ({ monthArray, date, onClick }) => {
   if (monthArray.length === 0) return null;
 
   return (
@@ -17,12 +17,11 @@ const Calendar = ({monthArray, date, onClick }) => {
         return (
           <CalendarItem
             key={index}
-            date={{ day: day.date, percentageConsumed: percentageString }} // Передаем объект с day и percentageConsumed
-            isCurrentDay={day.date === date}
-            isSelectedDay={day.date === date}
+            day={day.date} // Передаем дату как строку в формате 'YYYY-MM-DD'
+            percentageConsumed={percentageString} // Передаем процент как строку
             onClick={() => {
               if (isValidDate(day.date)) {
-                onClick(day.date);
+                onClick(day.date); // Передаем строку даты в формате 'YYYY-MM-DD'
               } else {
                 console.error('Invalid date value:', day.date);
               }
