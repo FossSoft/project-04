@@ -1,5 +1,4 @@
 .bg {
-  width: 343px;
   border-radius: 30px;
 }
 
@@ -11,11 +10,19 @@
   background-color: var(--green);
 }
 
-/* @media screen and (min-width: 375px) {
+@media screen and (min-width: 320px) and (max-width: 374px) {
+  .bg {
+    max-width: 343px;
+    width: 100%;
+    /* border-radius: 30px; */
+  }
+}
+
+@media screen and (min-width: 375px) {
   .bg {
     width: 343px;
   }
-} */
+}
 
 @media screen and (min-width: 768px) {
   .bg {

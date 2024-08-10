@@ -5,15 +5,25 @@ import img1x from '../../image/x1/Ellipse_14.png';
 import img2x from '../../image/x2/Ellipse_14.png';
 import sprite from '../../image/sprite/sprite.svg';
 import UserBarPopover from 'components/UserBarPopover/UserBarPopover';
-import { hidePopover, togglePopover } from '../../redux/popover/slice';
-import { selecteIcon } from '../../redux/popover/selectors';
-import { selectAvatar, selectUserName } from '../../redux/user/selectors';
+import {
+  getCurrentWidthBtn,
+  hidePopover,
+  togglePopover,
+} from '../../redux/popover/slice';
+import { selecteIcon, selecteWidth } from '../../redux/popover/selectors';
+import {
+  selectAvatar,
+  selectUserEmail,
+  selectUserName,
+} from '../../redux/user/selectors';
 
 export default function UserBar() {
   const dispatch = useDispatch();
   const userName = useSelector(selectUserName);
   const avatar = useSelector(selectAvatar);
   const icon = useSelector(selecteIcon);
+  const width = useSelector(selecteWidth);
+  const visitor = useSelector(selectUserEmail).split('@')[0];
   const btnRef = useRef(null);
 
   const handleTogglePopover = () => {
@@ -21,11 +31,33 @@ export default function UserBar() {
   };
 
   useEffect(() => {
+    const updateSize = () => {
+      if (btnRef.current) {
+        const { width } = btnRef.current.getBoundingClientRect();
+        dispatch(getCurrentWidthBtn(width));
+      }
+    };
+    updateSize();
+
+    const currentRef = btnRef.current;
+    const resizeObserver = new ResizeObserver(updateSize);
+    if (currentRef) {
+      resizeObserver.observe(currentRef);
+    }
+    return () => {
+      if (currentRef) {
+        resizeObserver.unobserve(currentRef);
+      }
+      resizeObserver.disconnect();
+    };
+  }, [dispatch, btnRef]);
+
+  useEffect(() => {
     const handleClickOutside = e => {
       if (
         btnRef.current &&
         !btnRef.current.contains(e.target) &&
-        !e.target.closest('.UserBarPopover_popover__Vz69-')
+        !e.target.closest('.popover')
       )
         dispatch(hidePopover());
     };
@@ -48,7 +80,7 @@ export default function UserBar() {
         {userName ? (
           <p className={css.text}>{userName}</p>
         ) : (
-          <p className={css.text}>Visitor</p>
+          <p className={css.text}>{visitor}</p>
         )}
 
         {avatar ? (
@@ -70,7 +102,7 @@ export default function UserBar() {
         </svg>
       </button>
 
-      <UserBarPopover className={css.userBarPopover} />
+      <UserBarPopover style={{ width: `${width}px` }} />
     </div>
   );
 }

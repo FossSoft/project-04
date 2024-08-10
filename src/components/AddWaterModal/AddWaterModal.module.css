@@ -1,0 +1,142 @@
+.body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  width: 343px;
+  padding: 40px 20px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 24px;
+}
+.addWaterTitle {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px; /* 120% */
+  letter-spacing: -0.2px;
+}
+.value-text-title {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; /* 125% */
+  letter-spacing: -0.16px;
+}
+.btn-close {
+  height: 28px;
+  width: 28px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+.value-container {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 16px;
+}
+.value-text {
+  padding-bottom: 8px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px; /* 128.571% */
+  letter-spacing: -0.14px;
+}
+.plus-minus {
+  display: flex;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+.value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 43px;
+  width: 86px;
+  /* padding: 11px, 20px; */
+  background-color: #323f47;
+  color: white;
+  border-radius: 30px;
+  border: none;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 22.4px;
+}
+.water-input {
+  width: 300px;
+  border: 1px solid #2f2f2f;
+  border-radius: 15px;
+  padding: 14px 16px 14px 16px;
+  align-items: flex-start;
+  gap: 10px;
+  align-self: stretch;
+}
+.btn-save {
+  width: 116px;
+  height: 46px;
+  background-color: #9be1a0;
+  color: black;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px; /* 150% */
+  letter-spacing: -0.16px;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    margin: auto;
+    padding: 40px;
+    width: 512px;
+    height: 555px;
+    border-radius: 15px;
+    gap: 24px;
+  }
+  .addWaterTitle {
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 32px; /* 114.286% */
+    letter-spacing: -0.28px;
+  }
+  .water-input {
+    width: 448px;
+  }
+  .btn-save {
+    width: 141px;
+    height: 60px;
+  }
+  .value-text {
+    font-size: 16px;
+  }
+  .value-text-title {
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px; /* 133.333% */
+    letter-spacing: -0.18px;
+  }
+}

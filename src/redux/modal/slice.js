@@ -5,6 +5,7 @@ const modalSlice = createSlice({
   initialState: {
     isOpenModalSettings: false,
     isOpenModalLogout: false,
+    isOpenModalAddWater: false,
   },
   reducers: {
     openModalSettings: (state, action) => {
@@ -20,6 +21,12 @@ const modalSlice = createSlice({
     closeModalLogout: (state, action) => {
       state.isOpenModalLogout = false;
     },
+    openModalAddWater: (state, action) => {
+      state.isOpenModalAddWater = true;
+    },
+    closeModalAddWater: (state, action) => {
+      state.isOpenModalAddWater = false;
+    },
   },
 });
 
@@ -28,6 +35,8 @@ export const {
   closeModalSettings,
   openModalLogout,
   closeModalLogout,
+  openModalAddWater,
+  closeModalAddWater,
 } = modalSlice.actions;
 
 export default modalSlice.reducer;

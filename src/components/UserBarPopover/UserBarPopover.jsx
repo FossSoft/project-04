@@ -1,6 +1,7 @@
-import clsx from 'clsx';
+// import clsx from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
 import css from './UserBarPopover.module.css';
+import './UserBarPopover.css';
 import sprite from '../../image/sprite/sprite.svg';
 import Modal from 'components/Modal/Modal';
 import {
@@ -14,12 +15,10 @@ import {
   openModalSettings,
 } from '../../redux/modal/slice';
 import LogOutModal from 'components/LogOutModal/LogOutModal';
-
 import { Setting } from 'components/Setting/Setting.jsx';
-
 import { selecteShowPopover } from '../../redux/popover/selectors';
 
-export default function UserBarPopover() {
+export default function UserBarPopover({ style }) {
   const dispatch = useDispatch();
   const showPopover = useSelector(selecteShowPopover);
   const isOpenModalSettings = useSelector(selecteIsOpenModalSettings);
@@ -42,46 +41,39 @@ export default function UserBarPopover() {
   };
 
   return (
-    <div className={showPopover ? clsx(css.popover, css.active) : css.popover}>
-      <div className={css.container}>
-        <svg className={clsx(css.icon, css.darkblue)}>
+    <div className={showPopover ? 'popover active' : 'popover'} style={style}>
+      <button
+        className={css.btnDarkblue}
+        onClick={handleOpenModalSettings}
+        type="button"
+      >
+        <svg className={css.iconDarkblue}>
           <use href={`${sprite}#icon-settings`}></use>
         </svg>
-        <button
-          className={clsx(css.btn, css.darkblue)}
-          onClick={handleOpenModalSettings}
-          type="button"
-        >
-          Settigs
-        </button>
+        Settigs
+      </button>
 
-        <Modal
-          isOpen={isOpenModalSettings}
-          onRequestClose={handleCloseModalSettings}
-        >
-          <Setting />
-        </Modal>
-      </div>
+      <Modal
+        isOpen={isOpenModalSettings}
+        onRequestClose={handleCloseModalSettings}
+      >
+        <Setting />
+      </Modal>
 
-      <div className={css.container}>
-        <svg className={clsx(css.icon, css.gray)}>
+      <button
+        className={css.btnGray}
+        onClick={handleOpenModalLogout}
+        type="button"
+      >
+        <svg className={css.iconGray}>
           <use href={`${sprite}#icon-log-out`}></use>
         </svg>
-        <button
-          className={clsx(css.btn, css.gray)}
-          onClick={handleOpenModalLogout}
-          type="button"
-        >
-          Log out
-        </button>
+        Log out
+      </button>
 
-        <Modal
-          isOpen={isOpenModalLogout}
-          onRequestClose={handleCloseModalLogout}
-        >
-          <LogOutModal />
-        </Modal>
-      </div>
+      <Modal isOpen={isOpenModalLogout} onRequestClose={handleCloseModalLogout}>
+        <LogOutModal />
+      </Modal>
     </div>
   );
 }

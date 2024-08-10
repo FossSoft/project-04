@@ -3,7 +3,7 @@ import { logIn, register, setAuthHeader, clearAuthHeader } from './operations';
 
 const authInitialState = {
   user: null,
-  accessToken: null,
+  accessToken: localStorage.getItem('token') || null,
   isLoggedIn: false,
   isRefreshing: false,
   error: null,
@@ -29,21 +29,21 @@ const authSlice = createSlice({
       .addCase(logIn.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.accessToken= action.payload.accessToken;
+
         state.isLoggedIn = true;
         state.isRefreshing = false;
       })
       .addCase(logIn.pending, state => {
         state.isRefreshing = true;
       })
-      .addCase(logIn.rejected, (state, action )=> {
+      .addCase(logIn.rejected, (state, action) => {
         state.error = action.error;
         state.isRefreshing = false;
       })
       .addCase(register.fulfilled, (state, action) => {
-
         console.log('Register Success:', action.payload);
         state.user = action.payload.user;
-        state.accessToken= action.payload.accessToken;
+        state.accessToken = action.payload.accessToken;
         state.isLoggedIn = true;
         state.error = false;
       })

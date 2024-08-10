@@ -5,7 +5,7 @@ import { setCredentials, clearCredentials} from './slice';
 export const apiClient = axios.create({
   baseURL: 'https://back-end-aquatrack.onrender.com',
   headers: {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   },
   withCredentials: true,
 });
@@ -16,7 +16,11 @@ export const setAuthHeader = token => {
 
 export const clearAuthHeader = () => {
   apiClient.defaults.headers.common.Authorization = '';
-}
+};
+const saveToken = token => {
+  localStorage.setItem('token', token);
+  console.log('Token saved:', localStorage.getItem('token'));
+};
 
 export const setupAxiosInterceptors = (store) => {
   apiClient.interceptors.response.use(
@@ -46,8 +50,10 @@ export const register = createAsyncThunk(
   async (userData, thunkAPI) => {
     try {
       const response = await apiClient.post('/auth/register', userData);
-      const {accessToken} = response.data;
+      const { accessToken } = response.data;
       setAuthHeader(accessToken);
+      saveToken(accessToken);
+      thunkAPI.dispatch(setCredentials(response.data));
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -62,7 +68,9 @@ export const logIn = createAsyncThunk(
       const { data } = await apiClient.post('/auth/login', credentials);
       const { accessToken } = data.data;
       setAuthHeader(accessToken);
-      return data.data
+      saveToken(accessToken);
+      thunkAPI.dispatch(setCredentials(data.data));
+      return data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data || error.message);
     }

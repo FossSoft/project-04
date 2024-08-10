@@ -1,33 +1,30 @@
 import css from './Setting.module.css';
-import toast, { Toaster } from 'react-hot-toast';
-import tablet from '../../image/x2/Ellipse_14.png';
-
+import toast from 'react-hot-toast';
+import avatar from '../../image/avatar.jpg';
+import * as Yup from 'yup';
 import sprite from '../../image/sprite/sprite.svg';
-
 import { useEffect, useId, useRef, useState } from 'react';
-
+import { selectIsLoading } from '../../redux/user/selectors.js';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { validationSchema } from './validationSchema.js';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  selectUserActivityTime,
   selectUserAvatar,
   selectUserEmail,
-  selectUserGender,
-  selectUserId,
   selectUserName,
-  selectUserWaterToDrink,
+  selectUserGender,
+  selectUserActivityTime,
   selectUserWeight,
 } from '../../redux/user/selectors.js';
-
+import { closeModalSettings } from '../../redux/modal/slice.js';
 import {
   fetchUserInfo,
   updateUserAvatar,
   updateUserInfo,
 } from '../../redux/user/operations.js';
-import { closeModalSettings } from '../../redux/modal/slice.js';
-export const Setting = ({ handleCloseModalSettings }) => {
+import { Spiner } from 'components/Spiner/Spiner.jsx';
+
+export const Setting = () => {
   const upload = useId();
   const womanRadio = useId();
   const manRadio = useId();
@@ -36,60 +33,70 @@ export const Setting = ({ handleCloseModalSettings }) => {
   const weightInput = useId();
   const timeInput = useId();
   const resultInput = useId();
-  //
+  const activeTimeSelector = useSelector(selectUserActivityTime);
   const nameSelector = useSelector(selectUserName);
-  const idSelector = useSelector(selectUserId);
-  const emeailSelector = useSelector(selectUserEmail);
   const genderSelector = useSelector(selectUserGender);
   const weightSelector = useSelector(selectUserWeight);
-  const activityTimeSelector = useSelector(selectUserActivityTime);
-  const userWaterDrinkSelector = useSelector(selectUserWaterToDrink);
+  const emeailSelector = useSelector(selectUserEmail);
+  const isLoading = useSelector(selectIsLoading);
   const avatarSelector = useSelector(selectUserAvatar);
-  //
 
+  // Validation
+  const validationSchema = Yup.object().shape({
+    username: Yup.string().test('Username must contain only letters', value => {
+      const isValidInitial = !value || /^[А-Яа-яA-Za-z]+$/.test(value);
+
+      return !value || isValidInitial;
+    }),
+    weight: Yup.number()
+      .required('Weight is required')
+      .positive('Weight must be a positive number')
+      .min(20, 'Weight must be at least 20kg')
+      .max(300, 'Weight must be 300kg or less'),
+    activeTime: Yup.number()
+      .required('Write your active sport time')
+      .max(10, 'Too much time')
+      .positive('Time must be a positive number'),
+    ownerResult: Yup.number()
+      .max(12, 'Too much')
+      .positive('Time must be a positive number'),
+  });
+  // Validation
   const dispatch = useDispatch();
-
-  //
-  const [file, setFile] = useState(null);
-  const [preview, setPreview] = useState(null);
-
   const handleFileChange = event => {
     const file = event.target.files[0];
-    // console.log(file);
-
-    setFile(file);
-
-    const fileURL = URL.createObjectURL(file);
-
-    setPreview(fileURL);
     const formData = new FormData();
-
     formData.append('avatar', file);
     dispatch(updateUserAvatar(formData));
   };
-  //
   const {
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors },
-    reset,
   } = useForm({
     resolver: yupResolver(validationSchema),
     mode: 'onChange',
   });
-
+  useEffect(() => {
+    setValue('gender', genderSelector);
+    setValue('username', nameSelector);
+    setValue('activeTime', activeTimeSelector);
+    setValue('weight', weightSelector);
+  }, [
+    genderSelector,
+    setValue,
+    nameSelector,
+    activeTimeSelector,
+    weightSelector,
+  ]);
   const form = useRef();
-  //
-
   const weightValue = watch('weight');
   const timeValue = watch('activeTime');
   const [result, setResult] = useState(0);
   const genderValue = watch('gender');
-  // const handleCloseModalSettingss = () => {
-  //   form.current.style.display = 'none';
-  //   dispatch(closeModalSettings());
-  // };
+
   useEffect(() => {
     if (weightValue > 0 && weightValue < 300 && timeValue > 0) {
       if (genderValue === 'woman') {
@@ -104,63 +111,31 @@ export const Setting = ({ handleCloseModalSettings }) => {
 
   useEffect(() => {
     dispatch(fetchUserInfo()).unwrap();
-    // .then(res => console.log(res));
   }, [dispatch]);
 
   const onSubmit = data => {
-    // const formData = new FormData();
-    // formData.append('username', data.name);
-    // formData.append('userEmail', data.userEmail);
-    // formData.append('weight', data.weight);
-    // formData.append('activeTime', data.activeTime);
-    // formData.append('avatar', data.upload[0]);
-    // console.log(formData.entries());
-
-    if (emeailSelector !== data.userEmail) {
-      toast.error('Write correctly amail');
-      return;
-    }
-
     dispatch(
       updateUserInfo({
         name: data.username,
         gender: data.gender,
-        // email: data.userEmail,
+
         weight: data.weight,
         activityTime: data.activeTime,
         dailyNorma: data.ownerResult,
       })
     );
-    // .unwrap()
-    // .then(res => console.log(res))
-    // .catch(err => console.log(err.message));
-
-    // dispatch(updateUserAvatar(data))
-    //   .unwrap()
-    //   .then(res => {
-    //     console.log(res, 'avatar updated successfully');
-    //   })
-    //   .catch(err => {
-    //     console.error(err.message);
-    //   });
+    toast.success('Successfully updated!', { duration: 1000 });
+    dispatch(closeModalSettings());
   };
   return (
-    <div className={css.container}>
+    <div className={css.probe}>
       <form ref={form} className={css.form} onSubmit={handleSubmit(onSubmit)}>
-        <svg
-          className={css.closeIcon}
-          onClick={() => {
-            dispatch(closeModalSettings());
-          }}
-        >
-          <use href={`${sprite}#icon-x`}></use>
-        </svg>
         <h2 className={css.titleForm}>Setting</h2>
         <div className={css.titleContainer}>
           <div className={css.uploadContaienr}>
             <img
               className={css.avatarImg}
-              src={!avatarSelector ? tablet : avatarSelector}
+              src={!avatarSelector ? avatar : avatarSelector}
               alt="Avatar"
             />
             <label htmlFor={upload} className={css.upload}>
@@ -187,8 +162,10 @@ export const Setting = ({ handleCloseModalSettings }) => {
                   <input
                     type="radio"
                     {...register('gender')}
-                    defaultChecked
                     value="woman"
+                    onChange={() => {
+                      setValue('gender', 'woman');
+                    }}
                     id={womanRadio}
                     className={css.inputRadio}
                   />
@@ -201,6 +178,9 @@ export const Setting = ({ handleCloseModalSettings }) => {
                     type="radio"
                     {...register('gender')}
                     value="man"
+                    onChange={() => {
+                      setValue('gender', 'man');
+                    }}
                     id={manRadio}
                     className={css.inputRadio}
                   />
@@ -222,7 +202,7 @@ export const Setting = ({ handleCloseModalSettings }) => {
                   }}
                 />
               </label>
-              <div style={{ height: 40 }}>
+              <div>
                 {errors.username && (
                   <p className={css.error}>{errors.username.message}</p>
                 )}
@@ -230,9 +210,10 @@ export const Setting = ({ handleCloseModalSettings }) => {
               <label htmlFor={emailInput}>
                 <p className={css.userEmail}>Email</p>
                 <input
-                  {...register('userEmail')}
                   type="text"
                   id={emailInput}
+                  defaultValue={emeailSelector}
+                  disabled
                   placeholder="Enter your email"
                   style={{
                     borderColor: errors.userEmail ? 'red' : 'initial',
@@ -278,8 +259,9 @@ export const Setting = ({ handleCloseModalSettings }) => {
                 <input
                   id={weightInput}
                   {...register('weight')}
+                  step="0.01"
+                  defaultValue="0"
                   type="number"
-                  defaultValue={0}
                   style={{
                     borderColor: errors.weight ? 'red' : 'initial',
                   }}
@@ -296,7 +278,8 @@ export const Setting = ({ handleCloseModalSettings }) => {
                 </p>
                 <input
                   type="number"
-                  defaultValue={0}
+                  defaultValue="0"
+                  step="0.01"
                   id={timeInput}
                   {...register('activeTime')}
                   style={{
@@ -324,10 +307,19 @@ export const Setting = ({ handleCloseModalSettings }) => {
                 <input
                   type="number"
                   id={resultInput}
+                  step="0.01"
                   className={css.userOwnerInput}
                   {...register('ownerResult')}
+                  style={{
+                    borderColor: errors.ownerResult ? 'red' : 'initial',
+                  }}
                 />
               </label>
+              <div>
+                {errors.ownerResult && (
+                  <p className={css.error}>{errors.ownerResult.message}</p>
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -336,12 +328,11 @@ export const Setting = ({ handleCloseModalSettings }) => {
           Save
         </button>
       </form>
-      {/* {preview && (
-        <div>
-          <img src={preview} alt="" />
+      {isLoading && (
+        <div className={css.loaderBg}>
+          <Spiner addClass={css.dataLoader} />
         </div>
-      )} */}
-      <Toaster />
+      )}
     </div>
   );
 };

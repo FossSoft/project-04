@@ -6,12 +6,32 @@
   height: 100%;
   display: flex;
   justify-content: center;
-  /* opacity: 1; */
+}
+.loaderBg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.4);
+  z-index: 3;
+}
+.dataLoader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.probe {
+  height: 600px;
 }
 .form {
-  /* width: 100%; */
   width: 343px;
-  height: 100%;
   position: relative;
   padding: 40px 20px;
 }
@@ -28,7 +48,6 @@
 }
 .titleContainer {
   display: flex;
-  /* align-items: center; */
   justify-content: center;
 }
 .error {
@@ -37,7 +56,7 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  line-height: 18px; /* 128.571% */
+  line-height: 18px;
   letter-spacing: -0.14px;
 }
 .form {
@@ -52,7 +71,7 @@
   font-size: 20px;
   font-style: normal;
   font-weight: 700;
-  line-height: 24px; /* 120% */
+  line-height: 24px;
   letter-spacing: -0.2px;
   margin-bottom: 20px;
 }
@@ -82,12 +101,11 @@
 .genderTitle {
   color: #323f47;
 
-  /* text-align: center; */
   font-family: Poppins;
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
-  line-height: 20px; /* 125% */
+  line-height: 20px;
   letter-spacing: -0.16px;
   margin-bottom: 14px;
 }
@@ -107,7 +125,7 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  line-height: 18px; /* 128.571% */
+  line-height: 18px;
   letter-spacing: -0.14px;
   position: relative;
   padding-left: 24px;
@@ -153,7 +171,7 @@
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
-  line-height: 20px; /* 125% */
+  line-height: 20px;
   letter-spacing: -0.16px;
 }
 .userEmail {
@@ -163,7 +181,7 @@
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
-  line-height: 20px; /* 125% */
+  line-height: 20px;
   letter-spacing: -0.16px;
 }
 .userData {
@@ -187,7 +205,7 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  line-height: 18px; /* 128.571% */
+  line-height: 18px;
   letter-spacing: -0.14px;
 }
 .userData label input:focus {
@@ -200,7 +218,7 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  line-height: 18px; /* 128.571% */
+  line-height: 18px;
   letter-spacing: -0.14px;
 }
 .normaTitle {
@@ -210,7 +228,7 @@
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
-  line-height: 20px; /* 125% */
+  line-height: 20px;
   letter-spacing: -0.16px;
   bottom: 14px;
 }
@@ -236,7 +254,7 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  line-height: 18px; /* 128.571% */
+  line-height: 18px;
   letter-spacing: -0.14px;
   margin-bottom: 4px;
 }
@@ -251,7 +269,7 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
-  line-height: 18px; /* 128.571% */
+  line-height: 18px;
   letter-spacing: -0.14px;
 }
 .activeTime {
@@ -264,7 +282,7 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  line-height: 18px; /* 128.571% */
+  line-height: 18px;
   letter-spacing: -0.14px;
 }
 .weightTime {
@@ -273,7 +291,7 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  line-height: 18px; /* 128.571% */
+  line-height: 18px;
   letter-spacing: -0.14px;
   margin-bottom: 8px;
 }
@@ -296,7 +314,7 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  line-height: 18px; /* 128.571% */
+  line-height: 18px;
   letter-spacing: -0.14px;
 }
 
@@ -309,7 +327,7 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  line-height: 18px; /* 128.571% */
+  line-height: 18px;
   letter-spacing: -0.14px;
   margin-bottom: 5px;
 }
@@ -319,8 +337,7 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
-  line-height: 18px; /* 128.571% */
-  /* margin-bottom: 14px; */
+  line-height: 18px;
 }
 .userOwnerResult {
   color: #323f47;
@@ -329,7 +346,7 @@
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
-  line-height: 20px; /* 125% */
+  line-height: 20px;
   letter-spacing: -0.16px;
   margin-bottom: 8px;
   max-width: 303px;
@@ -348,7 +365,7 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  line-height: 18px; /* 128.571% */
+  line-height: 18px;
   letter-spacing: -0.14px;
 }
 .userOwnerInput:focus {
@@ -362,7 +379,7 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
-  line-height: 18px; /* 128.571% */
+  line-height: 18px;
   letter-spacing: -0.14px;
 
   padding: 14px 40px;
@@ -380,6 +397,7 @@
   width: 18px;
   height: 18px;
 }
+
 @media screen and (min-width: 768px) {
   .container {
     min-width: 768px;
@@ -398,7 +416,7 @@
   }
   .titleForm {
     font-size: 28px;
-    line-height: 32px; /* 114.286% */
+    line-height: 32px;
   }
   .uploadImg {
     width: 20px;
@@ -410,41 +428,41 @@
   }
   .upload {
     font-size: 16px;
-    line-height: 24px; /* 150% */
+    line-height: 24px;
   }
   .genderTitle {
     font-size: 18px;
-    line-height: 24px; /* 133.333% */
+    line-height: 24px;
   }
   .radioInput {
     font-size: 16px;
-    line-height: 24px; /* 150% */
+    line-height: 24px;
   }
   .userName {
     font-size: 18px;
 
-    line-height: 24px; /* 133.333% */
+    line-height: 24px;
   }
   .userEmail {
     font-size: 18px;
 
-    line-height: 24px; /* 133.333% */
+    line-height: 24px;
   }
   .userData label input {
     font-size: 16px;
 
-    line-height: 24px; /* 150% */
+    line-height: 24px;
   }
   .userData label input::placeholder {
     font-size: 16px;
 
-    line-height: 24px; /* 150% */
+    line-height: 24px;
   }
   .normaTitle {
     font-size: 18px;
 
     font-weight: 700;
-    line-height: 24px; /* 133.333% */
+    line-height: 24px;
     letter-spacing: -0.18px;
   }
   .normaList {
@@ -457,33 +475,33 @@
   .genderV {
     font-size: 16px;
 
-    line-height: 24px; /* 150% */
+    line-height: 24px;
     letter-spacing: -0.16px;
   }
   .formula {
     font-size: 16px;
 
-    line-height: 24px; /* 150% */
+    line-height: 24px;
     letter-spacing: -0.16px;
   }
   .normaDescription {
     font-size: 16px;
 
-    line-height: 24px; /* 150% */
+    line-height: 24px;
     letter-spacing: -0.16px;
     max-width: 536px;
   }
   .activeTime {
     font-size: 16px;
 
-    line-height: 24px; /* 150% */
+    line-height: 24px;
     letter-spacing: -0.16px;
   }
   .weightTime {
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: 24px; /* 150% */
+    line-height: 24px;
     letter-spacing: -0.16px;
   }
   .weightTimeContainer label input {
@@ -492,7 +510,7 @@
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: 24px; /* 150% */
+    line-height: 24px;
     letter-spacing: -0.16px;
   }
   .userData label input {
@@ -501,21 +519,21 @@
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: 24px; /* 150% */
+    line-height: 24px;
     letter-spacing: -0.16px;
   }
   .requireWater {
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: 24px; /* 150% */
+    line-height: 24px;
     letter-spacing: -0.16px;
   }
   .resultText {
     font-size: 15px;
     font-style: normal;
     font-weight: 700;
-    line-height: 22.4px; /* 149.333% */
+    line-height: 22.4px;
   }
   .informationResult {
     display: flex;
@@ -526,7 +544,7 @@
     font-size: 18px;
     font-style: normal;
     font-weight: 700;
-    line-height: 24px; /* 133.333% */
+    line-height: 24px;
     letter-spacing: -0.18px;
   }
   .userOwnerInput {
@@ -535,7 +553,7 @@
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: 24px; /* 150% */
+    line-height: 24px;
     letter-spacing: -0.16px;
   }
   .activeIcon {
@@ -546,10 +564,13 @@
     font-size: 16px;
     font-style: normal;
 
-    line-height: 24px; /* 150% */
+    line-height: 24px;
     letter-spacing: -0.16px;
     padding: 16px 50px;
     width: 141px;
+  }
+  .probe {
+    height: 650px;
   }
 }
 
@@ -571,6 +592,9 @@
   .weightTimeContainer label input {
     width: 400px;
   }
+  .weightTimeContainer {
+    margin-top: 0;
+  }
   .userOwnerInput {
     width: 400px;
     margin-bottom: 0;
@@ -581,5 +605,8 @@
   }
   .secondDescktopContainer {
     padding-top: 86px;
+  }
+  .probe {
+    height: 610px;
   }
 }

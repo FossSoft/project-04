@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteWaterEntry } from '../../redux/water/operations';
-import { selectToken } from '../../redux/auth/selectors';
+import { selectAccessToken } from '../../redux/auth/selectors';
 import css from './DeleteWaterModal.module.css';
 
 export default function DeleteWaterModal({ item, onClose }) {
   const dispatch = useDispatch();
-  const token = useSelector(selectToken);
+  const token = useSelector(selectAccessToken);
 
   const handleDelete = async () => {
     if (!item || !item.id) {

@@ -1,0 +1,32 @@
+.loader {
+  width: 80px;
+  aspect-ratio: 1;
+  background: radial-gradient(
+        farthest-side at top,
+        #0000 calc(100% - 21px),
+        #9be1a0 calc(100% - 20px) 99%,
+        #0000
+      )
+      bottom/100% 50%,
+    radial-gradient(farthest-side, lightblue 94%, #0000) left / 20px 20px,
+    radial-gradient(farthest-side, lightblue 94%, #0000) right/20px 20px;
+  background-repeat: no-repeat;
+  position: relative;
+}
+.loader::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  inset: auto 0 0;
+  margin: auto;
+  border-radius: 50%;
+  background: orange;
+  transform-origin: 50% -20px;
+  animation: l14 1s infinite cubic-bezier(0.5, 623, 0.5, -623);
+}
+@keyframes l14 {
+  100% {
+    transform: rotate(0.5deg);
+  }
+}

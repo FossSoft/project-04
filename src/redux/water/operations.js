@@ -1,7 +1,6 @@
-
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { selectToken } from '../auth/selectors.js';
+import { selectAccessToken } from '../auth/selectors.js';
 
 axios.defaults.baseURL = 'https://back-end-aquatrack.onrender.com';
 
@@ -11,16 +10,18 @@ const setAuthHeader = token => {
 
 export const addWaterAmount = createAsyncThunk(
   'water/addWaterAmount',
-  async (waterData, thunkAPI) => {
+  async ([waterData, token], thunkAPI) => {
     try {
-      const { token, ...waterItem } = waterData;
-      if (token) {
-        setAuthHeader(token);
-      }
-      const { data } = await axios.post('/water', waterItem);
-      return data;
+      setAuthHeader(token);
+      const response = await axios.post('/water', waterData);
+      // console.log('Response from server:', response.data);
+      return response.data;
     } catch (error) {
-      console.error('Error adding water:', error);
+      if (error.response && error.response.status === 401) {
+        // console.error('Unauthorized: Token may be invalid or expired');
+        // } else {
+        //   console.error('Error adding water:', error.response?.data  error.message);
+      }
       return thunkAPI.rejectWithValue(error.response?.data || error.message);
     }
   }
@@ -28,16 +29,14 @@ export const addWaterAmount = createAsyncThunk(
 
 export const updateWaterAmount = createAsyncThunk(
   'water/updateWaterAmount',
-  async (waterData, thunkAPI) => {
+  async ([id, waterItem, token], thunkAPI) => {
     try {
-      const { token, ...waterItem } = waterData;
       if (token) {
         setAuthHeader(token);
       }
-      const { data } = await axios.put(`/water/${waterItem.id}`, waterItem);
+      const { data } = await axios.patch(`/water/${id}`, waterItem);
       return data;
     } catch (error) {
-      console.error('Error updating water:', error);
       return thunkAPI.rejectWithValue(error.response?.data || error.message);
     }
   }
@@ -63,13 +62,13 @@ export const fetchWaterDataByDay = createAsyncThunk(
   'water/fetchWaterDataByDay',
   async ({ date }, { getState, rejectWithValue }) => {
     const state = getState();
-    const token = selectToken(state);
+    const token = selectAccessToken(state);
     setAuthHeader(token);
     try {
       const response = await axios.get(`/water/day/${date}`);
       return response.data;
     } catch (error) {
-      console.error('Error fetching water data:', error.response?.data || error.message);
+      // console.error('Error fetching water data:', error.response?.data || error.message);
       return rejectWithValue(error.response?.data || error.message);
     }
   }

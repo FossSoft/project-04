@@ -1,4 +1,4 @@
-.popover {
+/* .popover {
   position: absolute;
   top: 54px;
   padding: 14px 20px 14px 20px;
@@ -20,51 +20,83 @@
 .popover.active {
   opacity: 1;
   pointer-events: all;
-}
+} */
 
-.container {
+.btnDarkblue {
   display: flex;
   align-items: center;
   column-gap: 8px;
+  padding: 0;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px; /* 128.571% */
+  color: var(--Dark-Blue);
+  background-color: transparent;
+  border-color: transparent;
+  outline: none;
+}
+.btnDarkblue:hover {
+  color: rgba(50, 63, 71, 0.4);
 }
 
-.icon {
+.iconDarkblue {
   display: flex;
   justify-content: center;
   align-self: center;
   width: 16px;
   height: 16px;
+  stroke: var(--Dark-Blue);
 }
 
-.btn {
-  padding: 0;
+.iconDarkblue:hover {
+  stroke: rgba(50, 63, 71, 0.4);
+}
 
+.btnGray {
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+  padding: 0;
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
   line-height: 18px; /* 128.571% */
+  color: rgba(50, 63, 71, 0.4);
   background-color: transparent;
   border-color: transparent;
+  outline: none;
 }
 
-.darkblue {
+.btnGray:hover {
   color: var(--Dark-Blue);
-  stroke: var(--Dark-Blue);
 }
 
-.gray {
-  color: rgba(50, 63, 71, 0.4);
+.iconGray {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  width: 16px;
+  height: 16px;
   stroke: rgba(50, 63, 71, 0.4);
 }
 
+.iconGray:hover {
+  stroke: var(--Dark-Blue);
+}
 @media screen and (min-width: 768px) {
-  .popover {
+  /* .popover {
     top: 64px;
     width: 157px;
     height: 82px;
+  } */
+
+  .btnDarkblue {
+    font-size: 15px;
+    line-height: 22.4px; /* 128.571% */
   }
 
-  .btn {
+  .btnGray {
     font-size: 15px;
     line-height: 22.4px; /* 128.571% */
   }

@@ -1,7 +1,3 @@
+export const selectWaterItems = state => state.water.waterData;
 
-
-export const selectWaterItems = (state) => state.water.waterDay;
-
-export const selectWaterDate = (state) => state.water.date;
-
-
+export const selectWaterDate = state => state.water.date;
