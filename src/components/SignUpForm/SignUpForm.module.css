@@ -5,7 +5,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-bottom: 100px;
 }
 
 form {
@@ -13,7 +12,7 @@ form {
 }
 .container {
   margin-top: 20px;
-  position: relative;
+  /*   position: relative; */
 }
 .input {
   font-family: Poppins;
@@ -43,6 +42,15 @@ form {
   text-align: left;
   color: rgba(47, 47, 47, 0.6);
 }
+.input:hover,
+.input:focus {
+  box-shadow: 7px 5px 29px -18px rgba(50, 63, 71, 1);
+}
+
+.input:focus {
+  box-shadow: 7px 5px 29px -18px rgba(50, 63, 71, 1);
+  transform: scale(1.01);
+}
 
 .errorInput::placeholder {
   color: rgba(239, 80, 80, 1);
@@ -52,6 +60,7 @@ form {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 16px;
 }
 .link {
   font-family: Poppins;
@@ -91,11 +100,12 @@ form {
   text-align: center;
   margin-top: 32px;
   padding: 16px;
-  margin-bottom: 16px;
+  /*    margin-bottom: 16px; */
   border: none;
 }
 
-.button:focus {
+.button:focus,
+.button:hover {
   background-color: rgba(135, 210, 141, 1);
 }
 
@@ -220,8 +230,8 @@ form {
   .modal {
     width: 436px;
     background-color: rgba(240, 239, 244, 1);
-    margin-bottom: 100px;
-    margin-top: 74px;
+    /*     margin-bottom: 100px;
+    margin-top: 74px; */
   }
   .text {
     font-size: 16px;
