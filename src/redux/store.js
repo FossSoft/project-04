@@ -36,7 +36,7 @@ const rootReducer = combineReducers({
   popover: popoverReducer,
   modal: modalReducer,
   water: waterReducer,
-  waterMonth: waterMonthReducer
+  waterMonth: waterMonthReducer,
 });
 
 const rootReducersWithReset = (state, action) => {

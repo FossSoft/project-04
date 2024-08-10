@@ -56,6 +56,7 @@ export default function UserBarPopover({ style }) {
       <Modal
         isOpen={isOpenModalSettings}
         onRequestClose={handleCloseModalSettings}
+        closeButtonPosition={{ right: '50px', top: '40px' }}
       >
         <Setting />
       </Modal>
