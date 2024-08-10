@@ -50,7 +50,7 @@ export const register = createAsyncThunk(
       const { accessToken } = response.data;
       setAuthHeader(accessToken);
       thunkAPI.dispatch(setCredentials(response.data));
-      return response.data;
+      return response.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
     }
