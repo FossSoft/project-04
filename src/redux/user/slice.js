@@ -21,7 +21,7 @@ const initialState = {
   activityTime: '',
   dailyNorma: 0,
   waterData: [],
-  todayProgress: "",
+  todayProgress: '',
   monthlyWaterData: {
     date: '',
     data: [],
@@ -135,7 +135,7 @@ const userSlice = createSlice({
       .addCase(deleteWaterEntry.fulfilled, (state, action) => {
         state.isLoading = false;
         state.waterData = state.waterData.filter(
-        item => item._id !== action.payload
+          item => item._id !== action.payload
         );
       })
       .addCase(deleteWaterEntry.rejected, (state, action) => {
@@ -151,8 +151,8 @@ const userSlice = createSlice({
       })
       .addCase(fetchTodayProgress.rejected, (state, action) => {
         state.isLoading = false;
-        state.error= action.payload;
-      })
+        state.error = action.payload;
+      });
   },
 });
 

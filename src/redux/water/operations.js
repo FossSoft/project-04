@@ -10,14 +10,18 @@ const setAuthHeader = token => {
 
 export const addWaterAmount = createAsyncThunk(
   'water/addWaterAmount',
-  async ([waterItem, token], thunkAPI) => {
+  async ([waterData, token], thunkAPI) => {
     try {
-      if (token) {
-        setAuthHeader(token);
-      }
-      const { data } = await axios.post('/water', waterItem);
-      return data;
+      setAuthHeader(token);
+      const response = await axios.post('/water', waterData);
+      // console.log('Response from server:', response.data);
+      return response.data;
     } catch (error) {
+      if (error.response && error.response.status === 401) {
+        // console.error('Unauthorized: Token may be invalid or expired');
+        // } else {
+        //   console.error('Error adding water:', error.response?.data  error.message);
+      }
       return thunkAPI.rejectWithValue(error.response?.data || error.message);
     }
   }

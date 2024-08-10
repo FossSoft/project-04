@@ -5,7 +5,7 @@ import { addWater } from '../../redux/water/slice';
 import Modal from 'components/Modal/Modal';
 import css from './AddWaterBtn.module.css';
 import sprite from '../../image/sprite/sprite.svg';
-import { WaterModal } from 'components/AddWaterModal/AddWaterModal';
+import { AddWaterModal } from 'components/AddWaterModal/AddWaterModal';
 
 const AddWaterBtn = ({ isPrimary = false }) => {
   const dispatch = useDispatch();
@@ -42,7 +42,7 @@ const AddWaterBtn = ({ isPrimary = false }) => {
       </button>
 
       <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal}>
-        <WaterModal onSubmit={handleAddWater} onCancel={handleCloseModal} />
+        <AddWaterModal onSubmit={handleAddWater} onCancel={handleCloseModal} />
       </Modal>
     </>
   );
