@@ -8,6 +8,7 @@ export const apiClient = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
+  withCredentials: true,
 });
 
 export const setAuthHeader = token => {
@@ -18,44 +19,30 @@ export const clearAuthHeader = () => {
   apiClient.defaults.headers.common.Authorization = '';
 };
 
-export const getToken = state =>
-  state.auth.accessToken || localStorage.getItem('token');
-
-export const setupAxiosInterceptors = store => {
-  // apiClient.interceptors.request.use(
-  //   config => {
-  //     const { auth } = store.getState();
-  //     if (auth.accessToken) {
-  //       config.headers.Authorization = `Bearer ${auth.accessToken}`;
-  //     }
-  //     return config;
-  //   },
-  //   error => Promise.reject(error)
-  // );
+export const getToken = state => state.auth.accessToken;
 
   apiClient.interceptors.response.use(
-    response => response,
-    async error => {
-      const { response, config } = error;
+    response => {
+      return response;
+    },
+    async function (error) {
+      const originalRequest = error.config;
+      if (error.response.status === 401 && !originalRequest._retry) {
+        originalRequest._retry = true;
+        const {
+          data: { data: accessToken },
+        } = await apiClient.post('/auth/refresh');
+        setAuthHeader(accessToken);
 
-      if (response.status === 401 && !config.__isRetryRequest) {
-        config.__isRetryRequest = true;
-
-        try {
-          await store.dispatch(refreshToken()).unwrap();
-          const { auth } = store.getState();
-          // config.headers.Authorization = `Bearer ${auth.accessToken}`;
-          setAuthHeader(auth.accessToken);
-          return apiClient(config);
-        } catch (refreshError) {
-          store.dispatch(clearCredentials());
-          return Promise.reject(refreshError);
-        }
+        // await store.dispatch(resetTokens(accessToken));
+        axios.defaults.headers.common['Authorization'] =
+          'Bearer ' + accessToken;
+        return apiClient(originalRequest);
       }
       return Promise.reject(error);
     }
   );
-};
+
 
 export const register = createAsyncThunk(
   'auth/register',
@@ -87,20 +74,20 @@ export const logIn = createAsyncThunk(
   }
 );
 
-export const refreshToken = createAsyncThunk(
-  'auth/refresh',
-  async (_, thunkAPI) => {
-    try {
-      const { data } = await apiClient.post('/auth/refresh');
-      setAuthHeader(data.data.accessToken);
-      thunkAPI.dispatch(setCredentials(data.data));
-      console.log(data.data);
-      return data.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.response?.data || error.message);
-    }
-  }
-);
+// export const refreshToken = createAsyncThunk(
+//   'auth/refresh',
+//   async (_, thunkAPI) => {
+//     try {
+//       const { data } = await apiClient.post('/auth/refresh');
+//       setAuthHeader(data.data.accessToken);
+//       thunkAPI.dispatch(setCredentials(data.data));
+//       console.log(data.data);
+//       return data.data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.response?.data || error.message);
+//     }
+//   }
+// );
 
 export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {

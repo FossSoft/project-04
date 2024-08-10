@@ -70,6 +70,6 @@ export const store = configureStore({
     }),
 });
 
-setupAxiosInterceptors(store);
+// setupAxiosInterceptors(store);
 
 export const persistor = persistStore(store);
