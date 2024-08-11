@@ -39,6 +39,10 @@ export default function UserBarPopover({ style }) {
   const handleCloseModalLogout = () => {
     dispatch(closeModalLogout());
   };
+  const closeButtonPosition =
+    window.innerWidth > 768
+      ? { right: '40px', top: '40px' }
+      : { right: '16px', top: '20px' };
 
   return (
     <div className={showPopover ? 'popover active' : 'popover'} style={style}>
@@ -56,7 +60,7 @@ export default function UserBarPopover({ style }) {
       <Modal
         isOpen={isOpenModalSettings}
         onRequestClose={handleCloseModalSettings}
-        closeButtonPosition={{ right: '50px', top: '40px' }}
+        closeButtonPosition={closeButtonPosition}
       >
         <Setting />
       </Modal>
