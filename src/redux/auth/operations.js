@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { setCredentials, clearCredentials, logoutAction } from './slice';
+import { setCredentials, logoutAction } from './slice';
 
 export const apiClient = axios.create({
-  // baseURL: 'https://back-end-aquatrack.onrender.com',
-  baseURL: 'http://localhost:3001',
+  baseURL: 'https://back-end-aquatrack.onrender.com',
+  // baseURL: 'http://localhost:3001',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -31,7 +31,9 @@ export const setupAxiosInterceptors = store => {
           const accessToken = res.data.data.accessToken;
           console.log(accessToken);
           // setAuthHeader(accessToken);
-          apiClient.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+          apiClient.defaults.headers.common[
+            'Authorization'
+          ] = `Bearer ${accessToken}`;
           originalRequest.headers['Authorization'] = `Bearer ${accessToken}`;
           console.log(originalRequest);
           store.dispatch(setCredentials(accessToken));
@@ -52,7 +54,7 @@ export const register = createAsyncThunk(
   async (userData, thunkAPI) => {
     try {
       const response = await apiClient.post('/auth/register', userData);
-      const  accessToken  = response.data.data.accessToken;
+      const accessToken = response.data.data.accessToken;
       setAuthHeader(accessToken);
       // thunkAPI.dispatch(setCredentials(accessToken));
       return response.data.data;
