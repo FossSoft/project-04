@@ -62,7 +62,7 @@ export default function SignUpForm() {
     const { repeatPassword, ...payload } = data;
 
     try {
-      const result = await dispatch(register(payload)).unwrap();
+      const result = await dispatch(register(payload));
       if (result?.data?.accessToken) {
         localStorage.setItem('token', result.data.accessToken);
         toast.success('Successfully registered!');

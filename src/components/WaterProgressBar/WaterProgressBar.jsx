@@ -2,18 +2,25 @@ import { useEffect } from 'react';
 import styles from './WaterProgressBar.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTodayProgress } from '../../redux/user/operations.js';
-import { selectTodayProgress, selectUserWaterToDrink } from '../../redux/user/selectors.js';
+import {
+  selectIsUserExist,
+  selectTodayProgress,
+  selectUserWaterToDrink,
+} from '../../redux/user/selectors.js';
 import { selectWaterItems } from '../../redux/water/selectors.js';
 
 export default function WaterProgressBar() {
   const dispatch = useDispatch();
   const percents = useSelector(selectTodayProgress);
   const waterData = useSelector(selectWaterItems);
-  const waterNorma = useSelector(selectUserWaterToDrink)
+  const waterNorma = useSelector(selectUserWaterToDrink);
+  const isUserExist = useSelector(selectIsUserExist);
 
   useEffect(() => {
-    dispatch(fetchTodayProgress());
-  }, [dispatch, waterData, waterNorma]);
+    console.log('fetchTodayProggress');
+    console.log(isUserExist);
+    isUserExist && dispatch(fetchTodayProgress());
+  }, [dispatch, waterData, waterNorma, isUserExist]);
 
   return (
     <div className={styles.container}>

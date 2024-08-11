@@ -142,7 +142,7 @@ export const Setting = () => {
     };
   }, []);
   useEffect(() => {
-    dispatch(fetchUserInfo()).unwrap();
+    dispatch(fetchUserInfo());
   }, [dispatch]);
 
   const onSubmit = data => {

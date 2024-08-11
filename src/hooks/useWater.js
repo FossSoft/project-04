@@ -4,6 +4,7 @@ import { toast } from 'react-hot-toast';
 import { deleteWater, addWater } from '../redux/water/slice';
 import { fetchWaterDataByDay, deleteWaterEntry } from '../redux/water/operations';
 import { selectWaterItems } from '../redux/water/selectors';
+import { selectIsUserExist } from '../redux/user/selectors.js';
 
 const toastOptions = {
   duration: 5000,
@@ -13,6 +14,8 @@ const toastOptions = {
     boxShadow: '8px 11px 27px -8px rgba(66, 68, 90, 1)',
   },
 };
+
+
 
 export const useWaterItem = (item) => {
   const dispatch = useDispatch();
@@ -52,7 +55,7 @@ export const useAddWater = () => {
 
   const handleAddWater = async (waterData) => {
     try {
-      await dispatch(addWater(waterData)).unwrap();
+      await dispatch(addWater(waterData));
       toast.success('Added water successfully!', toastOptions);
       closeModal();
     } catch (error) {
@@ -70,15 +73,17 @@ export const useAddWater = () => {
 
 export const useFetchWaterData = (selectedDate) => {
   const dispatch = useDispatch();
-  const waterData = useSelector(selectWaterItems);
+  const token = useSelector(selectAccessToken);
+  const waterData = useSelector(selectWaterItems); // Використання селектора
+  const isUserExist = useSelector(selectIsUserExist);
 
   useEffect(() => {
     const formattedDate = selectedDate ? new Date(selectedDate).toISOString().split('T')[0] : new Date().toISOString().split('T')[0];
 
-    if (formattedDate) {
+    if (formattedDate && token && isUserExist) {
       dispatch(fetchWaterDataByDay({ date: formattedDate }));
     }
-  }, [dispatch, selectedDate]);
+  }, [dispatch, selectedDate, token, isUserExist]);
 
   return { waterData };
 };
@@ -92,7 +97,7 @@ export const useDeleteWater = (item, onClose) => {
       return;
     }
     try {
-      await dispatch(deleteWaterEntry({ id: item.id })).unwrap();
+      await dispatch(deleteWaterEntry({ id: item.id }));
       toast.success('Deleted water successfully!', toastOptions);
       onClose();
     } catch (error) {

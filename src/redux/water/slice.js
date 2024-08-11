@@ -79,16 +79,7 @@ const waterSlice = createSlice({
       .addCase(deleteWaterEntry.pending, startLoading)
       .addCase(addWaterAmount.fulfilled, (state, action) => {
         state.isLoading = false;
-
-        if (!action.payload.id) {
-          return;
-        }
-        const exists = state.waterData.some(
-          item => item.id === action.payload.id
-        );
-        if (!exists) {
-          state.waterData.push(action.payload);
-        }
+        state.waterData.push(action.payload.data);
       })
       .addCase(deleteWaterEntry.fulfilled, (state, action) => {
         state.isLoading = false;

@@ -69,8 +69,8 @@ export const AddWaterModal = ({ onCancel }) => {
       time,
       date: waterDate,
     };
-    await dispatch(addWaterAmount(waterData)).unwrap();
-    dispatch(addWater(waterData));
+    await dispatch(addWaterAmount(waterData));
+    // dispatch(addWater(waterData));
     onCancel();
   };
 
