@@ -41,8 +41,8 @@ export const deleteWaterEntry = createAsyncThunk(
 export const fetchWaterDataByDay = createAsyncThunk(
   'water/fetchWaterDataByDay',
   async ({ date }, { getState, rejectWithValue }) => {
-    const state = getState();
-    const token = selectAccessToken(state);
+    // const state = getState();
+    // const token = selectAccessToken(state);
     // setAuthHeader(token);
     try {
       const response = await apiClient.get(`/water/day/${date}`);

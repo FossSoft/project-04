@@ -15,6 +15,7 @@ export default function TrackerPage() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log("FetchUSerInfo")
     dispatch(fetchUserInfo());
   }, [dispatch]);
   return (

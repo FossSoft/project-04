@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { logIn, register, setAuthHeader, clearAuthHeader, logout } from './operations';
+import { fetchTodayProgress } from '../user/operations.js';
 
 const authInitialState = {
   user: null,
@@ -14,14 +15,17 @@ const authSlice = createSlice({
   initialState: authInitialState,
   reducers: {
     setCredentials: (state, action) => {
-      state.accessToken = action.payload.accessToken;
-      state.user = action.payload.user;
-      setAuthHeader(state.accessToken);
+      state.accessToken = action.payload;
+      // state.user = action.payload.user;
+      // setAuthHeader(state.accessToken);
     },
     clearCredentials: (state) => {
       state.accessToken = null;
       state.user = null;
       clearAuthHeader();
+    },
+    logoutAction: (state) => {
+      return {...authInitialState}
     }
   },
   extraReducers: builder => {
@@ -39,6 +43,7 @@ const authSlice = createSlice({
       .addCase(logIn.rejected, (state, action) => {
         state.error = action.error;
         state.isRefreshing = false;
+        state.isLoggedIn = false;
       })
       .addCase(register.fulfilled, (state, action) => {
         console.log('Register Success:', action.payload);
@@ -61,9 +66,18 @@ const authSlice = createSlice({
       })
       .addCase(logout.rejected, (state, action) => {
         state.accessToken = '';
-      });
+      })
+      .addCase(fetchTodayProgress.pending, (state, action) => {
+        state.isRefreshing = true;
+      })
+      .addCase(fetchTodayProgress.fulfilled, (state, action) => {
+        state.isRefreshing = false;
+      })
+      .addCase(fetchTodayProgress.rejected, (state, action) => {
+        state.isRefreshing = false;
+      })
   },
 });
 
-export const { setCredentials, clearCredentials } = authSlice.actions;
+export const { setCredentials, clearCredentials, logoutAction } = authSlice.actions;
 export const authReducer = authSlice.reducer;

@@ -77,18 +77,18 @@ const waterSlice = createSlice({
       .addCase(addWaterAmount.fulfilled, (state, action) => {
         state.isLoading = false;
 
-        if (!action.payload.id) {
-          // console.warn('Received water entry with undefined ID:', action.payload);
-          return;
-        }
-        const exists = state.waterData.some(
-          item => item.id === action.payload.id
-        );
-        if (!exists) {
-          state.waterData.push(action.payload);
+        // if (!action.payload.id) {
+        //   // console.warn('Received water entry with undefined ID:', action.payload);
+        //   return;
+        // }
+        // const exists = state.waterData.some(
+        //   item => item.id === action.payload.id
+        // );
+        // if (!exists) {
+          state.waterData.push(action.payload.data);
           // } else {
           //   console.warn(Duplicate ID detected: ${action.payload.id});
-        }
+        // }
       })
       .addCase(deleteWaterEntry.fulfilled, (state, action) => {
         state.isLoading = false;

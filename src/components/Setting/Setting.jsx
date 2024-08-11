@@ -123,7 +123,7 @@ export const Setting = () => {
   }, [weightValue, timeValue, genderValue]);
 
   useEffect(() => {
-    dispatch(fetchUserInfo()).unwrap();
+    dispatch(fetchUserInfo());
   }, [dispatch]);
 
   const onSubmit = data => {
