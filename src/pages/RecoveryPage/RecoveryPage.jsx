@@ -1,10 +1,9 @@
-import SignInForm from '../../components/SignInForm/SignInForm';
+import SendEmailForm from '../../components/SendEmailForm/SendEmailForm';
 import Logo from '../../components/Logo/Logo';
 import AdvantagesSection from 'components/AdvantagesSection/AdvantagesSection';
-import { Link } from 'react-router-dom';
-import css from './SignInPage.module.css';
+import css from './RecoveryPage.module.css';
 
-export default function LoginPage() {
+export default function RecoveryLogin() {
   return (
     <div className={css.page}>
       <div className={css.wrapper}>
@@ -12,13 +11,7 @@ export default function LoginPage() {
           <Logo />
         </div>
         <div className={css.container}>
-          <SignInForm />
-          <p className={css.text}>
-            Don`t have an account?{' '}
-            <Link to="/signup" className={css.link}>
-              Sign Up
-            </Link>
-          </p>
+          <SendEmailForm />
         </div>
       </div>
       <div className={css.imageWrapper}>

@@ -87,3 +87,19 @@ export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
     return thunkAPI.rejectWithValue(error.message);
   }
 });
+
+export const sendEmail = createAsyncThunk(
+  'auth/request-reset-email',
+  async (credentials, thunkAPI) => {
+    try {
+      const response = await apiClient.post(
+        '/auth/request-reset-email',
+        credentials
+      );
+      thunkAPI.dispatch(clearCredentials());
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
