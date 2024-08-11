@@ -10,6 +10,8 @@ import SignInPage from '../../pages/SignInPage/SignInPage';
 import TrackerPage from '../../pages/TrackerPage/TrackerPage';
 import SignUpPage from 'pages/SignUpPage/SignUpPage';
 import { Setting } from 'components/Setting/Setting.jsx';
+// Ярик
+import RecoveryPage from '../../pages/RecoveryPage/RecoveryPage';
 
 export default function App() {
   // const dispatch = useDispatch();
@@ -41,6 +43,7 @@ export default function App() {
         />
         <Route path="/signup" element={<SignUpPage />}></Route>
         <Route path="/tracker" element={<TrackerPage />}></Route>
+        <Route path="/request-reset-email" element={<RecoveryPage />}></Route>
       </Routes>
     </>
   );

@@ -18,10 +18,10 @@ export const clearAuthHeader = () => {
   apiClient.defaults.headers.common.Authorization = '';
 };
 
-export const setupAxiosInterceptors = (store) => {
+export const setupAxiosInterceptors = store => {
   apiClient.interceptors.response.use(
-    (response) => response,
-    async (error) => {
+    response => response,
+    async error => {
       const originalRequest = error.config;
       if (error.response.status === 401 && !originalRequest._retry) {
         originalRequest._retry = true;
@@ -79,3 +79,19 @@ export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
     return thunkAPI.rejectWithValue(error.message);
   }
 });
+
+export const sendEmail = createAsyncThunk(
+  'auth/request-reset-email',
+  async (credentials, thunkAPI) => {
+    try {
+      const response = await apiClient.post(
+        '/auth/request-reset-email',
+        credentials
+      );
+      thunkAPI.dispatch(clearCredentials());
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);

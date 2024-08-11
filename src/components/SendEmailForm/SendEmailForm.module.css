@@ -4,20 +4,17 @@
   flex-direction: column;
   margin-bottom: 16px;
 }
+
 .text {
+  align-self: center;
   color: rgba(47, 47, 47, 0.5);
+  font-family: 'Poppins', sans-serif;
   font-size: 14px;
-  line-height: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px; /* 128.571% */
   letter-spacing: -0.14px;
 }
-
-.spanLink {
-  color: var(--dark-grey);
-  text-decoration-line: underline;
-  font-weight: 700;
-  letter-spacing: -0.16px;
-}
-
 .title {
   color: #323f47;
   /* Mobile/H2 */
@@ -54,6 +51,28 @@
   margin-bottom: 8px;
 }
 
+.text {
+  align-self: center;
+  color: rgba(47, 47, 47, 0.5);
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px; /* 128.571% */
+  letter-spacing: -0.14px;
+}
+
+.link {
+  color: #2f2f2f;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: -0.14px;
+  text-decoration-line: underline;
+  cursor: pointer;
+}
 .input {
   display: flex;
   padding: 16px;
@@ -177,11 +196,6 @@ input:active {
 }
 
 @media screen and (min-width: 375px) {
-  .text {
-    font-size: 16px;
-    line-height: 24px;
-    letter-spacing: -0.16px;
-  }
   .form {
     width: 311px;
   }
@@ -190,6 +204,11 @@ input:active {
 @media screen and (min-width: 768px) {
   .form {
     width: 436px;
+  }
+  .text {
+    font-size: 16px;
+    line-height: 24px; /* 150% */
+    letter-spacing: -0.16px;
   }
 
   .title {

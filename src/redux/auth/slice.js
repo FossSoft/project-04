@@ -1,11 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { logIn, register, setAuthHeader, clearAuthHeader, logout } from './operations';
+import {
+  logIn,
+  register,
+  setAuthHeader,
+  clearAuthHeader,
+  logout,
+  sendEmail,
+} from './operations';
 
 const authInitialState = {
   user: null,
   accessToken: localStorage.getItem('token') || null,
   isLoggedIn: false,
   isRefreshing: false,
+  isEmailSending: false,
+  emailSent: false,
+  emailError: null,
   error: null,
 };
 
@@ -18,11 +28,11 @@ const authSlice = createSlice({
       state.user = action.payload.user;
       setAuthHeader(state.accessToken);
     },
-    clearCredentials: (state) => {
+    clearCredentials: state => {
       state.accessToken = null;
       state.user = null;
       clearAuthHeader();
-    }
+    },
   },
   extraReducers: builder => {
     builder
@@ -61,6 +71,21 @@ const authSlice = createSlice({
       })
       .addCase(logout.rejected, (state, action) => {
         state.accessToken = '';
+      })
+      .addCase(sendEmail.fulfilled, (state, action) => {
+        state.isEmailSending = false;
+        state.emailSent = true;
+        state.emailError = null;
+      })
+      .addCase(sendEmail.pending, state => {
+        state.isEmailSending = true;
+        state.emailSent = false;
+        state.emailError = null;
+      })
+      .addCase(sendEmail.rejected, (state, action) => {
+        state.isEmailSending = false;
+        state.emailSent = false;
+        state.emailError = action.error.message;
       });
   },
 });

@@ -7,6 +7,7 @@ import { logIn } from '../../redux/auth/operations';
 import { useDispatch } from 'react-redux';
 import sprite from '../../image/sprite/sprite.svg';
 import css from './SignInForm.module.css';
+import { Link } from 'react-router-dom';
 
 export default function LoginForm() {
   const [type, setType] = useState('password');
@@ -49,9 +50,9 @@ export default function LoginForm() {
     },
   });
 
-  const onSubmit = async (values) => {
-      dispatch(logIn(values));
-      reset();
+  const onSubmit = async values => {
+    dispatch(logIn(values));
+    reset();
     // try {
     //   const result = await dispatch(logIn(values)).unwrap();
     //   localStorage.setItem('accessToken', result.data.accessToken);
@@ -146,6 +147,13 @@ export default function LoginForm() {
                 );
               }}
             />
+            <p className={css.text}>
+              <Link to="/request-reset-email">
+                <span className={css.spanLink} style={{ fontSize: 14 }}>
+                  Forgot password?
+                </span>
+              </Link>
+            </p>
             <button
               type="button"
               className={css.iconButton}
