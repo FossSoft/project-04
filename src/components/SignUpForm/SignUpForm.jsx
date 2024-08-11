@@ -63,13 +63,13 @@ export default function SignUpForm() {
 
     try {
       const result = await dispatch(register(payload));
-      if (result?.data?.accessToken) {
-        localStorage.setItem('token', result.data.accessToken);
+      // if (result?.accessToken) {
+        // localStorage.setItem('token', result.data.accessToken);
         toast.success('Successfully registered!');
         navigate('/tracker');
-      } else {
-        toast.error('Unexpected response format');
-      }
+      // } else {
+      //   toast.error('Unexpected response format');
+      // }
     } catch (error) {
       toast.error(error?.message || 'Registration failed');
     } finally {
