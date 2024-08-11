@@ -1,7 +1,22 @@
 .probe::-webkit-scrollbar {
-  display: none;
+  width: 15px;
+  opacity: 1;
 }
 
+.probe::-webkit-scrollbar-track {
+  border-radius: 40px;
+}
+
+.probe::-webkit-scrollbar-thumb {
+  background-color: #abb1b4;
+
+  width: 15px;
+  border-radius: 40px;
+}
+
+.probe::-webkit-scrollbar-thumb:hover {
+  background: #888;
+}
 .loaderBg {
   position: fixed;
   top: 0;
