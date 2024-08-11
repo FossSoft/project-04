@@ -122,7 +122,6 @@ export const Setting = () => {
     }
   }, [weightValue, timeValue, genderValue]);
   const modalContentRef = useRef(null);
-
   useEffect(() => {
     const handleKeyDown = event => {
       if (modalContentRef.current) {
@@ -136,41 +135,12 @@ export const Setting = () => {
       }
     };
 
-    const handleMouseDown = event => {
-      if (event.button !== 0 || !modalContentRef.current) return;
-      event.preventDefault();
-
-      const startY = event.pageY;
-      const startScrollTop = modalContentRef.current.scrollTop;
-
-      const handleMouseMove = moveEvent => {
-        const deltaY = moveEvent.pageY - startY;
-        modalContentRef.current.scrollTop = startScrollTop - deltaY;
-      };
-
-      const handleMouseUp = () => {
-        document.removeEventListener('mousemove', handleMouseMove);
-        document.removeEventListener('mouseup', handleMouseUp);
-      };
-
-      document.addEventListener('mousemove', handleMouseMove);
-      document.addEventListener('mouseup', handleMouseUp);
-    };
-
     document.addEventListener('keydown', handleKeyDown);
-    modalContentRef.current.addEventListener('mousedown', handleMouseDown);
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
-      if (modalContentRef.current) {
-        modalContentRef.current.removeEventListener(
-          'mousedown',
-          handleMouseDown
-        );
-      }
     };
   }, []);
-
   useEffect(() => {
     dispatch(fetchUserInfo()).unwrap();
   }, [dispatch]);
