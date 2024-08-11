@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useAuth } from '../../hooks/useAuth';
-import { refreshToken } from '../../redux/auth/operations';
+import { fetchUserInfo } from '../../redux/user/operations';
 import RestrictedRoute from '../../components/RestricktedRoute';
 import PrivateRoute from '../../components/PrivateRoute';
 import HomePage from '../../pages/HomePage/HomePage';
@@ -14,16 +14,6 @@ import { Setting } from 'components/Setting/Setting.jsx';
 import RecoveryPage from '../../pages/RecoveryPage/RecoveryPage';
 
 export default function App() {
-  // const dispatch = useDispatch();
-  // const { isRefreshing } = useAuth();
-  // useEffect(() => {
-  //   dispatch(refreshToken());
-  // }, [dispatch]);
-
-  // return isRefreshing ? (
-  //   <b>Refreshing user</b>
-  // ) : (
-
   return (
     <>
       <Routes>

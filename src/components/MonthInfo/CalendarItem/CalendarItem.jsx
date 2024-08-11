@@ -1,4 +1,3 @@
-// src\components\MonthInfo\CalendarItem\CalendarItem.jsx
 import { useDispatch } from 'react-redux';
 import { setDate } from '../../../redux/water/calendar/slice';
 import { format } from 'date-fns';
@@ -7,26 +6,17 @@ import css from './CalendarItem.module.css';
 
 const CalendarItem = ({
   day, // строка с датой в формате 'YYYY-MM-DD'
-  percentageConsumed, // строка с процентами, например '13%'
+  percentageConsumed, // число с процентами
   onClick, // Функция для обработки клика на день
 }) => {
   const dispatch = useDispatch();
 
-  // Логирование данных
-  console.log('Received day:', day);
-  console.log('Received percentage:', percentageConsumed);
-
   // Преобразование строки даты в формат YYYY-MM-DD
-  const dayNumber = day.split('-')[2];
-  const percentages =
-    Math.floor(Number(percentageConsumed.replace('%', ''))) || 0; // Удаление '%' и преобразование в число
+  const dayNumber = parseInt(day.split('-')[2], 10);
 
-  // Логика для стилизации
-  const classNameWrapper = clsx(css.dayWrapper, {
-    [css.currentDay]: day === format(new Date(), 'yyyy-MM-dd'), // Текущая дата
-    [css.selectedDay]: day === format(new Date(), 'yyyy-MM-dd'),
-    [css.highlightedBackground]: percentages > 0,
-    [css.defaultBackground]: percentages === 0,
+  // Определение класса для процентов
+  const percentageClass = clsx({
+    [css.boldText]: percentageConsumed > 100,
   });
 
   const handleClick = () => {
@@ -38,15 +28,25 @@ const CalendarItem = ({
 
   return (
     <div
-      className={classNameWrapper}
+      className={css.container}
       onClick={handleClick}
       style={{ cursor: 'pointer' }}
     >
-      <div className={clsx(css.number, { [css.notFull]: percentages < 100 })}>
+      <div
+        className={clsx(css.number, {
+          [css.currentDay]: day === format(new Date(), 'yyyy-MM-dd'), // Текущая дата
+          [css.selectedDay]: day === format(new Date(), 'yyyy-MM-dd'), // Выбранная дата
+        })}
+      >
         {dayNumber}
       </div>
-      <span className={css.percentages}>
-        {percentages < 100 ? percentages : 100}%
+      <span className={clsx(css.percentages, percentageClass)}>
+        {percentageConsumed > 100
+          ? percentageConsumed
+          : percentageConsumed < 100
+          ? percentageConsumed
+          : 100}
+        %
       </span>
     </div>
   );

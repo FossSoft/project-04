@@ -71,6 +71,7 @@
   line-height: 24px; /* 150% */
   letter-spacing: -0.16px;
   width: 100%;
+  background-color: rgba(240, 239, 244, 1);
 }
 
 .input:hover,

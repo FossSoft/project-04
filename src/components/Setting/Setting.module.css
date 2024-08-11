@@ -1,17 +1,21 @@
-.probe::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 15px;
-}
 .probe::-webkit-scrollbar {
-  width: 12px;
-  margin-left: 16px;
+  width: 15px;
+  opacity: 1;
 }
+
+.probe::-webkit-scrollbar-track {
+  border-radius: 40px;
+}
+
 .probe::-webkit-scrollbar-thumb {
-  background: #abb1b4;
-  border-radius: 15px;
+  background-color: #abb1b4;
+
+  width: 15px;
+  border-radius: 40px;
 }
+
 .probe::-webkit-scrollbar-thumb:hover {
-  background-color: #888;
+  background: #888;
 }
 .loaderBg {
   position: fixed;
@@ -97,6 +101,7 @@ input[type='number']::-webkit-outer-spin-button {
   display: flex;
   gap: 8px;
   align-items: center;
+  cursor: pointer;
 }
 
 .genderTitle {

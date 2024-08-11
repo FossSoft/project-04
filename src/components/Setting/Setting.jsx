@@ -121,9 +121,28 @@ export const Setting = () => {
       }
     }
   }, [weightValue, timeValue, genderValue]);
-
+  const modalContentRef = useRef(null);
   useEffect(() => {
-    dispatch(fetchUserInfo()).unwrap();
+    const handleKeyDown = event => {
+      if (modalContentRef.current) {
+        if (event.key === 'ArrowDown') {
+          modalContentRef.current.scrollBy({ top: 100, behavior: 'smooth' });
+          event.preventDefault();
+        } else if (event.key === 'ArrowUp') {
+          modalContentRef.current.scrollBy({ top: -100, behavior: 'smooth' });
+          event.preventDefault();
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+  useEffect(() => {
+    dispatch(fetchUserInfo());
   }, [dispatch]);
 
   const onSubmit = data => {
@@ -141,7 +160,7 @@ export const Setting = () => {
     dispatch(closeModalSettings());
   };
   return (
-    <div className={css.probe}>
+    <div className={css.probe} ref={modalContentRef}>
       <form ref={form} className={css.form} onSubmit={handleSubmit(onSubmit)}>
         <h2 className={css.titleForm}>Setting</h2>
         <div className={css.titleContainer}>

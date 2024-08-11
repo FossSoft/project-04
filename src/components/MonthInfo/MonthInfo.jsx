@@ -1,6 +1,5 @@
-// src/components/MonthInfo/MonthInfo.jsx
 import { useDispatch, useSelector } from 'react-redux';
-import { format } from 'date-fns'; // Удаляем getMonth и getYear
+import { format } from 'date-fns';
 import Calendar from './Calendar/Calendar.jsx';
 import CalendarPagination from './CalendarPagination/CalendarPagination.jsx';
 import CalendarTitle from './CalendarTitle/CalendarTitle.jsx';
@@ -26,6 +25,19 @@ function MonthInfo() {
   const selectedDate = useSelector(selectDate); // Дата в формате 'YYYY-MM-DD'
   const isLoading = useSelector(selectIsLoading);
   const isError = useSelector(selectError);
+
+  // Функция для форматирования процентов в число
+  const formatPercentage = percentage => {
+    if (!percentage) return 0;
+
+    const value = parseFloat(percentage.replace('%', ''));
+    return isNaN(value) ? 0 : Math.floor(value);
+  };
+
+  // Переменная для форматированного процента
+  const percentageNumber = monthArray.map(item =>
+    formatPercentage(item.percentage)
+  );
 
   const changeMonth = increment => {
     if (increment > 0) {
@@ -65,7 +77,8 @@ function MonthInfo() {
 
   return (
     <div className={css.container}>
-      <div className={css.wrapperContainer}>
+      {/* <div className={css.wrapperContainer}> */}
+      <div className={css.containerHeader}>
         <CalendarTitle onTodayHandler={onTodayHandler} title="Month" />
         <div className={css.containerToggle}>
           <CalendarPagination
@@ -76,17 +89,18 @@ function MonthInfo() {
           <CalendarToggle isActive={isActive} setIsActive={setIsActive} />
         </div>
       </div>
+      {/* </div> */}
       {isError && (
         <div className={css.errorMessage}>
           <p>An error occurred</p>
         </div>
       )}
-      {isLoading && <Loader />}
 
+      {isLoading && <Loader />}
       <Calendar
-        monthArray={monthArray}
+        percentage={percentageNumber}
         monthDay={monthDay}
-        date={selectedDate}
+        selectedDate={selectedDate}
         onClick={onDateSelect}
       />
     </div>
