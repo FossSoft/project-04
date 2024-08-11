@@ -1,14 +1,11 @@
-// src/components/MonthInfo/Calendar/Calendar.jsx
 import CalendarItem from '../CalendarItem/CalendarItem';
 import css from './Calendar.module.css';
 
-const Calendar = ({ monthArray, monthDay, selectedDate, onClick }) => {
+const Calendar = ({ percentage, monthDay, selectedDate, onClick }) => {
   return (
     <ul className={css.gridWrapper}>
       {monthDay.map((date, index) => {
-        const percentage =
-          monthArray.find(item => item.date === date)?.percentage || '0%';
-
+        // Получаем уникальный ключ для каждого элемента на основе индекса и разницы во времени
         const millisecondsToSelectedDate =
           new Date(date) - new Date(selectedDate);
         const uniqueKey = `${index}-${millisecondsToSelectedDate}`;
@@ -17,7 +14,7 @@ const Calendar = ({ monthArray, monthDay, selectedDate, onClick }) => {
           <CalendarItem
             key={uniqueKey}
             day={date} // Передаем дату как строку в формате 'YYYY-MM-DD'
-            percentageConsumed={percentage} // Передаем процент как строку
+            percentageConsumed={percentage[index] || 0} // Передаем соответствующий процент для каждого дня
             onClick={() => {
               onClick(date); // Передаем строку даты в формате 'YYYY-MM-DD'
             }}
