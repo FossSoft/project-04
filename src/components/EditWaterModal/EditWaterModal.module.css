@@ -90,6 +90,11 @@
   padding: 0;
   border: 1px solid #323f47;
 }
+.quantityBtn:disabled {
+  cursor: not-allowed;
+  background-color: rgba(108, 114, 117, 0.3);
+}
+
 .quantityIcon {
   display: flex;
   align-items: center;
@@ -102,7 +107,7 @@
   border-radius: 50px;
   padding: 11px 20px;
   background-color: #323f47;
-  width: 92px;
+  width: 95px;
   display: flex;
   justify-content: center;
 }

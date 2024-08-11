@@ -7,8 +7,6 @@ import css from './ChooseDate.module.css';
 function ChooseDate() {
   const currentDate = useSelector(selectWaterDate);
 
-  // console.log('Current Date:', currentDate);
-
   const formattedDate = new Date(currentDate);
 
   return (

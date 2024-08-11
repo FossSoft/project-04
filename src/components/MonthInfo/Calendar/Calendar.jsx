@@ -6,28 +6,24 @@ const isValidDate = dateString => {
   return !isNaN(date.getTime());
 };
 
-const Calendar = ({ month, date, onClick }) => {
-  if (month.length === 0) return null;
+const Calendar = ({ monthArray, date, onClick }) => {
+  if (monthArray.length === 0) return null;
 
   return (
     <ul className={css.calendar}>
-      {month.map((day, index) => {
-        // Получаем процент как строку, или '0%' по умолчанию
-        const percentageString = day.percentageConsumed || '0%';
+      {monthArray.map((day, index) => {
+        const percentageString = day.percentage || '0%';
 
         return (
           <CalendarItem
             key={index}
-            day={day.day}
-            isCurrentDay={day.day === date}
-            isSelectedDay={day.day === date}
-            // Передаём процент как есть, строкой
-            percentage={percentageString}
+            day={day.date} // Передаем дату как строку в формате 'YYYY-MM-DD'
+            percentageConsumed={percentageString} // Передаем процент как строку
             onClick={() => {
-              if (isValidDate(day.day)) {
-                onClick(day.day);
+              if (isValidDate(day.date)) {
+                onClick(day.date); // Передаем строку даты в формате 'YYYY-MM-DD'
               } else {
-                console.error('Invalid date value:', day.day);
+                console.error('Invalid date value:', day.date);
               }
             }}
           />

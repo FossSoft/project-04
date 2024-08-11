@@ -1,16 +1,17 @@
 .page {
   margin: 16px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
 }
 
 .wrapper {
   max-width: 380px;
   width: 100%;
-  padding: 24px 16px 216px 16px;
+  height: 780px;
+  padding: 24px 16px 16px 16px;
   border-radius: 30px;
   background: #f0eff4;
-  margin: 0 auto;
+  /* margin: 0 auto; */
 }
 
 .logoBox {
@@ -69,7 +70,8 @@
 
   .wrapper {
     max-width: 704px;
-    padding: 32px 32px 281px 32px;
+    height: 960px;
+    padding: 32px;
   }
 
   .logoBox {
@@ -96,6 +98,7 @@
 @media screen and (min-width: 1440px) {
   .wrapper {
     max-width: 672px;
+    height: 736px;
     padding-bottom: 169px;
     margin-right: 32px;
   }

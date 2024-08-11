@@ -53,7 +53,7 @@
   line-height: 1.28;
   letter-spacing: -0.01em;
   text-align: center;
-  padding: 14px 129px;
+  padding: 14px 0;
 
 }
 
@@ -114,6 +114,6 @@
     font-size: 16px;
     line-height: 1.5;
 
-    padding: 18px 67px;
+    padding: 18px 0;
   }
 }

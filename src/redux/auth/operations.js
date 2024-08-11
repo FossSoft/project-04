@@ -7,41 +7,34 @@ export const apiClient = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
+  withCredentials: true,
 });
 
-const setAuthHeader = token => {
+export const setAuthHeader = token => {
   apiClient.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
-const clearAuthHeader = () => {
+export const clearAuthHeader = () => {
   apiClient.defaults.headers.common.Authorization = '';
 };
+const saveToken = token => {
+  localStorage.setItem('token', token);
+  console.log('Token saved:', localStorage.getItem('token'));
+};
 
-export const setupAxiosInterceptors = store => {
-  apiClient.interceptors.request.use(
-    config => {
-      const { auth } = store.getState();
-      if (auth.accessToken) {
-        config.headers.Authorization = `Bearer ${auth.accessToken}`;
-      }
-      return config;
-    },
-    error => Promise.reject(error)
-  );
-
+export const setupAxiosInterceptors = (store) => {
   apiClient.interceptors.response.use(
-    response => response,
-    async error => {
-      const { response, config } = error;
-
-      if (response.status === 401 && !config.__isRetryRequest) {
-        config.__isRetryRequest = true;
-
+    (response) => response,
+    async (error) => {
+      const originalRequest = error.config;
+      if (error.response.status === 401 && !originalRequest._retry) {
+        originalRequest._retry = true;
         try {
-          await store.dispatch(refreshToken()).unwrap();
-          const { auth } = store.getState();
-          config.headers.Authorization = `Bearer ${auth.accessToken}`;
-          return apiClient(config);
+          const { data } = await apiClient.post('/auth/refresh');
+          const accessToken = data.accessToken;
+          setAuthHeader(accessToken);
+          store.dispatch(setCredentials({ accessToken }));
+          return apiClient(originalRequest);
         } catch (refreshError) {
           store.dispatch(clearCredentials());
           return Promise.reject(refreshError);
@@ -59,6 +52,7 @@ export const register = createAsyncThunk(
       const response = await apiClient.post('/auth/register', userData);
       const { accessToken } = response.data;
       setAuthHeader(accessToken);
+      saveToken(accessToken);
       thunkAPI.dispatch(setCredentials(response.data));
       return response.data;
     } catch (error) {
@@ -74,22 +68,9 @@ export const logIn = createAsyncThunk(
       const { data } = await apiClient.post('/auth/login', credentials);
       const { accessToken } = data.data;
       setAuthHeader(accessToken);
+      saveToken(accessToken);
       thunkAPI.dispatch(setCredentials(data.data));
       return data.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.response?.data || error.message);
-    }
-  }
-);
-
-export const refreshToken = createAsyncThunk(
-  'auth/refresh',
-  async (_, thunkAPI) => {
-    try {
-      const { data } = await apiClient.get('/user/refresh');
-      thunkAPI.dispatch(setCredentials(data.data));
-      console.log(data.data);
-      return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data || error.message);
     }

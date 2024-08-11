@@ -13,6 +13,9 @@ import {
   selectUserEmail,
   selectUserName,
   selectUserGender,
+  selectUserActivityTime,
+  selectUserWeight,
+  selectUserWaterToDrink,
 } from '../../redux/user/selectors.js';
 import { closeModalSettings } from '../../redux/modal/slice.js';
 import {
@@ -31,12 +34,14 @@ export const Setting = () => {
   const weightInput = useId();
   const timeInput = useId();
   const resultInput = useId();
+  const activeTimeSelector = useSelector(selectUserActivityTime);
   const nameSelector = useSelector(selectUserName);
   const genderSelector = useSelector(selectUserGender);
+  const weightSelector = useSelector(selectUserWeight);
   const emeailSelector = useSelector(selectUserEmail);
   const isLoading = useSelector(selectIsLoading);
   const avatarSelector = useSelector(selectUserAvatar);
-
+  const userNorma = useSelector(selectUserWaterToDrink);
   // Validation
   const validationSchema = Yup.object().shape({
     username: Yup.string().test('Username must contain only letters', value => {
@@ -47,14 +52,24 @@ export const Setting = () => {
     weight: Yup.number()
       .required('Weight is required')
       .positive('Weight must be a positive number')
+
       .min(20, 'Weight must be at least 20kg')
       .max(300, 'Weight must be 300kg or less'),
     activeTime: Yup.number()
       .required('Write your active sport time')
       .max(10, 'Too much time')
-      .positive('Time must be a positive number'),
+      .positive('Time must be a positive number')
+      .transform((value, originalValue) =>
+        originalValue === '' ? null : value
+      )
+      .nullable(),
     ownerResult: Yup.number()
       .max(12, 'Too much')
+      .nullable()
+      .required('Write your result!')
+      .transform((value, originalValue) =>
+        originalValue === '' ? null : value
+      )
       .positive('Time must be a positive number'),
   });
   // Validation
@@ -78,7 +93,17 @@ export const Setting = () => {
   useEffect(() => {
     setValue('gender', genderSelector);
     setValue('username', nameSelector);
-  }, [genderSelector, setValue, nameSelector]);
+    setValue('activeTime', activeTimeSelector);
+    setValue('weight', weightSelector);
+    setValue('ownerResult', userNorma);
+  }, [
+    genderSelector,
+    setValue,
+    nameSelector,
+    activeTimeSelector,
+    weightSelector,
+    userNorma,
+  ]);
   const form = useRef();
   const weightValue = watch('weight');
   const timeValue = watch('activeTime');
@@ -190,7 +215,7 @@ export const Setting = () => {
                   }}
                 />
               </label>
-              <div style={{ height: 40 }}>
+              <div>
                 {errors.username && (
                   <p className={css.error}>{errors.username.message}</p>
                 )}
@@ -198,6 +223,7 @@ export const Setting = () => {
               <label htmlFor={emailInput}>
                 <p className={css.userEmail}>Email</p>
                 <input
+                  className={css.emailInput}
                   type="text"
                   id={emailInput}
                   defaultValue={emeailSelector}
@@ -247,8 +273,9 @@ export const Setting = () => {
                 <input
                   id={weightInput}
                   {...register('weight')}
+                  step="0.01"
+                  defaultValue="0"
                   type="number"
-                  defaultValue={0}
                   style={{
                     borderColor: errors.weight ? 'red' : 'initial',
                   }}
@@ -265,7 +292,8 @@ export const Setting = () => {
                 </p>
                 <input
                   type="number"
-                  defaultValue={0}
+                  defaultValue="0"
+                  step="0.01"
                   id={timeInput}
                   {...register('activeTime')}
                   style={{
@@ -293,6 +321,7 @@ export const Setting = () => {
                 <input
                   type="number"
                   id={resultInput}
+                  step="0.01"
                   className={css.userOwnerInput}
                   {...register('ownerResult')}
                   style={{

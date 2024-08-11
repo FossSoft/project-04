@@ -1,14 +1,18 @@
 .itemWrapper {
+  flex: 1 1 0%;
+  min-width: 147px;
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 10px;
-  min-width: 149px;
   height: 74px;
   padding: 18px 14px;
   margin-bottom: 24px;
   border-radius: 15px;
   background: var(--white);
+  box-sizing: border-box;
 }
+
 
 .itemWrapper:last-child {
   margin-right: 0;
@@ -77,7 +81,7 @@
   .itemWrapper {
     padding: 20px;
     gap: 20px;
-    width: 192px;
+    min-width: 190px;
     height: 86px;
   }
 

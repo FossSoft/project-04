@@ -15,6 +15,7 @@
   flex-direction: column;
   gap:16px;
   padding-top: 74px;
+
 }
 .subtitle{
   color: rgb(47, 47, 47);
@@ -41,9 +42,11 @@
 .link{
   display: flex;
   gap: 10px;
+
 }
 .link_signup,
 .link_signin{
+  color: rgb(50, 63, 71);
   display: flex;
   font-family: Poppins, sans-serif;
   font-size: 14px;
@@ -71,12 +74,19 @@
 .link_signin{
   border: 1px solid rgb(50, 63, 71);
   width: 104px;
+  text-wrap: nowrap;
   padding: 14px 28px;
 }
 .link_signin:hover {
 border: 1px solid rgb(135, 210, 141);
 color:rgb(135, 210, 141);
 }
+.logo {
+  position: absolute;
+  left: 16px;
+top: 24px;
+}
+
 @media screen and (min-width: 768px){
 .section{
   width: 704px;
@@ -112,7 +122,12 @@ color:rgb(135, 210, 141);
 
 .link_signin {
   width: 135px;
-}}
+}
+     .logo {
+       left: 32px;
+       top: 38px;
+     }
+}
 @media screen and (min-width: 1440px){
   .section {
       width: 672px;
@@ -123,4 +138,8 @@ color:rgb(135, 210, 141);
   line-height: 0.95;
   height: 228px;
   }
+.logo {
+  left: 33px;
+  top: 32px;
+}
 }

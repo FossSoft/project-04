@@ -5,7 +5,13 @@ import { useEffect } from 'react';
 
 // children=Modal window put your component with css.
 
-export default function Modal({ children, style, isOpen, onRequestClose }) {
+export default function Modal({
+  children,
+  style,
+  isOpen,
+  onRequestClose,
+  closeButtonPosition,
+}) {
   const handleModalClick = e => {
     e.stopPropagation();
   };
@@ -35,7 +41,11 @@ export default function Modal({ children, style, isOpen, onRequestClose }) {
         style={style}
         onClick={handleModalClick}
       >
-        <button className={css.btn} onClick={onRequestClose}>
+        <button
+          className={css.btn}
+          onClick={onRequestClose}
+          style={closeButtonPosition}
+        >
           <svg className={css.icon}>
             <use href={`${sprite}#icon-x`}></use>
           </svg>

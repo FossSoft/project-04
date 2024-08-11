@@ -5,15 +5,13 @@ import css from './DailyInfo.module.css'
 
 export default function DailyInfo() {
   return (
-    <>
-      <div className={css.container}>
-        <div className={css.dataContainer}>
-          <ChooseDate />
-          <AddWaterBtn />
-        </div>
-        <WaterList />
+    <div className={css.container}>
+      <div className={css.dataContainer}>
+        <ChooseDate />
+        <AddWaterBtn isPrimary={false} />
       </div>
-    </>
+      <WaterList />
+    </div>
   );
 }
 
