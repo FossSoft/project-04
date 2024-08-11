@@ -10,9 +10,9 @@ export default function TitleHello() {
     <div className={css.text}>
       Hello,
       {!userName ? (
-        <span className={css.span}>{visitor}!</span>
+        <span className={css.span}> {visitor}!</span>
       ) : (
-        <span className={css.span}>{userName}</span>
+        <span className={css.span}> {userName}</span>
       )}
     </div>
   );

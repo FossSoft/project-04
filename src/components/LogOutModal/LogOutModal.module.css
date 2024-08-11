@@ -48,6 +48,14 @@
   color: rgba(50, 63, 71, 0.3);
 }
 
+.params.green:hover {
+  background-color: var(--green-hover);
+}
+
+.params.gray:hover {
+  color: rgba(50, 63, 71, 1);
+}
+
 @media screen and (min-width: 320px) and (max-width: 374px) {
   .wrapper {
     max-width: 344px;
