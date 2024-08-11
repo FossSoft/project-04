@@ -52,6 +52,7 @@ const authSlice = createSlice({
       })
       .addCase(register.rejected, state => {
         state.error = true;
+      })
       .addCase(logout.pending, (state, action) => {
         state.accessToken = '';
       })
