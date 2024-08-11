@@ -7,26 +7,21 @@ import css from './CalendarItem.module.css';
 
 const CalendarItem = ({
   day, // строка с датой в формате 'YYYY-MM-DD'
-  percentageConsumed, // строка с процентами, например '13%'
+  percentageConsumed, // число с процентами
   onClick, // Функция для обработки клика на день
 }) => {
+  console.log('Received CalendarItem percentageConsumed:', percentageConsumed); // что приходит в percentageConsumed
   const dispatch = useDispatch();
 
-  // Логирование данных
-  // console.log('Received day:', day);
-  // console.log('Received percentage:', percentageConsumed);
-
   // Преобразование строки даты в формат YYYY-MM-DD
-  const dayNumber = day.split('-')[2];
-  const percentages =
-    Math.floor(Number(percentageConsumed.replace('%', ''))) || 0; // Удаление '%' и преобразование в число
+  const dayNumber = parseInt(day.split('-')[2], 10);
 
   // Логика для стилизации
   const classNameWrapper = clsx(css.dayWrapper, {
     [css.currentDay]: day === format(new Date(), 'yyyy-MM-dd'), // Текущая дата
     [css.selectedDay]: day === format(new Date(), 'yyyy-MM-dd'),
-    [css.highlightedBackground]: percentages > 0,
-    [css.defaultBackground]: percentages === 0,
+    [css.highlightedBackground]: percentageConsumed > 0,
+    [css.defaultBackground]: percentageConsumed === 0,
   });
 
   const handleClick = () => {
@@ -42,11 +37,15 @@ const CalendarItem = ({
       onClick={handleClick}
       style={{ cursor: 'pointer' }}
     >
-      <div className={clsx(css.number, { [css.notFull]: percentages < 100 })}>
+      <div
+        className={clsx(css.number, {
+          [css.notFull]: percentageConsumed < 100,
+        })}
+      >
         {dayNumber}
       </div>
       <span className={css.percentages}>
-        {percentages < 100 ? percentages : 100}%
+        {percentageConsumed < 100 ? percentageConsumed : 100}%
       </span>
     </div>
   );

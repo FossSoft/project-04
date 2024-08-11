@@ -1,6 +1,5 @@
-// src/components/MonthInfo/MonthInfo.jsx
 import { useDispatch, useSelector } from 'react-redux';
-import { format } from 'date-fns'; // Удаляем getMonth и getYear
+import { format } from 'date-fns';
 import Calendar from './Calendar/Calendar.jsx';
 import CalendarPagination from './CalendarPagination/CalendarPagination.jsx';
 import CalendarTitle from './CalendarTitle/CalendarTitle.jsx';
@@ -26,7 +25,20 @@ function MonthInfo() {
   const selectedDate = useSelector(selectDate); // Дата в формате 'YYYY-MM-DD'
   const isLoading = useSelector(selectIsLoading);
   const isError = useSelector(selectError);
-  // console.log('isError:', isError); // Выводим ошибку в консоль
+
+  // Функция для форматирования процентов в число
+  const formatPercentage = percentage => {
+    if (!percentage) return 0;
+
+    const value = parseFloat(percentage.replace('%', ''));
+    return isNaN(value) ? 0 : Math.floor(value);
+  };
+
+  // Переменная для форматированного процента
+  const percentageNumber = monthArray.map(item =>
+    formatPercentage(item.percentage)
+  );
+
   const changeMonth = increment => {
     if (increment > 0) {
       dispatch(upMonth());
@@ -86,9 +98,9 @@ function MonthInfo() {
 
       {isLoading && <Loader />}
       <Calendar
-        monthArray={monthArray}
+        percentage={percentageNumber}
         monthDay={monthDay}
-        date={selectedDate}
+        selectedDate={selectedDate}
         onClick={onDateSelect}
       />
     </div>
