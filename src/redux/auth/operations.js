@@ -3,8 +3,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { setCredentials, clearCredentials, logoutAction } from './slice';
 
 export const apiClient = axios.create({
-  // baseURL: 'https://back-end-aquatrack.onrender.com',
-  baseURL: 'http://localhost:3001',
+  baseURL: 'https://back-end-aquatrack.onrender.com',
+  // baseURL: 'http://localhost:3001',
   headers: {
     'Content-Type': 'application/json',
   },
