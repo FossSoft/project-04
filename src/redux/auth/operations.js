@@ -5,7 +5,7 @@ import { setCredentials, clearCredentials } from './slice';
 export const apiClient = axios.create({
   baseURL: 'https://back-end-aquatrack.onrender.com',
   headers: {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   },
 });
 
@@ -15,23 +15,23 @@ const setAuthHeader = token => {
 
 const clearAuthHeader = () => {
   apiClient.defaults.headers.common.Authorization = '';
-}
+};
 
-export const setupAxiosInterceptors = (store) => {
+export const setupAxiosInterceptors = store => {
   apiClient.interceptors.request.use(
-    (config) => {
+    config => {
       const { auth } = store.getState();
       if (auth.accessToken) {
         config.headers.Authorization = `Bearer ${auth.accessToken}`;
       }
       return config;
     },
-    (error) => Promise.reject(error)
+    error => Promise.reject(error)
   );
 
   apiClient.interceptors.response.use(
-    (response) => response,
-    async (error) => {
+    response => response,
+    async error => {
       const { response, config } = error;
 
       if (response.status === 401 && !config.__isRetryRequest) {
@@ -57,7 +57,7 @@ export const register = createAsyncThunk(
   async (userData, thunkAPI) => {
     try {
       const response = await apiClient.post('/auth/register', userData);
-      const {accessToken} = response.data;
+      const { accessToken } = response.data;
       setAuthHeader(accessToken);
       thunkAPI.dispatch(setCredentials(response.data));
       return response.data;
@@ -84,24 +84,23 @@ export const logIn = createAsyncThunk(
 
 export const refreshToken = createAsyncThunk(
   'auth/refresh',
-  async (_, thunkAPI) => {            
-   try {
-    const { data }  = await apiClient.get('/user/refresh');
-    thunkAPI.dispatch(setCredentials(data.data));
-    console.log(data.data)
-    return data;
-   } catch (error) {
-    return thunkAPI.rejectWithValue(error.response?.data || error.message);
-   }
+  async (_, thunkAPI) => {
+    try {
+      const { data } = await apiClient.get('/user/refresh');
+      thunkAPI.dispatch(setCredentials(data.data));
+      console.log(data.data);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response?.data || error.message);
+    }
   }
 );
-
 
 export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
     await apiClient.post('/auth/logout');
     clearAuthHeader();
-    localStorage.clear();
+    // localStorage.clear();
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }

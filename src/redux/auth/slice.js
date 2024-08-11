@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { logIn, register, refreshToken } from './operations';
+import { logIn, register, refreshToken, logout } from './operations';
 
 const authInitialState = {
   user: null,
@@ -19,18 +19,18 @@ const authSlice = createSlice({
       state.isLoggedIn = true;
       state.error = null;
     },
-    clearCredentials: (state) => {
+    clearCredentials: state => {
       state.user = null;
       state.accessToken = null;
       state.isLoggedIn = false;
       state.error = null;
-    },  
+    },
   },
   extraReducers: builder => {
     builder
       .addCase(logIn.fulfilled, (state, action) => {
         state.user = action.payload.user;
-        state.accessToken= action.payload.accessToken;
+        state.accessToken = action.payload.accessToken;
 
         state.isLoggedIn = true;
         state.isRefreshing = false;
@@ -38,15 +38,14 @@ const authSlice = createSlice({
       .addCase(logIn.pending, state => {
         state.isRefreshing = true;
       })
-      .addCase(logIn.rejected, (state, action )=> {
+      .addCase(logIn.rejected, (state, action) => {
         state.error = action.error;
         state.isRefreshing = false;
       })
       .addCase(register.fulfilled, (state, action) => {
-
         console.log('Register Success:', action.payload);
         state.user = action.payload.user;
-        state.accessToken= action.payload.accessToken;
+        state.accessToken = action.payload.accessToken;
         state.isLoggedIn = true;
         state.error = false;
       })
@@ -65,6 +64,15 @@ const authSlice = createSlice({
       .addCase(refreshToken.rejected, (state, action) => {
         state.error = action.error;
         state.isRefreshing = false;
+      })
+      .addCase(logout.pending, (state, action) => {
+        state.accessToken = '';
+      })
+      .addCase(logout.fulfilled, (state, action) => {
+        state.accessToken = '';
+      })
+      .addCase(logout.rejected, (state, action) => {
+        state.accessToken = '';
       });
   },
 });
