@@ -1,10 +1,11 @@
+// src/components/MonthInfo/MonthInfo.jsx
 import { useDispatch, useSelector } from 'react-redux';
-import { format } from 'date-fns';
-import Calendar from '../MonthInfo/Calendar/Calendar.jsx';
-import CalendarPagination from '../MonthInfo/CalendarPagination/CalendarPagination.jsx';
-import CalendarTitle from '../MonthInfo/CalendarTitle/CalendarTitle.jsx';
+import { format } from 'date-fns'; // Удаляем getMonth и getYear
+import Calendar from './Calendar/Calendar.jsx';
+import CalendarPagination from './CalendarPagination/CalendarPagination.jsx';
+import CalendarTitle from './CalendarTitle/CalendarTitle.jsx';
 import CalendarToggle from './CalendarToggle/CalendarToggle.jsx';
-import Loader from '../MonthInfo/Loader/Loader.jsx';
+import Loader from './Loader/Loader.jsx';
 import css from './MonthInfo.module.css';
 import { upMonth, downMonth, setDate } from '../../redux/water/calendar/slice';
 import {
@@ -44,22 +45,19 @@ function MonthInfo() {
     dispatch(setDate(formattedDate));
   };
 
-  // Преобразование даты в формат YYYY-MM-DD
-  const formatDate = dateString => {
-    const [month, day] = dateString.split(', ').map(part => part.trim());
-    const monthIndex = new Date(Date.parse(month + ' 1, 2012')).getMonth(); // Получаем индекс месяца
-    const year = new Date().getFullYear(); // Текущий год
-
-    // Создаем объект Date и форматируем в YYYY-MM-DD
-    const dateObject = new Date(year, monthIndex, day);
-    return format(dateObject, 'yyyy-MM-dd');
+  // Генерация массива дней для текущего месяца
+  const getMonthDaysArray = (year, month) => {
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    return Array.from({ length: daysInMonth }, (_, i) => {
+      const day = i + 1;
+      return format(new Date(year, month, day), 'yyyy-MM-dd');
+    });
   };
 
-  // Преобразование всех дат в monthArray
-  const formattedMonthArray = monthArray.map(day => ({
-    ...day,
-    date: formatDate(day.date),
-  }));
+  // Получаем текущий год и месяц из currentMonth
+  const year = parseInt(currentMonth.split('-')[0], 10);
+  const month = parseInt(currentMonth.split('-')[1], 10) - 1;
+  const monthDay = getMonthDaysArray(year, month);
 
   useEffect(() => {
     dispatch(fetchWaterData(currentMonth));
@@ -71,7 +69,7 @@ function MonthInfo() {
         <CalendarTitle onTodayHandler={onTodayHandler} title="Month" />
         <div className={css.containerToggle}>
           <CalendarPagination
-            currentDate={new Date(currentMonth)}
+            currentDate={new Date(year, month, 1)}
             changeMonth={changeMonth}
             onMonthHandler={onTodayHandler}
           />
@@ -86,7 +84,8 @@ function MonthInfo() {
       {isLoading && <Loader />}
 
       <Calendar
-        monthArray={formattedMonthArray}
+        monthArray={monthArray}
+        monthDay={monthDay}
         date={selectedDate}
         onClick={onDateSelect}
       />
