@@ -32,6 +32,9 @@ const waterSlice = createSlice({
     setWaterDay(state, action) {
       state.waterData = action.payload;
     },
+    setWaterDate(state, action) {
+      state.date = action.payload;
+    },
     addWater(state, action) {
       state.waterData.push(action.payload);
     },
@@ -78,7 +81,6 @@ const waterSlice = createSlice({
         state.isLoading = false;
 
         if (!action.payload.id) {
-          // console.warn('Received water entry with undefined ID:', action.payload);
           return;
         }
         const exists = state.waterData.some(
@@ -86,8 +88,6 @@ const waterSlice = createSlice({
         );
         if (!exists) {
           state.waterData.push(action.payload);
-          // } else {
-          //   console.warn(Duplicate ID detected: ${action.payload.id});
         }
       })
       .addCase(deleteWaterEntry.fulfilled, (state, action) => {
@@ -100,7 +100,7 @@ const waterSlice = createSlice({
   },
 });
 
-export const { setWaterDay, addWater, updateWater, deleteWater } =
+export const { setWaterDay, setSelectedDate, addWater, updateWater, deleteWater } =
   waterSlice.actions;
 
 export default waterSlice.reducer;
