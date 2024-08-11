@@ -160,8 +160,9 @@ form {
   .modal {
     margin-top: 170px;
     margin-bottom: 170px;
-    padding-left: 16px;
-    padding-right: 16px;
+    width: 100%;
+    /*  padding-left: 16px;
+    padding-right: 16px; */
   }
   .text {
     font-size: 14px;
@@ -198,6 +199,13 @@ form {
   }
   .label {
     font-size: 14px;
+  }
+  .modal {
+    margin-top: 170px;
+    margin-bottom: 170px;
+    width: 311px;
+    /*    padding-left: 16px;
+    padding-right: 16px; */
   }
 }
 
