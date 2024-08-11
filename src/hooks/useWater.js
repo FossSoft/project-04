@@ -5,6 +5,7 @@ import { deleteWater, addWater } from '../redux/water/slice';
 import { fetchWaterDataByDay, deleteWaterEntry } from '../redux/water/operations';
 import { selectWaterItems } from '../redux/water/selectors';
 import { selectIsUserExist } from '../redux/user/selectors.js';
+import { selectAccessToken } from '../redux/auth/selectors.js';
 
 const toastOptions = {
   duration: 5000,

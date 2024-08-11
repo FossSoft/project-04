@@ -17,21 +17,30 @@ export default function WaterProgressBar() {
   const isUserExist = useSelector(selectIsUserExist);
 
   useEffect(() => {
-    console.log('fetchTodayProggress');
+    console.log('fetchTodayProgress');
     console.log(isUserExist);
     isUserExist && dispatch(fetchTodayProgress());
   }, [dispatch, waterData, waterNorma, isUserExist]);
+
+  const numericPercents = parseFloat(percents);
+
+  const limitedPercents = Math.min(numericPercents, 100);
+
+  const displayPercents = `${limitedPercents}%`;
 
   return (
     <div className={styles.container}>
       <p className={styles.today}>Today</p>
       <div className={styles.progress}>
-        <div className={styles.line} style={{ width: `${percents}` }}>
+        <div
+          className={styles.line}
+          style={{ width: displayPercents }}
+        >
           <div className={styles.circle}></div>
           <span className={styles.tadwyPercent}>
-            {percents === '0%' || percents === '50%' || percents === '100%'
+            {limitedPercents === 0 || limitedPercents === 50 || limitedPercents === 100
               ? null
-              : percents}
+              : displayPercents}
           </span>
         </div>
       </div>
@@ -44,3 +53,4 @@ export default function WaterProgressBar() {
     </div>
   );
 }
+
