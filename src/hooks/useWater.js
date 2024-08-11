@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { deleteWater, addWater } from '../redux/water/slice';
-import { selectAccessToken } from '../redux/auth/selectors';
 import { fetchWaterDataByDay, deleteWaterEntry } from '../redux/water/operations';
 import { selectWaterItems } from '../redux/water/selectors';
 
@@ -69,25 +68,23 @@ export const useAddWater = () => {
   };
 };
 
-export const useFetchWaterData = () => {
+export const useFetchWaterData = (selectedDate) => {
   const dispatch = useDispatch();
-  const token = useSelector(selectAccessToken);
-  const waterData = useSelector(selectWaterItems); // Використання селектора
+  const waterData = useSelector(selectWaterItems);
 
   useEffect(() => {
-    const currentDate = new Date().toISOString().split('T')[0];
+    const formattedDate = selectedDate ? new Date(selectedDate).toISOString().split('T')[0] : new Date().toISOString().split('T')[0];
 
-    if (currentDate && token) {
-      dispatch(fetchWaterDataByDay({ date: currentDate }));
+    if (formattedDate) {
+      dispatch(fetchWaterDataByDay({ date: formattedDate }));
     }
-  }, [dispatch, token]);
+  }, [dispatch, selectedDate]);
 
   return { waterData };
 };
 
 export const useDeleteWater = (item, onClose) => {
   const dispatch = useDispatch();
-  // const token = useSelector(selectAccessToken);
 
   const handleDelete = async () => {
     if (!item?.id) {
@@ -105,3 +102,4 @@ export const useDeleteWater = (item, onClose) => {
 
   return { handleDelete };
 };
+
