@@ -77,19 +77,19 @@ function MonthInfo() {
 
   return (
     <div className={css.container}>
-      <div className={css.wrapperContainer}>
-        <div className={css.containerHeader}>
-          <CalendarTitle onTodayHandler={onTodayHandler} title="Month" />
-          <div className={css.containerToggle}>
-            <CalendarPagination
-              currentDate={new Date(year, month, 1)}
-              changeMonth={changeMonth}
-              onMonthHandler={onTodayHandler}
-            />
-            <CalendarToggle isActive={isActive} setIsActive={setIsActive} />
-          </div>
+      {/* <div className={css.wrapperContainer}> */}
+      <div className={css.containerHeader}>
+        <CalendarTitle onTodayHandler={onTodayHandler} title="Month" />
+        <div className={css.containerToggle}>
+          <CalendarPagination
+            currentDate={new Date(year, month, 1)}
+            changeMonth={changeMonth}
+            onMonthHandler={onTodayHandler}
+          />
+          <CalendarToggle isActive={isActive} setIsActive={setIsActive} />
         </div>
       </div>
+      {/* </div> */}
       {isError && (
         <div className={css.errorMessage}>
           <p>An error occurred</p>

@@ -1,4 +1,3 @@
-// src\components\MonthInfo\CalendarItem\CalendarItem.jsx
 import { useDispatch } from 'react-redux';
 import { setDate } from '../../../redux/water/calendar/slice';
 import { format } from 'date-fns';
@@ -10,18 +9,14 @@ const CalendarItem = ({
   percentageConsumed, // число с процентами
   onClick, // Функция для обработки клика на день
 }) => {
-  console.log('Received CalendarItem percentageConsumed:', percentageConsumed); // что приходит в percentageConsumed
   const dispatch = useDispatch();
 
   // Преобразование строки даты в формат YYYY-MM-DD
   const dayNumber = parseInt(day.split('-')[2], 10);
 
-  // Логика для стилизации
-  const classNameWrapper = clsx(css.dayWrapper, {
-    [css.currentDay]: day === format(new Date(), 'yyyy-MM-dd'), // Текущая дата
-    [css.selectedDay]: day === format(new Date(), 'yyyy-MM-dd'),
-    [css.highlightedBackground]: percentageConsumed > 0,
-    [css.defaultBackground]: percentageConsumed === 0,
+  // Определение класса для процентов
+  const percentageClass = clsx({
+    [css.boldText]: percentageConsumed > 100,
   });
 
   const handleClick = () => {
@@ -33,19 +28,25 @@ const CalendarItem = ({
 
   return (
     <div
-      className={classNameWrapper}
+      className={css.container}
       onClick={handleClick}
       style={{ cursor: 'pointer' }}
     >
       <div
         className={clsx(css.number, {
-          [css.notFull]: percentageConsumed < 100,
+          [css.currentDay]: day === format(new Date(), 'yyyy-MM-dd'), // Текущая дата
+          [css.selectedDay]: day === format(new Date(), 'yyyy-MM-dd'), // Выбранная дата
         })}
       >
         {dayNumber}
       </div>
-      <span className={css.percentages}>
-        {percentageConsumed < 100 ? percentageConsumed : 100}%
+      <span className={clsx(css.percentages, percentageClass)}>
+        {percentageConsumed > 100
+          ? percentageConsumed
+          : percentageConsumed < 100
+          ? percentageConsumed
+          : 100}
+        %
       </span>
     </div>
   );
