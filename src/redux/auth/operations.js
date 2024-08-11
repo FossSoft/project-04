@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { setCredentials, clearCredentials} from './slice';
+import { setCredentials, clearCredentials } from './slice';
 
 export const apiClient = axios.create({
   baseURL: 'https://back-end-aquatrack.onrender.com',
@@ -18,11 +18,6 @@ export const clearAuthHeader = () => {
   apiClient.defaults.headers.common.Authorization = '';
 };
 const saveToken = token => {
-  localStorage.setItem('token', token);
-  console.log('Token saved:', localStorage.getItem('token'));
-};
-
-const saveToken = (token) => {
   localStorage.setItem('token', token);
   console.log('Token saved:', localStorage.getItem('token'));
 };
