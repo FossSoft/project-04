@@ -87,7 +87,7 @@ export const useFetchWaterData = () => {
 
 export const useDeleteWater = (item, onClose) => {
   const dispatch = useDispatch();
-  const token = useSelector(selectAccessToken);
+  // const token = useSelector(selectAccessToken);
 
   const handleDelete = async () => {
     if (!item?.id) {
@@ -95,7 +95,7 @@ export const useDeleteWater = (item, onClose) => {
       return;
     }
     try {
-      await dispatch(deleteWaterEntry({ id: item.id, token })).unwrap();
+      await dispatch(deleteWaterEntry({ id: item.id })).unwrap();
       toast.success('Deleted water successfully!', toastOptions);
       onClose();
     } catch (error) {

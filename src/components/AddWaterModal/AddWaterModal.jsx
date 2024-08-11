@@ -59,17 +59,17 @@ export const AddWaterModal = ({ onCancel }) => {
     setTime(e.target.value);
   };
   const handleSaveWater = async () => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      return;
-    }
+    // const token = localStorage.getItem('token');
+    // if (!token) {
+    //   return;
+    // }
 
     const waterData = {
       amountOfWater: quantity,
       time,
       date: waterDate,
     };
-    await dispatch(addWaterAmount([waterData, token])).unwrap();
+    await dispatch(addWaterAmount(waterData)).unwrap();
     dispatch(addWater(waterData));
     onCancel();
   };
