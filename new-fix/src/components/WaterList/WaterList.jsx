@@ -3,8 +3,8 @@ import { useFetchWaterData } from '../../hooks/useWater';
 import WaterItem from '../WaterItem/WaterItem';
 import css from './WaterList.module.css';
 
-const WaterList = ({ selectedDate }) => {
-  const { waterData } = useFetchWaterData(selectedDate);
+const WaterList = () => {
+  const { waterData } = useFetchWaterData();
 
   const sortedWaterData = [...waterData].sort((a, b) => {
     const [hoursA, minutesA] = (a.time || '').split(':').map(Number);
@@ -21,7 +21,7 @@ const WaterList = ({ selectedDate }) => {
       ) : (
         <ul className={css.list}>
           {sortedWaterData.map((item) => (
-            <li key={item.id}>
+            <li key={item.id} >
               <WaterItem item={item} />
             </li>
           ))}

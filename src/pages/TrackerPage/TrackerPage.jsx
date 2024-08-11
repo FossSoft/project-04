@@ -8,10 +8,12 @@ import MonthInfo from 'components/MonthInfo/MonthInfo';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchUserInfo } from '../../redux/user/operations';
+import { Toaster } from 'react-hot-toast';
+
 
 export default function TrackerPage() {
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     dispatch(fetchUserInfo());
   }, [dispatch]);
@@ -30,6 +32,8 @@ export default function TrackerPage() {
           <MonthInfo />
         </BackgroundColor>
       </Layout>
+
+      <Toaster position="top-center" reverseOrder={false} />
     </div>
   );
 }

@@ -2,7 +2,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchWaterData } from './operations';
 
-const waterSlice = createSlice({
+const waterMonthSlice = createSlice({
   name: 'water',
   initialState: {
     waterData: [],
@@ -15,14 +15,32 @@ const waterSlice = createSlice({
   reducers: {
     upMonth(state) {
       const currentDate = new Date(state.date);
-      currentDate.setMonth(currentDate.getMonth() + 1);
+      let newMonth = currentDate.getMonth() + 1; // getMonth возвращает значение от 0 до 11
+
+      if (newMonth < 12) {
+        currentDate.setMonth(newMonth);
+      } else {
+        currentDate.setMonth(0); // Переход на январь
+        currentDate.setFullYear(currentDate.getFullYear() + 1);
+      }
+
       state.date = currentDate.toISOString().split('T')[0];
     },
+
     downMonth(state) {
       const currentDate = new Date(state.date);
-      currentDate.setMonth(currentDate.getMonth() - 1);
+      let newMonth = currentDate.getMonth() - 1;
+
+      if (newMonth >= 0) {
+        currentDate.setMonth(newMonth);
+      } else {
+        currentDate.setMonth(11); // Переход на декабрь
+        currentDate.setFullYear(currentDate.getFullYear() - 1);
+      }
+
       state.date = currentDate.toISOString().split('T')[0];
     },
+
     setDate(state, action) {
       state.date = action.payload;
     },
@@ -35,7 +53,7 @@ const waterSlice = createSlice({
       })
       .addCase(fetchWaterData.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.waterData = action.payload.data || [];
+        state.waterData = action.payload.data.records || [];
       })
       .addCase(fetchWaterData.rejected, (state, action) => {
         state.isLoading = false;
@@ -44,6 +62,6 @@ const waterSlice = createSlice({
   },
 });
 
-export const { upMonth, downMonth, setDate } = waterSlice.actions;
+export const { upMonth, downMonth, setDate } = waterMonthSlice.actions;
 
-export default waterSlice.reducer;
+export default waterMonthSlice.reducer;

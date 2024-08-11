@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { setCredentials, clearCredentials} from './slice';
+import { setCredentials, clearCredentials } from './slice';
 
 export const apiClient = axios.create({
   baseURL: 'https://back-end-aquatrack.onrender.com',
@@ -16,10 +16,6 @@ export const setAuthHeader = token => {
 
 export const clearAuthHeader = () => {
   apiClient.defaults.headers.common.Authorization = '';
-};
-const saveToken = token => {
-  localStorage.setItem('token', token);
-  console.log('Token saved:', localStorage.getItem('token'));
 };
 
 export const setupAxiosInterceptors = (store) => {
@@ -52,7 +48,6 @@ export const register = createAsyncThunk(
       const response = await apiClient.post('/auth/register', userData);
       const { accessToken } = response.data;
       setAuthHeader(accessToken);
-      saveToken(accessToken);
       thunkAPI.dispatch(setCredentials(response.data));
       return response.data;
     } catch (error) {
@@ -68,7 +63,6 @@ export const logIn = createAsyncThunk(
       const { data } = await apiClient.post('/auth/login', credentials);
       const { accessToken } = data.data;
       setAuthHeader(accessToken);
-      saveToken(accessToken);
       thunkAPI.dispatch(setCredentials(data.data));
       return data.data;
     } catch (error) {
@@ -81,7 +75,6 @@ export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
     await apiClient.post('/auth/logout');
     clearAuthHeader();
-    localStorage.clear();
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }

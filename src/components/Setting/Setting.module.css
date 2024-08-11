@@ -1,11 +1,21 @@
-.container {
-  min-width: 320px;
-  max-width: 375px;
-  padding: 0 16px;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
+.probe::-webkit-scrollbar {
+  width: 15px;
+  opacity: 1;
+}
+
+.probe::-webkit-scrollbar-track {
+  border-radius: 40px;
+}
+
+.probe::-webkit-scrollbar-thumb {
+  background-color: #abb1b4;
+
+  width: 15px;
+  border-radius: 40px;
+}
+
+.probe::-webkit-scrollbar-thumb:hover {
+  background: #888;
 }
 .loaderBg {
   position: fixed;
@@ -28,7 +38,9 @@ input[type='number']::-webkit-outer-spin-button {
   margin: 0;
 }
 .probe {
-  height: 600px;
+  height: 650px;
+  border-radius: 15px;
+  overflow-x: auto;
 }
 .form {
   width: 343px;
@@ -38,14 +50,7 @@ input[type='number']::-webkit-outer-spin-button {
 .input-error {
   border: 2px solid red;
 }
-.closeIcon {
-  width: 24px;
-  height: 24px;
-  position: absolute;
-  top: 16px;
-  right: 20px;
-  cursor: pointer;
-}
+
 .titleContainer {
   display: flex;
   justify-content: center;
@@ -198,7 +203,8 @@ input[type='number']::-webkit-outer-spin-button {
   padding: 14px 16px;
   border-radius: 15px;
   outline: none;
-  border: 1px solid rgba(47, 47, 47, 0.2);
+  border: 1px rgba(47, 47, 47, 0.2);
+
   color: #2f2f2f;
 
   font-family: Poppins;
@@ -209,9 +215,15 @@ input[type='number']::-webkit-outer-spin-button {
   letter-spacing: -0.14px;
 }
 .userData label input:focus {
-  border: 1px solid rgba(47, 47, 47, 0.4);
+  border: 1px rgba(47, 47, 47, 0.2);
+}
+.userData label input:active {
+  border: 1px rgba(47, 47, 47, 0.4);
 }
 
+.emailInput:disabled {
+  background-color: #abb1b4;
+}
 .userData label input::placeholder {
   color: #323f47;
   font-family: Poppins;
@@ -304,7 +316,7 @@ input[type='number']::-webkit-outer-spin-button {
 }
 .weightTimeContainer label input {
   border-radius: 15px;
-  border: 1px solid rgba(47, 47, 47, 0.15);
+  border: 1px rgba(47, 47, 47, 0.2);
   width: 303px;
   padding: 14px 16px;
   outline: none;
@@ -319,7 +331,10 @@ input[type='number']::-webkit-outer-spin-button {
 }
 
 .weightTimeContainer label input:focus {
-  border: 1px solid rgba(47, 47, 47, 0.4);
+  border: 1px rgba(47, 47, 47, 0.2);
+}
+.weightTimeContainer label input:active {
+  border: 1px rgba(47, 47, 47, 0.4);
 }
 .requireWater {
   color: #2f2f2f;
@@ -354,7 +369,7 @@ input[type='number']::-webkit-outer-spin-button {
 }
 .userOwnerInput {
   border-radius: 15px;
-  border: 1px solid rgba(47, 47, 47, 0.15);
+  border: 1px rgba(47, 47, 47, 0.2);
   width: 303px;
   padding: 14px 16px;
   margin-bottom: 40px;
@@ -369,7 +384,10 @@ input[type='number']::-webkit-outer-spin-button {
   letter-spacing: -0.14px;
 }
 .userOwnerInput:focus {
-  border: 1px solid rgba(47, 47, 47, 0.4);
+  border: 1px rgba(47, 47, 47, 0.2);
+}
+.userOwnerInput:active {
+  border: 1px rgba(47, 47, 47, 0.4);
 }
 .formBtn {
   color: #323f47;
@@ -389,8 +407,9 @@ input[type='number']::-webkit-outer-spin-button {
   outline: none;
   width: 116px;
   margin-top: 40px;
+  transition: background 500ms ease;
 }
-.formBtn:active {
+.formBtn:hover {
   background: #87d28d;
 }
 .activeIcon {
@@ -607,6 +626,6 @@ input[type='number']::-webkit-outer-spin-button {
     padding-top: 86px;
   }
   .probe {
-    height: 610px;
+    height: 650px;
   }
 }

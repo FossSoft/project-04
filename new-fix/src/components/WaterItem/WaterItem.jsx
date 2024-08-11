@@ -1,3 +1,4 @@
+// import { format, parseISO, subHours } from 'date-fns';
 import { useWaterItem } from '../../hooks/useWater';
 import css from './WaterItem.module.css';
 import sprite from '../../image/sprite/sprite.svg';
@@ -16,7 +17,6 @@ const WaterItem = ({ item }) => {
     handleDelete,
   } = useWaterItem(item);
 
-
   const { amountOfWater, time } = item;
   const formatAmount = (amountOfWater) => {
     const liters = amountOfWater / 1000;
@@ -27,6 +27,10 @@ const WaterItem = ({ item }) => {
     }
   };
   const formatTime = (time) => time;
+  //   const formatTime = (isoString) => {
+  //     const date = subHours(parseISO(isoString), 0);
+  //     return format(date, 'HH:mm');
+  //   };
 
   return (
     <div className={css.itemWrapper}>

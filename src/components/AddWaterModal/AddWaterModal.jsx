@@ -58,20 +58,18 @@ export const AddWaterModal = ({ onCancel }) => {
   const handleChangeTime = e => {
     setTime(e.target.value);
   };
-
   const handleSaveWater = async () => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      return;
-    }
+    // const token = localStorage.getItem('token');
+    // if (!token) {
+    //   return;
+    // }
 
     const waterData = {
       amountOfWater: quantity,
       time,
       date: waterDate,
     };
-
-    await dispatch(addWaterAmount([waterData, token])).unwrap();
+    await dispatch(addWaterAmount(waterData)).unwrap();
     dispatch(addWater(waterData));
     onCancel();
   };
@@ -81,10 +79,7 @@ export const AddWaterModal = ({ onCancel }) => {
       <h1 className={css.addWaterTitle}>Add Water</h1>
 
       <div>
-        <h2
-          style={{ marginBottom: '20px' }}
-          className={css['value-text-title']}
-        >
+        <h2 style={{ marginBottom: '20px' }} className={css['value-text-title']}>
           Choose a value:
         </h2>
         <p className={css['value-text']}>Amount of water:</p>
@@ -135,7 +130,7 @@ export const AddWaterModal = ({ onCancel }) => {
         <input
           className={css['water-input']}
           placeholder="50"
-          type="text"
+          type="number"
           value={quantity}
           onChange={handleChangeQuantity}
           onBlur={handleBlurQuantity}

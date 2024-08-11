@@ -1,24 +1,12 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import clsx from 'clsx';
-import { addWater } from '../../redux/water/slice';
 import Modal from 'components/Modal/Modal';
+import { AddWaterModal } from 'components/AddWaterModal/AddWaterModal.jsx';
+import { useAddWater } from '../../hooks/useWater';
 import css from './AddWaterBtn.module.css';
 import sprite from '../../image/sprite/sprite.svg';
-import { AddWaterModal } from 'components/AddWaterModal/AddWaterModal';
 
 const AddWaterBtn = ({ isPrimary = false }) => {
-  const dispatch = useDispatch();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleOpenModal = () => setIsModalOpen(true);
-  const handleCloseModal = () => setIsModalOpen(false);
-
-  const handleAddWater = waterItem => {
-    console.log('Dispatching water item:', waterItem);
-    dispatch(addWater(waterItem));
-    handleCloseModal();
-  };
+  const { isModalOpen, openModal, closeModal, handleAddWater } = useAddWater();
 
   return (
     <>
@@ -28,7 +16,7 @@ const AddWaterBtn = ({ isPrimary = false }) => {
           [css.btnSecondary]: !isPrimary,
         })}
         type="button"
-        onClick={handleOpenModal}
+        onClick={openModal}
       >
         <svg
           className={clsx(css.svgPlus, {
@@ -40,9 +28,8 @@ const AddWaterBtn = ({ isPrimary = false }) => {
         </svg>
         <span>Add water</span>
       </button>
-
-      <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal}>
-        <AddWaterModal onSubmit={handleAddWater} onCancel={handleCloseModal} />
+      <Modal isOpen={isModalOpen} onRequestClose={closeModal}>
+        <AddWaterModal onSubmit={handleAddWater} onCancel={closeModal} />
       </Modal>
     </>
   );

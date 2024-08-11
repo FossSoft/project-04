@@ -11,7 +11,7 @@
   opacity: 0;
   pointer-events: none;
   transform: scale(0.5);
-  transition: opacity 250ms linear, transform 250ms linear;
+  transition: opacity var(--effect), transform var(--effect);
   overflow-x: auto;
   z-index: 1000;
 }
@@ -27,9 +27,7 @@
   background-color: var(--white);
   border-radius: 15px;
   transform: scale(0.5);
-  transition: transform 250ms ease;
-  /* overflow-y: auto;
-  overflow-x: auto; */
+  transition: transform var(--effect);
 }
 
 .modal.active {
