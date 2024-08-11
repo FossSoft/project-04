@@ -6,11 +6,8 @@
   height: 100%;
   overflow: hidden;
 }
-.currentDay {
-  background: #323f47;
-  color: #9be1a0;
-}
-@media screen and (max-width: 375px) {
+
+@media screen and (max-width: 376px) {
   .gridWrapper {
     grid-template-columns: repeat(7, 1fr);
   }

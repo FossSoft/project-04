@@ -1,3 +1,4 @@
+// src\components\MonthInfo\CalendarItem\CalendarItem.jsx
 import { useDispatch } from 'react-redux';
 import { setDate } from '../../../redux/water/calendar/slice';
 import { format } from 'date-fns';
@@ -22,7 +23,7 @@ const CalendarItem = ({
 
   // Логика для стилизации
   const classNameWrapper = clsx(css.dayWrapper, {
-    [css.currentDay]: day === format(new Date(), 'yyyy-MM-dd'), // Проверьте, соответствует ли дата текущему дню
+    [css.currentDay]: day === format(new Date(), 'yyyy-MM-dd'), // Текущая дата
     [css.selectedDay]: day === format(new Date(), 'yyyy-MM-dd'),
     [css.highlightedBackground]: percentages > 0,
     [css.defaultBackground]: percentages === 0,
