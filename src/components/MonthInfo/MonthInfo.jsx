@@ -26,7 +26,7 @@ function MonthInfo() {
   const selectedDate = useSelector(selectDate); // Дата в формате 'YYYY-MM-DD'
   const isLoading = useSelector(selectIsLoading);
   const isError = useSelector(selectError);
-
+  // console.log('isError:', isError); // Выводим ошибку в консоль
   const changeMonth = increment => {
     if (increment > 0) {
       dispatch(upMonth());
@@ -66,14 +66,16 @@ function MonthInfo() {
   return (
     <div className={css.container}>
       <div className={css.wrapperContainer}>
-        <CalendarTitle onTodayHandler={onTodayHandler} title="Month" />
-        <div className={css.containerToggle}>
-          <CalendarPagination
-            currentDate={new Date(year, month, 1)}
-            changeMonth={changeMonth}
-            onMonthHandler={onTodayHandler}
-          />
-          <CalendarToggle isActive={isActive} setIsActive={setIsActive} />
+        <div className={css.containerHeader}>
+          <CalendarTitle onTodayHandler={onTodayHandler} title="Month" />
+          <div className={css.containerToggle}>
+            <CalendarPagination
+              currentDate={new Date(year, month, 1)}
+              changeMonth={changeMonth}
+              onMonthHandler={onTodayHandler}
+            />
+            <CalendarToggle isActive={isActive} setIsActive={setIsActive} />
+          </div>
         </div>
       </div>
       {isError && (
@@ -81,8 +83,8 @@ function MonthInfo() {
           <p>An error occurred</p>
         </div>
       )}
-      {isLoading && <Loader />}
 
+      {isLoading && <Loader />}
       <Calendar
         monthArray={monthArray}
         monthDay={monthDay}

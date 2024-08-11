@@ -13,8 +13,8 @@ const CalendarItem = ({
   const dispatch = useDispatch();
 
   // Логирование данных
-  console.log('Received day:', day);
-  console.log('Received percentage:', percentageConsumed);
+  // console.log('Received day:', day);
+  // console.log('Received percentage:', percentageConsumed);
 
   // Преобразование строки даты в формат YYYY-MM-DD
   const dayNumber = day.split('-')[2];
