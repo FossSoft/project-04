@@ -1,8 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { useAuth } from '../../hooks/useAuth';
-import { fetchUserInfo } from '../../redux/user/operations';
+// import { useEffect } from 'react';
+// import { useDispatch } from 'react-redux';
+// import { useAuth } from '../../hooks/useAuth';
+// import { fetchUserInfo } from '../../redux/user/operations';
 import RestrictedRoute from '../../components/RestricktedRoute';
 import PrivateRoute from '../../components/PrivateRoute';
 import HomePage from '../../pages/HomePage/HomePage';
