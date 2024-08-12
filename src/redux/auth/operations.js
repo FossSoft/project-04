@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { setCredentials, logoutAction, clearCredentials } from './slice';
+import { setCredentials, logoutAction } from './slice';
 
 export const apiClient = axios.create({
   baseURL: 'https://back-end-aquatrack.onrender.com',
@@ -104,12 +104,12 @@ export const sendEmail = createAsyncThunk(
 );
 export const resetPassword = createAsyncThunk(
   'auth/reset-password',
-  async(formData, thunkAPI)=>{
+  async (formData, thunkAPI) => {
     try {
-      const response = await apiClient.post('/auth/reset-password',formData);
+      const response = await apiClient.post('/auth/reset-password', formData);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data || error.message);
     }
   }
-)
+);

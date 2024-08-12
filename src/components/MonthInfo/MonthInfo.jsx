@@ -67,10 +67,6 @@ function MonthInfo() {
       item => convertDate(currentMonth, item.date) === date
     );
 
-    // Логирование текущей даты и найденного объекта
-    console.log('Processing Date:', date);
-    console.log('Found Item:', item);
-
     const percentage = item?.percentage || '0%';
 
     // Логирование процентного значения перед форматированием
@@ -81,9 +77,6 @@ function MonthInfo() {
       percentage: formatPercentage(percentage),
     };
   });
-
-  // Логирование calendarArray
-  console.log('Calendar Array:', calendarArray);
 
   const changeMonth = increment => {
     if (increment > 0) {
@@ -103,6 +96,7 @@ function MonthInfo() {
   };
 
   useEffect(() => {
+    console.log('Fetching water data for month:', currentMonth);
     dispatch(fetchWaterData(currentMonth));
   }, [dispatch, currentMonth, waterData]);
 
