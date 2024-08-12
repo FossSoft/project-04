@@ -1,4 +1,4 @@
-import axios from 'axios';
+// import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { apiClient } from '../auth/operations.js';
 
@@ -81,7 +81,8 @@ export const updateUserAvatar = createAsyncThunk(
   }
 );
 
-export const fetchTodayProgress = createAsyncThunk("user/fetchTodayProggress",
+export const fetchTodayProgress = createAsyncThunk(
+  'user/fetchTodayProggress',
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
     const token = getToken(state);
@@ -100,7 +101,7 @@ export const fetchTodayProgress = createAsyncThunk("user/fetchTodayProggress",
       return thunkAPI.rejectWithValue(error.response?.data || error.message);
     }
   }
-)
+);
 
 export const fetchWaterDataByDay = createAsyncThunk(
   'user/fetchWaterDataByDay',
