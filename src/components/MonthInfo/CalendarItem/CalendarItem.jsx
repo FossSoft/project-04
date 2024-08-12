@@ -14,10 +14,8 @@ const CalendarItem = ({
   // Преобразование строки даты в формат YYYY-MM-DD
   const dayNumber = parseInt(day.split('-')[2], 10);
 
-  // Определение класса для процентов
-  const percentageClass = clsx({
-    [css.boldText]: percentageConsumed > 100,
-  });
+  // Убедимся, что percentageConsumed не больше 100
+  const cappedPercentage = Math.min(percentageConsumed, 100);
 
   const handleClick = () => {
     dispatch(setDate(day)); // Дата уже в формате YYYY-MM-DD
@@ -40,14 +38,7 @@ const CalendarItem = ({
       >
         {dayNumber}
       </div>
-      <span className={clsx(css.percentages, percentageClass)}>
-        {percentageConsumed > 100
-          ? percentageConsumed
-          : percentageConsumed < 100
-          ? percentageConsumed
-          : 100}
-        %
-      </span>
+      <span className={css.percentages}>{cappedPercentage}%</span>
     </div>
   );
 };
