@@ -133,7 +133,6 @@
 .editInput {
   width: 100%;
   margin-top: 8px;
-  display: flex;
   padding: 14px 16px 16px 14px;
   align-items: flex-start;
   border-radius: 15px;
@@ -218,6 +217,7 @@
   }
   .editInput {
     padding: 16px;
+    font-size: 16px;
   }
   .labelValueOfWater {
     font-size: 18px;
