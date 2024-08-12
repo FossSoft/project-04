@@ -7,6 +7,7 @@ import { useEffect, useId, useRef, useState } from 'react';
 import { selectIsLoading } from '../../redux/user/selectors.js';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { RotatingLines } from 'react-loader-spinner';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectUserAvatar,
@@ -23,7 +24,6 @@ import {
   updateUserAvatar,
   updateUserInfo,
 } from '../../redux/user/operations.js';
-import { Spiner } from 'components/Spiner/Spiner.jsx';
 
 export const Setting = () => {
   const upload = useId();
@@ -363,7 +363,7 @@ export const Setting = () => {
       </form>
       {isLoading && (
         <div className={css.loaderBg}>
-          <Spiner addClass={css.dataLoader} />
+          <RotatingLines addClass={css.dataLoader} />
         </div>
       )}
     </div>
