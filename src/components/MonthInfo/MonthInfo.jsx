@@ -16,6 +16,7 @@ import {
 } from '../../redux/water/calendar/selectors';
 import { useState, useEffect } from 'react';
 import { fetchWaterData } from '../../redux/water/calendar/operations.js';
+import { selectWaterItems } from '../../redux/water/selectors.js';
 
 function MonthInfo() {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ function MonthInfo() {
   const selectedDate = useSelector(selectDate); // Дата в формате 'YYYY-MM-DD'
   const isLoading = useSelector(selectIsLoading);
   const isError = useSelector(selectError);
+  const waterData = useSelector(selectWaterItems)
 
   // Функция для форматирования процентов в число
   const formatPercentage = percentage => {
@@ -73,7 +75,7 @@ function MonthInfo() {
 
   useEffect(() => {
     dispatch(fetchWaterData(currentMonth));
-  }, [dispatch, currentMonth]);
+  }, [dispatch, currentMonth, waterData]);
 
   return (
     <div className={css.container}>
