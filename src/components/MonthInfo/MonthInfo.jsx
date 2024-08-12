@@ -36,27 +36,12 @@ function MonthInfo() {
     return isNaN(value) ? 0 : Math.floor(value);
   };
 
-  // Переменная для форматированного процента
-  const percentageNumber = monthArray.map(item =>
-    formatPercentage(item.percentage)
-  );
-
-  const changeMonth = increment => {
-    if (increment > 0) {
-      dispatch(upMonth());
-    } else if (increment < 0) {
-      dispatch(downMonth());
-    }
-  };
-
-  const onTodayHandler = () => {
-    const today = new Date();
-    dispatch(setDate(format(today, 'yyyy-MM-dd')));
-  };
-
-  const onDateSelect = date => {
-    const formattedDate = format(date, 'yyyy-MM-dd');
-    dispatch(setDate(formattedDate));
+  // Функция для преобразования даты из формата "Month, Day" в формат "YYYY-MM-DD"
+  const convertDate = (monthYear, dateStr) => {
+    const [monthName, day] = dateStr.split(', ');
+    const monthIndex = new Date(Date.parse(monthName + ' 1, 2020')).getMonth();
+    const year = monthYear.split('-')[0];
+    return format(new Date(year, monthIndex, day), 'yyyy-MM-dd');
   };
 
   // Генерация массива дней для текущего месяца
@@ -72,6 +57,50 @@ function MonthInfo() {
   const year = parseInt(currentMonth.split('-')[0], 10);
   const month = parseInt(currentMonth.split('-')[1], 10) - 1;
   const monthDay = getMonthDaysArray(year, month);
+
+  // Логирование monthArray
+  console.log('Month Array:', monthArray);
+
+  // Формируем массив объектов с датой и процентом
+  const calendarArray = monthDay.map((date, index) => {
+    const item = monthArray.find(
+      item => convertDate(currentMonth, item.date) === date
+    );
+
+    // Логирование текущей даты и найденного объекта
+    console.log('Processing Date:', date);
+    console.log('Found Item:', item);
+
+    const percentage = item?.percentage || '0%';
+
+    // Логирование процентного значения перед форматированием
+    console.log('Raw Percentage:', percentage);
+
+    return {
+      date,
+      percentage: formatPercentage(percentage),
+    };
+  });
+
+  // Логирование calendarArray
+  console.log('Calendar Array:', calendarArray);
+
+  const changeMonth = increment => {
+    if (increment > 0) {
+      dispatch(upMonth());
+    } else if (increment < 0) {
+      dispatch(downMonth());
+    }
+  };
+
+  const onTodayHandler = () => {
+    const today = new Date();
+    dispatch(setDate(format(today, 'yyyy-MM-dd')));
+  };
+
+  const handleDateClick = date => {
+    dispatch(setDate(date)); // Обновляем состояние даты в Redux
+  };
 
   useEffect(() => {
     dispatch(fetchWaterData(currentMonth));
@@ -103,10 +132,11 @@ function MonthInfo() {
       )}
 
       <Calendar
-        percentage={percentageNumber}
-        monthDay={monthDay}
+        monthItem={calendarArray} // Передаем массив объектов с датой и процентом
         selectedDate={selectedDate}
-        onClick={onDateSelect}
+        currentDate={format(new Date(), 'yyyy-MM-dd')}
+        isActive={isActive}
+        onClick={handleDateClick} // Передаем обработчик кликов
       />
     </div>
   );
