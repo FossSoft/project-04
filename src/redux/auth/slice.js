@@ -7,6 +7,7 @@ import {
   clearAuthHeader,
   logout,
   sendEmail,
+  resetPassword
 } from './operations';
 
 import { fetchTodayProgress } from '../user/operations.js';
@@ -99,7 +100,21 @@ const authSlice = createSlice({
         state.isEmailSending = false;
         state.emailSent = false;
         state.emailError = action.error.message;
+      })
+      .addCase(resetPassword.pending, (state) => {
+        state.isRefreshing = true; 
+        state.error = null;  
+      })
+      .addCase(resetPassword.fulfilled, (state, action) => {
+        state.isRefreshing = false;
+        state.error = null;
+      })
+      .addCase(resetPassword.rejected, (state, action) => {
+        state.isRefreshing = false;
+        state.error = action.payload || action.error.message;
+      })
       });
+
   },
 });
 

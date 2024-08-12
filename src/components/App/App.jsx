@@ -12,6 +12,7 @@ import SignUpPage from 'pages/SignUpPage/SignUpPage';
 import { Setting } from 'components/Setting/Setting.jsx';
 // Ярик
 import RecoveryPage from '../../pages/RecoveryPage/RecoveryPage';
+import ResetPasswordPage from 'pages/ResetPasswordPage/ResetPasswordPage';
 
 export default function App() {
   return (
@@ -34,6 +35,7 @@ export default function App() {
         <Route path="/signup" element={<SignUpPage />}></Route>
         <Route path="/tracker" element={<TrackerPage />}></Route>
         <Route path="/request-reset-email" element={<RecoveryPage />}></Route>
+        <Route path="/reset-password/:token" element={<ResetPasswordPage />}></Route>
       </Routes>
     </>
   );
