@@ -96,10 +96,20 @@ export const sendEmail = createAsyncThunk(
         '/auth/request-reset-email',
         credentials
       );
-      thunkAPI.dispatch(clearCredentials());
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data || error.message);
     }
   }
 );
+export const resetPassword = createAsyncThunk(
+  'auth/reset-password',
+  async(formData, thunkAPI)=>{
+    try {
+      const response = await apiClient.post('/auth/reset-password',formData);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response?.data || error.message);
+    }
+  }
+)
