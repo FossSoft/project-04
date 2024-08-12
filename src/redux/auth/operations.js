@@ -1,6 +1,10 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+<<<<<<< Updated upstream
 import { setCredentials, clearCredentials } from './slice';
+=======
+import { setCredentials, logoutAction, clearCredentials } from './slice';
+>>>>>>> Stashed changes
 
 export const apiClient = axios.create({
   baseURL: 'https://back-end-aquatrack.onrender.com',

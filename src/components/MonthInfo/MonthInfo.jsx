@@ -16,6 +16,12 @@ import {
   selectIsLoading,
   selectError,
 } from '../../redux/water/calendar/selectors';
+<<<<<<< Updated upstream
+=======
+import { useState, useEffect } from 'react';
+import { fetchWaterData } from '../../redux/water/calendar/operations.js';
+import { setWaterDate } from '../../redux/water/slice.js';
+>>>>>>> Stashed changes
 
 function MonthInfo() {
   const dispatch = useDispatch();
@@ -41,7 +47,13 @@ function MonthInfo() {
   };
 
   const onDateSelect = date => {
+<<<<<<< Updated upstream
     dispatch(setDate(format(date, 'yyyy-MM-dd')));
+=======
+    const formattedDate = format(date, 'yyyy-MM-dd');
+    // dispatch(setDate(formattedDate));
+    dispatch(setWaterDate(formattedDate))
+>>>>>>> Stashed changes
   };
 
   return (

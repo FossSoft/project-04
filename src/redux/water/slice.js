@@ -80,7 +80,12 @@ const waterSlice = createSlice({
   },
 });
 
+<<<<<<< Updated upstream
 export const { setWaterDay, addWater, updateWater, deleteWater } = waterSlice.actions;
+=======
+export const { setWaterDay, setSelectedDate, addWater, updateWater, deleteWater, setWaterDate } =
+  waterSlice.actions;
+>>>>>>> Stashed changes
 
 export default waterSlice.reducer;
 
