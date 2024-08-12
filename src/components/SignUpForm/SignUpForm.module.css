@@ -225,7 +225,7 @@ form {
 @media screen and (min-width: 768px) {
   .modal {
     width: 436px;
-    /*    margin-top: 227px; */
+    margin-top: 227px;
     margin-bottom: 227px;
   }
   .text {
@@ -263,8 +263,8 @@ form {
   .modal {
     width: 436px;
     background-color: rgba(240, 239, 244, 1);
-    /*     margin-bottom: 100px;
-    margin-top: 74px; */
+    margin-bottom: 100px;
+    margin-top: 130px;
   }
   .text {
     font-size: 16px;
