@@ -1,6 +1,6 @@
 import { RotatingLines } from 'react-loader-spinner';
 
-export default function Loader() {
+export default function Loader({ addClass = '' }) {
   return (
     <div>
       <RotatingLines
