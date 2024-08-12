@@ -55,7 +55,7 @@ function MonthInfo() {
 
   const onDateSelect = date => {
     const formattedDate = format(date, 'yyyy-MM-dd');
-    // dispatch(setDate(formattedDate));
+    dispatch(setDate(formattedDate));
     dispatch(setWaterDate(formattedDate))
   };
 

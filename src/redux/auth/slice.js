@@ -102,8 +102,8 @@ const authSlice = createSlice({
         state.emailError = action.error.message;
       })
       .addCase(resetPassword.pending, (state) => {
-        state.isRefreshing = true; 
-        state.error = null;  
+        state.isRefreshing = true;
+        state.error = null;
       })
       .addCase(resetPassword.fulfilled, (state, action) => {
         state.isRefreshing = false;
@@ -113,8 +113,6 @@ const authSlice = createSlice({
         state.isRefreshing = false;
         state.error = action.payload || action.error.message;
       })
-      });
-
   },
 });
 
