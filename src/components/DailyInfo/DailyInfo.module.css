@@ -1,6 +1,6 @@
 .containerDailyInfo {
-  padding: 20px 20px;
-
+  padding: 20px 20px 40px;
+  height: 220px;
 }
 
 .dataContainer {
@@ -10,30 +10,9 @@
   margin-bottom: 24px;
 }
 
-/* @media screen and (min-width: 320px) and (max-width: 375px) {
-  .container {
-    min-width: 320px;
-    max-width: 375px;
-    padding: 16px 16px;
-  }
-}
-
-@media screen and (min-width: 375px) {
-  .container {
-    width: 375px;
-    padding: 16px 16px;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .container {
-    width: 768px;
-    padding: 32px 32px;
-  }
-} */
-
 @media screen and (min-width: 768px) {
   .containerDailyInfo {
+    height: 234px;
     padding-left: 32px;
     padding-right: 32px;
   }

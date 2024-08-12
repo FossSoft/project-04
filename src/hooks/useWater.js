@@ -2,13 +2,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { deleteWater, addWater } from '../redux/water/slice';
-import {
-  fetchWaterDataByDay,
-  deleteWaterEntry,
-} from '../redux/water/operations';
+import { fetchWaterDataByDay, deleteWaterEntry } from '../redux/water/operations';
 import { selectWaterItems } from '../redux/water/selectors';
-import { selectIsUserExist } from '../redux/user/selectors.js';
-import { selectAccessToken } from '../redux/auth/selectors.js';
 
 const toastOptions = {
   duration: 5000,
@@ -19,7 +14,7 @@ const toastOptions = {
   },
 };
 
-export const useWaterItem = item => {
+export const useWaterItem = (item) => {
   const dispatch = useDispatch();
   const { id } = item;
 
@@ -55,9 +50,9 @@ export const useAddWater = () => {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
-  const handleAddWater = async waterData => {
+  const handleAddWater = async (waterData) => {
     try {
-      await dispatch(addWater(waterData));
+      await dispatch(addWater(waterData)).unwrap();
       toast.success('Added water successfully!', toastOptions);
       closeModal();
     } catch (error) {
@@ -73,21 +68,19 @@ export const useAddWater = () => {
   };
 };
 
-export const useFetchWaterData = selectedDate => {
+export const useFetchWaterData = (selectedDate) => {
   const dispatch = useDispatch();
-  const token = useSelector(selectAccessToken);
-  const waterData = useSelector(selectWaterItems); // Використання селектора
-  const isUserExist = useSelector(selectIsUserExist);
+  const waterData = useSelector(selectWaterItems);
 
   useEffect(() => {
     const formattedDate = selectedDate
       ? new Date(selectedDate).toISOString().split('T')[0]
       : new Date().toISOString().split('T')[0];
 
-    if (formattedDate && token && isUserExist) {
+    if (formattedDate) {
       dispatch(fetchWaterDataByDay({ date: formattedDate }));
     }
-  }, [dispatch, selectedDate, token, isUserExist]);
+  }, [dispatch, selectedDate]);
 
   return { waterData };
 };
@@ -101,7 +94,7 @@ export const useDeleteWater = (item, onClose) => {
       return;
     }
     try {
-      await dispatch(deleteWaterEntry({ id: item.id }));
+      await dispatch(deleteWaterEntry({ id: item.id })).unwrap();
       toast.success('Deleted water successfully!', toastOptions);
       onClose();
     } catch (error) {
@@ -111,3 +104,4 @@ export const useDeleteWater = (item, onClose) => {
 
   return { handleDelete };
 };
+

@@ -1,33 +1,26 @@
 .textNoWater {
-
-  padding-top: 20px;
+  padding-top: 30px;
   padding-bottom: 20px;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.29;
-
-  max-width: 240px;
+  max-width: 270px;
   margin: 0 auto;
   text-align: center;
-
   width: 100%;
   box-sizing: border-box;
 }
 
-
 .list {
-  width: 100%;
   display: flex;
   justify-content: flex-start;
   flex-wrap: nowrap;
   overflow-x: auto;
   gap: 8px;
-  margin-bottom: 24px;
   box-sizing: border-box;
   scroll-snap-type: x mandatory;
   outline: none;
 }
-
 
 .list::-webkit-scrollbar {
   height: 8px;
@@ -37,9 +30,7 @@
   background-color: var(--Dark-Blue);
   border-radius: 9px;
   cursor: pointer;
-
   transition: background-color var(--effect);
-
 }
 
 .list::-webkit-scrollbar-track {
@@ -54,14 +45,9 @@
 
 .list::-webkit-scrollbar-thumb:vertical {
   display: none;
-
 }
 
 @media (min-width: 768px) {
-  .textNoWater {
-    max-width: 500px;
-  }
-
   .list {
     gap: 32px;
 
