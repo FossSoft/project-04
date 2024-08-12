@@ -16,6 +16,7 @@ import {
 } from '../../redux/water/calendar/selectors';
 import { useState, useEffect } from 'react';
 import { fetchWaterData } from '../../redux/water/calendar/operations.js';
+import { setWaterDate } from '../../redux/water/slice.js';
 
 function MonthInfo() {
   const dispatch = useDispatch();
@@ -54,7 +55,8 @@ function MonthInfo() {
 
   const onDateSelect = date => {
     const formattedDate = format(date, 'yyyy-MM-dd');
-    dispatch(setDate(formattedDate));
+    // dispatch(setDate(formattedDate));
+    dispatch(setWaterDate(formattedDate))
   };
 
   // Генерация массива дней для текущего месяца

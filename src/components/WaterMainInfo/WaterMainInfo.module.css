@@ -3,6 +3,8 @@
     width: 288px;
     position: relative;
     height: 415px;
+    padding-top: 42px;
+    padding-left: 16px;
   }
   .addWaterBtn {
     position: absolute;
@@ -22,7 +24,7 @@
   }
   .progress {
     position: absolute;
-    left: 73px;
+    left: 46px;
     bottom: 120px;
   }
 }
@@ -32,6 +34,11 @@
     width: 343px;
     padding-top: 50px;
     padding-left: 41px;
+  }
+  .progress {
+    position: absolute;
+    left: 73px;
+    bottom: 120px;
   }
 }
 
