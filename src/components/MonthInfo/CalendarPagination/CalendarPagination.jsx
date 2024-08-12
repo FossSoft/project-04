@@ -1,17 +1,26 @@
-//src\components\MonthInfo\CalendarPagination\CalendarPagination.jsx
+// src/components/MonthInfo/CalendarPagination/CalendarPagination.jsx
 import { addMonths, subMonths, format } from 'date-fns';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa6';
 import css from './CalendarPagination.module.css';
 
-const CalendarPagination = ({ currentDate, onMonthHandler }) => {
+const CalendarPagination = ({ currentDate, changeMonth, onMonthHandler }) => {
   const [date, setDate] = useState(currentDate);
 
+  useEffect(() => {
+    setDate(currentDate);
+  }, [currentDate]);
+
   const handlePrev = () => {
-    setDate(prevDate => subMonths(prevDate, 1));
+    const newDate = subMonths(date, 1);
+    setDate(newDate);
+    changeMonth(-1);
   };
 
   const handleNext = () => {
-    setDate(prevDate => addMonths(prevDate, 1));
+    const newDate = addMonths(date, 1);
+    setDate(newDate);
+    changeMonth(1);
   };
 
   const month = format(date, 'MMMM');
@@ -19,15 +28,14 @@ const CalendarPagination = ({ currentDate, onMonthHandler }) => {
 
   return (
     <div className={css.wrapperButtons}>
-      <button className={css.chevronButton} onClick={handlePrev}>
-        &lt;
+      <button onClick={handlePrev} className={css.chevronButton}>
+        <FaChevronLeft />
       </button>
-      <button
-        onClick={onMonthHandler}
-        className={css.monthButton}
-      >{`${month}, ${year}`}</button>
-      <button className={css.chevronButton} onClick={handleNext}>
-        &gt;
+      <button onClick={onMonthHandler} className={css.monthButton}>
+        {`${month}, ${year}`}
+      </button>
+      <button onClick={handleNext} className={css.chevronButton}>
+        <FaChevronRight />
       </button>
     </div>
   );

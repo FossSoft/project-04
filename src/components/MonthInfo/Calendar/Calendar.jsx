@@ -1,31 +1,22 @@
 import CalendarItem from '../CalendarItem/CalendarItem';
 import css from './Calendar.module.css';
 
-const isValidDate = dateString => {
-  const date = new Date(dateString);
-  return !isNaN(date.getTime());
-};
-
-const Calendar = ({ month, date, onClick }) => {
-  if (month.length === 0) return null;
-
+const Calendar = ({ percentage, monthDay, selectedDate, onClick }) => {
   return (
-    <ul className={css.calendar}>
-      {month.map((day, index) => {
-        const percentageString = day.percentageConsumed || '0%';
+    <ul className={css.gridWrapper}>
+      {monthDay.map((date, index) => {
+        // Получаем уникальный ключ для каждого элемента на основе индекса и разницы во времени
+        const millisecondsToSelectedDate =
+          new Date(date) - new Date(selectedDate);
+        const uniqueKey = `${index}-${millisecondsToSelectedDate}`;
 
         return (
           <CalendarItem
-            key={index}
-            date={{ day: day.date, percentageConsumed: percentageString }} // Передаем объект с day и percentageConsumed
-            isCurrentDay={day.date === date}
-            isSelectedDay={day.date === date}
+            key={uniqueKey}
+            day={date} // Передаем дату как строку в формате 'YYYY-MM-DD'
+            percentageConsumed={percentage[index] || 0} // Передаем соответствующий процент для каждого дня
             onClick={() => {
-              if (isValidDate(day.date)) {
-                onClick(day.date);
-              } else {
-                console.error('Invalid date value:', day.date);
-              }
+              onClick(date); // Передаем строку даты в формате 'YYYY-MM-DD'
             }}
           />
         );

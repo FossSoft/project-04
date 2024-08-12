@@ -1,13 +1,10 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
 import { format, isSameDay } from 'date-fns';
-import { selectWaterDate } from '../../redux/water/selectors';
+import { selectDate } from '../../redux/water/calendar/selectors';
 import css from './ChooseDate.module.css';
 
 function ChooseDate() {
-  const currentDate = useSelector(selectWaterDate);
-
-  // console.log('Current Date:', currentDate);
+  const currentDate = useSelector(selectDate);
 
   const formattedDate = new Date(currentDate);
 
@@ -21,3 +18,5 @@ function ChooseDate() {
 }
 
 export default ChooseDate;
+
+

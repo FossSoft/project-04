@@ -23,3 +23,5 @@ export const selectIsLoading = state => state.user.isLoading;
 export const selectUserError = state => state.user.error;
 
 export const selectTodayProgress = state => state.user.todayProgress;
+
+export const selectIsUserExist = state => Boolean(state.user.email);

@@ -1,36 +1,52 @@
-import clsx from 'clsx';
+import { useDispatch } from 'react-redux';
+import { setDate } from '../../../redux/water/calendar/slice';
 import { format } from 'date-fns';
+import clsx from 'clsx';
 import css from './CalendarItem.module.css';
 
-const CalendarItem = ({ date, isCurrentDay, isSelectedDay, onClick }) => {
-  // Извлекаем данные из объекта date
-  const percentages = Math.floor(Number(date.percentageConsumed)) || 0;
-  const currentDate = format(new Date(), 'yyyy-MM-dd');
-  const dayNumber = date.day.split('-')[2]; // Извлекаем номер дня из строки даты
+const CalendarItem = ({
+  day, // строка с датой в формате 'YYYY-MM-DD'
+  percentageConsumed, // число с процентами
+  onClick, // Функция для обработки клика на день
+}) => {
+  const dispatch = useDispatch();
+
+  // Преобразование строки даты в формат YYYY-MM-DD
+  const dayNumber = parseInt(day.split('-')[2], 10);
+
+  // Определение класса для процентов
+  const percentageClass = clsx({
+    [css.boldText]: percentageConsumed > 100,
+  });
+
+  const handleClick = () => {
+    dispatch(setDate(day)); // Дата уже в формате YYYY-MM-DD
+    if (onClick) {
+      onClick(new Date(day)); // Передаем дату в формате Date
+    }
+  };
 
   return (
-    // Стилизация всего календаря
     <div
-      className={clsx(css.dayWrapper, {
-        [css.currentDay]: isCurrentDay,
-        [css.selectedDay]: isSelectedDay,
-        [css.highlightedBackground]: percentages > 0 && !isCurrentDay,
-        [css.defaultBackground]: percentages === 0 && !isCurrentDay,
-      })}
-      onClick={() => onClick(date.day)}
+      className={css.container}
+      onClick={handleClick}
       style={{ cursor: 'pointer' }}
     >
-      {/* Стилизация номера дня */}
       <div
         className={clsx(css.number, {
-          [css.notFull]: percentages < 100,
-          [css.current]: currentDate === date.day,
+          [css.currentDay]: day === format(new Date(), 'yyyy-MM-dd'), // Текущая дата
+          [css.selectedDay]: day === format(new Date(), 'yyyy-MM-dd'), // Выбранная дата
         })}
       >
         {dayNumber}
       </div>
-      <span className={css.percentages}>
-        {percentages < 100 ? percentages : 100}%
+      <span className={clsx(css.percentages, percentageClass)}>
+        {percentageConsumed > 100
+          ? percentageConsumed
+          : percentageConsumed < 100
+          ? percentageConsumed
+          : 100}
+        %
       </span>
     </div>
   );

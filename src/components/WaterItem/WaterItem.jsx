@@ -1,53 +1,32 @@
-import { useState } from 'react';
-// import { format, parseISO, subHours } from 'date-fns';
+import { useWaterItem } from '../../hooks/useWater';
 import css from './WaterItem.module.css';
 import sprite from '../../image/sprite/sprite.svg';
 import DeleteWaterModal from 'components/DeleteWaterModal/DeleteWaterModal';
 import { EditWaterModal } from 'components/EditWaterModal/EditWaterModal';
 import Modal from 'components/Modal/Modal';
-import { useDispatch } from 'react-redux';
-import { deleteWater } from '../../redux/water/slice';
 
-const WaterItem = ({ item, onEdit }) => {
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const dispatch = useDispatch();
+const WaterItem = ({ item }) => {
+  const {
+    isDeleteModalOpen,
+    isEditModalOpen,
+    openDeleteModal,
+    closeDeleteModal,
+    openEditModal,
+    closeEditModal,
+    handleDelete,
+  } = useWaterItem(item);
 
-  const { id, amountOfWater, time } = item;
 
+  const { amountOfWater, time } = item;
   const formatAmount = (amountOfWater) => {
-    return `${amountOfWater} ml`;
+    const liters = amountOfWater / 1000;
+    if (liters >= 1) {
+      return `${liters.toFixed(2)} L`;
+    } else {
+      return `${amountOfWater} ml`;
+    }
   };
-
-  //   const formatTime = (isoString) => {
-  //     const date = subHours(parseISO(isoString), 0);
-  //     return format(date, 'HH:mm');
-  //   };
-
-  const formatTime = (time) => {
-    return time;
-  };
-
-  const openDeleteModal = () => {
-    setIsDeleteModalOpen(true);
-  };
-
-  const closeDeleteModal = () => {
-    setIsDeleteModalOpen(false);
-  };
-
-  const openEditModal = () => {
-    setIsEditModalOpen(true);
-  };
-
-  const closeEditModal = () => {
-    setIsEditModalOpen(false);
-  };
-
-  const handleDelete = () => {
-    dispatch(deleteWater(id));
-    closeDeleteModal();
-  };
+  const formatTime = (time) => time;
 
   return (
     <div className={css.itemWrapper}>

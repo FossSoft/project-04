@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import css from './AddWaterModal.module.css'; // Переконайтеся, що цей шлях правильний і CSS підключається
 import sprite from '../../image/sprite/sprite.svg'; // Актуальний шлях до спрайту
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addWaterAmount } from '../../redux/water/operations';
+import { selectWaterDate } from '../../redux/water/selectors';
+import { addWater } from '../../redux/water/slice';
 
-export const WaterModal = ({ onClose }) => {
+export const AddWaterModal = ({ onCancel }) => {
+  const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(50);
   const timeNow = new Date().toTimeString().slice(0, 5);
-  const dispatch = useDispatch();
+  const [time, setTime] = useState(timeNow);
+  const waterDate = useSelector(selectWaterDate);
   const handleDecrease = () => {
     setQuantity(prevValue => (prevValue > 50 ? prevValue - 50 : prevValue));
   };
@@ -16,12 +20,58 @@ export const WaterModal = ({ onClose }) => {
     setQuantity(prevValue => (prevValue < 1500 ? prevValue + 50 : prevValue));
   };
 
-  const handleChange = e => {
-    setQuantity(Number(e.target.value));
+  // const handleChangeQuantity = e => {
+  //   let value = e.target.value;
+  //   if (isNaN(value) || value.trim() === '') {
+  //     return;
+  //   }
+
+  //   value = Number(value);
+  //   if (value < 0) {
+  //     value = 0;
+  //   } else if (value > 1500) {
+  //     value = 1500;
+  //   }
+
+  //   setQuantity(value);
+  // };
+  const handleChangeQuantity = e => {
+    let value = e.target.value;
+
+    // Дозволяємо вводити лише цифри, обмежуємо довжину до 4 символів
+    if (/^\d{0,4}$/.test(value)) {
+      setQuantity(value);
+    }
   };
 
-  const handleSaveWater = () => {
-    dispatch(addWaterAmount({}));
+  const handleBlurQuantity = () => {
+    let numericValue = Number(quantity);
+
+    // Обмежуємо значення діапазоном від 0 до 1500
+    if (numericValue > 1500) {
+      numericValue = 1500;
+    }
+
+    setQuantity(numericValue);
+  };
+
+  const handleChangeTime = e => {
+    setTime(e.target.value);
+  };
+  const handleSaveWater = async () => {
+    // const token = localStorage.getItem('token');
+    // if (!token) {
+    //   return;
+    // }
+
+    const waterData = {
+      amountOfWater: quantity,
+      time,
+      date: waterDate,
+    };
+    await dispatch(addWaterAmount(waterData));
+    // dispatch(addWater(waterData));
+    onCancel();
   };
 
   return (
@@ -29,10 +79,7 @@ export const WaterModal = ({ onClose }) => {
       <h1 className={css.addWaterTitle}>Add Water</h1>
 
       <div>
-        <h2
-          style={{ marginBottom: '20px' }}
-          className={css['value-text-title']}
-        >
+        <h2 style={{ marginBottom: '20px' }} className={css['value-text-title']}>
           Choose a value:
         </h2>
         <p className={css['value-text']}>Amount of water:</p>
@@ -51,7 +98,7 @@ export const WaterModal = ({ onClose }) => {
             className={css.value}
             value={`${quantity}ml`}
             readOnly
-            onChange={handleChange}
+            onChange={handleChangeQuantity}
             style={{
               WebkitAppearance: 'none',
               MozAppearance: 'textfield',
@@ -72,6 +119,7 @@ export const WaterModal = ({ onClose }) => {
           type="time"
           className={css['water-input']}
           defaultValue={timeNow}
+          onChange={handleChangeTime}
         />
       </div>
 
@@ -82,14 +130,15 @@ export const WaterModal = ({ onClose }) => {
         <input
           className={css['water-input']}
           placeholder="50"
-          type="text"
+          type="number"
           value={quantity}
-          onChange={handleChange}
+          onChange={handleChangeQuantity}
+          onBlur={handleBlurQuantity}
         />
       </div>
 
       <button
-        type="button"
+        type="submit"
         onClick={handleSaveWater}
         className={css['btn-save']}
       >

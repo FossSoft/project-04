@@ -4,12 +4,24 @@
   flex-direction: column;
   margin-bottom: 16px;
 }
+.text {
+  color: rgba(47, 47, 47, 0.5);
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: -0.14px;
+}
+
+.spanLink {
+  color: var(--dark-grey);
+  text-decoration-line: underline;
+  font-weight: 700;
+  letter-spacing: -0.16px;
+}
 
 .title {
   color: #323f47;
-
   /* Mobile/H2 */
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 32px;
   font-style: normal;
   font-weight: 700;
@@ -33,7 +45,7 @@
 
 .label {
   color: #2f2f2f;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
@@ -52,13 +64,14 @@
   transition: border 250ms cubic-bezier(0.4, 0, 0.2, 1);
   outline: 0 none;
   color: #2f2f2f;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: 24px; /* 150% */
   letter-spacing: -0.16px;
   width: 100%;
+  background-color: rgba(240, 239, 244, 1);
 }
 
 .input:hover,
@@ -79,7 +92,7 @@ input:active {
   color: rgba(47, 47, 47, 0.6);
 
   /* Mobile/Main text */
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -107,7 +120,7 @@ input:active {
   background: #9be1a0;
   color: #323f47;
   text-align: center;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
@@ -155,7 +168,7 @@ input:active {
 
 .error {
   color: #ef5050;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -165,6 +178,11 @@ input:active {
 }
 
 @media screen and (min-width: 375px) {
+  .text {
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.16px;
+  }
   .form {
     width: 311px;
   }

@@ -2,29 +2,45 @@ import { useEffect } from 'react';
 import styles from './WaterProgressBar.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTodayProgress } from '../../redux/user/operations.js';
-import { selectTodayProgress, selectUserWaterToDrink } from '../../redux/user/selectors.js';
+import {
+  selectIsUserExist,
+  selectTodayProgress,
+  selectUserWaterToDrink,
+} from '../../redux/user/selectors.js';
 import { selectWaterItems } from '../../redux/water/selectors.js';
 
 export default function WaterProgressBar() {
   const dispatch = useDispatch();
   const percents = useSelector(selectTodayProgress);
   const waterData = useSelector(selectWaterItems);
-  const waterNorma = useSelector(selectUserWaterToDrink)
+  const waterNorma = useSelector(selectUserWaterToDrink);
+  const isUserExist = useSelector(selectIsUserExist);
 
   useEffect(() => {
-    dispatch(fetchTodayProgress());
-  }, [dispatch, waterData, waterNorma]);
+    console.log('fetchTodayProgress');
+    console.log(isUserExist);
+    isUserExist && dispatch(fetchTodayProgress());
+  }, [dispatch, waterData, waterNorma, isUserExist]);
+
+  const numericPercents = parseFloat(percents);
+
+  const limitedPercents = Math.min(numericPercents, 100);
+
+  const displayPercents = `${limitedPercents}%`;
 
   return (
     <div className={styles.container}>
       <p className={styles.today}>Today</p>
       <div className={styles.progress}>
-        <div className={styles.line} style={{ width: `${percents}` }}>
+        <div
+          className={styles.line}
+          style={{ width: displayPercents }}
+        >
           <div className={styles.circle}></div>
           <span className={styles.tadwyPercent}>
-            {percents === '0%' || percents === '50%' || percents === '100%'
+            {limitedPercents === 0 || limitedPercents === 50 || limitedPercents === 100
               ? null
-              : percents}
+              : displayPercents}
           </span>
         </div>
       </div>
@@ -37,3 +53,4 @@ export default function WaterProgressBar() {
     </div>
   );
 }
+

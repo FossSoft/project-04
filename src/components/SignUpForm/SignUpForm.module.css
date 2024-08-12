@@ -5,7 +5,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-bottom: 100px;
 }
 
 form {
@@ -13,7 +12,7 @@ form {
 }
 .container {
   margin-top: 20px;
-  position: relative;
+  /*   position: relative; */
 }
 .input {
   font-family: Poppins;
@@ -26,6 +25,7 @@ form {
   padding-bottom: 16px;
   padding-left: 16px;
   margin-top: 8px;
+  margin-bottom: 8px;
   background-color: rgba(240, 239, 244, 1);
 }
 
@@ -43,6 +43,15 @@ form {
   text-align: left;
   color: rgba(47, 47, 47, 0.6);
 }
+.input:hover,
+.input:focus {
+  box-shadow: 7px 5px 29px -18px rgba(50, 63, 71, 1);
+}
+
+.input:focus {
+  box-shadow: 7px 5px 29px -18px rgba(50, 63, 71, 1);
+  transform: scale(1.01);
+}
 
 .errorInput::placeholder {
   color: rgba(239, 80, 80, 1);
@@ -52,6 +61,7 @@ form {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 16px;
 }
 .link {
   font-family: Poppins;
@@ -91,11 +101,12 @@ form {
   text-align: center;
   margin-top: 32px;
   padding: 16px;
-  margin-bottom: 16px;
+  /*    margin-bottom: 16px; */
   border: none;
 }
 
-.button:focus {
+.button:focus,
+.button:hover {
   background-color: rgba(135, 210, 141, 1);
 }
 
@@ -123,14 +134,6 @@ form {
 }
 .errorMessage {
   color: rgba(239, 80, 80, 1);
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
-  letter-spacing: -0.01em;
-  text-align: left;
-  margin-left: 8px;
-  margin-top: 8px;
-  display: block;
 }
 .errorInput {
   border-color: rgba(239, 80, 80, 1);
@@ -150,8 +153,9 @@ form {
   .modal {
     margin-top: 170px;
     margin-bottom: 170px;
-    padding-left: 16px;
-    padding-right: 16px;
+    width: 100%;
+    /*  padding-left: 16px;
+    padding-right: 16px; */
   }
   .text {
     font-size: 14px;
@@ -171,6 +175,14 @@ form {
   .label {
     font-size: 14px;
   }
+  .errorMessage {
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: -0.01em;
+    text-align: left;
+  }
 }
 
 @media screen and (min-width: 375px) {
@@ -188,6 +200,24 @@ form {
   }
   .label {
     font-size: 14px;
+  }
+  .modal {
+    margin-top: 170px;
+    margin-bottom: 170px;
+    width: 311px;
+    /*   padding-left: 16px;
+    padding-right: 16px; */
+  }
+  .errorMessage {
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: -0.01em;
+    text-align: left;
+  }
+  .link {
+    font-size: 16px;
   }
 }
 
@@ -213,6 +243,19 @@ form {
   .h2 {
     font-size: 36px;
   }
+  .link {
+    font-size: 16px;
+  }
+  .errorMessage {
+    color: rgba(239, 80, 80, 1);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: -0.01em;
+    text-align: left;
+    margin-left: 8px;
+    display: block;
+  }
 }
 
 /* Desktop and > */
@@ -221,7 +264,7 @@ form {
     width: 436px;
     background-color: rgba(240, 239, 244, 1);
     margin-bottom: 100px;
-    margin-top: 74px;
+    margin-top: 130px;
   }
   .text {
     font-size: 16px;
@@ -234,5 +277,15 @@ form {
   }
   .h2 {
     font-size: 36px;
+  }
+  .errorMessage {
+    color: rgba(239, 80, 80, 1);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: -0.01em;
+    text-align: left;
+    margin-left: 8px;
+    display: block;
   }
 }

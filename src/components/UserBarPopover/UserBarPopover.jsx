@@ -1,4 +1,4 @@
-// import clsx from 'clsx';
+import clsx from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
 import css from './UserBarPopover.module.css';
 import './UserBarPopover.css';
@@ -39,15 +39,19 @@ export default function UserBarPopover({ style }) {
   const handleCloseModalLogout = () => {
     dispatch(closeModalLogout());
   };
+  const closeButtonPosition =
+    window.innerWidth > 768
+      ? { right: '40px', top: '40px' }
+      : { right: '16px', top: '20px' };
 
   return (
     <div className={showPopover ? 'popover active' : 'popover'} style={style}>
       <button
-        className={css.btnDarkblue}
+        className={clsx(css.btn, css.darkblue)}
         onClick={handleOpenModalSettings}
         type="button"
       >
-        <svg className={css.iconDarkblue}>
+        <svg className={css.icon}>
           <use href={`${sprite}#icon-settings`}></use>
         </svg>
         Settigs
@@ -56,16 +60,17 @@ export default function UserBarPopover({ style }) {
       <Modal
         isOpen={isOpenModalSettings}
         onRequestClose={handleCloseModalSettings}
+        closeButtonPosition={closeButtonPosition}
       >
         <Setting />
       </Modal>
 
       <button
-        className={css.btnGray}
+        className={clsx(css.btn, css.gray)}
         onClick={handleOpenModalLogout}
         type="button"
       >
-        <svg className={css.iconGray}>
+        <svg className={css.icon}>
           <use href={`${sprite}#icon-log-out`}></use>
         </svg>
         Log out

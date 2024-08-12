@@ -1,10 +1,15 @@
-import { MdToday } from 'react-icons/md';
 import css from './CalendarTitle.module.css';
 
 const CalendarTitle = ({ onTodayHandler, title }) => {
+  const handleClick = () => {
+    if (title === 'Month') {
+      onTodayHandler(); // Переход на текущую дату
+    }
+  };
+
   return (
-    <div className={css.textWrapper}>
-      {title} <MdToday className={css.todayIcon} onClick={onTodayHandler} />
+    <div className={css.textWrapper} onClick={handleClick}>
+      {title}
     </div>
   );
 };
