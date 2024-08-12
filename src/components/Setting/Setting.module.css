@@ -209,7 +209,7 @@ input[type='number']::-webkit-outer-spin-button {
 
   color: #2f2f2f;
 
-  font-family: Poppins;
+  font-family: Poppins, sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -324,7 +324,7 @@ input[type='number']::-webkit-outer-spin-button {
   outline: none;
   color: #2f2f2f;
 
-  font-family: Poppins;
+  font-family: Poppins, sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -528,6 +528,7 @@ input[type='number']::-webkit-outer-spin-button {
   .weightTimeContainer label input {
     padding: 16px;
     width: 568px;
+    font-family: Poppins, sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -543,6 +544,7 @@ input[type='number']::-webkit-outer-spin-button {
     font-weight: 400;
     line-height: 24px;
     letter-spacing: -0.16px;
+    font-family: Poppins, sans-serif;
   }
   .requireWater {
     font-size: 16px;
@@ -577,6 +579,7 @@ input[type='number']::-webkit-outer-spin-button {
     font-weight: 400;
     line-height: 24px;
     letter-spacing: -0.16px;
+    font-family: Poppins, sans-serif;
   }
   .activeIcon {
     width: 22px;
