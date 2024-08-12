@@ -91,7 +91,8 @@ const waterSlice = createSlice({
   },
 });
 
-export const { setWaterDay, setSelectedDate, addWater, updateWater, deleteWater } =
+
+export const { setWaterDay, addWater, updateWater, deleteWater, setWaterDate } =
   waterSlice.actions;
 
 export default waterSlice.reducer;

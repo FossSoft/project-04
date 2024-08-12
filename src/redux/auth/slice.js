@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import {
   logIn,
   register,
-  setAuthHeader,
+  // setAuthHeader,
   clearAuthHeader,
   logout,
   sendEmail,
@@ -113,8 +113,11 @@ const authSlice = createSlice({
         state.isRefreshing = false;
         state.error = action.payload || action.error.message;
       })
+      });
+
   },
 });
 
-export const { setCredentials, clearCredentials, logoutAction } = authSlice.actions;
+export const { setCredentials, clearCredentials, logoutAction } =
+  authSlice.actions;
 export const authReducer = authSlice.reducer;
