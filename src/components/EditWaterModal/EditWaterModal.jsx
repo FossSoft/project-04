@@ -44,19 +44,19 @@ export const EditWaterModal = ({item, onClose }) => {
   const handleChangeAmmount = (e) => {
       
   let value = e.target.value;
-  if (isNaN(value) || value.trim() === '') {
-    return; 
-  }
-
-  value = Number(value);
-  if (value < 0) {
-    value = 0;
-  } else if (value > 1500) {
-    value = 1500;
-  }
-
-  setQuantity(value);
+    if (/^\d{0,4}$/.test(value)) {
+      setQuantity(value);
+    }
 };
+  
+  const handleBlurQuantity = () => {
+    let numericValue = Number(quantity);
+    if (numericValue > 1500) {
+      numericValue = 1500;
+    }
+
+    setQuantity(numericValue);
+  };
   
   const handleChangeTime = (e) => {
       setTime(e.target.value)
@@ -103,7 +103,7 @@ export const EditWaterModal = ({item, onClose }) => {
               Recording time:
               <input
                 className={css.editInput}
-                type="text"
+                type="time"
                 id="recordingTime"
               defaultValue={time}
               onChange={handleChangeTime}
@@ -116,10 +116,13 @@ export const EditWaterModal = ({item, onClose }) => {
               Enter the value of the water used:
               <input
                 className={css.editInput}
-                type="text"
-                id="valueOfWater"
+                type="number"
+              id="valueOfWater"
+              placeholder='50'
               value={quantity}
-                onChange={handleChangeAmmount}            
+              onChange={handleChangeAmmount}
+              onBlur={handleBlurQuantity}
+              required
               />
             </label>
             <button type="submit" className={css.btnSave}>
