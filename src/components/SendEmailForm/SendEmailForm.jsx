@@ -38,12 +38,11 @@ export default function SendEmailForm() {
       toast.success(
         'Check your email! We sent you a link to reset your password.'
       );
-      setEmailSent(true); // Скрываем форму после успешной отправки
+      setEmailSent(true);
       reset();
     } catch (error) {
-      // Если произошла ошибка, показываем соответствующий тост
       toast.error('User does not exist.');
-      setEmailSent(false); // Оставляем форму видимой
+      setEmailSent(false);
     }
   };
   return (
