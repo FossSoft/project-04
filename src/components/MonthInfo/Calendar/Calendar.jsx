@@ -1,22 +1,21 @@
-// src/components/MonthInfo/Calendar/Calendar.jsx
 import CalendarItem from '../CalendarItem/CalendarItem';
 import css from './Calendar.module.css';
 
-const Calendar = ({ percentage, monthDay, onClick }) => {
+const Calendar = ({ monthItem, onClick }) => {
   return (
     <ul className={css.gridWrapper}>
-      {monthDay.map((date, index) => {
-        // Используем индекс в качестве уникального ключа
+      {monthItem.map(({ date, percentage }, index) => {
         const uniqueKey = index;
 
-        // Логирование date
+        // Логирование date и percentage
         console.log('Calendar Date:', date);
+        console.log('Calendar Percentage:', percentage);
 
         return (
           <CalendarItem
             key={uniqueKey}
             day={date} // Передаем дату как строку в формате 'YYYY-MM-DD'
-            percentageConsumed={percentage[index] || 0} // Передаем соответствующий процент для каждого дня
+            percentageConsumed={percentage} // Передаем соответствующий процент для каждого дня
             onClick={() => {
               onClick(date); // Передаем строку даты в формате 'YYYY-MM-DD'
             }}

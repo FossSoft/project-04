@@ -6,19 +6,33 @@ button {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: baseline;
+  align-items: center;
   gap: 5px;
   width: 100%;
 }
 .monthButton {
   color: #323f47;
   text-align: center;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
-  line-height: 1.5;
+  line-height: 1.28;
   letter-spacing: -0.01em;
 }
 .chevronButton {
   width: 18px;
   height: 18px;
+}
+
+@media (min-width: 768px) {
+  .monthButton {
+    color: #323f47;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+  }
+}
+@media (min-width: 1440px) {
+  /*---*/
 }
