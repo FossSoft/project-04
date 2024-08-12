@@ -2,7 +2,6 @@
   width: 250px;
   display: flex;
   flex-direction: column;
-  margin-bottom: 16px;
 }
 
 .text {
@@ -12,17 +11,16 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  line-height: 18px; /* 128.571% */
+  line-height: 18px;
   letter-spacing: -0.14px;
 }
 .title {
   color: #323f47;
-  /* Mobile/H2 */
   font-family: 'Poppins', sans-serif;
   font-size: 32px;
   font-style: normal;
   font-weight: 700;
-  line-height: 32px; /* 100% */
+  line-height: 32px;
   letter-spacing: -0.32px;
   margin-bottom: 32px;
 }
@@ -46,22 +44,10 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
-  line-height: 18px; /* 128.571% */
+  line-height: 18px;
   letter-spacing: -0.14px;
   margin-bottom: 8px;
 }
-
-.text {
-  align-self: center;
-  color: rgba(47, 47, 47, 0.5);
-  font-family: 'Poppins', sans-serif;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 18px; /* 128.571% */
-  letter-spacing: -0.14px;
-}
-
 .link {
   color: #2f2f2f;
   font-family: 'Poppins', sans-serif;
@@ -87,7 +73,7 @@
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
-  line-height: 24px; /* 150% */
+  line-height: 24px;
   letter-spacing: -0.16px;
   width: 100%;
   background-color: rgba(240, 239, 244, 1);
@@ -109,13 +95,11 @@ input:active {
 
 .input::placeholder {
   color: rgba(47, 47, 47, 0.6);
-
-  /* Mobile/Main text */
   font-family: 'Poppins', sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  line-height: 18px; /* 128.571% */
+  line-height: 18px;
   letter-spacing: -0.14px;
 }
 
@@ -135,6 +119,7 @@ input:active {
   justify-content: center;
   align-items: center;
   gap: 10px;
+  margin-bottom: 16px;
   border-radius: 30px;
   background: #9be1a0;
   color: #323f47;
@@ -143,7 +128,7 @@ input:active {
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
-  line-height: 18px; /* 128.571% */
+  line-height: 18px;
   letter-spacing: -0.14px;
   outline: 0 none;
   border: transparent;
@@ -191,7 +176,7 @@ input:active {
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  line-height: 18px; /* 128.571% */
+  line-height: 18px;
   letter-spacing: -0.14px;
   margin-top: 8px;
 }
@@ -208,29 +193,33 @@ input:active {
   }
   .text {
     font-size: 16px;
-    line-height: 24px; /* 150% */
+    line-height: 24px;
     letter-spacing: -0.16px;
   }
 
   .title {
     font-size: 36px;
-    line-height: 38px; /* 105.556% */
+    line-height: 38px;
     letter-spacing: -0.36px;
   }
 
   .wrap:nth-child(2) {
     margin-bottom: 20px;
   }
+  .link {
+    font-size: 16px;
+  }
 
   .label {
     font-size: 16px;
-    line-height: 24px; /* 150% */
+    line-height: 24px;
     letter-spacing: -0.16px;
   }
 
   .btn {
     font-size: 16px;
-    line-height: 24px; /* 150% */
+    line-height: 24px;
+
     letter-spacing: -0.16px;
   }
 }
