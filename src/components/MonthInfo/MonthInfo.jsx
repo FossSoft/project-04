@@ -17,6 +17,7 @@ import {
 import { useState, useEffect } from 'react';
 import { fetchWaterData } from '../../redux/water/calendar/operations.js';
 import { selectWaterItems } from '../../redux/water/selectors.js';
+import { setWaterDate } from '../../redux/water/slice.js';
 
 function MonthInfo() {
   const dispatch = useDispatch();
@@ -92,6 +93,7 @@ function MonthInfo() {
   };
 
   const handleDateClick = date => {
+    dispatch(setWaterDate(date))
     dispatch(setDate(date)); // Обновляем состояние даты в Redux
   };
 
