@@ -1,4 +1,12 @@
-.container{
-  margin-top: 32px;
-  margin-bottom: 32px;
+
+ .container {
+  margin: 16px;
+ }
+
+@media screen and (min-width: 375px) {
+  .container {
+      margin-top: 32px;
+      margin-bottom: 32px;
+    }
 }
+
