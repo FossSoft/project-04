@@ -6,7 +6,6 @@ export const fetchWaterData = createAsyncThunk(
   async (date, thunkAPI) => {
     try {
       const response = await apiClient.get(`/water/month/${date}`);
-      console.log(response.data.data.records);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

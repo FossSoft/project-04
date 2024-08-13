@@ -1,9 +1,13 @@
 import CalendarItem from '../CalendarItem/CalendarItem';
 import css from './Calendar.module.css';
 
-const Calendar = ({ monthItem, onClick, currentDate, selectedDate, isActive }) => {
-  console.log('currentDate from Calendar:', currentDate);
-console.log('selectedDate from Calendar:', selectedDate);
+const Calendar = ({
+  monthItem,
+  onClick,
+  currentDate,
+  selectedDate,
+  isActive,
+}) => {
   return (
     <ul className={css.gridWrapper}>
       {monthItem.map(({ date, percentage }, index) => {

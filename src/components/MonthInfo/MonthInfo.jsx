@@ -59,8 +59,6 @@ function MonthInfo() {
   const month = parseInt(currentMonth.split('-')[1], 10) - 1;
   const monthDay = getMonthDaysArray(year, month);
 
- 
-
   // Формируем массив объектов с датой и процентом
   const calendarArray = monthDay.map((date, index) => {
     const item = monthArray.find(
@@ -68,7 +66,6 @@ function MonthInfo() {
     );
 
     const percentage = item?.percentage || '0%';
-
 
     return {
       date,
@@ -90,12 +87,11 @@ function MonthInfo() {
   };
 
   const handleDateClick = date => {
-    dispatch(setWaterDate(date))
+    dispatch(setWaterDate(date));
     dispatch(setDate(date)); // Обновляем состояние даты в Redux
   };
 
   useEffect(() => {
-    console.log('Fetching water data for month:', currentMonth);
     dispatch(fetchWaterData(currentMonth));
   }, [dispatch, currentMonth, waterData]);
 
