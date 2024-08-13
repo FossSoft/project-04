@@ -19,11 +19,8 @@
 .btnPrimary {
   width: 140px;
   height: 46px;
-  /* padding: 20px 14px; */
-
   color: var(--white);
   background-color: var(--Dark-Blue);
-
   font-weight: 700;
   font-size: 14px;
   line-height: 1.29;
@@ -88,7 +85,6 @@
     width: 178px;
     height: 60px;
     padding: 18px 0;
-
   }
 
   .btnPrimary span {

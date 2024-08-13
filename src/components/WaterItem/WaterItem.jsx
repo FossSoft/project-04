@@ -19,9 +19,11 @@ const WaterItem = ({ item }) => {
 
   const { amountOfWater, time } = item;
   const formatAmount = (amountOfWater) => {
-    const liters = amountOfWater / 1000;
-    if (liters >= 1) {
-      return `${liters.toFixed(2)} L`;
+    if (amountOfWater === 1000) {
+      return '1 L';
+    } else if (amountOfWater > 1000) {
+      const liters = amountOfWater / 1000;
+      return `${liters.toFixed(1)} L`;
     } else {
       return `${amountOfWater} ml`;
     }

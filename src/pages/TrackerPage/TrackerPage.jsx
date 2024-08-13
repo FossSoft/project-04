@@ -26,11 +26,13 @@ export default function TrackerPage() {
         </BackgroundColor>
 
         <BackgroundColor color="grey">
-          <div className={css.padding}>
-            <UserPanel />
+          <div className={css.wrapper}>
+            <div className={css.padding}>
+              <UserPanel />
+            </div>
+            <DailyInfo />
+            <MonthInfo />
           </div>
-          <DailyInfo />
-          <MonthInfo />
         </BackgroundColor>
       </Layout>
 

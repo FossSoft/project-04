@@ -1,11 +1,7 @@
 .modalContainer {
-  /* width: 100%; */
   width: 344px;
   padding: 40px 14px;
-  border-radius: 15px;
   text-align: center;
-  box-sizing: border-box;
-  background-color: white;
 }
 
 .title {
