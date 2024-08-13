@@ -1,8 +1,5 @@
 .container {
-  padding-left: 20px;
-  padding-right: 20px;
-
-  padding-bottom: 40px;
+  padding: 0 20px 40px;
   position: relative;
   box-sizing: border-box;
   max-width: 100%;
@@ -21,34 +18,24 @@
 }
 .containerHeader {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
 .containerToggle {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   align-items: center;
   gap: 16px;
 }
 
 @media (min-width: 768px) {
   .container {
-    padding-left: 32px;
-    padding-right: 32px;
-    padding-bottom: 35px;
+    padding: 0 32px 35px;
   }
   .containerToggle {
     gap: 20px;
   }
 }
 @media (min-width: 1440px) {
-  .container {
-    padding-left: 32px;
-    padding-right: 32px;
-
-    padding-bottom: 35px;
-  }
+  /*  */
 }
