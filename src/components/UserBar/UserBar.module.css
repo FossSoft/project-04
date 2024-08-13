@@ -16,12 +16,6 @@
   border-color: transparent;
 }
 
-/* .wrapper {
-  display: flex;
-  column-gap: 10px;
-  align-items: center;
-} */
-
 .text {
   color: var(--white);
   text-align: center;
@@ -36,6 +30,7 @@
   width: 38px;
   height: 38px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .icon {
