@@ -65,6 +65,10 @@
     line-height: 8px; /* 100% */
     transform: translateX(50%);
   }
+
+  .tadwyPercentTop {
+    top: -15px;
+  }
   .circle {
     position: absolute;
     top: -3px;

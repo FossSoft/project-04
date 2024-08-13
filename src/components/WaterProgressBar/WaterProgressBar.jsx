@@ -28,19 +28,22 @@ export default function WaterProgressBar() {
 
   const displayPercents = `${limitedPercents}%`;
 
+  const shouldPositionTop =
+    (numericPercents >= 40 && numericPercents <= 60) ||
+    (numericPercents >= 80 && numericPercents <= 100);
+
   return (
     <div className={styles.container}>
       <p className={styles.today}>Today</p>
       <div className={styles.progress}>
-        <div
-          className={styles.line}
-          style={{ width: displayPercents }}
-        >
+        <div className={styles.line} style={{ width: displayPercents }}>
           <div className={styles.circle}></div>
-          <span className={styles.tadwyPercent}>
-            {limitedPercents === 0 || limitedPercents === 50 || limitedPercents === 100
-              ? null
-              : displayPercents}
+          <span
+            className={`${styles.tadwyPercent} ${
+              shouldPositionTop ? styles.tadwyPercentTop : ''
+            }`}
+          >
+            {limitedPercents < 10 || limitedPercents === 50 || limitedPercents === 100 ? null : displayPercents}
           </span>
         </div>
       </div>
@@ -53,4 +56,3 @@ export default function WaterProgressBar() {
     </div>
   );
 }
-
