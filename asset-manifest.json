@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/project-04/static/css/main.cb4f426c.css",
-    "main.js": "/project-04/static/js/main.10ed566b.js",
+    "main.css": "/project-04/static/css/main.50ba1fab.css",
+    "main.js": "/project-04/static/js/main.fc7b0db8.js",
     "static/media/Rectangle_19.png": "/project-04/static/media/Rectangle_19.60162aa6c4e15c469f12.png",
     "static/media/Rectangle_19_tab.png": "/project-04/static/media/Rectangle_19_tab.9d1438aa9a4af1ec862e.png",
     "static/media/transparent_bottle_for_water1.png": "/project-04/static/media/transparent_bottle_for_water1.2c41e618e001fecb4f2b.png",
@@ -24,11 +24,11 @@
     "static/media/Male_Memojis_1.png": "/project-04/static/media/Male_Memojis_1.d833242b5cccdd5c34e7.png",
     "static/media/Ellipse_14.png": "/project-04/static/media/Ellipse_14.82e88a00e81f9d87e0ba.png",
     "index.html": "/project-04/index.html",
-    "main.cb4f426c.css.map": "/project-04/static/css/main.cb4f426c.css.map",
-    "main.10ed566b.js.map": "/project-04/static/js/main.10ed566b.js.map"
+    "main.50ba1fab.css.map": "/project-04/static/css/main.50ba1fab.css.map",
+    "main.fc7b0db8.js.map": "/project-04/static/js/main.fc7b0db8.js.map"
   },
   "entrypoints": [
-    "static/css/main.cb4f426c.css",
-    "static/js/main.10ed566b.js"
+    "static/css/main.50ba1fab.css",
+    "static/js/main.fc7b0db8.js"
   ]
 }
