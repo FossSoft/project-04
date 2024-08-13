@@ -50,15 +50,16 @@ export const Setting = () => {
       return !value || isValidInitial;
     }),
     weight: Yup.number()
-      .required('Weight is required')
-      .positive('Weight must be a positive number')
-
-      .min(20, 'Weight must be at least 20kg')
+      .min(0)
+      .notRequired()
+      .transform((value, originalValue) =>
+        originalValue === '' ? null : value
+      )
       .max(300, 'Weight must be 300kg or less'),
     activeTime: Yup.number()
-      .required('Write your active sport time')
-      .max(10, 'Too much time')
-      .positive('Time must be a positive number')
+      .max(15, 'Too much time')
+      .notRequired()
+      .min(0)
       .transform((value, originalValue) =>
         originalValue === '' ? null : value
       )
@@ -109,15 +110,17 @@ export const Setting = () => {
   const timeValue = watch('activeTime');
   const [result, setResult] = useState(0);
   const genderValue = watch('gender');
-
+  // timeValue !== 0 &&
   useEffect(() => {
-    if (weightValue > 0 && weightValue < 300 && timeValue > 0) {
+    if (weightValue > 0) {
       if (genderValue === 'woman') {
         const mainResult = weightValue * 0.03 + timeValue * 0.4;
-        setResult(mainResult.toFixed(2));
+        setResult(mainResult.toFixed(1));
+      } else if (weightValue === 0 || weightValue === '') {
+        setResult(0);
       } else {
         const mainResult = weightValue * 0.04 + timeValue * 0.6;
-        setResult(mainResult.toFixed(2));
+        setResult(mainResult.toFixed(1));
       }
     }
   }, [weightValue, timeValue, genderValue]);
@@ -150,7 +153,6 @@ export const Setting = () => {
       updateUserInfo({
         name: data.username,
         gender: data.gender,
-
         weight: data.weight,
         activityTime: data.activeTime,
         dailyNorma: data.ownerResult,
@@ -292,7 +294,7 @@ export const Setting = () => {
                 <input
                   id={weightInput}
                   {...register('weight')}
-                  step="0.01"
+                  step="0.1"
                   defaultValue="0"
                   type="number"
                   style={{
@@ -312,7 +314,7 @@ export const Setting = () => {
                 <input
                   type="number"
                   defaultValue="0"
-                  step="0.01"
+                  step="0.1"
                   id={timeInput}
                   {...register('activeTime')}
                   style={{
@@ -331,7 +333,9 @@ export const Setting = () => {
                 <p className={css.requireWater}>
                   The required amount of water in liters per day:
                 </p>
-                <p className={css.resultText}>{result}</p>
+                <p className={css.resultText}>
+                  {result < 0.11 ? Math.round(result) : result}
+                </p>
               </div>
               <label htmlFor={resultInput}>
                 <p className={css.userOwnerResult}>
@@ -340,7 +344,7 @@ export const Setting = () => {
                 <input
                   type="number"
                   id={resultInput}
-                  step="0.01"
+                  step="0.1"
                   className={css.userOwnerInput}
                   {...register('ownerResult')}
                   style={{
