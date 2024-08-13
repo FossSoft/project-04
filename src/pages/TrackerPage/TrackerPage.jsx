@@ -10,14 +10,13 @@ import { useEffect } from 'react';
 import { fetchUserInfo } from '../../redux/user/operations';
 import { Toaster } from 'react-hot-toast';
 
-
 export default function TrackerPage() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("FetchUSerInfo")
     dispatch(fetchUserInfo());
   }, [dispatch]);
+
   return (
     <div className="container">
       <Layout>
