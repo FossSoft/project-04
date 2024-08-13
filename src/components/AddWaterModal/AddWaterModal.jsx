@@ -45,7 +45,7 @@ export const AddWaterModal = ({ onCancel }) => {
   };
 
   const handleBlurQuantity = () => {
-    let numericValue = Number(quantity);
+    let numericValue = Number(quantity + 1);
 
     // Обмежуємо значення діапазоном від 0 до 1500
     if (numericValue > 1500) {
