@@ -153,7 +153,6 @@ export const Setting = () => {
       updateUserInfo({
         name: data.username,
         gender: data.gender,
-
         weight: data.weight,
         activityTime: data.activeTime,
         dailyNorma: data.ownerResult,

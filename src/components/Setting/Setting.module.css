@@ -97,6 +97,7 @@ input[type='number']::-webkit-outer-spin-button {
   width: 75px;
   height: 75px;
   border-radius: 50%;
+  object-fit: cover;
 }
 .upload {
   display: flex;
