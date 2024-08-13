@@ -1,6 +1,6 @@
 .section{
   position: relative;
-  width: 343px;
+  max-width: 343px;
   height: 411px;
   display: flex;
   flex-direction: column;
