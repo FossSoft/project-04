@@ -53,15 +53,6 @@ export default function LoginForm() {
   const onSubmit = async values => {
     dispatch(logIn(values));
     reset();
-    // try {
-    //   const result = await dispatch(logIn(values)).unwrap();
-    //   localStorage.setItem('accessToken', result.data.accessToken);
-    //   toast.success('Successfully logged in!');
-    // } catch (error) {
-    //   toast.error(error?.message || 'Incorrect login or password');
-    // } finally {
-    //   reset();
-    // }
   };
 
   const handleToggle = () => {
