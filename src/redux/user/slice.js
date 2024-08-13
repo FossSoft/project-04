@@ -21,7 +21,7 @@ const initialState = {
   activityTime: '',
   dailyNorma: 0,
   waterData: [],
-  todayProgress: '',
+  todayProgress: '0%',
   monthlyWaterData: {
     date: '',
     data: [],
