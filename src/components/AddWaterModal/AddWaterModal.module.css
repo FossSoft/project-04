@@ -112,8 +112,12 @@ p {
   font-weight: 700;
   line-height: 24px; /* 150% */
   letter-spacing: -0.16px;
+  transition: all 0.35s ease-in-out;
 }
-
+.btn-save:hover,
+.btn-save:focus {
+  background: #87d28d;
+}
 @media screen and (min-width: 768px) {
   .container {
     display: flex;
