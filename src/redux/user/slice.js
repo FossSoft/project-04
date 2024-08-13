@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import {
   addWaterAmount,
   deleteWaterEntry,
+  fetchCountCustomers,
   fetchTodayProgress,
   fetchUserInfo,
   fetchWaterDataByDay,
@@ -26,6 +27,7 @@ const initialState = {
     date: '',
     data: [],
   },
+  countCustomers: 0,
   isLoggedIn: false,
   isLoading: false,
   error: null,
@@ -152,6 +154,17 @@ const userSlice = createSlice({
       .addCase(fetchTodayProgress.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
+      })
+      .addCase(fetchCountCustomers.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchCountCustomers.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.countCustomers = payload;
+      })
+      .addCase(fetchCountCustomers.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
       });
   },
 });
