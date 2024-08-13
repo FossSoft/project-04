@@ -2,9 +2,8 @@
 
 .gridWrapper {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(7, minmax(auto, 1fr));
   gap: 20px 18px;
-  list-style-type: none;
   padding: 0;
   margin: 0;
 }

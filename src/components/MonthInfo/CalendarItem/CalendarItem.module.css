@@ -19,30 +19,21 @@
   text-align: center;
   line-height: 28px;
   border-radius: 50%;
-  background-color: #Fff; 
+  background-color: #fff;
 }
 .number.active,
 .number:hover {
   background: #323f47;
-  color:  #9be1a0;
+  color: #9be1a0;
 }
 .bgHighlighted {
-   background-color: #323F4733; 
+  background-color: #323f4733;
 }
 
 .current {
   background: #323f47;
   color: #9be1a0;
 }
-
-/* .active {
-  border-color: #323f47;
-} */
-
-/* .notComplete {
-  background-color: #Fff; 
-} */
-
 
 .percentages {
   color: rgba(47, 47, 47, 0.6);
