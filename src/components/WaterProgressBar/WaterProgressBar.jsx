@@ -17,8 +17,6 @@ export default function WaterProgressBar() {
   const isUserExist = useSelector(selectIsUserExist);
 
   useEffect(() => {
-    console.log('fetchTodayProgress');
-    console.log(isUserExist);
     isUserExist && dispatch(fetchTodayProgress());
   }, [dispatch, waterData, waterNorma, isUserExist]);
 
@@ -43,7 +41,11 @@ export default function WaterProgressBar() {
               shouldPositionTop ? styles.tadwyPercentTop : ''
             }`}
           >
-            {limitedPercents < 10 || limitedPercents === 50 || limitedPercents === 100 ? null : displayPercents}
+            {limitedPercents < 10 ||
+            limitedPercents === 50 ||
+            limitedPercents === 100
+              ? null
+              : displayPercents}
           </span>
         </div>
       </div>

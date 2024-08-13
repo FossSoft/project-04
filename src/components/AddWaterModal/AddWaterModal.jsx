@@ -4,7 +4,7 @@ import sprite from '../../image/sprite/sprite.svg'; // Актуальний шл
 import { useDispatch, useSelector } from 'react-redux';
 import { addWaterAmount } from '../../redux/water/operations';
 import { selectWaterDate } from '../../redux/water/selectors';
-import { addWater } from '../../redux/water/slice';
+// import { addWater } from '../../redux/water/slice';
 
 export const AddWaterModal = ({ onCancel }) => {
   const dispatch = useDispatch();
@@ -79,7 +79,10 @@ export const AddWaterModal = ({ onCancel }) => {
       <h1 className={css.addWaterTitle}>Add Water</h1>
 
       <div>
-        <h2 style={{ marginBottom: '20px' }} className={css['value-text-title']}>
+        <h2
+          style={{ marginBottom: '20px' }}
+          className={css['value-text-title']}
+        >
           Choose a value:
         </h2>
         <p className={css['value-text']}>Amount of water:</p>
