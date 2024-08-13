@@ -59,8 +59,7 @@ function MonthInfo() {
   const month = parseInt(currentMonth.split('-')[1], 10) - 1;
   const monthDay = getMonthDaysArray(year, month);
 
-  // Логирование monthArray
-  console.log('Month Array:', monthArray);
+ 
 
   // Формируем массив объектов с датой и процентом
   const calendarArray = monthDay.map((date, index) => {
@@ -70,8 +69,6 @@ function MonthInfo() {
 
     const percentage = item?.percentage || '0%';
 
-    // Логирование процентного значения перед форматированием
-    console.log('Raw Percentage:', percentage);
 
     return {
       date,
