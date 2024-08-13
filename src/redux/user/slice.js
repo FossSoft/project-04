@@ -19,7 +19,7 @@ const initialState = {
   name: '',
   email: '',
   weight: 0,
-  activityTime: '',
+  activityTime: 0,
   dailyNorma: 0,
   waterData: [],
   todayProgress: '0%',
