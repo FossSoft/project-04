@@ -50,7 +50,7 @@ export const EditWaterModal = ({item, onClose }) => {
 };
   
   const handleBlurQuantity = () => {
-    let numericValue = Number(quantity);
+    let numericValue = Number(quantity + 1);
     if (numericValue > 1500) {
       numericValue = 1500;
     }
