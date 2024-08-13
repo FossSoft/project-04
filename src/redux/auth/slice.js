@@ -9,7 +9,7 @@ import {
   sendEmail,
   resetPassword
 } from './operations';
-
+import { toast} from 'react-hot-toast';
 import { fetchTodayProgress } from '../user/operations.js';
 
 const authInitialState = {
@@ -43,9 +43,16 @@ const authSlice = createSlice({
       .addCase(logIn.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.accessToken = action.payload.accessToken;
-
         state.isLoggedIn = true;
         state.isRefreshing = false;
+        toast.success('Logged in successfully!', {
+          duration: 5000,
+          position: 'top-center',
+          style: {
+            textAlign: 'center',
+            boxShadow: '8px 11px 27px -8px rgba(66, 68, 90, 1)',
+          },
+        });
       })
       .addCase(logIn.pending, state => {
         state.isRefreshing = true;
@@ -54,6 +61,14 @@ const authSlice = createSlice({
         state.error = action.error;
         state.isRefreshing = false;
         state.isLoggedIn = false;
+        toast.error('Email or password is wrong.', {
+          duration: 5000,
+          position: 'top-center',
+          style: {
+            textAlign: 'center',
+            boxShadow: '8px 11px 27px -8px rgba(66, 68, 90, 1)',
+          },
+        });
       })
       .addCase(register.fulfilled, (state, action) => {
         console.log('Register Success:', action.payload);
