@@ -1,14 +1,7 @@
 import clsx from 'clsx';
 import css from './CalendarItem.module.css';
 
-const CalendarItem = ({
-  day,
-  percentageConsumed,
-  onClick,
-  currentDate,
-  selectedDate,
-  isActive,
-}) => {
+const CalendarItem = ({ day, percentageConsumed, onClick, currentDate }) => {
   const dayNumber = parseInt(day.split('-')[2], 10);
   const cappedPercentage = Math.min(percentageConsumed, 100);
 
@@ -17,8 +10,8 @@ const CalendarItem = ({
       <div
         className={clsx(css.number, {
           [css.bgHighlighted]: cappedPercentage < 100,
-          [css.current]: currentDate === day ,
-            })}
+          [css.current]: currentDate === day,
+        })}
       >
         {dayNumber}
       </div>
