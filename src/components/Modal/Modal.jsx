@@ -16,6 +16,7 @@ export default function Modal({
     e.stopPropagation();
   };
   useEffect(() => {
+    const bodyElement = document.body;
     const handleKeyDown = e => {
       if (e.key === 'Escape') {
         onRequestClose();
@@ -24,10 +25,12 @@ export default function Modal({
 
     if (isOpen) {
       document.addEventListener('keydown', handleKeyDown);
+      bodyElement.classList.add('lock');
     }
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
+      bodyElement.classList.remove('lock');
     };
   }, [isOpen, onRequestClose]);
 

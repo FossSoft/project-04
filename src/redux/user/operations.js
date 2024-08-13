@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { apiClient } from '../auth/operations.js';
 
@@ -14,6 +15,18 @@ const setAuthHeader = token => {
 
 const getToken = state =>
   state.auth.accessToken || localStorage.getItem('token');
+
+export const fetchCountCustomers = createAsyncThunk(
+  'user/fetchCountCustomers',
+  async (_, thunkAPI) => {
+    try {
+      const response = await apiClient.get('/user/count');
+      return response.data.totalUsers;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
 
 export const fetchUserInfo = createAsyncThunk(
   'user/fetchUserInfo',

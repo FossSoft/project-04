@@ -7,12 +7,12 @@ import css from './HomePage.module.css';
 export default function HomePage() {
   return (
     <div className={css.container}>
-    <Layout>
-      <BackgroundColor color="grey">
-        <WelcomeSection />
-      </BackgroundColor>
-      <AdvantagesSection />
-    </Layout>
+      <Layout>
+        <BackgroundColor color="grey">
+          <WelcomeSection />
+        </BackgroundColor>
+        <AdvantagesSection />
+      </Layout>
     </div>
   );
 }
