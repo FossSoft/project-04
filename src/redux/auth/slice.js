@@ -7,9 +7,9 @@ import {
   clearAuthHeader,
   logout,
   sendEmail,
-  resetPassword
+  resetPassword,
 } from './operations';
-import { toast} from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 import { fetchTodayProgress } from '../user/operations.js';
 
 const authInitialState = {
@@ -71,7 +71,6 @@ const authSlice = createSlice({
         });
       })
       .addCase(register.fulfilled, (state, action) => {
-        console.log('Register Success:', action.payload);
         state.user = action.payload.email;
         state.accessToken = action.payload.accessToken;
         state.isLoggedIn = true;
@@ -116,7 +115,7 @@ const authSlice = createSlice({
         state.emailSent = false;
         state.emailError = action.error.message;
       })
-      .addCase(resetPassword.pending, (state) => {
+      .addCase(resetPassword.pending, state => {
         state.isRefreshing = true;
         state.error = null;
       })
@@ -127,7 +126,7 @@ const authSlice = createSlice({
       .addCase(resetPassword.rejected, (state, action) => {
         state.isRefreshing = false;
         state.error = action.payload || action.error.message;
-      })
+      });
   },
 });
 
