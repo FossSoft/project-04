@@ -8,6 +8,7 @@ import SignUpPage from 'pages/SignUpPage/SignUpPage';
 import { Setting } from 'components/Setting/Setting.jsx';
 import RecoveryPage from '../../pages/RecoveryPage/RecoveryPage';
 import ResetPasswordPage from 'pages/ResetPasswordPage/ResetPasswordPage';
+import { Toaster } from 'react-hot-toast';
 
 export default function App() {
   return (
@@ -39,6 +40,7 @@ export default function App() {
           element={<ResetPasswordPage />}
         ></Route>
       </Routes>
+      <Toaster position="top-center" reverseOrder={false} />
     </>
   );
 
