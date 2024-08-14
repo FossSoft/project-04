@@ -62,20 +62,22 @@ export default function SignUpForm() {
     const { repeatPassword, ...payload } = data;
 
     try {
-      const result = await dispatch(register(payload));
-      // if (result?.accessToken) {
-        // localStorage.setItem('token', result.data.accessToken);
-        toast.success('Successfully registered!');
-        navigate('/tracker');
-      // } else {
-      //   toast.error('Unexpected response format');
-      // }
+      await dispatch(register(payload)).unwrap();
+      toast.success('Successfully registered!');
+      reset();
+      navigate('/tracker');
     } catch (error) {
       toast.error(error?.message || 'Registration failed');
-    } finally {
-      reset();
     }
   };
+
+  const emailClassName = `${css.input} ${errors.email ? css.errorInput : ''}`;
+  const passwordClassName = `${css.input} ${
+    errors.password ? css.errorInput : ''
+  }`;
+  const repeatPasswordClassName = `${css.input} ${
+    errors.repeatPassword ? css.errorInput : ''
+  }`;
 
   return (
     <div className={css.modal}>
@@ -89,7 +91,7 @@ export default function SignUpForm() {
             control={control}
             render={({ field }) => (
               <input
-                className={`${css.input} ${errors.email ? css.errorInput : ''}`}
+                className={emailClassName}
                 placeholder="Enter your email"
                 type="email"
                 {...field}
@@ -108,9 +110,7 @@ export default function SignUpForm() {
               control={control}
               render={({ field }) => (
                 <input
-                  className={`${css.input} ${
-                    errors.password ? css.errorInput : ''
-                  }`}
+                  className={passwordClassName}
                   placeholder="Enter your password"
                   type={showPassword ? 'text' : 'password'}
                   {...field}
@@ -137,9 +137,7 @@ export default function SignUpForm() {
               control={control}
               render={({ field }) => (
                 <input
-                  className={`${css.input} ${
-                    errors.repeatPassword ? css.errorInput : ''
-                  }`}
+                  className={repeatPasswordClassName}
                   placeholder="Please repeat password"
                   type={showRepeatPassword ? 'text' : 'password'}
                   {...field}
