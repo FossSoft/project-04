@@ -113,6 +113,10 @@ p {
   line-height: 24px; /* 150% */
   letter-spacing: -0.16px;
 }
+.btn-save:hover {
+  background-color: #87d28d;
+  transition: all 0.35s ease-in-out;
+}
 
 @media screen and (min-width: 768px) {
   .container {
